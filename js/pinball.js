@@ -1,0 +1,4 @@
+/*
+ * JS for pinball project
+ */
+
