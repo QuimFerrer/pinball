@@ -6,4 +6,77 @@
  * {
  	margin:  0;
  	padding: 0;
+ 	list-style: none;
  }
+
+/* General */
+#main {
+	width: 995px;
+	margin: 0 auto;
+}
+header {
+	padding: 20px;
+	border: 1px dashed #D6BDF2;
+}
+menu {
+	width: 18%;
+}
+section {
+	width: 70%;
+	margin-top: 10px;
+	padding: 50px;
+	border: 1px dashed #D6BDF2;
+}
+menu,
+section {
+	float: left;
+}
+footer {
+	clear: both;
+	padding: 10px;
+	border:  1px dashed #D6BDF2;
+}
+/* Icones */
+#inici   	{ background-image: url(ico/dialog.png); }
+#recrea  	{ background-image: url(ico/products.png); }
+#empresa 	{ background-image: url(ico/build.png); }
+#torneig 	{ background-image: url(ico/reports.png); }
+#contacte 	{ background-image: url(ico/email.png); }
+#usuaris  	{ background-image: url(ico/users.png); }
+
+/* Menu */
+.menu {
+	margin: 5px 5px 5px 0 ;
+	background-color:#E7E7E7;
+	border:1px solid #F90;
+	border-radius:8px 8px 8px 8px;
+	-moz-border-radius:8px 8px 8px 8px;
+	-webkit-border-radius:8px 8px 8px 8px;
+}
+.menu a
+{	display:block;line-height: 18px;text-decoration:none;color:blue;font-size:0.9em;
+    margin-bottom:20px;border:1px solid #E7E7E7;padding:8px;padding-left:45px;
+	background-position:top left;background-repeat:no-repeat;
+}
+.menu a:hover { color:green;background-color:#BFDFFF;border:1px dotted blue;}
+
+.menu li {
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	padding:2px;
+	margin:1px 3px;
+}
+.menu h3 {
+	color:green;
+	background-color: #FFD3A8;
+	border-bottom:1px solid #C99;
+	font-family: Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	padding:4px;
+	text-align:center;
+	margin-bottom:10px;
+	border-radius:8px 8px 0px 0px;
+	-moz-border-radius:8px 8px 0px 0px;
+	-webkit-border-radius:8px 8px 0px 0px;
+}
