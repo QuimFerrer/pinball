@@ -1,0 +1,115 @@
+*** STANDARD GAMES  ***
+
+Placa integral de vídeo de alta resolución, gran velocidad y prestaciones adaptables para cualquier tipo de necesidad, adaptable a cualquier  sistema que necesite un Terminal de vídeo para comunicarse con el usuario gráficamente.
+
+Microcontrolador hitachi h8/2329 , 384 kbytes de flash interna y 32 kbytes de ram interna , 25mhz.
+  El micro dispone de dos DAC con los que se puede generar sonido de alta calidad  (22 ks/s)     para   poder realizar orientaciones verbales, acústicas o musicales.
+  1 ADC de 2 entradas.  (Papa poder sensar todas las alimentaciones y mostrarlas en la pantalla de monitor )
+SD-Card  4 BITS   para almacenamiento de todos los gráficos (128 megas) y sonidos  ilimitados .
+     Ram estática ferrítica  4 mega bits , para gestion de clases en el montaje del video y con retención de datos.
+    Control de  periféricos integrados por ecuación en cpld, (incluido el tiempo de  NMI ),
+      Protección anticopy . Periféricos , antisparck y  DAC para el control del volumen hasta  256 niveles   Lógicos
+Tensión de alimentación desde 8 a 45Volt. Regulador en placa a 3.3Volt .
+Salidas y entradas protegidas eléctricamente (alta inmunidad)
+Un port diferencial 485 destinado al control  CCTALCK.,protegido contra parásitos externos.
+2x Uart rs232.
+Video SVGA generado por ecuación. Gran robustez ante parásitos electromagnéticos.
+Dos sdram (512 mega bits cada una) para carga del conjunto de gráficos, lo que permite una gran    velocidad en la ejecución del video.
+Distintas opciones para video, 800 x 600 (en 65.535 colores).
+Velocidad del video ( fpga ) 14 msg x frame = 70 frames por segundo. Esto hace de esta placa una de la mas rápidas  del mercado en las condiciones de placa plana.
+
+Opción Segunda pantalla.
+ Terminal de video adaptable a otras placas electrónicas
+con la finalidad de gestionar otra pantalla de video con
+las mismas características.
+El control de los gráficos y las movies se ejecuta
+externamente mediante un protocolo própio a través de un interface SPI, RS-485 o RS-232.
+
+COMMA6-A
+Estándar para gaming en Italia. Cumpliendo los requisitos de
+homologación que se requieren para el hardware. Dos tampers
+para detección de apertura de las cajas que protegen placa contra manipulación.  Protocolo de comunicación con Monopolio de Estado. Soporte de tarjeta en la parte inferior. Gráficos y sonido en SD-CARD. Programa Embebido en microcontrolador, etc. 
+
+
+ 	
+Standard games 	
+
+Placa integral de vídeo de alta resolución, gran velocidad y prestaciones adaptables para cualquier tipo de necesidad, adaptable a cualquier  sistema que necesite un Terminal de vídeo para comunicarse con el usuario gráficamente.
+
+Microcontrolador hitachi h8/2329 , 384 kbytes de flash interna y 32 kbytes de ram interna , 25mhz.
+  El micro dispone de dos DAC con los que se puede generar sonido de alta calidad  (22 ks/s)     para   poder realizar orientaciones verbales, acústicas o musicales.
+  1 ADC de 2 entradas.  (Papa poder sensar todas las alimentaciones y mostrarlas en la pantalla de monitor )
+SD-Card  4 BITS   para almacenamiento de todos los gráficos (128 megas) y sonidos  ilimitados .
+     Ram estática ferrítica  4 mega bits , para gestion de clases en el montaje del video y con retención de datos.
+    Control de  periféricos integrados por ecuación en cpld, (incluido el tiempo de  NMI ),
+      Protección anticopy . Periféricos , antisparck y  DAC para el control del volumen hasta  256 niveles   Lógicos
+Tensión de alimentación desde 8 a 45Volt. Regulador en placa a 3.3Volt .
+Salidas y entradas protegidas eléctricamente (alta inmunidad)
+Un port diferencial 485 destinado al control  CCTALCK.,protegido contra parásitos externos.
+2x Uart rs232.
+Video SVGA generado por ecuación. Gran robustez ante parásitos electromagnéticos.
+Dos sdram (512 mega bits cada una) para carga del conjunto de gráficos, lo que permite una gran    velocidad en la ejecución del video.
+Distintas opciones para video, 800 x 600 (en 65.535 colores).
+Velocidad del video ( fpga ) 14 msg x frame = 70 frames por segundo. Esto hace de esta placa una de la mas rápidas  del mercado en las condiciones de placa plana.
+
+Opción Segunda pantalla.
+ Terminal de video adaptable a otras placas electrónicas
+con la finalidad de gestionar otra pantalla de video con
+las mismas características.
+El control de los gráficos y las movies se ejecuta
+externamente mediante un protocolo própio a través de un interface SPI, RS-485 o RS-232.
+
+COMMA6-A
+Estándar para gaming en Italia. Cumpliendo los requisitos de
+homologación que se requieren para el hardware. Dos tampers
+para detección de apertura de las cajas que protegen placa contra manipulación.  Protocolo de comunicación con Monopolio de Estado. Soporte de tarjeta en la parte inferior. Gráficos y sonido en SD-CARD. Programa Embebido en microcontrolador, etc.
+	
+
+*** BINGO ELECTRONICO ***
+
+Tecnología avanzada.
+Microprocesador Coldfire 5206e
+Cartones con iluminación LED de luz blanca Multicromática.
+Comunicación serial entre todos los elementos que componen el Kit.
+Sistema de lectura de "Holes" inteligente ( para evitar manipulación externa).
+Control de selector electrónico, aceptador de billetes,  llaves de pago y cobro. Totalizadores electromecánicos y electrónicos.
+Hopper. Bolas antimagnéticas. Varios idiomas. Amplia configuración adaptable a holomologaciones del país. Posibilidad de LINK con  acumulativo inalámbrico. Tutorial de juego en luces y display alfanumérico.
+Bonus para cartón individual, SuperBonus para cartón individual, Numero Mágico, premio 4 esquinas, premio DIAGONAL, premio Súper línea, 6ª 7ª y 8ª bolas extras, multiplicadores de cartones Individuales.
+Personalización de serigrafía y gráficos tanto en tablero como en Frontal.
+
+
+*** ROULETTE ***
+
+Rouleta electrónica
+Triple ruleta electrónica de luces con visualizador de apuestas individual por número.
+Display informativo LCD, 4 apuestas fijas, turbo, refill, pago manual, contabilidad en totalizadores Mecánicos y electrónicos, 2 hoppers, selector de caída directa, selector de billetes, activación directa a cajón, amplia configuración, reserva de contabilidad encriptada, caducidad del juego por tiempo, atractivos sonidos.  
+
+
+*** KIT DE DIANA ZONE DART ***
+
+Amplia gama de juegos:
+180 – simple-double in-double out-double in/out-master out
+301 – simple-double in-double out-double in/out-master out
+501 – simple-double in-double out-double in/out-master out
+701 – simple-double in-double out-double in/out-master out
+901 – simple-double in-double out-double in/out-master out
+301 KILLER – simple-double in-double out-double in/out-master out
+CRICKEt–simple-no score-cutthroat-master-crazy-wild and crazy
+HI SCORE
+LOW SCORE
+ROULETTE
+SHANGHAI
+
+Opciones :
+EQUAL
+HANDICAP
+TEAM
+EQUAL TEAM
+EQUAL HANDICAP
+
+Selección de Bull 25/50 , 50/50, Happy Hour programable.
+Amplia configuración. Selección intuitiva de juegos. Muestra del resultado final de la partida por clasificación, handicap, PPD. Hazañas. Varios idiomas. Sonidos indicadores de eventos. Selector electrónico de monedas, selector de billetes, interface de sensor de dardos inteligente. 
+
+
+
+
