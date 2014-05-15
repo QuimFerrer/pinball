@@ -7,7 +7,7 @@
             <li><a id="empresa" 	href="../html/empresa.php">Empresa</a></li>
             <li><a id="torneig" 	href="../html/torneig.php">Torneigs</a></li>
             <li><a id="contacte"	href="../html/contacte.php">Contactar</a></li>
-            <li><a id="usuaris"    	href="../html/usuaris.php">Zona de joc</a></li>
+            <li><a id="usuaris"     href="../html/usuaris.php">Zona de joc</a></li>
         </ul>
     </div> 
 <?php } ?>
