@@ -80,3 +80,9 @@ footer {
 	-moz-border-radius:8px 8px 0px 0px;
 	-webkit-border-radius:8px 8px 0px 0px;
 }
+
+.promo img {
+	width: 150px;
+	height: 150px;
+}
+
