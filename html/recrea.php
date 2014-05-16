@@ -15,9 +15,25 @@
 			<?php menu(); ?>
 		</menu>
 		<section>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, nemo, ducimus aliquam totam rerum neque asperiores similique ad vel reprehenderit commodi praesentium atque nostrum assumenda mollitia unde voluptatibus quo facilis!</p>
-			<p>Nulla, aliquam, ullam commodi quae repellat molestiae aut cumque dolor porro laudantium blanditiis facilis reprehenderit officiis eius laboriosam at autem tenetur vel nesciunt distinctio aliquid eveniet perferendis nam natus dolore.</p>
-			<p>Dolorum, deleniti, cum, voluptate, praesentium dignissimos nulla dolor vero fugit quasi officiis temporibus nobis excepturi iusto dolore iste maxime quos. Rem eius tenetur nihil aperiam veritatis iure ipsam nulla aliquam.</p>
+			<h1>Llista de productes</h1>
+			<?php 
+				$query    = 'SELECT * FROM productes';
+				$response = dbExec($query);
+
+				echo '<ul class="promo">';
+
+				foreach($response as $producte) {
+					echo '<li>';
+					echo '<img src="..\resources\img\\'. $producte->foto .'" alt="">';
+					echo '<h2>'. 				$producte->nom .'</h3>';
+					echo '<p>Codi: '. 			$producte->id .'</p>';
+					echo '<p>Detall: '. 		$producte->descripcio .'</p>';
+					echo '<h3>Preu: '. 			$producte->preu .'€</h3>';
+					echo '<p>Data d\'alta: '. 	$producte->data_alta .'</p>';
+					echo '</li><hr>';
+				}
+				echo '</ul>';
+			 ?>
 		</section>
 		<footer>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, nemo, ducimus aliquam totam rerum neque asperiores similique ad vel reprehenderit commodi praesentium atque nostrum assumenda mollitia unde voluptatibus quo facilis!</p>
