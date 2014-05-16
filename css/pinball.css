@@ -13,6 +13,7 @@
 #main {
 	width: 995px;
 	margin: 0 auto;
+	font-family: Consolas, monospace;
 }
 header {
 	padding: 20px;
@@ -22,9 +23,8 @@ menu {
 	width: 18%;
 }
 section {
-	width: 70%;
-	margin-top: 10px;
-	padding: 50px;
+	width: 80%;
+	margin: 10px 0 0 15px;
 	border: 1px dashed #D6BDF2;
 }
 menu,
@@ -47,18 +47,26 @@ footer {
 /* Menu */
 .menu {
 	margin: 5px 5px 5px 0 ;
-	background-color:#E7E7E7;
+	background-color:rgb(173, 97, 97);
 	border:1px solid #F90;
 	border-radius:8px 8px 8px 8px;
 	-moz-border-radius:8px 8px 8px 8px;
 	-webkit-border-radius:8px 8px 8px 8px;
 }
 .menu a
-{	display:block;line-height: 18px;text-decoration:none;color:blue;font-size:0.9em;
-    margin-bottom:20px;border:1px solid #E7E7E7;padding:8px;padding-left:45px;
-	background-position:top left;background-repeat:no-repeat;
+{	display:block;
+	line-height: 18px;
+	text-decoration:none;
+	color:#FFF;
+	font-size:0.9em;
+    margin-bottom:10px;
+    border:2px solid rgb(173, 97, 97);
+    padding:8px;
+    padding-left:40px;
+	background-position:top left;
+	background-repeat:no-repeat;
 }
-.menu a:hover { color:green;background-color:#BFDFFF;border:1px dotted blue;}
+.menu a:hover { color:#000;background-color:#BFDFFF;border:2px solid #FFF;}
 
 .menu li {
 	font-family:Verdana, Geneva, sans-serif;
@@ -67,8 +75,8 @@ footer {
 	margin:1px 3px;
 }
 .menu h3 {
-	color:green;
-	background-color: #FFD3A8;
+	color:#FFF;
+	background-color: #000;
 	border-bottom:1px solid #C99;
 	font-family: Helvetica, sans-serif;
 	font-size:14px;
@@ -81,8 +89,16 @@ footer {
 	-webkit-border-radius:8px 8px 0px 0px;
 }
 
+/* recrea.php */
 .promo img {
+	float: left;
 	width: 150px;
 	height: 150px;
+	margin-right: 10px;
+}
+.promo li {
+	clear: both;
+	padding: 10px 5px;
+	border-bottom: dashed 2px #F1BBFD;
 }
 

@@ -27,10 +27,10 @@
 					echo '<img src="..\resources\img\\'. $producte->foto .'" alt="">';
 					echo '<h2>'. 				$producte->nom .'</h3>';
 					echo '<p>Codi: '. 			$producte->id .'</p>';
-					echo '<p>Detall: '. 		$producte->descripcio .'</p>';
 					echo '<h3>Preu: '. 			$producte->preu .'€</h3>';
 					echo '<p>Data d\'alta: '. 	$producte->data_alta .'</p>';
-					echo '</li><hr>';
+					echo '<p>Detall: '. 		$producte->descripcio .'</p>';
+					echo '</li>';
 				}
 				echo '</ul>';
 			 ?>
