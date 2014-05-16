@@ -10,7 +10,7 @@
 
 	if (!isset($_GET['query']) ) die('<h1>No es una consulta correcte !</h1>');
 
-	$link = mysql_connect('mysql.hostinger.es', 'u555588791_curs', 'calmolins');
+	$link = mysql_connect('host', 'usr', 'pwd');
 
 	if (!$link)	die('Not connected : ' . mysql_error());
 
