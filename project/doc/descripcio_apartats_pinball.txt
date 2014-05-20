@@ -1,0 +1,54 @@
+Recreatius
+
+1. mostrar una llista d'info de les máquines recretives
+
+
+PiballKit
+
+1. info del projecte pinballKit
+
+
+Torneigs
+
+1. mostrar una llista de tots els torneigs amb possiblitat de registre.
+
+
+Contacte
+
+1. mostrar formulari de contacte
+
+
+Zona d'usuari
+
+1. accés usuaris amb accés a registre de jugador
+
+2. menú jugador
+	a. perfil jugador
+	b. consultar torneigs apuntants amb:
+		1. informació del ranking, posició i punts dins del ranking
+		2. possibilitat de donar-se de baixa
+	c. consultar tots els torneigs amb possibilitat d'apuntar-se
+
+3. menú administrador
+	a. perfil administrador
+	b. gestió partides
+	c. gestió torneigs: mostrar tots els torneigs en forma de llista amb botons d'opcions:
+		1. màquines associades
+		2. joc associat
+		3. jugadors registrats
+	d. gestió màquines:
+		i. mostrar totes les máquines en forma de llista amb botons d'opcions:
+			1. alta, baixa, modificació
+			2. ubicació
+			3. jocs instal.lats
+			4. credits totals
+			5. altres ...
+		ii. estadístiques. opcions :
+			1. obtenir recaudació de totes les màquines
+			2. recaudació máx,min,promigs, x zones etc
+	e. gestió jugadors: mostrar relació de jugadors en forma de llista amb botons d'opcions:
+		1. consultar perfil
+		2. baixa (bloqueig)
+		3. consultar torneigs registrats amb:
+			1. ranquing amb la seva posició de cada torneig
+			2. punts de cada posició
