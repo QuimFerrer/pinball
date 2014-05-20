@@ -20,10 +20,10 @@ header {
 	border: 1px dashed #D6BDF2;
 }
 menu {
-	width: 18%;
+	width: 20%;
 }
 section {
-	width: 80%;
+	width: 78%;
 	margin: 10px 0 0 15px;
 	border: 1px dashed #D6BDF2;
 }
@@ -35,6 +35,7 @@ footer {
 	clear: both;
 	padding: 10px;
 	border:  1px dashed #D6BDF2;
+	text-align: center;
 }
 /* Icones */
 #inici   	{ background-image: url(ico/dialog.png); }
@@ -42,11 +43,13 @@ footer {
 #empresa 	{ background-image: url(ico/build.png); }
 #torneig 	{ background-image: url(ico/reports.png); }
 #contacte 	{ background-image: url(ico/email.png); }
-#usuaris  	{ background-image: url(ico/users.png); }
+#jocs 	 	{ background-image: url(ico/users.png); }
 
 /* Menu */
 .menu {
 	margin: 5px 5px 5px 0 ;
+	color:#FFF;
+	font-size:0.9em;
 	background-color:rgb(173, 97, 97);
 	border:1px solid #F90;
 	border-radius:8px 8px 8px 8px;
@@ -55,10 +58,9 @@ footer {
 }
 .menu a
 {	display:block;
+	color:#FFF;
 	line-height: 18px;
 	text-decoration:none;
-	color:#FFF;
-	font-size:0.9em;
     margin-bottom:10px;
     border:2px solid rgb(173, 97, 97);
     padding:8px;
@@ -87,6 +89,24 @@ footer {
 	border-radius:8px 8px 0px 0px;
 	-moz-border-radius:8px 8px 0px 0px;
 	-webkit-border-radius:8px 8px 0px 0px;
+}
+#dialog {
+	margin: 10px 5px;
+}
+#dialog fieldset {
+	padding: 5px;
+}
+#dialog legend {
+	padding: 0 5px;
+}
+#dialog input[type="submit"] {
+	margin-top: 7px;
+	width: 50%;
+}
+
+/* usuaris.php */
+#users h2 {
+	background-color: #B8D8FE;
 }
 
 /* recrea.php */

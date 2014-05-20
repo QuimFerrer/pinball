@@ -14,14 +14,50 @@
 		<menu>
 			<?php menu(); ?>
 		</menu>
-		<section>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, nemo, ducimus aliquam totam rerum neque asperiores similique ad vel reprehenderit commodi praesentium atque nostrum assumenda mollitia unde voluptatibus quo facilis!</p>
-			<p>Nulla, aliquam, ullam commodi quae repellat molestiae aut cumque dolor porro laudantium blanditiis facilis reprehenderit officiis eius laboriosam at autem tenetur vel nesciunt distinctio aliquid eveniet perferendis nam natus dolore.</p>
-			<p>Dolorum, deleniti, cum, voluptate, praesentium dignissimos nulla dolor vero fugit quasi officiis temporibus nobis excepturi iusto dolore iste maxime quos. Rem eius tenetur nihil aperiam veritatis iure ipsam nulla aliquam.</p>
+		<section id="users">
+<?php if ($_GET['id'] == 'adm') :?>
+			<article>
+				<h2>Aministrador</h2>
+				<ul>
+					<li><a href="#">Torneigs</a></li>
+					<li><a href="#">Màquines</a></li>
+					<li><a href="#">Partides</a></li>
+					<li><a href="#">Jugadors</a></li>
+					<li><a href="#">Consultes</a></li>
+				</ul>		
+			</article>
+
+<?php endif ?>
+<?php if ($_GET['id'] == 'usr') :?>
+
+			<article>
+				<h2>Usuari</h2>
+				<ul>
+					<li><a href="#">Perfil</a></li>
+					<li><a href="#">Donar-se de baixa</a></li>
+					<li><a href="#">Torneigs</a></li>
+				</ul>					
+			</article>
+		
+<?php endif ?>
 		</section>
 		<footer>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, nemo, ducimus aliquam totam rerum neque asperiores similique ad vel reprehenderit commodi praesentium atque nostrum assumenda mollitia unde voluptatibus quo facilis!</p>
+			<?php footer(); ?>
 		</footer>
 	</div>
 </body>
+	<script src="../js/pinball.js"></script>
+	<script>
+		var op;
+		var options = document.querySelectorAll('#users a');
+
+		for (options in op)
+			op.onclick = function (e) {
+				e.preventDefault();
+
+				alert('click');
+				return false;
+			}
+
+	</script>
 </html>
