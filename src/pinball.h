@@ -27,7 +27,21 @@
             <li><a id="empresa" 	href="../html/empresa.php">Empresa</a></li>
             <li><a id="torneig" 	href="../html/torneig.php">Torneigs</a></li>
             <li><a id="contacte"	href="../html/contacte.php">Contactar</a></li>
-            <li><a id="usuaris"     href="../html/usuaris.php">Zona de joc</a></li>
+            <li><a id="jocs"        href="../html/jocs.php">Zona de joc</a></li>
         </ul>
-    </div> 
+        <div id="dialog">
+            <form id="access">
+                <fieldset>
+                    <legend>Registre</legend>
+                    <label for="usr">Nom usuari</label><input type="text" name="usr">
+                    <label for="pwd">Clau accés</label><input type="password" name="pwd">
+                    <input type="submit" value="Entrar">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+<?php } ?>
+
+<?php function footer() { ?>
+    <p>&copy;2014 cal molins team group</p>
 <?php } ?>

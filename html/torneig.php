@@ -20,8 +20,9 @@
 			<p>Dolorum, deleniti, cum, voluptate, praesentium dignissimos nulla dolor vero fugit quasi officiis temporibus nobis excepturi iusto dolore iste maxime quos. Rem eius tenetur nihil aperiam veritatis iure ipsam nulla aliquam.</p>
 		</section>
 		<footer>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, nemo, ducimus aliquam totam rerum neque asperiores similique ad vel reprehenderit commodi praesentium atque nostrum assumenda mollitia unde voluptatibus quo facilis!</p>
+			<?php footer(); ?>
 		</footer>
 	</div>
 </body>
+	<script src="../js/pinball.js"></script>
 </html>
