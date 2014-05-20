@@ -2,16 +2,13 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-DROP SCHEMA IF EXISTS `pinballKit` ;
-CREATE SCHEMA IF NOT EXISTS `pinballKit` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci ;
-USE `pinballKit` ;
 
 -- -----------------------------------------------------
--- Table `pinballKit`.`usuari`
+-- Table `u555588791_pinba`.`usuari`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pinballKit`.`usuari` ;
+DROP TABLE IF EXISTS `u555588791_pinba`.`usuari` ;
 
-CREATE  TABLE IF NOT EXISTS `pinballKit`.`usuari` (
+CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`usuari` (
   `01_pk_idUsuari` INT NOT NULL ,
   `02_nomUsuari` VARCHAR(45) NULL ,
   `03_cognomUsuari` VARCHAR(45) NULL ,
@@ -27,11 +24,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pinballKit`.`admin`
+-- Table `u555588791_pinba`.`admin`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pinballKit`.`admin` ;
+DROP TABLE IF EXISTS `u555588791_pinba`.`admin` ;
 
-CREATE  TABLE IF NOT EXISTS `pinballKit`.`admin` (
+CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`admin` (
   `01_pk_idAdm` INT NOT NULL ,
   `02_faceAdm` VARCHAR(255) NULL ,
   `03_twitterAdm` VARCHAR(255) NULL ,
@@ -43,11 +40,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pinballKit`.`jugador`
+-- Table `u555588791_pinba`.`jugador`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pinballKit`.`jugador` ;
+DROP TABLE IF EXISTS `u555588791_pinba`.`jugador` ;
 
-CREATE  TABLE IF NOT EXISTS `pinballKit`.`jugador` (
+CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`jugador` (
   `01_pk_idJug` INT NOT NULL ,
   `02_faceJug` VARCHAR(255) NULL ,
   `03_twitterJug` VARCHAR(255) NULL ,
@@ -59,11 +56,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pinballKit`.`torneig`
+-- Table `u555588791_pinba`.`torneig`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pinballKit`.`torneig` ;
+DROP TABLE IF EXISTS `u555588791_pinba`.`torneig` ;
 
-CREATE  TABLE IF NOT EXISTS `pinballKit`.`torneig` (
+CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`torneig` (
   `01_pk_idTorn` INT NOT NULL ,
   `02_pk_idJocTorn` INT NOT NULL ,
   `03_nomTorn` VARCHAR(45) NULL ,
@@ -78,11 +75,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pinballKit`.`inscrit`
+-- Table `u555588791_pinba`.`inscrit`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pinballKit`.`inscrit` ;
+DROP TABLE IF EXISTS `u555588791_pinba`.`inscrit` ;
 
-CREATE  TABLE IF NOT EXISTS `pinballKit`.`inscrit` (
+CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`inscrit` (
   `01_pk_idTornInsc` INT NOT NULL ,
   `02_pk_idJocInsc` INT NOT NULL ,
   `03_pk_idJugInsc` INT NOT NULL ,
@@ -91,11 +88,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pinballKit`.`maquina`
+-- Table `u555588791_pinba`.`maquina`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pinballKit`.`maquina` ;
+DROP TABLE IF EXISTS `u555588791_pinba`.`maquina` ;
 
-CREATE  TABLE IF NOT EXISTS `pinballKit`.`maquina` (
+CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`maquina` (
   `01_pk_idMaq` INT NOT NULL ,
   `02_macMaq` VARCHAR(20) NULL ,
   `03_propMaq` VARCHAR(45) NULL ,
@@ -109,11 +106,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pinballKit`.`ubicacio`
+-- Table `u555588791_pinba`.`ubicacio`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pinballKit`.`ubicacio` ;
+DROP TABLE IF EXISTS `u555588791_pinba`.`ubicacio` ;
 
-CREATE  TABLE IF NOT EXISTS `pinballKit`.`ubicacio` (
+CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`ubicacio` (
   `01_pk_idUbic` INT NOT NULL ,
   `02_pk_idMaqUbic` INT NOT NULL ,
   `02_empUbic` VARCHAR(45) NULL ,
@@ -136,11 +133,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pinballKit`.`joc`
+-- Table `u555588791_pinba`.`joc`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pinballKit`.`joc` ;
+DROP TABLE IF EXISTS `u555588791_pinba`.`joc` ;
 
-CREATE  TABLE IF NOT EXISTS `pinballKit`.`joc` (
+CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`joc` (
   `01_pk_idJoc` INT NOT NULL ,
   `02_nomJoc` VARCHAR(45) NULL ,
   `03_numPartidesJugadesJoc` INT NULL ,
@@ -152,11 +149,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pinballKit`.`round`
+-- Table `u555588791_pinba`.`round`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pinballKit`.`round` ;
+DROP TABLE IF EXISTS `u555588791_pinba`.`round` ;
 
-CREATE  TABLE IF NOT EXISTS `pinballKit`.`round` (
+CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`round` (
   `01_pk_idMaqRound` INT NOT NULL ,
   `02_pk_idJocRound` INT NOT NULL ,
   `03_pk_idJugRound` INT NOT NULL ,
@@ -168,11 +165,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pinballKit`.`maqInstall`
+-- Table `u555588791_pinba`.`maqInstall`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pinballKit`.`maqInstall` ;
+DROP TABLE IF EXISTS `u555588791_pinba`.`maqInstall` ;
 
-CREATE  TABLE IF NOT EXISTS `pinballKit`.`maqInstall` (
+CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`maqInstall` (
   `01_pk_idMaqInst` INT NOT NULL ,
   `02_pk_idJocInst` INT NOT NULL ,
   PRIMARY KEY (`01_pk_idMaqInst`, `02_pk_idJocInst`) )
@@ -180,11 +177,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pinballKit`.`partida`
+-- Table `u555588791_pinba`.`partida`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pinballKit`.`partida` ;
+DROP TABLE IF EXISTS `u555588791_pinba`.`partida` ;
 
-CREATE  TABLE IF NOT EXISTS `pinballKit`.`partida` (
+CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`partida` (
   `01_pk_idMaqPart` INT NOT NULL ,
   `02_pk_idJocPart` INT NOT NULL ,
   `03_pk_idJugPart` INT NOT NULL ,
@@ -197,11 +194,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pinballKit`.`torneigTePartida`
+-- Table `u555588791_pinba`.`torneigTePartida`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pinballKit`.`torneigTePartida` ;
+DROP TABLE IF EXISTS `u555588791_pinba`.`torneigTePartida` ;
 
-CREATE  TABLE IF NOT EXISTS `pinballKit`.`torneigTePartida` (
+CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`torneigTePartida` (
   `01_pk_idTornTTP` INT NOT NULL ,
   `02_pk_idMaqTTP` INT NOT NULL ,
   `03_pk_idJocTTP` INT NOT NULL ,
@@ -216,123 +213,123 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `pinballKit`.`usuari`
+-- Data for table `u555588791_pinba`.`usuari`
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
-USE `pinballKit`;
-INSERT INTO `pinballKit`.`usuari` (`01_pk_idUsuari`, `02_nomUsuari`, `03_cognomUsuari`, `04_loginUsuari`, `05_pwdUsuari`, `06_emailUsuari`, `07_fotoUsuari`, `08_datAltaUsuari`, `09_datModUsuari`, `10_datBaixaUsuari`) VALUES ('2', 'joan', 'salas', 'joan', 'jsalas', 'jsalas@gmail.com', NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`usuari` (`01_pk_idUsuari`, `02_nomUsuari`, `03_cognomUsuari`, `04_loginUsuari`, `05_pwdUsuari`, `06_emailUsuari`, `07_fotoUsuari`, `08_datAltaUsuari`, `09_datModUsuari`, `10_datBaixaUsuari`) VALUES ('3', 'josep', 'puig', 'josep', 'jpuig', 'jpuig@gmail.com', NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`usuari` (`01_pk_idUsuari`, `02_nomUsuari`, `03_cognomUsuari`, `04_loginUsuari`, `05_pwdUsuari`, `06_emailUsuari`, `07_fotoUsuari`, `08_datAltaUsuari`, `09_datModUsuari`, `10_datBaixaUsuari`) VALUES ('4', 'miquel', 'roca', 'miquel', 'mroca', 'mroca@gmail.com', NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`usuari` (`01_pk_idUsuari`, `02_nomUsuari`, `03_cognomUsuari`, `04_loginUsuari`, `05_pwdUsuari`, `06_emailUsuari`, `07_fotoUsuari`, `08_datAltaUsuari`, `09_datModUsuari`, `10_datBaixaUsuari`) VALUES ('1', 'adm', 'adm', 'adm', 'adm', 'admadm@gmail.com', NULL, '2014-05-13', NULL, NULL);
+USE `u555588791_pinba`;
+INSERT INTO `u555588791_pinba`.`usuari` (`01_pk_idUsuari`, `02_nomUsuari`, `03_cognomUsuari`, `04_loginUsuari`, `05_pwdUsuari`, `06_emailUsuari`, `07_fotoUsuari`, `08_datAltaUsuari`, `09_datModUsuari`, `10_datBaixaUsuari`) VALUES ('2', 'joan', 'salas', 'joan', 'jsalas', 'jsalas@gmail.com', NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`usuari` (`01_pk_idUsuari`, `02_nomUsuari`, `03_cognomUsuari`, `04_loginUsuari`, `05_pwdUsuari`, `06_emailUsuari`, `07_fotoUsuari`, `08_datAltaUsuari`, `09_datModUsuari`, `10_datBaixaUsuari`) VALUES ('3', 'josep', 'puig', 'josep', 'jpuig', 'jpuig@gmail.com', NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`usuari` (`01_pk_idUsuari`, `02_nomUsuari`, `03_cognomUsuari`, `04_loginUsuari`, `05_pwdUsuari`, `06_emailUsuari`, `07_fotoUsuari`, `08_datAltaUsuari`, `09_datModUsuari`, `10_datBaixaUsuari`) VALUES ('4', 'miquel', 'roca', 'miquel', 'mroca', 'mroca@gmail.com', NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`usuari` (`01_pk_idUsuari`, `02_nomUsuari`, `03_cognomUsuari`, `04_loginUsuari`, `05_pwdUsuari`, `06_emailUsuari`, `07_fotoUsuari`, `08_datAltaUsuari`, `09_datModUsuari`, `10_datBaixaUsuari`) VALUES ('1', 'adm', 'adm', 'adm', 'adm', 'admadm@gmail.com', NULL, '2014-05-13', NULL, NULL);
 
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table `pinballKit`.`admin`
+-- Data for table `u555588791_pinba`.`admin`
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
-USE `pinballKit`;
-INSERT INTO `pinballKit`.`admin` (`01_pk_idAdm`, `02_faceAdm`, `03_twitterAdm`, `04_datAltaAdm`, `05_datModAdm`, `06_datBaixaAdm`) VALUES ('1', NULL, NULL, '2014-05-13', NULL, NULL);
+USE `u555588791_pinba`;
+INSERT INTO `u555588791_pinba`.`admin` (`01_pk_idAdm`, `02_faceAdm`, `03_twitterAdm`, `04_datAltaAdm`, `05_datModAdm`, `06_datBaixaAdm`) VALUES ('1', NULL, NULL, '2014-05-13', NULL, NULL);
 
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table `pinballKit`.`jugador`
+-- Data for table `u555588791_pinba`.`jugador`
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
-USE `pinballKit`;
-INSERT INTO `pinballKit`.`jugador` (`01_pk_idJug`, `02_faceJug`, `03_twitterJug`, `04_datAltaJug`, `05_datModJug`, `06_datBaixaJug`) VALUES ('2', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`jugador` (`01_pk_idJug`, `02_faceJug`, `03_twitterJug`, `04_datAltaJug`, `05_datModJug`, `06_datBaixaJug`) VALUES ('3', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`jugador` (`01_pk_idJug`, `02_faceJug`, `03_twitterJug`, `04_datAltaJug`, `05_datModJug`, `06_datBaixaJug`) VALUES ('4', NULL, NULL, '2014-05-13', NULL, NULL);
+USE `u555588791_pinba`;
+INSERT INTO `u555588791_pinba`.`jugador` (`01_pk_idJug`, `02_faceJug`, `03_twitterJug`, `04_datAltaJug`, `05_datModJug`, `06_datBaixaJug`) VALUES ('2', NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`jugador` (`01_pk_idJug`, `02_faceJug`, `03_twitterJug`, `04_datAltaJug`, `05_datModJug`, `06_datBaixaJug`) VALUES ('3', NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`jugador` (`01_pk_idJug`, `02_faceJug`, `03_twitterJug`, `04_datAltaJug`, `05_datModJug`, `06_datBaixaJug`) VALUES ('4', NULL, NULL, '2014-05-13', NULL, NULL);
 
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table `pinballKit`.`torneig`
+-- Data for table `u555588791_pinba`.`torneig`
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
-USE `pinballKit`;
-INSERT INTO `pinballKit`.`torneig` (`01_pk_idTorn`, `02_pk_idJocTorn`, `03_nomTorn`, `04_premiTorn`, `05_datIniTorn`, `06_datFinTorn`, `07_datAltaTorn`, `08_datModTorn`, `09_datBaixaTorn`) VALUES ('1000', '100', 'fifa 2014', '100', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`torneig` (`01_pk_idTorn`, `02_pk_idJocTorn`, `03_nomTorn`, `04_premiTorn`, `05_datIniTorn`, `06_datFinTorn`, `07_datAltaTorn`, `08_datModTorn`, `09_datBaixaTorn`) VALUES ('1001', '101', 'arcade 2014', '200', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`torneig` (`01_pk_idTorn`, `02_pk_idJocTorn`, `03_nomTorn`, `04_premiTorn`, `05_datIniTorn`, `06_datFinTorn`, `07_datAltaTorn`, `08_datModTorn`, `09_datBaixaTorn`) VALUES ('1002', '102', 'web 2014', '300', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`torneig` (`01_pk_idTorn`, `02_pk_idJocTorn`, `03_nomTorn`, `04_premiTorn`, `05_datIniTorn`, `06_datFinTorn`, `07_datAltaTorn`, `08_datModTorn`, `09_datBaixaTorn`) VALUES ('1003', '103', 'castles 2014', '400', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`torneig` (`01_pk_idTorn`, `02_pk_idJocTorn`, `03_nomTorn`, `04_premiTorn`, `05_datIniTorn`, `06_datFinTorn`, `07_datAltaTorn`, `08_datModTorn`, `09_datBaixaTorn`) VALUES ('1004', '104', 'webapp 2014', '500', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`torneig` (`01_pk_idTorn`, `02_pk_idJocTorn`, `03_nomTorn`, `04_premiTorn`, `05_datIniTorn`, `06_datFinTorn`, `07_datAltaTorn`, `08_datModTorn`, `09_datBaixaTorn`) VALUES ('1005', '100', 'mytorn 2014', '600', NULL, NULL, '2014-05-13', NULL, NULL);
+USE `u555588791_pinba`;
+INSERT INTO `u555588791_pinba`.`torneig` (`01_pk_idTorn`, `02_pk_idJocTorn`, `03_nomTorn`, `04_premiTorn`, `05_datIniTorn`, `06_datFinTorn`, `07_datAltaTorn`, `08_datModTorn`, `09_datBaixaTorn`) VALUES ('1000', '100', 'fifa 2014', '100', NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`torneig` (`01_pk_idTorn`, `02_pk_idJocTorn`, `03_nomTorn`, `04_premiTorn`, `05_datIniTorn`, `06_datFinTorn`, `07_datAltaTorn`, `08_datModTorn`, `09_datBaixaTorn`) VALUES ('1001', '101', 'arcade 2014', '200', NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`torneig` (`01_pk_idTorn`, `02_pk_idJocTorn`, `03_nomTorn`, `04_premiTorn`, `05_datIniTorn`, `06_datFinTorn`, `07_datAltaTorn`, `08_datModTorn`, `09_datBaixaTorn`) VALUES ('1002', '102', 'web 2014', '300', NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`torneig` (`01_pk_idTorn`, `02_pk_idJocTorn`, `03_nomTorn`, `04_premiTorn`, `05_datIniTorn`, `06_datFinTorn`, `07_datAltaTorn`, `08_datModTorn`, `09_datBaixaTorn`) VALUES ('1003', '103', 'castles 2014', '400', NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`torneig` (`01_pk_idTorn`, `02_pk_idJocTorn`, `03_nomTorn`, `04_premiTorn`, `05_datIniTorn`, `06_datFinTorn`, `07_datAltaTorn`, `08_datModTorn`, `09_datBaixaTorn`) VALUES ('1004', '104', 'webapp 2014', '500', NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`torneig` (`01_pk_idTorn`, `02_pk_idJocTorn`, `03_nomTorn`, `04_premiTorn`, `05_datIniTorn`, `06_datFinTorn`, `07_datAltaTorn`, `08_datModTorn`, `09_datBaixaTorn`) VALUES ('1005', '100', 'mytorn 2014', '600', NULL, NULL, '2014-05-13', NULL, NULL);
 
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table `pinballKit`.`inscrit`
+-- Data for table `u555588791_pinba`.`inscrit`
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
-USE `pinballKit`;
-INSERT INTO `pinballKit`.`inscrit` (`01_pk_idTornInsc`, `02_pk_idJocInsc`, `03_pk_idJugInsc`) VALUES ('1000', '100', '2');
-INSERT INTO `pinballKit`.`inscrit` (`01_pk_idTornInsc`, `02_pk_idJocInsc`, `03_pk_idJugInsc`) VALUES ('1001', '101', '3');
-INSERT INTO `pinballKit`.`inscrit` (`01_pk_idTornInsc`, `02_pk_idJocInsc`, `03_pk_idJugInsc`) VALUES ('1002', '102', '4');
-INSERT INTO `pinballKit`.`inscrit` (`01_pk_idTornInsc`, `02_pk_idJocInsc`, `03_pk_idJugInsc`) VALUES ('1003', '103', '2');
-INSERT INTO `pinballKit`.`inscrit` (`01_pk_idTornInsc`, `02_pk_idJocInsc`, `03_pk_idJugInsc`) VALUES ('1004', '104', '3');
-INSERT INTO `pinballKit`.`inscrit` (`01_pk_idTornInsc`, `02_pk_idJocInsc`, `03_pk_idJugInsc`) VALUES ('1005', '100', '2');
+USE `u555588791_pinba`;
+INSERT INTO `u555588791_pinba`.`inscrit` (`01_pk_idTornInsc`, `02_pk_idJocInsc`, `03_pk_idJugInsc`) VALUES ('1000', '100', '2');
+INSERT INTO `u555588791_pinba`.`inscrit` (`01_pk_idTornInsc`, `02_pk_idJocInsc`, `03_pk_idJugInsc`) VALUES ('1001', '101', '3');
+INSERT INTO `u555588791_pinba`.`inscrit` (`01_pk_idTornInsc`, `02_pk_idJocInsc`, `03_pk_idJugInsc`) VALUES ('1002', '102', '4');
+INSERT INTO `u555588791_pinba`.`inscrit` (`01_pk_idTornInsc`, `02_pk_idJocInsc`, `03_pk_idJugInsc`) VALUES ('1003', '103', '2');
+INSERT INTO `u555588791_pinba`.`inscrit` (`01_pk_idTornInsc`, `02_pk_idJocInsc`, `03_pk_idJugInsc`) VALUES ('1004', '104', '3');
+INSERT INTO `u555588791_pinba`.`inscrit` (`01_pk_idTornInsc`, `02_pk_idJocInsc`, `03_pk_idJugInsc`) VALUES ('1005', '100', '2');
 
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table `pinballKit`.`maquina`
+-- Data for table `u555588791_pinba`.`maquina`
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
-USE `pinballKit`;
-INSERT INTO `pinballKit`.`maquina` (`01_pk_idMaq`, `02_macMaq`, `03_propMaq`, `04_credMaq`, `05_totCredMaq`, `06_datAltaMaq`, `07_datModMaq`, `08_datBaixaMaq`) VALUES ('10', NULL, 'josep guijosa', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`maquina` (`01_pk_idMaq`, `02_macMaq`, `03_propMaq`, `04_credMaq`, `05_totCredMaq`, `06_datAltaMaq`, `07_datModMaq`, `08_datBaixaMaq`) VALUES ('20', NULL, 'josep guijosa', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`maquina` (`01_pk_idMaq`, `02_macMaq`, `03_propMaq`, `04_credMaq`, `05_totCredMaq`, `06_datAltaMaq`, `07_datModMaq`, `08_datBaixaMaq`) VALUES ('30', NULL, 'joan farres', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`maquina` (`01_pk_idMaq`, `02_macMaq`, `03_propMaq`, `04_credMaq`, `05_totCredMaq`, `06_datAltaMaq`, `07_datModMaq`, `08_datBaixaMaq`) VALUES ('40', NULL, 'joan farres', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`maquina` (`01_pk_idMaq`, `02_macMaq`, `03_propMaq`, `04_credMaq`, `05_totCredMaq`, `06_datAltaMaq`, `07_datModMaq`, `08_datBaixaMaq`) VALUES ('50', NULL, 'miquel farres', NULL, NULL, '2014-05-13', NULL, NULL);
+USE `u555588791_pinba`;
+INSERT INTO `u555588791_pinba`.`maquina` (`01_pk_idMaq`, `02_macMaq`, `03_propMaq`, `04_credMaq`, `05_totCredMaq`, `06_datAltaMaq`, `07_datModMaq`, `08_datBaixaMaq`) VALUES ('10', NULL, 'josep guijosa', NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maquina` (`01_pk_idMaq`, `02_macMaq`, `03_propMaq`, `04_credMaq`, `05_totCredMaq`, `06_datAltaMaq`, `07_datModMaq`, `08_datBaixaMaq`) VALUES ('20', NULL, 'josep guijosa', NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maquina` (`01_pk_idMaq`, `02_macMaq`, `03_propMaq`, `04_credMaq`, `05_totCredMaq`, `06_datAltaMaq`, `07_datModMaq`, `08_datBaixaMaq`) VALUES ('30', NULL, 'joan farres', NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maquina` (`01_pk_idMaq`, `02_macMaq`, `03_propMaq`, `04_credMaq`, `05_totCredMaq`, `06_datAltaMaq`, `07_datModMaq`, `08_datBaixaMaq`) VALUES ('40', NULL, 'joan farres', NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maquina` (`01_pk_idMaq`, `02_macMaq`, `03_propMaq`, `04_credMaq`, `05_totCredMaq`, `06_datAltaMaq`, `07_datModMaq`, `08_datBaixaMaq`) VALUES ('50', NULL, 'miquel farres', NULL, NULL, '2014-05-13', NULL, NULL);
 
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table `pinballKit`.`ubicacio`
+-- Data for table `u555588791_pinba`.`ubicacio`
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
-USE `pinballKit`;
-INSERT INTO `pinballKit`.`ubicacio` (`01_pk_idUbic`, `02_pk_idMaqUbic`, `02_empUbic`, `03_dirUbic`, `04_pobUbic`, `05_cpUbic`, `06_provUbic`, `07_latUbic`, `08_longUbic`, `09_altUbic`, `10_contUbic`, `11_emailUbic`, `12_telUbic`, `13_mobUbic`, `14_datAltaUbic`, `15_datModUbic`, `16_datBaixaUbic`) VALUES ('1', '10', 'astic,sa', 'santa anna,23', 'sabadell', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`ubicacio` (`01_pk_idUbic`, `02_pk_idMaqUbic`, `02_empUbic`, `03_dirUbic`, `04_pobUbic`, `05_cpUbic`, `06_provUbic`, `07_latUbic`, `08_longUbic`, `09_altUbic`, `10_contUbic`, `11_emailUbic`, `12_telUbic`, `13_mobUbic`, `14_datAltaUbic`, `15_datModUbic`, `16_datBaixaUbic`) VALUES ('2', '20', 'astic,sa', 'santa anna,23', 'sabadell', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`ubicacio` (`01_pk_idUbic`, `02_pk_idMaqUbic`, `02_empUbic`, `03_dirUbic`, `04_pobUbic`, `05_cpUbic`, `06_provUbic`, `07_latUbic`, `08_longUbic`, `09_altUbic`, `10_contUbic`, `11_emailUbic`, `12_telUbic`, `13_mobUbic`, `14_datAltaUbic`, `15_datModUbic`, `16_datBaixaUbic`) VALUES ('3', '30', 'fermol,sl', 'robert,2', 'barcelona', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`ubicacio` (`01_pk_idUbic`, `02_pk_idMaqUbic`, `02_empUbic`, `03_dirUbic`, `04_pobUbic`, `05_cpUbic`, `06_provUbic`, `07_latUbic`, `08_longUbic`, `09_altUbic`, `10_contUbic`, `11_emailUbic`, `12_telUbic`, `13_mobUbic`, `14_datAltaUbic`, `15_datModUbic`, `16_datBaixaUbic`) VALUES ('4', '40', 'fermol,sl', 'robert,2', 'barcelona', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`ubicacio` (`01_pk_idUbic`, `02_pk_idMaqUbic`, `02_empUbic`, `03_dirUbic`, `04_pobUbic`, `05_cpUbic`, `06_provUbic`, `07_latUbic`, `08_longUbic`, `09_altUbic`, `10_contUbic`, `11_emailUbic`, `12_telUbic`, `13_mobUbic`, `14_datAltaUbic`, `15_datModUbic`, `16_datBaixaUbic`) VALUES ('5', '50', 'iol,sa', 'londres,90', 'mollet', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
+USE `u555588791_pinba`;
+INSERT INTO `u555588791_pinba`.`ubicacio` (`01_pk_idUbic`, `02_pk_idMaqUbic`, `02_empUbic`, `03_dirUbic`, `04_pobUbic`, `05_cpUbic`, `06_provUbic`, `07_latUbic`, `08_longUbic`, `09_altUbic`, `10_contUbic`, `11_emailUbic`, `12_telUbic`, `13_mobUbic`, `14_datAltaUbic`, `15_datModUbic`, `16_datBaixaUbic`) VALUES ('1', '10', 'astic,sa', 'santa anna,23', 'sabadell', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacio` (`01_pk_idUbic`, `02_pk_idMaqUbic`, `02_empUbic`, `03_dirUbic`, `04_pobUbic`, `05_cpUbic`, `06_provUbic`, `07_latUbic`, `08_longUbic`, `09_altUbic`, `10_contUbic`, `11_emailUbic`, `12_telUbic`, `13_mobUbic`, `14_datAltaUbic`, `15_datModUbic`, `16_datBaixaUbic`) VALUES ('2', '20', 'astic,sa', 'santa anna,23', 'sabadell', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacio` (`01_pk_idUbic`, `02_pk_idMaqUbic`, `02_empUbic`, `03_dirUbic`, `04_pobUbic`, `05_cpUbic`, `06_provUbic`, `07_latUbic`, `08_longUbic`, `09_altUbic`, `10_contUbic`, `11_emailUbic`, `12_telUbic`, `13_mobUbic`, `14_datAltaUbic`, `15_datModUbic`, `16_datBaixaUbic`) VALUES ('3', '30', 'fermol,sl', 'robert,2', 'barcelona', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacio` (`01_pk_idUbic`, `02_pk_idMaqUbic`, `02_empUbic`, `03_dirUbic`, `04_pobUbic`, `05_cpUbic`, `06_provUbic`, `07_latUbic`, `08_longUbic`, `09_altUbic`, `10_contUbic`, `11_emailUbic`, `12_telUbic`, `13_mobUbic`, `14_datAltaUbic`, `15_datModUbic`, `16_datBaixaUbic`) VALUES ('4', '40', 'fermol,sl', 'robert,2', 'barcelona', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacio` (`01_pk_idUbic`, `02_pk_idMaqUbic`, `02_empUbic`, `03_dirUbic`, `04_pobUbic`, `05_cpUbic`, `06_provUbic`, `07_latUbic`, `08_longUbic`, `09_altUbic`, `10_contUbic`, `11_emailUbic`, `12_telUbic`, `13_mobUbic`, `14_datAltaUbic`, `15_datModUbic`, `16_datBaixaUbic`) VALUES ('5', '50', 'iol,sa', 'londres,90', 'mollet', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
 
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table `pinballKit`.`joc`
+-- Data for table `u555588791_pinba`.`joc`
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
-USE `pinballKit`;
-INSERT INTO `pinballKit`.`joc` (`01_pk_idJoc`, `02_nomJoc`, `03_numPartidesJugadesJoc`, `04_datAltaJoc`, `05_datModJoc`, `06_datBaixaJoc`) VALUES ('100', 'tetris', NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`joc` (`01_pk_idJoc`, `02_nomJoc`, `03_numPartidesJugadesJoc`, `04_datAltaJoc`, `05_datModJoc`, `06_datBaixaJoc`) VALUES ('101', 'war3d', NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`joc` (`01_pk_idJoc`, `02_nomJoc`, `03_numPartidesJugadesJoc`, `04_datAltaJoc`, `05_datModJoc`, `06_datBaixaJoc`) VALUES ('102', 'fhising', NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`joc` (`01_pk_idJoc`, `02_nomJoc`, `03_numPartidesJugadesJoc`, `04_datAltaJoc`, `05_datModJoc`, `06_datBaixaJoc`) VALUES ('103', 'arcade', NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `pinballKit`.`joc` (`01_pk_idJoc`, `02_nomJoc`, `03_numPartidesJugadesJoc`, `04_datAltaJoc`, `05_datModJoc`, `06_datBaixaJoc`) VALUES ('104', 'pacman', NULL, '2014-05-13', NULL, NULL);
+USE `u555588791_pinba`;
+INSERT INTO `u555588791_pinba`.`joc` (`01_pk_idJoc`, `02_nomJoc`, `03_numPartidesJugadesJoc`, `04_datAltaJoc`, `05_datModJoc`, `06_datBaixaJoc`) VALUES ('100', 'tetris', NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`joc` (`01_pk_idJoc`, `02_nomJoc`, `03_numPartidesJugadesJoc`, `04_datAltaJoc`, `05_datModJoc`, `06_datBaixaJoc`) VALUES ('101', 'war3d', NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`joc` (`01_pk_idJoc`, `02_nomJoc`, `03_numPartidesJugadesJoc`, `04_datAltaJoc`, `05_datModJoc`, `06_datBaixaJoc`) VALUES ('102', 'fhising', NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`joc` (`01_pk_idJoc`, `02_nomJoc`, `03_numPartidesJugadesJoc`, `04_datAltaJoc`, `05_datModJoc`, `06_datBaixaJoc`) VALUES ('103', 'arcade', NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`joc` (`01_pk_idJoc`, `02_nomJoc`, `03_numPartidesJugadesJoc`, `04_datAltaJoc`, `05_datModJoc`, `06_datBaixaJoc`) VALUES ('104', 'pacman', NULL, '2014-05-13', NULL, NULL);
 
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table `pinballKit`.`maqInstall`
+-- Data for table `u555588791_pinba`.`maqInstall`
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
-USE `pinballKit`;
-INSERT INTO `pinballKit`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('10', '100');
-INSERT INTO `pinballKit`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('10', '101');
-INSERT INTO `pinballKit`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('10', '102');
-INSERT INTO `pinballKit`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('20', '102');
-INSERT INTO `pinballKit`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('20', '103');
-INSERT INTO `pinballKit`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('20', '104');
-INSERT INTO `pinballKit`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('30', '101');
-INSERT INTO `pinballKit`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('30', '103');
-INSERT INTO `pinballKit`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('40', '100');
-INSERT INTO `pinballKit`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('40', '101');
-INSERT INTO `pinballKit`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('40', '102');
-INSERT INTO `pinballKit`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('40', '103');
-INSERT INTO `pinballKit`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('40', '104');
-INSERT INTO `pinballKit`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('50', '103');
-INSERT INTO `pinballKit`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('50', '104');
+USE `u555588791_pinba`;
+INSERT INTO `u555588791_pinba`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('10', '100');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('10', '101');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('10', '102');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('20', '102');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('20', '103');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('20', '104');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('30', '101');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('30', '103');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('40', '100');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('40', '101');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('40', '102');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('40', '103');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('40', '104');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('50', '103');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`01_pk_idMaqInst`, `02_pk_idJocInst`) VALUES ('50', '104');
 
 COMMIT;
