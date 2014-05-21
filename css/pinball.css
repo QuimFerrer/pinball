@@ -44,6 +44,7 @@ footer {
 #torneig 	{ background-image: url(ico/reports.png); }
 #contacte 	{ background-image: url(ico/email.png); }
 #jocs 	 	{ background-image: url(ico/users.png); }
+#registre 	{ background-image: url(ico/kgpg_sign.png); }
 
 /* Menu */
 .menu {
@@ -101,7 +102,7 @@ footer {
 }
 #dialog input[type="submit"] {
 	margin-top: 7px;
-	width: 50%;
+	width: 45%;
 }
 
 /* usuaris.php */
