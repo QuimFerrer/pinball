@@ -29,7 +29,7 @@
 				<div id="toolbar" style="padding: 4px; border: 1px solid silver; border-radius: 3px"></div>
 			</article>
 				
-			<div id="grid" style="width: 100%; height: 450px;"></div>
+			<div id="grid" style="width: 100%; height: 500px;"></div>
 		</section>
 		<footer>
 			<?php footer(); ?>
@@ -37,8 +37,8 @@
 	</div>
 </body>
 	<script type="text/javascript" src="../js/lib/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript" src="//w2ui.com/src/w2ui-1.3.min.js"></script>
-	<script src="../js/pinball.js"></script>
+	<script type="text/javascript" src="../js/lib/w2ui-1.3.2.min.js"></script>
+	<script type="text/javascript" src="../js/pinball.js"></script>
 	<script>
 // Toolbar per l'Administrador
 <?php if ($_GET['id'] == 'adm') :?>
@@ -46,37 +46,43 @@
 	$('#toolbar').w2toolbar({
 		name: 'toolbar',
 		items: [
-			{ type: 'button',  id: '1020', caption: 'Torneigs',  img: 'icon-edit', hint: 'Hint for item 1' },
-			{ type: 'button',  id: '1040', caption: 'Màquines',  img: 'icon-folder', hint: 'Hint for item 2' },
-			{ type: 'button',  id: '1060', caption: 'Partides',  img: 'icon-page', hint: 'Hint for item 3' },
-			{ type: 'button',  id: '1080', caption: 'Jugadors',  img: 'icon-folder', hint: 'Hint for item 4' },
-			{ type: 'button',  id: '1100', caption: 'Consultes', img: 'icon-page', hint: 'Hint for item 5' }
+			{ type: 'button',  id: '1020', caption: 'Torneigs',  img: 'icon-edit', hint: 'Accés a torneigs' },
+			{ type: 'button',  id: '1040', caption: 'Màquines',  img: 'icon-folder', hint: 'Accés a màquines' },
+			{ type: 'button',  id: '1060', caption: 'Partides',  img: 'icon-page', hint: 'Accés a partides' },
+			{ type: 'button',  id: '1080', caption: 'Jugadors',  img: 'icon-folder', hint: 'Accés a jugadors' },
+			{ type: 'button',  id: '1100', caption: 'Consultes', img: 'icon-page', hint: 'Mòdul de consultes' }
 		],
-		onClick: function (e) {
-
-			e.preventDefault();
-
-			switch(e.target) {
-				case '1020':
-					columns = [				
-						{ field: 'nom', caption: 'Nom del producte', size: '40%' },
-						{ field: 'foto', caption: 'Foto del producte', size: '40%' }
-					];
-				    querySend(e.target, columns);
-				    break;
-				case '1040':
-					columns = [				
-						{ field: '03_propMaq', caption: 'Nom del propietari', size: '100%' }
-					];
-				    querySend(e.target, columns);
-				    break;
-				default:
-				    console.log("default");
-			}
-			return false;
-		}
+		onClick: function(e){ modelVista(e) }
 	});
+
+	var modelVista = function(e) {
+		e.preventDefault();
+
+		switch(e.target) {
+			case '1020':
+				columns = [				
+					{ field: 'nom', caption: 'Nom del producte', size: '40%' },
+					{ field: 'foto', caption: 'Foto del producte', size: '40%' }
+				];
+			    showGrid("Torneigs", e.target, columns);
+			    break;
+
+			case '1040':
+				columns = [				
+					{ field: '01_pk_idMaq', caption: 'ID Maquina', size: '10%' },
+					{ field: '03_propMaq', caption: 'Nom del propietari', size: '50%' },
+					{ field: '06_datAltaMaq', caption: 'Data alta', size: '40%' }
+				];
+			    showGrid("Maquines", e.target, columns);
+			    break;
+
+			default:
+			    console.log("default");
+		}
+		return false;
+	};
 <?php endif ?>
+
 
 // Toolbar per l'Usuari
 <?php if ($_GET['id'] == 'usr') :?>
@@ -98,7 +104,7 @@
 						{ field: 'nom', caption: 'usuari', size: '20%' },
 						{ field: 'foto', caption: 'partida', size: '20%' }
 					];
-				    querySend(e.target, columns);
+				    showGrid("Perfil d'usuari", e.target, columns);
 				    break;
 				default:
 				    console.log("default");
@@ -108,48 +114,55 @@
 	});
 <?php endif ?>
 
-	function querySend(target, columns) {
+	function showGrid(title, target, columns) {
+		
+		if (!w2ui.grid)	createGrid(title);
+		w2utils.lock("#grid", 'Connectant ...', true);
 
 		$.post( "query.php", 
 			{pid:target}, 
 
 			function(data) {
-				if (!w2ui.grid)	CreateGrid();
-
+				console.log(data);
 				w2ui.grid.columns = columns;
 				w2ui.grid.records = data;
+				w2utils.unlock("#grid");
 				w2ui.grid.refresh();
-
-			}, "json")
-
-			.fail( function(e) {
-				$( "#grid" ).empty().append( "error:"+ e );
-			}
-		);
+			}, "json"
+		)
+		.fail( function(e) {
+			console.log(e);
+			$( "#grid" ).empty().append( "error:"+ e.status );
+		});
 	}
 
 
-	function CreateGrid() {
+	function createGrid(title) {
+
+		show = {
+		    header         : true,  	// indicates if header is visible
+		    toolbar        : true,  	// indicates if toolbar is visible
+		    footer         : true,  	// indicates if footer is visible
+		    columnHeaders  : true,   	// indicates if columns is visible
+		    lineNumbers    : false,  	// indicates if line numbers column is visible
+		    expandColumn   : false,  	// indicates if expand column is visible
+		    selectColumn   : true,  	// indicates if select column is visible
+		    emptyRecords   : false,  	// indicates if empty records are visible
+		    toolbarReload  : false,   	// indicates if toolbar reload button is visible
+		    toolbarColumns : true,   	// indicates if toolbar columns button is visible
+		    toolbarSearch  : false,   	// indicates if toolbar search controls are visible
+		    toolbarAdd     : true,   	// indicates if toolbar add new button is visible
+		    toolbarEdit	   : true,   	// indicates if toolbar delete button is visible
+		    toolbarDelete  : true,   	// indicates if toolbar delete button is visible
+		    toolbarSave    : true,   	// indicates if toolbar save button is visible
+			selectionBorder: true,	 	// display border arround selection (for selectType = 'cell')
+			recordTitles   : false	 	// indicates if to define titles for records
+		}
 
 		$('#grid').w2grid({ 
 			name: 'grid', 
-			header: 'Titol de la consulta',
-			show: {
-				header: true,
-				toolbar: true,
-				footer: true,
-				toolbarAdd: true,
-				toolbarDelete: true,
-				toolbarSave: true,
-				toolbarEdit: true,
-				lineNumbers	: true,
-				selectColumn: true,
-				expandColumn: true
-			},		
-			columns: [				
-				{ field: 'nom', caption: 'Nom del producte', size: '40%' },
-				{ field: 'foto', caption: 'Foto del producte', size: '40%' }
-			],
+			header: title,
+			show: show,		
 			onAdd: function (event) {
 				w2alert('add');
 			},

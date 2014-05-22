@@ -11,27 +11,38 @@
 		switch ($pid) {
 			case CONSULTA_ADM :
 				// $query    = 'SELECT id, nom, foto FROM productes';
-				// $response = dbExec($query);
+				$query    = 'Set @var:=0;SELECT @var:=@var+1 as recid, nom, foto FROM productes';
+				$response = dbExec($query);
 
-				// $records = array();
-				// // Respectar format que espera el grid
+				// // Respectar format que espera el grid'
 				// foreach($response as $row) {
 				// 	$records[] = (object) array('recid'=>(int)$row->id, 'nom'=>$row->nom, 'foto'=>$row->foto);
 				// }
 
-				$records[] = (object) array('recid'=>1, 'nom'=>"Quim", 'foto'=>"foto de Quim");
-				$records[] = (object) array('recid'=>2, 'nom'=>"Joan", 'foto'=>"foto de Joan");
+				// // $records[] = (object) array('recid'=>1, 'nom'=>"Quim", 'foto'=>"foto de Quim");
+				// // $records[] = (object) array('recid'=>2, 'nom'=>"Joan", 'foto'=>"foto de Joan");
 
-				echo json_encode( $records );
+				echo json_encode( $response );
 				break;
 
 			case MAQUINES :
-				$query    = 'SELECT id, nom FROM maquines';
-				$response = dbExec($query);
+				//sleep(3); // Temporitzar la consulta 3 segons
+				// $records[] = (object) array('recid'=>1, 'nom'=>"Maquina 1", 'foto'=>"maquina1.jpg");
+				// $records[] = (object) array('recid'=>2, 'nom'=>"Maquina 2", 'foto'=>"maquina2.png");
 
-				$records = array();
+				$query    = 'SELECT * FROM maquina';
+				$response = dbExec($query);
+				$n = 1;
+
 				foreach($response as $row) {
-					$records[] = (object) array('recid'=>(int)$row->01_pk_idMaq, 'nom'=>$row->03_propMaq);
+
+					$rec['recid'] = strval($n);
+
+					foreach ($row as $key => $value) {
+						$rec[$key] = $value;
+					}
+					$records[] = $rec;
+					$n++;
 				}
 
 				echo json_encode( $records );
@@ -56,4 +67,5 @@
 	} else {
 		die ("error");
 	}
+
 ?>
