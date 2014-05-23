@@ -1,4 +1,4 @@
-select * from jugador;
+select @rn:=@rn+1 as ‘recid’, j.* from jugador as j, (SELECT @rn:=0) rr;
 
 select  01_pk_idJug,01_pk_idTornInsc,03_nomTorn,02_pk_idJocInsc from jugador
 left join inscrit on 01_pk_idJug = 03_pk_idJugInsc
