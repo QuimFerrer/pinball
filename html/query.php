@@ -11,7 +11,7 @@
 		switch ($pid) {
 			case CONSULTA_ADM :
 				// $query    = 'SELECT id, nom, foto FROM productes';
-				$query    = 'Set @var:=0;SELECT @var:=@var+1 as recid, nom, foto FROM productes';
+				$query    = 'SELECT @var:=@var+1 as recid, p.* FROM productes as p, (SELECT @var:=0) as r';
 				$response = dbExec($query);
 
 				// // Respectar format que espera el grid'
@@ -30,22 +30,23 @@
 				// $records[] = (object) array('recid'=>1, 'nom'=>"Maquina 1", 'foto'=>"maquina1.jpg");
 				// $records[] = (object) array('recid'=>2, 'nom'=>"Maquina 2", 'foto'=>"maquina2.png");
 
+				// $query    = 'SELECT @var:=@var+1 as recid, p.* FROM maquina as p, (SELECT @var:=0) as r';
 				$query    = 'SELECT * FROM maquina';
 				$response = dbExec($query);
-				$n = 1;
+				// $n = 1;
 
-				foreach($response as $row) {
+				// foreach($response as $row) {
 
-					$rec['recid'] = strval($n);
+				// 	$rec['recid'] = strval($n);
 
-					foreach ($row as $key => $value) {
-						$rec[$key] = $value;
-					}
-					$records[] = $rec;
-					$n++;
-				}
+				// 	foreach ($row as $key => $value) {
+				// 		$rec[$key] = $value;
+				// 	}
+				// 	$records[] = $rec;
+				// 	$n++;
+				// }
 
-				echo json_encode( $records );
+				echo json_encode( $response );
 				break;
 
 			case CONSULTA_USR :

@@ -64,7 +64,7 @@
 					{ field: 'nom', caption: 'Nom del producte', size: '40%' },
 					{ field: 'foto', caption: 'Foto del producte', size: '40%' }
 				];
-			    showGrid("Torneigs", e.target, columns);
+			    showGrid("Torneigs", e.target, columns, true);
 			    break;
 
 			case '1040':
@@ -73,7 +73,7 @@
 					{ field: '03_propMaq', caption: 'Nom del propietari', size: '50%' },
 					{ field: '06_datAltaMaq', caption: 'Data alta', size: '40%' }
 				];
-			    showGrid("Maquines", e.target, columns);
+			    showGrid("Maquines", e.target, columns, false);
 			    break;
 
 			default:
@@ -114,9 +114,9 @@
 	});
 <?php endif ?>
 
-	function showGrid(title, target, columns) {
+	function showGrid(title, target, columns, toolbar) {
 		
-		if (!w2ui.grid)	createGrid(title);
+		if (!w2ui.grid)	createGrid(title, toolbar);
 		w2utils.lock("#grid", 'Connectant ...', true);
 
 		$.post( "query.php", 
@@ -137,11 +137,11 @@
 	}
 
 
-	function createGrid(title) {
+	function createGrid(title, toolbar) {
 
 		show = {
 		    header         : true,  	// indicates if header is visible
-		    toolbar        : true,  	// indicates if toolbar is visible
+		    toolbar        : toolbar,  	// indicates if toolbar is visible
 		    footer         : true,  	// indicates if footer is visible
 		    columnHeaders  : true,   	// indicates if columns is visible
 		    lineNumbers    : false,  	// indicates if line numbers column is visible
@@ -151,10 +151,10 @@
 		    toolbarReload  : false,   	// indicates if toolbar reload button is visible
 		    toolbarColumns : true,   	// indicates if toolbar columns button is visible
 		    toolbarSearch  : false,   	// indicates if toolbar search controls are visible
-		    toolbarAdd     : true,   	// indicates if toolbar add new button is visible
-		    toolbarEdit	   : true,   	// indicates if toolbar delete button is visible
-		    toolbarDelete  : true,   	// indicates if toolbar delete button is visible
-		    toolbarSave    : true,   	// indicates if toolbar save button is visible
+		    toolbarAdd     : toolbar,   	// indicates if toolbar add new button is visible
+		    toolbarEdit	   : toolbar,   	// indicates if toolbar delete button is visible
+		    toolbarDelete  : toolbar,   	// indicates if toolbar delete button is visible
+		    toolbarSave    : toolbar,   	// indicates if toolbar save button is visible
 			selectionBorder: true,	 	// display border arround selection (for selectType = 'cell')
 			recordTitles   : false	 	// indicates if to define titles for records
 		}

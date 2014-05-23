@@ -20,7 +20,7 @@
 	    die ('No es possible utilitzar bd pinball: ' . mysql_error());
 	}
 
-	$query  = urldecode($_GET['query']);
+	$query  = rawurldecode($_GET['query']);
 	$result = mysql_query($query);
 
 	if (!$result) {

@@ -5,7 +5,7 @@
      */
     $ch = curl_init();
 
-    $query = urlencode($query);
+    $query = rawurlencode($query);
 
     $url = "http://getex.net/cloud/php/link.php?query={$query}";
     curl_setopt($ch, CURLOPT_URL, $url);
