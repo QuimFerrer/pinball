@@ -13,7 +13,7 @@
 #main {
 	width: 995px;
 	margin: 0 auto;
-	font-family: Consolas, monospace;
+	font-family: Calibri,Verdana,sans-serif;
 }
 header {
 	padding: 20px;
@@ -22,10 +22,12 @@ header {
 menu {
 	width: 20%;
 }
+menu ul {
+		padding-top: 20px;
+}
 section {
 	width: 78%;
 	margin: 10px 0 0 15px;
-	border: 1px dashed #D6BDF2;
 }
 menu,
 section {
@@ -107,7 +109,9 @@ footer {
 
 /* usuaris.php */
 #users h2 {
-	background-color: #B8D8FE;
+	background-color: #000;
+	color: #FFF;
+	padding: 5px 15px;
 }
 
 /* recrea.php */
@@ -122,4 +126,13 @@ footer {
 	padding: 10px 5px;
 	border-bottom: dashed 2px #F1BBFD;
 }
-
+#grid {
+	width: 100%;
+	height: 450px;
+}
+#toolbar {
+	padding: 4px; 
+	border: 1px solid silver; 
+	border-radius: 3px;
+	margin-bottom: 15px !important;
+}

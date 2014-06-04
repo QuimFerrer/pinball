@@ -33,6 +33,9 @@
 				// $query    = 'SELECT @var:=@var+1 as recid, p.* FROM maquina as p, (SELECT @var:=0) as r';
 				$query    = 'SELECT * FROM maquina';
 				$response = dbExec($query);
+				// Preparar array per a retornar al grid tots els registres
+				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
+
 				// $n = 1;
 
 				// foreach($response as $row) {

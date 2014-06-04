@@ -1,4 +1,12 @@
-<?php include("../src/pinball.h"); ?>
+<?php
+
+include ("../src/pinball.h");
+include ("../src/seguretat.php"); 
+
+comprovaSessio();
+
+?>
+
 <!doctype html>
 <html>
 <head>

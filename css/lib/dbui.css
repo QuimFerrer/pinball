@@ -1,0 +1,7 @@
+#grid { width: 100%; height: 770px; }
+
+#grid_grid_header { font-size: 17px; text-transform: uppercase; text-align: left; }
+
+#form { width: 100%; height: 100%; }
+
+.w2ui-grid-data>div { font-size: 12px;text-transform: uppercase; }

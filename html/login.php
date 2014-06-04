@@ -1,3 +1,15 @@
+<?php 
+
+include ("../src/pinball.h");
+include ("../src/seguretat.php");
+
+$_GET["errorusuario"] = "";
+
+if (isset($_POST['access']) )
+	if ($_POST['access'] == "Entrar") $_GET['errorusuario'] = 'si';
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,23 +21,33 @@
 </head>
 <body>
 
+<section>
+	<table align="center" width="225" cellspacing="2" cellpadding="2" border="0">
+		<tr><td colspan="2" align="center">
+		<?php
+			if ($_GET["errorusuario"]=="si")
+				echo '<span style="color:000000"><b>Dades incorrectes</b></span>';
+		?>
+	</td></tr></table>
+</section>	
+</body>
+</html>
+
 <?php 
 
 	// Recupera POST usr i pwd
-	// Si usr= "adm" && pwd="adm"
-	// directament a usuaris.php?id=adm
-	// Si no, buscar a BD i en funcio del resultar entrar
+	// Valida usuari/password en BD i en funcio del resultar entrar
     // usuaris.php?id=usr
 	// El pas de params es farà per SESSION, de moment per GET
 
-	if ($_POST['usr'] == 'adm')
-		header("Location:usuaris.php?id=adm");
-	else if ($_POST['usr'] == 'usr')
-		header("Location:usuaris.php?id=usr");
+	$host  = $_SERVER['HTTP_HOST'];
+	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+	
+	if (controlLogin($_POST["usr"],$_POST["pwd"]) == "SI")
+		$extra = 'usuaris.php';
 	else
-		header("Location:inici.php");
+		$extra = 'inici.php';
+
+	header("Location: http://$host$uri/$extra");
 
  ?>
-	
-</body>
-</html>

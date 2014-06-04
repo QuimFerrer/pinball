@@ -18,9 +18,49 @@
     return json_decode($response);
 }?>
 
+<?php function dbExecLocal($query) {
+    /* dbExec. Connecta amb script remot link.php
+     * Executa : string amb consulta SQL
+     * Retorna : string JSON
+     */
+         
+    if (!isset($query) ) die('<h1>No es una consulta correcte !</h1>');
+
+    $link = mysql_connect("localhost", "root", "");
+
+    if (!$link) die('Not connected : ' . mysql_error());
+
+    $db_selected = mysql_select_db('u555588791_pinba', $link);
+
+    if (!$db_selected) {
+        die ('No es possible utilitzar bd pinball: ' . mysql_error());
+    }
+
+    $result = mysql_query($query);
+
+    if (!$result) {
+        die('Consulta no valida: ' . mysql_error());
+    }
+
+    // Obtenir la consulta en forma d'arrays d'objectes
+    $json = array();
+    while ($obj = mysql_fetch_object($result)) {
+        $json[] = $obj;
+    }
+
+    // Retornar array codificat JSON
+    return (json_encode($json));
+
+    // Alliberar resultat
+    mysql_free_result($result);
+
+    // Tancar connexió
+    mysql_close($link);
+
+}?>
+
 <?php function menu() { ?>
     <div class="menu">
-        <h3>Menu</h3>
         <ul>
             <li><a id="inici"  		href="../html/inici.php">Inici</a></li>
             <li><a id="recrea" 		href="../html/recrea.php">Recreatius</a></li>
@@ -31,12 +71,13 @@
             <li><a id="registre"    href="../html/registre.php">Registre</a></li>
         </ul>
         <div id="dialog">
-            <form id="access">
+            <form name="aa" id="access">
                 <fieldset>
                     <legend>Accés</legend>
                     <label for="usr">Nom usuari</label><input type="text" name="usr">
                     <label for="pwd">Clau accés</label><input type="password" name="pwd">
-                    <input type="submit" value="Entrar">
+                    <input type="submit" name="entrar" value="Entrar"/>
+                    <input type="submit" name="sortir" value="Sortir"/>
                 </fieldset>
             </form>
         </div>
