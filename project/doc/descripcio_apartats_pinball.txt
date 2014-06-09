@@ -1,11 +1,30 @@
+Varis
+
+1. buscar icones pel menú
+2. maquillar pàgina Logout
+3. crear taula productes a la base de dades
+4. afegir dates modificacio i baixa a taula de productes
+5. modificar dbExecLocal per adaptar-ho a insert, update, delete
+
+
 Recreatius
 
-1. mostrar una llista d'info de les máquines recretives
+1. mostrar una llista d'info de les máquines recretives.
+	
+	--> buscar més recreatius e introduir-los a la base de dades. imatges amb ALT
+
+Empresa
+
+1. info de l'empresa
+
+	--> posar el text d'info de l'empresa a la web
 
 
 PiballKit
 
 1. info del projecte pinballKit
+
+	--> afegir info dels 4 jocs a la web amb fotos
 
 
 Torneigs
@@ -15,40 +34,51 @@ Torneigs
 
 Contacte
 
-1. mostrar formulari de contacte
+1. gestió formulari de contacte
+
+
+Registre
+
+1. gestió del formulari de registre
 
 
 Zona d'usuari
 
-1. accés usuaris amb accés a registre de jugador
+1. menú test --> per crear registres a la base de dades
 
 2. menú jugador
-	a. perfil jugador
-	b. consultar torneigs apuntants amb:
-		1. informació del ranking, posició i punts dins del ranking
-		2. possibilitat de donar-se de baixa
-	c. consultar tots els torneigs amb possibilitat d'apuntar-se
+	a. PERFIL. gestio perfil jugador (modificació, consulta, baixa --> fa logout)
+	b. ELS MEUS TORNEIGS. consultar torneigs apuntants amb:
+		1. PUNTUACIONS. informació del ranking, posició i punts dins del ranking
+		2. HISTÒRIC. històric de torneigs
+		3. BAIXA. possibilitat de donar-se de baixa
+	c. TOTS ELS TORNEIGS. consultar tots els torneigs amb possibilitat d'apuntar-se
 
 3. menú administrador
-	a. perfil administrador
-	b. gestió partides
-	c. gestió torneigs: mostrar tots els torneigs en forma de llista amb botons d'opcions:
-		1. màquines associades
+	a. PERFIL. gestio perfil administrador (modificacio, consulta)
+	b. PARTIDES. gestió partides
+	c. JOCS. gestió de jocs
+		--> afegir camp descripcio joc a la database
+	d. TORNEIGS. gestió torneigs: mostrar tots els torneigs per gestionar-los en forma de llista amb botons d'opcions:
+		1. màquines associades als torneigs
 		2. joc associat
 		3. jugadors registrats
-	d. gestió màquines:
-		i. mostrar totes les máquines en forma de llista amb botons d'opcions:
+	e. MÀQUINES. gestió màquines:
+		i. GESTIÓ. mostrar totes les máquines en forma de llista amb botons d'opcions:
 			1. alta, baixa, modificació
-			2. ubicació
-			3. jocs instal.lats
-			4. credits totals
-			5. altres ...
-		ii. estadístiques. opcions :
+			2. informar:
+				a. ubicació
+				b. jocs instal.lats
+				c. credits totals
+				d. altres ...
+		ii. ESTADÍSTIQUES. opcions :
 			1. obtenir recaudació de totes les màquines
 			2. recaudació máx,min,promigs, x zones etc
-	e. gestió jugadors: mostrar relació de jugadors en forma de llista amb botons d'opcions:
+	f. UBICACIONS. gestió ubicacions.
+	g. JUGADORS. gestió jugadors: mostrar relació de jugadors en forma de llista amb botons d'opcions:
 		1. consultar perfil
 		2. baixa (bloqueig)
+			--> control.lar amb login que el usuari no està donat de baixa
 		3. consultar torneigs registrats amb:
 			1. ranquing amb la seva posició de cada torneig
 			2. punts de cada posició

@@ -1,4 +1,4 @@
--------------------------------------------------------------------------------------------------------------------------------------
+﻿-------------------------------------------------------------------------------------------------------------------------------------
 	JUEGO: ARMAGEDON
 -------------------------------------------------------------------------------------------------------------------------------------
 El Gobierno estaba probando una nueva tecnología para los viajes espaciales, el sistema es inestable y....... !!!! ESTAN HABRIENDO PUERTAS QUE JAMAS DEBERIAN HABER SIDO ABIERTAS ¡¡¡. AdemÁs parece ser las Fuerzas Extraterrestres están interesados en esta tecnología también. Menos mal que ,los componentes de la Resistencia solucionán todos los problemas .....y detendrán los lios generados por los gobernantes.
@@ -79,4 +79,10 @@ Sidelanes:"pasillos laterales" bola extra cuando esta encendido.
 Duelo nocturno premio: una puntuacion establecida activa el duelo. 
 
 
+---------
+PACMAN
+---------
 
+El objetivo del juego es controlar nuestro personaje a través de un laberinto mientras él va comiendo puntos. Cuando todos los puntos son comidos se pasa al siguiente nivel.
+Pulsa en "Start Game" para iniciar el juego, mueves con las teclas de flechas del teclado, con la tecla M, apagas el sonido, con P, pausas el juego y Q hace que lo abandones. Existen cuatro fantasmas que recorren el laberinto e intentan atraparnos. Si algún fantasma llegase a tocarnos perdemos una vida. Inicialmente tenemos tres vidas, cuando se han perdido todas las vidas el juego terminará. Cerca de las esquinas del laberinto hay cuatro galletas de superpoder, cuando las comemos, nos volvemos más fuertes, los fantasmas no podrán tocarnos, girarán en dirección opuesta a dónde estamos y se moverán más lentamente, de hecho, si ellos nos tocan, los enviaremos temporalmente a un espacio cerrado en el centro del laberinto y obtendremos puntos por ello. 
+También podemos obtener bonos en forma de fruta cerca del centro del laberinto. Cuando logramos comer estas frutas obtenemos puntos extra.
