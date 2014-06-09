@@ -67,31 +67,6 @@ if (isset($_SESSION['autentificat']))
     }
 }
 
-function comprovaSessio2()
-{
-
-session_name("loginUsuari"); 
-//Inicia la sessió
-session_start();
-
-//comprova que el usuari está autentificat
-
-if (isset($_SESSION['autentificat']))
-    {
-    $host  = $_SERVER['HTTP_HOST'];
-    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-    if ($_SESSION['autentificat'] != "SI")
-        {
-        }
-    else
-         if( IsEndSession() == "SI")
-            { 
-            $extra = 'logout.php';
-            header("Location: http://$host$uri/$extra");
-            }
-    }
-}
-
 function isEndSession()
 {
     $_SESSION['endTime'] = "";
