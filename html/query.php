@@ -1,4 +1,9 @@
-<?php include("../src/pinball.h");
+<?php 
+
+include ("../src/pinball.h");
+include ("../src/seguretat.php"); 
+
+comprovaSessio();
 
 	const CONSULTA_ADM = 1020;
 	const CONSULTA_USR = 2020;
