@@ -1,4 +1,15 @@
-<?php function dbExec($query) {
+<?php 
+
+    define("LOCAL", true);
+
+    function dbExec($query) {
+        if(LOCAL) $response = dbExecLocal($query);
+        else      $response = dbExecRemote($query);
+        return $response;
+    }
+
+
+    function dbExecRemote($query) {
     /* dbExec. Connecta amb script remot link.php
      * Executa : string amb consulta SQL
      * Retorna : string JSON
@@ -49,7 +60,7 @@
     }
 
     // Retornar array codificat JSON
-    return (json_encode($json));
+    return $json;
 
     // Alliberar resultat
     mysql_free_result($result);
@@ -59,29 +70,43 @@
 
 }?>
 
-<?php function menu() { ?>
-    <div class="menu">
-        <ul>
-            <li><a id="inici"  		href="../html/inici.php">Inici</a></li>
-            <li><a id="recrea" 		href="../html/recrea.php">Recreatius</a></li>
-            <li><a id="empresa" 	href="../html/empresa.php">Empresa</a></li>
-            <li><a id="torneig" 	href="../html/torneig.php">Torneigs</a></li>
-            <li><a id="contacte"	href="../html/contacte.php">Contactar</a></li>
-            <li><a id="jocs"        href="../html/jocs.php">Zona de joc</a></li>
-            <li><a id="registre"    href="../html/registre.php">Registre</a></li>
-        </ul>
-        <div id="dialog">
-            <form name="aa" id="access">
-                <fieldset>
-                    <legend>Accés</legend>
-                    <label for="usr">Nom usuari</label><input type="text" name="usr">
-                    <label for="pwd">Clau accés</label><input type="password" name="pwd">
-                    <input type="submit" name="entrar" value="Entrar"/>
-                    <input type="submit" name="sortir" value="Sortir"/>
-                </fieldset>
-            </form>
+<?php function menu() { 
+
+    if (isset($_SESSION["autentificat"]) && $_SESSION["autentificat"] == "SI") :
+?>
+        <div class="menu">
+            <ul>
+                <li><a id="inici"       href="../html/inici.php">Inici</a></li>
+                <li><a id="recrea"      href="../html/recrea.php">Recreatius</a></li>
+                <li><a id="empresa"     href="../html/empresa.php">Empresa</a></li>
+                <li><a id="jocs"        href="../html/jocs.php">Pinball kit</a></li>
+                <li><a id="contacte"    href="../html/contacte.php">Contactar</a></li>
+                <li><a id="logout"      href="../html/logout.php">Sortir</a></li>
+            </ul>
         </div>
-    </div>
+<?php else : ?>
+        <div class="menu">
+            <ul>
+                <li><a id="inici"       href="../html/inici.php">Inici</a></li>
+                <li><a id="recrea"      href="../html/recrea.php">Recreatius</a></li>
+                <li><a id="empresa"     href="../html/empresa.php">Empresa</a></li>
+                <li><a id="jocs"        href="../html/jocs.php">Pinball kit</a></li>
+                <li><a id="torneig"     href="../html/torneig.php">Torneigs</a></li>
+                <li><a id="registre"    href="../html/registre.php">Registre</a></li>
+                <li><a id="contacte"    href="../html/contacte.php">Contactar</a></li>
+            </ul>
+            <div id="dialog">
+                <form name="aa" id="access">
+                    <fieldset>
+                        <legend>Accés</legend>
+                        <label for="usr">Nom usuari</label><input type="text" name="usr">
+                        <label for="pwd">Clau accés</label><input type="password" name="pwd">
+                        <input type="submit" name="entrar" value="Entrar"/>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+<?php endif; ?>
 <?php } ?>
 
 <?php function footer() { ?>

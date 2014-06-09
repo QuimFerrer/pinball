@@ -1,7 +1,7 @@
 <?php
 
 // tiempo máximo de sesión
-define("TIMEOUT",90);
+define("TIMEOUT",3);
 define("USUARI_ADM","adm");
 
 function controlLogin($user,$pswd)
@@ -10,7 +10,7 @@ function controlLogin($user,$pswd)
               FROM usuari as u, (SELECT @nl:=0) as nnl
               WHERE u._04_loginUsuari = "' . $user . '" and u._05_pwdUsuari = "' . $pswd .'";';
 
-    $res = json_decode(dbExecLocal($query));
+    $res = dbExecLocal($query);
 
     if ($res != NULL)
         {

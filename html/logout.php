@@ -17,7 +17,7 @@ $url = 'http://'.$host.$uri.'/'.$extra;
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<?php print('<meta content="5;URL=' . $url .'" http-equiv="REFRESH"> </meta>'); ?>
+	<?php print('<meta content="2;URL=' . $url .'" http-equiv="REFRESH"> </meta>'); ?>
 	<title>Log out</title>
 	<style>
 		

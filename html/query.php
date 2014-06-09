@@ -2,7 +2,8 @@
 
 	const CONSULTA_ADM = 1020;
 	const CONSULTA_USR = 2020;
-	const MAQUINES 	= 1040;
+	const MAQUINES 	   = 1040;
+	const USUARIS 	   = 1080;
 
 	$pid = isset($_REQUEST['pid']) ? (int) $_REQUEST['pid'] : 0;
 
@@ -10,7 +11,6 @@
 
 		switch ($pid) {
 			case CONSULTA_ADM :
-				// $query    = 'SELECT id, nom, foto FROM productes';
 				$query    = 'SELECT @var:=@var+1 as recid, p.* FROM productes as p, (SELECT @var:=0) as r';
 				$response = dbExec($query);
 
@@ -26,29 +26,16 @@
 				break;
 
 			case MAQUINES :
-				//sleep(3); // Temporitzar la consulta 3 segons
-				// $records[] = (object) array('recid'=>1, 'nom'=>"Maquina 1", 'foto'=>"maquina1.jpg");
-				// $records[] = (object) array('recid'=>2, 'nom'=>"Maquina 2", 'foto'=>"maquina2.png");
-
-				// $query    = 'SELECT @var:=@var+1 as recid, p.* FROM maquina as p, (SELECT @var:=0) as r';
 				$query    = 'SELECT * FROM maquina';
 				$response = dbExec($query);
 				// Preparar array per a retornar al grid tots els registres
 				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
+				echo json_encode( $response );
+				break;
 
-				// $n = 1;
-
-				// foreach($response as $row) {
-
-				// 	$rec['recid'] = strval($n);
-
-				// 	foreach ($row as $key => $value) {
-				// 		$rec[$key] = $value;
-				// 	}
-				// 	$records[] = $rec;
-				// 	$n++;
-				// }
-
+			case USUARIS :
+				$query    = 'SELECT @var:=@var+1 as recid, p.* FROM usuari as p, (SELECT @var:=0) as r';
+				$response = dbExec($query);
 				echo json_encode( $response );
 				break;
 
