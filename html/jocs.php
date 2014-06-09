@@ -23,9 +23,20 @@ comprovaSessio();
 			<?php menu(); ?>
 		</menu>
 		<section>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, nemo, ducimus aliquam totam rerum neque asperiores similique ad vel reprehenderit commodi praesentium atque nostrum assumenda mollitia unde voluptatibus quo facilis!</p>
-			<p>Nulla, aliquam, ullam commodi quae repellat molestiae aut cumque dolor porro laudantium blanditiis facilis reprehenderit officiis eius laboriosam at autem tenetur vel nesciunt distinctio aliquid eveniet perferendis nam natus dolore.</p>
-			<p>Dolorum, deleniti, cum, voluptate, praesentium dignissimos nulla dolor vero fugit quasi officiis temporibus nobis excepturi iusto dolore iste maxime quos. Rem eius tenetur nihil aperiam veritatis iure ipsam nulla aliquam.</p>
+			<h1>Llista de jocs</h1>
+			<?php 
+				$query    = 'SELECT * FROM joc';
+				$response = dbExecLocal($query);
+
+				echo '<ul class="promo">';
+
+				foreach($response as $joc) {
+					echo "<li>". $joc->_01_pk_idJoc ."</li>";
+					echo "<li>". $joc->_02_nomJoc ."</li>";
+				}
+
+				echo '</ul>';
+			 ?>
 		</section>
 		<footer>
 			<?php footer(); ?>

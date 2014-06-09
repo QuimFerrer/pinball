@@ -149,7 +149,7 @@ var dbForm = function() {
             w2ui['dialog'].record = { 'recid' : data.recid };
         else
             w2ui['dialog'].record = { 'recid' : 0 };
-
+console.log(data);
         w2ui['dialog'].fields.forEach( 
             function(value, index) {
                 if (data)

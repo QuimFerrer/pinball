@@ -69,7 +69,7 @@ function mostraUsuariLogat()
 			{ type: 'button',  id: '1020', caption: 'Productes', img: 'icon-edit', hint: 'Manteniment de productes' },
 			{ type: 'button',  id: '1040', caption: 'Màquines',  img: 'icon-folder', hint: 'Accés a màquines' },
 			{ type: 'button',  id: '1060', caption: 'Torneigs',  img: 'icon-edit', hint: 'Accés a torneigs' },
-			{ type: 'button',  id: '1080', caption: 'Jugadors',  img: 'icon-folder', hint: 'Accés a jugadors' },
+			{ type: 'button',  id: '1080', caption: 'Usuaris',  img: 'icon-folder', hint: 'Accés a usuaris' },
 			{ type: 'button',  id: '1100', caption: 'Consultes', img: 'icon-page', hint: 'Mòdul de consultes' }
 		],
 		onClick: function(e){ modelVista(e) }
@@ -113,6 +113,16 @@ function mostraUsuariLogat()
 			    DataGrid("Llistat de màquines", false, columns, e.target);
 			    break;
 
+			case '1080':
+				columns = [				
+					{ field: '01_pk_idUsuari', caption: 'ID Usuari', size: '10%' },
+					{ field: '02_nomUsuari', caption: 'Nom', size: '30%' },
+					{ field: '03_cognomUsuari', caption: 'Cognom', size: '30%' },
+					{ field: '04_loginUsuari', caption: 'Login', size: '15%' },
+					{ field: '05_pwdUsuari', caption: 'Password', size: '15%' }
+				];
+			    DataGrid("Manteniment d'usuaris", "usuari", columns, e.target);
+			    break;
 			default:
 			    console.log("default");
 		}
