@@ -24,11 +24,11 @@
 
 				foreach($response as $producte) {
 					echo '<li>';
-					echo '<img src="..\resources\img\\'. $producte->foto .'" alt="">';
+					echo '<img src="..\resources\img\recreatius\\'. $producte->foto .'" alt="">';
 					echo '<h2>'. 				$producte->nom .'</h3>';
 					echo '<p>Codi: '. 			$producte->id .'</p>';
 					echo '<h3>Preu: '. 			$producte->preu .'€</h3>';
-					echo '<p>Data d\'alta: '. 	$producte->data_alta .'</p>';
+					echo '<p>Data d\'alta: '. 	$producte->datAltaPro .'</p>';
 					echo '<p>Detall: '. 		$producte->descripcio .'</p>';
 					echo '</li>';
 				}
