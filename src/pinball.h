@@ -96,12 +96,13 @@
                 <li><a id="contacte"    href="../html/contacte.php">Contactar</a></li>
             </ul>
             <div id="dialog">
-                <form name="aa" id="access">
+                <form name="login" action="" method="post">
                     <fieldset>
                         <legend>Accés</legend>
-                        <label for="usr">Nom usuari</label><input type="text" name="usr">
-                        <label for="pwd">Clau accés</label><input type="password" name="pwd">
+                        <label for="usr">Nom usuari</label><input type="text" name="usr" required>
+                        <label for="pwd">Clau accés</label><input type="password" name="pwd" required>
                         <input type="submit" name="entrar" value="Entrar"/>
+                        <div id="errorLogin"></div>                        
                     </fieldset>
                 </form>
             </div>

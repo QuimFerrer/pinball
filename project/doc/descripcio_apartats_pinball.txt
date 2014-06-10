@@ -1,23 +1,26 @@
 Varis
 
 1. buscar icones pel menú
-2. maquillar pàgina Logout
-3. crear taula productes a la base de dades
-4. afegir dates modificacio i baixa a taula de productes
+--> ok. <-- 2. maquillar pàgina Logout
+--> ok. <-- 3. crear taula productes a la base de dades
+--> ok. <-- 4. afegir dates modificacio i baixa a taula de productes
 5. modificar dbExecLocal per adaptar-ho a insert, update, delete
+--> ok. <-- 6.control.lar amb login que el usuari no està donat de baixa
 
 
 Recreatius
 
 1. mostrar una llista d'info de les máquines recretives.
 	
-	--> buscar més recreatius e introduir-los a la base de dades. imatges amb ALT
+	--> buscar més recreatius e introduir-los a la base de dades.
+	--> imatges amb ALT
+	--> revisar accents ??????
 
 Empresa
 
 1. info de l'empresa
 
-	--> posar el text d'info de l'empresa a la web
+	--> ok <-- posar el text d'info de l'empresa a la web
 
 
 PiballKit
@@ -25,6 +28,8 @@ PiballKit
 1. info del projecte pinballKit
 
 	--> afegir info dels 4 jocs a la web amb fotos
+	--> revisar accents ??????
+	--> imatges amb ALT
 
 
 Torneigs
@@ -78,7 +83,6 @@ Zona d'usuari
 	g. JUGADORS. gestió jugadors: mostrar relació de jugadors en forma de llista amb botons d'opcions:
 		1. consultar perfil
 		2. baixa (bloqueig)
-			--> control.lar amb login que el usuari no està donat de baixa
 		3. consultar torneigs registrats amb:
 			1. ranquing amb la seva posició de cada torneig
 			2. punts de cada posició
