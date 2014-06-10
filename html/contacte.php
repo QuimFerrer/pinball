@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Pinball. Inici</title>
+	<link rel="stylesheet" href="../css/lib/w2ui-1.3.2.css" />
 	<link rel="stylesheet" href="../css/pinball.css">
 </head>
 <body>
@@ -15,14 +16,72 @@
 			<?php menu(); ?>
 		</menu>
 		<section>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, nemo, ducimus aliquam totam rerum neque asperiores similique ad vel reprehenderit commodi praesentium atque nostrum assumenda mollitia unde voluptatibus quo facilis!</p>
-			<p>Nulla, aliquam, ullam commodi quae repellat molestiae aut cumque dolor porro laudantium blanditiis facilis reprehenderit officiis eius laboriosam at autem tenetur vel nesciunt distinctio aliquid eveniet perferendis nam natus dolore.</p>
-			<p>Dolorum, deleniti, cum, voluptate, praesentium dignissimos nulla dolor vero fugit quasi officiis temporibus nobis excepturi iusto dolore iste maxime quos. Rem eius tenetur nihil aperiam veritatis iure ipsam nulla aliquam.</p>
+			<hgroup>
+				<h2>Formulari de contacte</h2><br>
+				<h3>Ens interessa conèixer la teva opinió</h3>				
+			</hgroup>
+			<p>El nostre objectiu és la millora contínua, per això totes les opinions compten i ens ajuden a seguir avançant. Si vols expressar alguna idea o tens algun suggeriment sobre els nostres productes o la nostra marca, t’agrairem que ens contactis des del nostre correu electrònic. Les teves inquietuds seran tingudes en compte i les teves idees també.</p><br>
+			<div id="form" style="width: 100%;">
+				<div class="w2ui-page page-0">
+					<div class="w2ui-label">Nom:</div>
+					<div class="w2ui-field">
+						<input name="nom" type="text" maxlength="100" size="60"/>
+					</div>
+					<div class="w2ui-label">Cognoms:</div>
+					<div class="w2ui-field">
+						<input name="cognoms" type="text" maxlength="100" size="60"/>
+					</div>
+					<div class="w2ui-label">eMail:</div>
+					<div class="w2ui-field">
+						<input name="email" type="text" maxlength="100" size="60"/>
+					</div>
+					<div class="w2ui-label">Comentari:</div>
+					<div class="w2ui-field">
+						<textarea name="comentari" type="text" style="width: 385px; height: 80px; resize: none"></textarea>
+					</div>
+				</div>
+				<div class="w2ui-buttons">
+					<input type="button" value="Esborrar" name="reset">
+					<input type="button" value="Enviar" name="save">
+				</div>
+			</div><br>
+			<div>
+				<p>De conformitat amb el que estableix la Llei Orgànica 15/1999, de 13 de desembre, de Protecció de Dades de Caràcter Personal, l’informem que les seves dades de caràcter personal s’incorporaran a un fitxer amb la finalitat de gestionar els processos de selecció de personal, atendre les seves consultes, suggeriments i reclamacions i informar sobre nous productes i promocions per qualsevol mitjà (inclosos mitjans electrònics). Així mateix, l’informem de la possibilitat de fer efectius els seus drets d’accés, oposició, rectificació i cancel.lació en els termes previstos en la llei esmentada, davant el titular i responsable del fitxer.</p>
+			</div>
 		</section>
 		<footer>
 			<?php footer(); ?>
 		</footer>
 	</div>
 </body>
-	<script src="../js/pinball.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../js/lib/w2ui-1.3.2.min.js"></script>
+<script type="text/javascript" src="../js/lib/dbui.js"></script>
+<script>
+$(function () {
+	$('#form').w2form({ 
+		name  : 'form',
+		url   : 'query.php',
+		fields: [
+			{ name: 'nom', 			type: 'text', required: true },
+			{ name: 'cognoms',  	type: 'text', required: true },
+			{ name: 'email',  		type: 'email', required: true },
+			{ name: 'comentari',  	type: 'text', required: true}
+		],
+		actions: {
+			reset: function () {
+				this.clear();
+			},
+			save: function() {
+				var self = this;
+				this.save( {pid:1000}, function(e) {
+					console.log(e);
+					w2alert('Gràcies per la teva col.laboració', 'Missatge');
+					self.clear();
+				});
+			}
+		}
+	});
+});
+</script>
 </html>
