@@ -3,18 +3,29 @@
 include ("../src/pinball.h");
 include ("../src/seguretat.php"); 
 
-comprovaSessio();
+// comprovaSessio();
 
+	const FORM_CONTACTE= 1000;
+	const FORM_REGISTRE= 1010;
 	const CONSULTA_ADM = 1020;
 	const CONSULTA_USR = 2020;
 	const MAQUINES 	   = 1040;
 	const USUARIS 	   = 1080;
 
+	
 	$pid = isset($_REQUEST['pid']) ? (int) $_REQUEST['pid'] : 0;
 
 	if ($pid > 0) {
 
 		switch ($pid) {
+			case FORM_CONTACTE:
+				echo json_encode($_REQUEST['record']);
+				break;
+
+			case FORM_REGISTRE:
+				echo json_encode($_REQUEST['record']);
+				break;
+
 			case CONSULTA_ADM :
 				$query    = 'SELECT @var:=@var+1 as recid, p.* FROM productes as p, (SELECT @var:=0) as r';
 				$response = dbExec($query);
