@@ -45,7 +45,7 @@ if (isset($_POST['entrar']))
 	else
 		{
 ?>
-<script>document.querySelector("#errorLogin").innerHTML = "</br>Usuari o clau incorrecte";</script>
+<script>document.querySelector("#errorLogin").innerHTML = "Usuari o clau incorrecte";</script>
 <?php
 		echo '<meta content="2" http-equiv="REFRESH"> </meta>';		
 		}

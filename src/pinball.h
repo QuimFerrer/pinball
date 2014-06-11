@@ -99,7 +99,7 @@
             </ul>
             <div id="dialog">
                 <form name="login" action="" method="post">
-                    <div id="errorLogin"></div>                        
+                    <span id="errorLogin"></span>                        
                     <input type="text" name="usr" placeholder="Nom d'usuari" required>
                     <input type="password" name="pwd" placeholder="Clau d'accés" required>
                     <input type="submit" name="entrar" value="Entrar"/>
