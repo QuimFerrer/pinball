@@ -113,3 +113,23 @@
 <?php function footer() { ?>
     <p>&copy;2014 cal molins team group</p>
 <?php } ?>
+
+<?php function controlAcces($usr,$pwd)
+    {
+    if (controlLogin($usr,$pwd) == "SI")
+        {
+        $host  = $_SERVER['HTTP_HOST'];
+        $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        $extra = './usuaris.php';
+        header("Location: http://$host$uri/$extra");
+        }   
+    else
+        {
+?>
+    <script>document.querySelector("#errorLogin").innerHTML = "</br>Usuari o clau incorrecte";</script>
+<?php
+        echo '<meta content="2" http-equiv="REFRESH"> </meta>';     
+        }
+    }
+?>
+

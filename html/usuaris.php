@@ -28,7 +28,7 @@ function mostraUsuariLogat()
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Pinball. Inici</title>
+	<title>Pinball. Usuaris</title>
 	<link rel="stylesheet" href="../css/lib/w2ui-1.3.2.css" />
 	<link rel="stylesheet" href="../css/pinball.css">
 </head>

@@ -1,17 +1,17 @@
-<?php
+<?php 
+
+ob_start();
 
 include ("../src/pinball.h");
-include ("../src/seguretat.php"); 
-
-comprovaSessio();
+include ("../src/seguretatLogin.php");
 
 ?>
-
 <!doctype html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Pinball. Zona de jocs</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- <meta charset="UTF-8"> -->
+	<title>Pinball. Jocs</title>
 	<link rel="stylesheet" href="../css/pinball.css">
 </head>
 <body>
@@ -32,7 +32,7 @@ comprovaSessio();
 
 				foreach($response as $joc) {
 					echo '<li>';
-					echo '<img src="..\resources\img\jocs\\'. $joc->_04_imgJoc .'" alt="">';
+					echo '<img src="../resources/img/jocs/'. $joc->_04_imgJoc .'" alt="'. $joc->_02_nomJoc .'">';
 					echo '<h2>'. 				$joc->_02_nomJoc .'</h3>';
 					echo '<p>Codi: '. 			$joc->_01_pk_idJoc .'</p>';
 					echo '<p>Data d\'alta: '. 	$joc->_06_datAltaJoc .'</p>';
@@ -50,3 +50,7 @@ comprovaSessio();
 </body>
 	<script src="../js/pinball.js"></script>
 </html>
+
+<?php
+if (isset($_POST['entrar'])) controlAcces($_POST["usr"],$_POST["pwd"]);
+?>

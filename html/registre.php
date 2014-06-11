@@ -1,4 +1,11 @@
-<?php include("../src/pinball.h"); ?>
+<?php 
+
+ob_start();
+
+include ("../src/pinball.h");
+include ("../src/seguretatLogin.php");
+
+?>
 <!doctype html>
 <html>
 <head>
@@ -81,3 +88,7 @@ $(function () {
 });
 </script>
 </html>
+
+<?php
+if (isset($_POST['entrar'])) controlAcces($_POST["usr"],$_POST["pwd"]);
+?>

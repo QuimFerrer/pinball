@@ -93,6 +93,7 @@ footer {
 	-moz-border-radius:8px 8px 0px 0px;
 	-webkit-border-radius:8px 8px 0px 0px;
 }
+
 #dialog {
 	margin: 10px 5px;
 }
@@ -105,6 +106,18 @@ footer {
 #dialog input[type="submit"] {
 	margin-top: 7px;
 	width: 45%;
+}
+
+#dialog input[type="text"],
+#dialog input[type="password"]
+ {
+	margin:  0;
+ 	padding: 0;
+ 	list-style: none;
+ 	border:1px solid grey;
+ 	border-radius: 0;
+ 	width: 151px;
+ 	height:18px;
 }
 
 /* usuaris.php */

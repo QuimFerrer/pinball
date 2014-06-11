@@ -1,7 +1,9 @@
 <?php 
 
+ob_start();
+
 include ("../src/pinball.h");
-include ("../src/seguretat.php");
+include ("../src/seguretatLogin.php");
 
 ?>
 <!doctype html>
@@ -32,21 +34,5 @@ include ("../src/seguretat.php");
 </html>
 
 <?php
-
-if (isset($_POST['entrar']))
-	if (controlLogin($_POST["usr"],$_POST["pwd"]) == "SI")
-		{
-		$host  = $_SERVER['HTTP_HOST'];
-		$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-		$extra = './usuaris.php';
-		header("Location: http://$host$uri/$extra");
-		}	
-	else
-		{
-?>
-<script>document.querySelector("#errorLogin").innerHTML = "</br>Usuari o clau incorrecte";</script>
-<?php
-		echo '<meta content="2" http-equiv="REFRESH"> </meta>';		
-		}
-
+if (isset($_POST['entrar'])) controlAcces($_POST["usr"],$_POST["pwd"]);
 ?>
