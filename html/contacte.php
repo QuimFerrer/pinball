@@ -21,7 +21,9 @@
 				<h3>Ens interessa conèixer la teva opinió</h3>				
 			</hgroup>
 			<p>El nostre objectiu és la millora contínua, per això totes les opinions compten i ens ajuden a seguir avançant. Si vols expressar alguna idea o tens algun suggeriment sobre els nostres productes o la nostra marca, t’agrairem que ens contactis des del nostre correu electrònic. Les teves inquietuds seran tingudes en compte i les teves idees també.</p><br>
-			<div id="form" style="width: 100%;">
+			<img src="../resources/img/idea.png" height="300" width="220" alt="" style="float:left;margin-right:40px;">
+
+			<div id="form" style="width: 60%;">
 				<div class="w2ui-page page-0">
 					<div class="w2ui-label">Nom:</div>
 					<div class="w2ui-field">
@@ -44,8 +46,9 @@
 					<input type="button" value="Esborrar" name="reset">
 					<input type="button" value="Enviar" name="save">
 				</div>
-			</div><br>
+			</div>
 			<div>
+				<br>
 				<p>De conformitat amb el que estableix la Llei Orgànica 15/1999, de 13 de desembre, de Protecció de Dades de Caràcter Personal, l’informem que les seves dades de caràcter personal s’incorporaran a un fitxer amb la finalitat de gestionar els processos de selecció de personal, atendre les seves consultes, suggeriments i reclamacions i informar sobre nous productes i promocions per qualsevol mitjà (inclosos mitjans electrònics). Així mateix, l’informem de la possibilitat de fer efectius els seus drets d’accés, oposició, rectificació i cancel.lació en els termes previstos en la llei esmentada, davant el titular i responsable del fitxer.</p>
 			</div>
 		</section>
