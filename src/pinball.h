@@ -94,16 +94,15 @@
                 <li><a id="torneig"     href="../html/torneig.php">Torneigs</a></li>
                 <li><a id="registre"    href="../html/registre.php">Registre</a></li>
                 <li><a id="contacte"    href="../html/contacte.php">Contactar</a></li>
+                <li></li>
+                <li><h3>Accés a usuaris registrats</h3></li>
             </ul>
             <div id="dialog">
                 <form name="login" action="" method="post">
-                    <fieldset>
-                        <legend>Accés</legend>
-                        <label for="usr">Nom usuari</label><input type="text" name="usr" required>
-                        <label for="pwd">Clau accés</label><input type="password" name="pwd" required>
-                        <input type="submit" name="entrar" value="Entrar"/>
-                        <div id="errorLogin"></div>                        
-                    </fieldset>
+                    <div id="errorLogin"></div>                        
+                    <input type="text" name="usr" placeholder="Nom d'usuari" required>
+                    <input type="password" name="pwd" placeholder="Clau d'accés" required>
+                    <input type="submit" name="entrar" value="Entrar"/>
                 </form>
             </div>
         </div>
