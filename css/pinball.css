@@ -53,12 +53,18 @@ footer {
 /* Menu */
 .menu {
 	margin:0;
+	padding-top: 7px;
+	padding-bottom: 7px;
 	background-color: #165489;
 	color:#FFF;
 	box-shadow: 6px 3px 5px #D8D7D7;
 }
+.menu ul,
+.menu #dialog {
+	display: inline-block;
+}
 .menu ul {
-	padding: 5px;
+	width: 57%;
 }
 .menu a
 {	display:block;
@@ -78,18 +84,15 @@ footer {
 	font-family:Verdana, Geneva, sans-serif;
 	font-size:11px;
 	padding:2px;
-	margin:1px 3px;
 	display: inline-block;
 }
-.menu li h3 {
-	margin-left: 40px;
-	font-size: 1.6em;
-	font-weight: normal;
+.menu span:first-child {
 	color: #6AE26A;
 }
 #dialog {
-	text-align: right;
-	padding: 0 10px 10px;
+	width: 40%;
+	padding: 10px 0 10px 20px;
+	border-left: 4px solid #C0EDFE;
 }
 #dialog input[type=text],
 #dialog input[type=password] {
