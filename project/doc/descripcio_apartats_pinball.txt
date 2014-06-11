@@ -13,7 +13,7 @@ Recreatius
 1. mostrar una llista d'info de les máquines recretives.
 	
 	--> buscar més recreatius e introduir-los a la base de dades.
-	--> imatges amb ALT
+	--> ok <-- imatges amb ALT
 	--> revisar accents ??????
 
 Empresa
@@ -27,14 +27,15 @@ PiballKit
 
 1. info del projecte pinballKit
 
-	--> afegir info dels 4 jocs a la web amb fotos
+	--> ok <-- afegir info dels 4 jocs a la web amb fotos
 	--> revisar accents ??????
-	--> imatges amb ALT
+	--> ok <-- imatges amb ALT
 
 
 Torneigs
 
 1. mostrar una llista de tots els torneigs amb possiblitat de registre.
+--> ok -->
 
 
 Contacte

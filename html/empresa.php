@@ -1,9 +1,16 @@
-<?php include("../src/pinball.h"); ?>
+<?php 
+
+ob_start();
+
+include ("../src/pinball.h");
+include ("../src/seguretatLogin.php");
+
+?>
 <!doctype html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Pinball. Inici</title>
+	<title>Pinball. Empresa</title>
 	<link rel="stylesheet" href="../css/pinball.css">
 </head>
 <body>
@@ -55,3 +62,7 @@
 </body>
 	<script src="../js/pinball.js"></script>
 </html>
+
+<?php
+if (isset($_POST['entrar'])) controlAcces($_POST["usr"],$_POST["pwd"]);
+?>
