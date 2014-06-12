@@ -12,7 +12,7 @@ USE `u555588791_pinba` ;
 DROP TABLE IF EXISTS `u555588791_pinba`.`usuari` ;
 
 CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`usuari` (
-  `_01_pk_idUsuari` INT NOT NULL ,
+  `_01_pk_idUsuari` INT NOT NULL AUTO_INCREMENT ,
   `_02_nomUsuari` VARCHAR(45) NULL ,
   `_03_cognomUsuari` VARCHAR(45) NULL ,
   `_04_loginUsuari` VARCHAR(45) NULL ,
@@ -74,7 +74,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `u555588791_pinba`.`joc` ;
 
 CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`joc` (
-  `_01_pk_idJoc` INT NOT NULL ,
+  `_01_pk_idJoc` INT NOT NULL AUTO_INCREMENT ,
   `_02_nomJoc` VARCHAR(45) NULL ,
   `_03_descJoc` MEDIUMTEXT NULL ,
   `_04_imgJoc` VARCHAR(45) NULL ,
@@ -92,7 +92,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `u555588791_pinba`.`torneig` ;
 
 CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`torneig` (
-  `_01_pk_idTorn` INT NOT NULL ,
+  `_01_pk_idTorn` INT NOT NULL AUTO_INCREMENT ,
   `_02_pk_idJocTorn` INT NOT NULL ,
   `_03_nomTorn` VARCHAR(45) NULL ,
   `_04_premiTorn` DECIMAL(10) NULL ,
@@ -141,7 +141,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `u555588791_pinba`.`maquina` ;
 
 CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`maquina` (
-  `_01_pk_idMaq` INT NOT NULL ,
+  `_01_pk_idMaq` INT NOT NULL AUTO_INCREMENT ,
   `_02_macMaq` VARCHAR(20) NULL ,
   `_03_propMaq` VARCHAR(45) NULL ,
   `_04_credMaq` DECIMAL(10) NULL ,
@@ -159,7 +159,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `u555588791_pinba`.`ubicacio` ;
 
 CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`ubicacio` (
-  `_01_pk_idUbic` INT NOT NULL ,
+  `_01_pk_idUbic` INT NOT NULL AUTO_INCREMENT ,
   `_02_pk_idMaqUbic` INT NOT NULL ,
   `_03_empUbic` VARCHAR(45) NULL ,
   `_04_dirUbic` VARCHAR(45) NULL ,
