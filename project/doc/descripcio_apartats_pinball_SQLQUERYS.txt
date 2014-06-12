@@ -1,0 +1,70 @@
+Recreatius
+
+1. mostrar una llista d'info de les máquines recretives
+
+
+PiballKit
+
+1. info del projecte pinballKit
+
+
+Torneigs
+
+1. mostrar una llista de tots els torneigs amb possiblitat de registre.
+
+
+Contacte
+
+1. mostrar formulari de contacte
+
+
+Zona d'usuari
+
+1. accés usuaris amb accés a registre de jugador
+
+2. menú jugador
+	a. perfil jugador
+	b. consultar torneigs apuntants amb:
+		1. informació del ranking, posició i punts dins del ranking
+		2. possibilitat de donar-se de baixa
+	c. consultar tots els torneigs amb possibilitat d'apuntar-se
+
+3. menú administrador
+	a. perfil administrador
+///////////////////MOSTRAR_PERFIL//////////////////////////////////////
+SELECT `07_fotoUsuari`,`02_nomUsuari`,`03_cognomUsuari`,`04_loginUsuari`,`06_emailUsuari` `05_pwdUsuari` FROM `usuari`
+WHERE `04_loginUsuari`='adm';
+/////////////////////ACTULIZAR PERFIL///////////////////////////////////
+UPDATE `usuari` SET 02_nomUsuari = "admin", 03_cognomUsuari = "new_cognom", 04_loginUsuari = "admin", 05_pwdUsuari = "1234", 06_emailUsuari = "jesus@gmail.com", 07_fotoUsuari="dir_foto", 09_datModUsuari = "new_data" WHERE `01_pk_idUsuari`='1';
+//////////////////////////////////////////////////////////////////////
+	b. gestió partides
+/////numero de partidas por maquina///////////////////////////////////
+ select `01_pk_idMaqPart` , count(*) as partida from partida group by `01_pk_idMaqPart` 
+/////////nº partidas x joc ////////////////////////////////////
+ select `02_pk_idJocPart` , count(*) as partida from partida group by `02_pk_idJocPart` 
+/////////nº partidas por semanas//////////////////////////
+Select `05_datAltPart`,sum(`03_pk_idJugPart`) as `03_pk_idJugPart` From partida group by {fn week(`05_datAltPart`)}
+
+	c. gestió torneigs: mostrar tots els torneigs en forma de llista amb botons d'opcions:
+		1. màquines associades
+/////////cuantas torneig en cada maquina/////y en que ubicacio???/////
+		2. joc associat
+///////
+		3. jugadors registrats
+/////cunantos jugador ni ha en cada torneig oberts //////////////
+	d. gestió màquines:
+		i. mostrar totes les máquines en forma de llista amb botons d'opcions:
+			1. alta, baixa, modificació
+			2. ubicació
+			3. jocs instal.lats
+			4. credits totals
+			5. altres ...
+		ii. estadístiques. opcions :
+			1. obtenir recaudació de totes les màquines
+			2. recaudació máx,min,promigs, x zones etc
+	e. gestió jugadors: mostrar relació de jugadors en forma de llista amb botons d'opcions:
+		1. consultar perfil
+		2. baixa (bloqueig)
+		3. consultar torneigs registrats amb:
+			1. ranquing amb la seva posició de cada torneig
+			2. punts de cada posició
