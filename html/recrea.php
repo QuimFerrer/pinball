@@ -35,7 +35,7 @@ include ("../src/seguretatLogin.php");
 					echo '<h2>'. 				$producte->nom .'</h3>';
 					echo '<p>Codi: '. 			$producte->id .'</p>';
 					echo '<h3>Preu: '. 			$producte->preu .'€</h3>';
-					echo '<p>Data d\'alta: '. 	$producte->datAltaPro .'</p>';
+					echo '<p>Data d\'alta: '. 	date('j-m-Y',strtotime($producte->datAltaPro)) .'</p>';
 					echo '<p>Detall: '. 		$producte->descripcio .'</p>';
 					echo '</li>';
 				}

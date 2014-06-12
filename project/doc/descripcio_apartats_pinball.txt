@@ -14,7 +14,7 @@ Recreatius
 	
 	--> buscar més recreatius e introduir-los a la base de dades.
 	--> ok <-- imatges amb ALT
-	--> revisar accents ??????
+	--> ok <-- revisar accents ??????
 
 Empresa
 
@@ -28,7 +28,7 @@ PiballKit
 1. info del projecte pinballKit
 
 	--> ok <-- afegir info dels 4 jocs a la web amb fotos
-	--> revisar accents ??????
+	--> ok <-- revisar accents ??????
 	--> ok <-- imatges amb ALT
 
 

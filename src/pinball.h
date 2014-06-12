@@ -54,12 +54,15 @@
     }
 
     // Obtenir la consulta en forma d'arrays d'objectes
+    // $json = array();
+    // while ($obj = mysql_fetch_object($result)) {
+    //     $json[] = $obj ;
+    
     $json = array();
-    while ($obj = mysql_fetch_object($result)) {
-        $json[] = $obj;
-    }
+    while ($obj = mysql_fetch_assoc($result)) {
+        $json[] = (object)array_map('utf8_encode', $obj) ;
 
-    // Retornar array codificat JSON
+    }
     return $json;
 
     // Alliberar resultat
