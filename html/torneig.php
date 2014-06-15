@@ -26,11 +26,12 @@ include ("../src/seguretatLogin.php");
 			<?php 
 				$data = date("Y-n-j");
 				// $dataHora = date("Y-n-j H:i:s");
-				$query    = 'SELECT * FROM torneig as t 
-							INNER JOIN joc as j ON t._02_pk_idJocTorn = j._01_pk_idJoc
-							WHERE t._06_datFinTorn > "' . $data .'" and 
-							t._09_datBaixaTorn IS NULL
-							ORDER BY t._05_datIniTorn';
+				$query   = 'SELECT * 
+							FROM torneig
+							INNER JOIN joc ON _02_pk_idJocTorn = _01_pk_idJoc
+							WHERE _06_datFinTorn > "' . $data .'" and 
+							_09_datBaixaTorn IS NULL
+							ORDER BY _05_datIniTorn;';
 				$response = dbExec($query);
 
 				echo '<ul class="promo">';
