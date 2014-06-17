@@ -32,7 +32,6 @@ section {
 	margin: 5px;
 	border: 1px solid #E8E8FC;
 	background-color: #FFF;
-	padding: 18px;
 }
 footer {
 	clear: both;
@@ -49,6 +48,7 @@ footer {
 #contacte 	{ background-image: url(ico/email.png); }
 #jocs 	 	{ background-image: url(ico/arcade.png); }
 #registre 	{ background-image: url(ico/kgpg_sign.png); }
+#logout 	{ background-image: url(ico/exit.png); }
 
 /* Menu */
 .menu {
@@ -113,7 +113,7 @@ footer {
 	margin:  0;
  	padding: 0;
  	list-style: none;
- 	border:1px solid grey;
+ 	border:1px solid gray;
  	border-radius: 0;
  	width: 151px;
  	height:18px;
@@ -139,8 +139,15 @@ footer {
 	border-bottom: dashed 2px #F1BBFD;
 }
 #grid {
-	width: 100%;
-	height: 450px;
+	width: 83%;
+	height: 550px;
+	float: left;
+}
+#sidebar {
+	float: left;
+	width: 16.8%;
+	height: 550px;
+	margin-right: 1px;
 }
 #toolbar {
 	padding: 4px; 

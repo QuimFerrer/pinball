@@ -94,6 +94,7 @@ var dbGrid = function() {
             fnOnError     = function(target, error) { console.log( error.xhr.responseText, error ); };
 
             fnOnLoad = function(target, eventData) {
+                alert("load");
                         var result = JSON.parse(eventData.xhr.responseText);
 
                         if (typeof result  != 'undefined') {
@@ -105,6 +106,7 @@ var dbGrid = function() {
 
         } else {
             // Mode consulta
+            options.toolbar = false;
             action   = "query.php";
             postData = { pid: id };
         }
