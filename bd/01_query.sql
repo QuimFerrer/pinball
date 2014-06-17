@@ -7,8 +7,10 @@ SELECT @rn:=@rn+1 AS ‘recid’, j.* FROM jugador AS j, (SELECT @rn:=0) rr;
 /* torneigs als que está registrat un jugador amb el codi de joc */
 /***********************************************************************************************/
 
-SELECT _01_pk_idJug AS idJug, _01_pk_idTorn AS idTorn, _03_nomTorn AS nomTorn, _02_pk_idJocInsc AS idJoc
-FROM jugador
+SELECT _01_pk_idJug AS idJug, BB.loginJug, _01_pk_idTorn AS idTorn, _03_nomTorn AS nomTorn, _02_pk_idJocInsc AS idJoc
+FROM
+(SELECT _01_pk_idUsuari as idUsuari,_04_loginUsuari as loginJug FROM usuari) AS BB,
+jugador
 LEFT JOIN inscrit ON _01_pk_idJug = _03_pk_idJugInsc
 INNER JOIN torneig ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
 WHERE 
@@ -16,17 +18,18 @@ WHERE
 		_09_datBaixaTorn IS NULL AND
 		_06_datBaixaInsc IS NULL AND	
 		_04_datAltaInsc  IS NOT NULL AND
+		BB.idUsuari = _01_pk_idJug AND
 
-		/* canviar pel codi del jugador */
+		/* canviar pel login de l'usuari */
 		
-		_01_pk_idJug = 2;
+		BB.loginJug = "joan";
 
 
 /***********************************************************************************************/
 /* torneigs als que está registrat un jugador amb el seu nom, el codi de joc i el nom del joc */
 /***********************************************************************************************/
 
-SELECT _01_pk_idUsuari AS idJug,_02_nomUsuari AS nomJug ,_01_pk_idTorn AS idTorn,_03_nomTorn AS nomTorn,
+SELECT _01_pk_idUsuari AS idJug, _04_loginUsuari AS loginJug, _02_nomUsuari AS nomJug ,_01_pk_idTorn AS idTorn,_03_nomTorn AS nomTorn,
 _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc 
 FROM usuari
 LEFT JOIN jugador  ON _01_pk_idUsuari = _01_pk_idJug
@@ -40,9 +43,9 @@ WHERE
 		_06_datBaixaInsc   IS NULL AND	
 		_04_datAltaInsc    IS NOT NULL AND
 
-		/* canviar pel codi del jugador */
+		/* canviar pel login de l'usuari */
 		
-		_01_pk_idUsuari = 2;
+		_04_loginUsuari = "joan";
 
 
 /***********************************************************************************************/
@@ -53,9 +56,9 @@ WHERE
 START TRANSACTION;
 CREATE TABLE CC  ENGINE=MEMORY
 SELECT _01_pk_idTorn as idTorn,_03_nomTorn as nomTorn, idJoc, aa.nomJoc,_03_pk_idJugRonda as idJug ,
-bb.nomJug, sum(_07_puntsRonda) AS punts FROM 
-(SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS aa,
-(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug FROM usuari) AS bb,
+BB.nomJug, BB.loginJug, sum(_07_puntsRonda) AS punts FROM 
+(SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
+(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug, _04_loginUsuari AS loginJug FROM usuari) AS BB,
 torneig
 LEFT JOIN torneigTePartida ON (_01_pk_idTorn = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
 INNER JOIN partida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
@@ -66,9 +69,10 @@ INNER JOIN ronda ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
 							 _03_pk_idJugPart = _03_pk_idJugRonda AND
 							 _04_pk_idDatHorPart = _04_pk_idDatHorPartRonda )
 WHERE 
-		nomJug <> "admin" AND
-		_02_pk_idJocTorn  = aa.idJoc AND
-		_03_pk_idJugRonda = bb.idUsuari AND
+		loginJug <> "admin" AND
+		_02_pk_idJocTorn  = AA.idJoc AND
+		_03_pk_idJugRonda = BB.idUsuari AND
+		_07_datBaixaPart IS NULL AND
 		_06_datFinTorn   >= DATE(_04_pk_idDatHorPart) AND
 		
 		/* canviar $data Y-n-j ( 2014-06-15 ) per Data CURRENT */
@@ -92,14 +96,14 @@ WHERE
 		_09_datBaixaTorn IS NULL AND
 		_06_datBaixaInsc IS NULL AND	
 		_04_datAltaInsc  IS NOT NULL AND		
-		CC.idJug = _01_pk_idJug AND
+		CC.idJug  = _01_pk_idJug AND
 		CC.idTorn = XX.idTorn AND
 		
 		/* canviar $data Y-n-j ( 2014-06-15 ) per Data CURRENT */
-		/* canviar el codi del jugador */
+		/* canviar el login del jugador */
 		
 		_06_datFinTorn   >= "2014-06-15" AND
-		_01_pk_idJug = 2
+		CC.loginJug = "$login"
 		
 ) AS ZZ
 WHERE ranking > 0
@@ -109,6 +113,8 @@ ORDER BY idTorn, ranking;
 DROP TABLE CC;
 COMMIT;
 
+/* select * from cc; 
+*/
 
 /***********************************************************************************************/
 /* ranking històric d'un jugador als torneigs registrats finalitzats i en curs */
@@ -118,9 +124,9 @@ COMMIT;
 START TRANSACTION;
 CREATE TABLE CC  ENGINE=MEMORY
 SELECT _01_pk_idTorn as idTorn,_03_nomTorn as nomTorn, idJoc, aa.nomJoc,_03_pk_idJugRonda as idJug ,
-bb.nomJug, sum(_07_puntsRonda) AS punts FROM 
-(SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS aa,
-(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug FROM usuari) AS bb,
+BB.nomJug, BB.loginJug, sum(_07_puntsRonda) AS punts FROM 
+(SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
+(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug, _04_loginUsuari AS loginJug FROM usuari) AS BB,
 torneig
 LEFT JOIN torneigTePartida ON (_01_pk_idTorn = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
 INNER JOIN partida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
@@ -131,14 +137,13 @@ INNER JOIN ronda ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
 							 _03_pk_idJugPart = _03_pk_idJugRonda AND
 							 _04_pk_idDatHorPart = _04_pk_idDatHorPartRonda )
 WHERE 
-		nomJug <> "admin" AND
-		_02_pk_idJocTorn  = aa.idJoc AND
-		_03_pk_idJugRonda = bb.idUsuari AND
+		loginJug <> "admin" AND
+		_02_pk_idJocTorn  = AA.idJoc AND
+		_03_pk_idJugRonda = BB.idUsuari AND
+		_07_datBaixaPart IS NULL AND
 		_06_datFinTorn   >= DATE(_04_pk_idDatHorPart)
 GROUP BY _01_pk_idTorn,_03_pk_idJugRonda
 ORDER BY _01_pk_idTorn, punts DESC;
-
-select * from CC;
 
 SELECT * FROM
 ( 
@@ -154,9 +159,8 @@ WHERE
 		CC.idJug = _01_pk_idJug AND
 		CC.idTorn = XX.idTorn AND
 		
-		/*  canviar pel codi del jugador */
-
-		_01_pk_idJug = 2
+	/* canviar el login del jugador */
+		CC.loginJug = "joan"		
 		
 ) AS ZZ
 WHERE ranking > 0
@@ -183,10 +187,12 @@ WHERE
 				_01_pk_idTornInsc = 1001
 
 		 )) AND
-	/*  canviar pel codi del torneig i del jugador */	
+		 
+	/* canviar pel login de l'usuari */	
 		
 		_01_pk_idTornInsc = 1001 AND
-		_03_pk_idJugInsc  = 2;
+		(_03_pk_idJugInsc IN ( SELECT _01_pk_idUsuari AS _03_pk_idJugInsc FROM usuari
+		WHERE _04_loginUsuari = "$login"));
 
 /*
 
@@ -198,7 +204,11 @@ WHERE
 		(_02_pk_idJocInsc IN ( SELECT _02_pk_idJocTorn AS _02_pk_idJocInsc FROM torneig WHERE   
 		_01_pk_idTornInsc = 1001 )) AND
 		_01_pk_idTornInsc = 1001 AND
-		_03_pk_idJugInsc  = 2;
+		(_03_pk_idJugInsc IN ( SELECT _01_pk_idUsuari AS _03_pk_idJugInsc FROM usuari
+		WHERE _04_loginUsuari = "joan"));
+
+select * from inscrit;
+
 
 */
 
