@@ -1,7 +1,5 @@
 <?php
 
-define("USUARI_ADM","adm");
-
 function controlLogin($user,$pswd)
 {
     $query = 'SELECT @nl:=@nl+1 as estat, u.*
@@ -19,9 +17,6 @@ function controlLogin($user,$pswd)
         //defineixo una sessió i guardo dades
         session_start();
         $_SESSION["autentificat"] = "SI";
-        $_SESSION["tipoUsr"] = "usuari";
-        if ($user == USUARI_ADM)
-            $_SESSION["tipoUsr"] = "admin";
         $_SESSION["login"] = $user;
         $_SESSION["nomUsr"] = $res[0]->_02_nomUsuari;
         $_SESSION["cognomUsr"] = $res[0]->_03_cognomUsuari;
