@@ -239,9 +239,8 @@ CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`partida` (
   `_02_pk_idJocPart` INT NOT NULL ,
   `_03_pk_idJugPart` INT NOT NULL ,
   `_04_pk_idDatHorPart` DATETIME NOT NULL ,
-  `_05_datAltPart` DATETIME NULL ,
-  `_06_datModPart` DATETIME NULL ,
-  `_07_datBaixaPart` DATETIME NULL ,
+  `_05_datModPart` DATETIME NULL ,
+  `_06_datBaixaPart` DATETIME NULL ,
   PRIMARY KEY (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`) ,
   INDEX `partida_2_ronda` (`_01_pk_idMaqPart` ASC, `_02_pk_idJocPart` ASC, `_03_pk_idJugPart` ASC, `_04_pk_idDatHorPart` ASC) ,
   INDEX `partida_2_maquina` (`_01_pk_idMaqPart` ASC) ,
@@ -501,20 +500,20 @@ COMMIT;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datAltPart`, `_06_datModPart`, `_07_datBaixaPart`) VALUES ('10', '101', '2', '2014-06-15 14:00:10', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datAltPart`, `_06_datModPart`, `_07_datBaixaPart`) VALUES ('10', '101', '3', '2014-06-15 14:00:10', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datAltPart`, `_06_datModPart`, `_07_datBaixaPart`) VALUES ('10', '101', '4', '2014-06-15 14:00:10', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datAltPart`, `_06_datModPart`, `_07_datBaixaPart`) VALUES ('10', '101', '5', '2014-06-15 14:00:10', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datAltPart`, `_06_datModPart`, `_07_datBaixaPart`) VALUES ('30', '101', '2', '2014-06-15 14:00:10', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datAltPart`, `_06_datModPart`, `_07_datBaixaPart`) VALUES ('30', '101', '3', '2014-06-15 14:00:10', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datAltPart`, `_06_datModPart`, `_07_datBaixaPart`) VALUES ('30', '101', '4', '2014-06-15 14:00:10', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datAltPart`, `_06_datModPart`, `_07_datBaixaPart`) VALUES ('30', '101', '5', '2014-06-15 14:00:10', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datAltPart`, `_06_datModPart`, `_07_datBaixaPart`) VALUES ('40', '101', '2', '2014-06-15 14:00:10', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datAltPart`, `_06_datModPart`, `_07_datBaixaPart`) VALUES ('40', '101', '3', '2014-06-15 14:00:10', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datAltPart`, `_06_datModPart`, `_07_datBaixaPart`) VALUES ('40', '101', '4', '2014-06-15 14:00:10', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datAltPart`, `_06_datModPart`, `_07_datBaixaPart`) VALUES ('40', '101', '5', '2014-06-15 14:00:10', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datAltPart`, `_06_datModPart`, `_07_datBaixaPart`) VALUES ('10', '100', '2', '2014-06-15 14:00:10', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datAltPart`, `_06_datModPart`, `_07_datBaixaPart`) VALUES ('40', '100', '2', '2014-06-15 14:00:10', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('10', '101', '2', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('10', '101', '3', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('10', '101', '4', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('10', '101', '5', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('30', '101', '2', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('30', '101', '3', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('30', '101', '4', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('30', '101', '5', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('40', '101', '2', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('40', '101', '3', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('40', '101', '4', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('40', '101', '5', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('10', '100', '2', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('40', '100', '2', '2014-06-15 14:00:10', NULL, NULL);
 
 COMMIT;
 

@@ -10,10 +10,11 @@ FROM usuari
 LEFT JOIN jugador ON _01_pk_idUsuari = _01_pk_idJug
 WHERE
 	_10_datBaixaUsuari IS NULL AND
+	_06_datBaixaJug    IS NULL AND
 	
-	/* canviar pel codi del usuari */
+	/* canviar pel login de l'usuari */
 	
-	_01_pk_idUsuari = 2;
+	_04_loginUsuari = "$login";
 
 
 /***********************************************************************************************/
@@ -24,29 +25,29 @@ WHERE
 /* canviar $dataTime Y-n-j H:i:s ( 2014-06-15 10:10:10 ) per Data CURRENT */
 
 START TRANSACTION;
-UPDATE usuari SET _02_nomUsuari    = '$nom',
-						_03_cognomUsuari = '$cognom',
-						_05_pwdUsuari    = '$password',
-						_06_emailUsuari  = '$email',						
-						_07_fotoUsuari   = '$nomFoto',
-						_09_datModUsuari = '$dataTime'
+UPDATE usuari SET _02_nomUsuari    = "$nom",
+						_03_cognomUsuari = "$cognom",
+						_05_pwdUsuari    = "$passwor",
+						_06_emailUsuari  = "$email",						
+						_07_fotoUsuari   = "$nomFoto",
+						_09_datModUsuari = "$dataTime"
 WHERE
 		_10_datBaixaUsuari IS NULL AND
 		
-		/*  canviar pel codi del jugador */		
-		
-		_01_pk_idUsuari = 2;
+		/* canviar pel login de l'usuari */
+	
+		_04_loginUsuari = "$login";
 
-
-UPDATE jugador SET _02_faceJug    = '$facebook',
-						 _03_twitterJug = '$twitter',
-						 _05_datModJug  = '$dataTime'
+UPDATE jugador SET _02_faceJug    = "$facebook",
+						 _03_twitterJug = "$twitter",
+						 _05_datModJug  = "$dataTime"
 WHERE 
 		_06_datBaixaJug IS NULL AND
-
-		/*  canviar pel codi del jugador */		
-
-		_01_pk_idJug = 2;
+		
+		/* canviar pel login de l'usuari */		
+		
+		(_01_pk_idJug IN ( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
+		WHERE _04_loginUsuari = "$login"));
 		
 COMMIT;
 
@@ -59,18 +60,18 @@ UPDATE usuari SET _02_nomUsuari    = "joan josep",
 						_06_emailUsuari  = "joanjosep@gmail.com",						
 						_07_fotoUsuari   = "jjsalas.jpg",
 						_09_datModUsuari = "2014-06-15 12:11:11"
-WHERE _01_pk_idUsuari = 2 and _10_datBaixaUsuari IS NULL;
+WHERE _04_loginUsuari = "joan" and _10_datBaixaUsuari IS NULL;
 
 UPDATE jugador SET _02_faceJug    = "jjsalas@hotmail.com",
 						 _03_twitterJug = "@jjsalas",
 						 _05_datModJug  = "2014-06-15 12:11:11"
-WHERE _01_pk_idJug = 2 and _06_datBaixaJug IS NULL;
+WHERE 
+		_06_datBaixaJug IS NULL AND
+		(_01_pk_idJug IN ( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
+		WHERE _04_loginUsuari = "joan"));
 
-SELECT _01_pk_idUsuari,_02_nomUsuari,_03_cognomUsuari,_04_loginUsuari,_05_pwdUsuari,_06_emailUsuari,_07_fotoUsuari,
-_02_faceJug,_03_twitterJug
-from usuari as u
-left join jugador as j on _01_pk_idUsuari = _01_pk_idJug
-WHERE _01_pk_idUsuari = 2 and _10_datBaixaUsuari IS NULL;
+select * from usuari;
+select * from jugador;
 COMMIT;
 */
 
@@ -85,27 +86,35 @@ UPDATE usuari SET _10_datBaixaUsuari = "$dataTime"
 WHERE 
 		_10_datBaixaUsuari IS NULL AND
 		
-		/*  canviar pel codi del jugador */			
-		
-		_01_pk_idUsuari = 2;
+		/* canviar pel login de l'usuari */
+	
+		_04_loginUsuari = "$login";		
 
 UPDATE jugador SET _06_datBaixaJug  = "$dataTime"
 WHERE
 		 _06_datBaixaJug IS NULL AND
+		 
+		/* canviar pel login de l'usuari */		
+		
+		(_01_pk_idJug IN ( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
+		WHERE _04_loginUsuari = "$login"));		 
 
-		/*  canviar pel codi del jugador */	
-
-		_01_pk_idJug = 2;
 COMMIT;
 
 /*  ejemplo
 
 START TRANSACTION;
 UPDATE usuari SET _10_datBaixaUsuari = "2014-06-15 13:10:20"
-WHERE _01_pk_idUsuari = 2 and _10_datBaixaUsuari IS NULL;
+WHERE _04_loginUsuari = "joan" and _10_datBaixaUsuari IS NULL;
 
 UPDATE jugador SET _06_datBaixaJug  = "2014-06-15 13:10:20"
-WHERE _01_pk_idJug = 2 and _06_datBaixaJug IS NULL;
+WHERE 
+		_06_datBaixaJug IS NULL and
+		(_01_pk_idJug IN ( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
+		WHERE _04_loginUsuari = "joan"));		 
+
+select * from usuari;
+select * from jugador;
 COMMIT;
 
 */

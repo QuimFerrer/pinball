@@ -61,8 +61,8 @@ Zona d'usuari
 	c.  ( 01_query.sql ) TOTS ELS TORNEIGS. consultar tots els torneigs amb possibilitat d'apuntar-se
 
 3. menú administrador
-	a. PERFIL. gestio perfil administrador (modificacio, consulta)
-	b. PARTIDES. gestió partides
+	a. ( 02_query.sql ) PERFIL. gestio perfil administrador (consulta, modificació)
+	b. PARTIDES. gestió partides (anular / bloquear, desanular / desbloquear)
 	c. JOCS. gestió de jocs
 		--> afegir camp descripcio joc a la database
 	d. TORNEIGS. gestió torneigs: mostrar tots els torneigs per gestionar-los en forma de llista amb botons d'opcions:
