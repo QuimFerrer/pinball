@@ -69,33 +69,109 @@ COMMIT;
 
 */
 
+
+/************************************************************************************/
+/*** llistar partides   */
+/************************************************************************************/
+
+SELECT _01_pk_idTorn AS idTorn, P.* FROM partida AS P, torneig
+WHERE
+	(_03_pk_idJugPart IN ( SELECT _01_pk_idUsuari AS _03_pk_idJugPart FROM usuari
+
+	/* canviar pel login de l'usuari */	
+
+		WHERE _04_loginUsuari = "$login"))
+		GROUP BY _00_pk_idPart_auto;
+
+
 /************************************************************************************/
 /*** anul.lar / bloquejar  partides   */
 /************************************************************************************/
 
-SELECT _01_pk_idTorn as idTorn,_03_nomTorn as nomTorn, idJoc, aa.nomJoc,_03_pk_idJugRonda as idJug ,
-BB.nomJug, BB.loginJug, R.* FROM
-(SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
-(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug, _04_loginUsuari AS loginJug FROM usuari) AS BB,
-torneig
-LEFT JOIN torneigTePartida ON (_01_pk_idTorn = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
-INNER JOIN partida AS P ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
-							  _03_pk_idJocTTP = _02_pk_idJocPart AND
-							  _04_pk_idJugTTP = _03_pk_idJugPart )
-INNER JOIN ronda AS R ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
-							 _02_pk_idJocPart = _02_pk_idJocRonda AND
-							 _03_pk_idJugPart = _03_pk_idJugRonda AND
-							 _04_pk_idDatHorPart = _04_pk_idDatHorPartRonda )
+	/* canviar $dataTime Y-n-j H:i:s ( 2014-06-15 10:10:10 ) per Data CURRENT */
+
+UPDATE partida SET _06_datBaixaPart  = "$dataTime"
 WHERE 
-		loginJug <> "admin" AND
-		_02_pk_idJocTorn  = AA.idJoc AND
-		_03_pk_idJugRonda = BB.idUsuari AND
 		_06_datBaixaPart IS NULL AND
-		_06_datFinTorn   >= DATE(_04_pk_idDatHorPart) AND
 		
-		/* canviar $data Y-n-j ( 2014-06-15 ) per Data CURRENT */
-				
-		_06_datFinTorn   >= "2014-06-15"
+		 	/*  canviar pel id de partida */	
+		 	
+		_00_pk_idPart_auto = "$idPartida";
+
+/************************************************************************************/
+/*** desanul.lar / desbloquejar  partides   */
+/************************************************************************************/
+
+UPDATE partida SET _06_datBaixaPart  = NULL
+WHERE 
+		_06_datBaixaPart IS NOT NULL AND
 		
-GROUP BY _01_pk_idTorn,_03_pk_idJugRonda
-ORDER BY _01_pk_idTorn;
+		 	/*  canviar pel id de partida */	
+		 	
+		_00_pk_idPart_auto = "$idPartida";
+
+
+
+/************************************************************************************/
+/*** llistat de JOCS   */
+/************************************************************************************/
+
+SELECT * FROM joc;
+
+/************************************************************************************/
+/*** ALTA d'UN JOC   */
+/************************************************************************************/
+
+/* canviar les variables */
+/* canviar $dataTime Y-n-j H:i:s ( 2014-06-15 10:10:10 ) per Data CURRENT */
+
+INSERT INTO joc VALUES (NULL,$nomJoc,$descJoc,$imgJoc,0,$dataTime,NULL,NULL);
+
+
+/************************************************************************************/
+/*** BAIXA d'UN JOC   */
+/************************************************************************************/
+
+/* canviar variables per valors  */
+/* canviar $dataTime Y-n-j H:i:s ( 2014-06-15 10:10:10 ) per Data CURRENT */
+
+UPDATE FROM joc SET _08_datBaixaJoc = "$dataTime"
+
+WHERE 
+		_01_pk_idJoc = "$idJoc" AND
+		_08_datBaixaJoc IS NOT NULL;
+
+
+
+/************************************************************************************/
+/*** MODIFICACIO d'UN JOC   */
+/************************************************************************************/
+
+/* canviar variables per valors  */
+/* canviar $dataTime Y-n-j H:i:s ( 2014-06-15 10:10:10 ) per Data CURRENT */
+
+UPDATE FROM joc SET _02_nomJoc    = "$nomJoc",
+						  _03_descJoc   = "$descJoc",
+						  _04_imgJoc    = "$imgJoc",
+						  _07_datModJoc = "$dataTime"
+
+WHERE _01_pk_idJoc = "$idJoc";
+
+
+/************************************************************************************/
+/*** ACTUALITZACIÓ DE PARTIDES JUGADES A UN JOC   */
+/************************************************************************************/
+
+/* canviar variables per valors  */
+/* canviar $dataTime Y-n-j H:i:s ( 2014-06-15 10:10:10 ) per Data CURRENT */
+
+UPDATE joc SET _05_numPartidesJugadesJoc = "$partides",
+						  _07_datModJoc = "$dataTime"
+
+WHERE 
+		_01_pk_idJoc = "$idJoc" AND
+		_08_datBaixaJoc IS NULL;
+		
+		
+
+

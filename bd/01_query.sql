@@ -67,13 +67,13 @@ INNER JOIN partida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
 INNER JOIN ronda ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
 							 _02_pk_idJocPart = _02_pk_idJocRonda AND
 							 _03_pk_idJugPart = _03_pk_idJugRonda AND
-							 _04_pk_idDatHorPart = _04_pk_idDatHorPartRonda )
+							 _04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )
 WHERE 
 		loginJug <> "admin" AND
 		_02_pk_idJocTorn  = AA.idJoc AND
 		_03_pk_idJugRonda = BB.idUsuari AND
-		_07_datBaixaPart IS NULL AND
-		_06_datFinTorn   >= DATE(_04_pk_idDatHorPart) AND
+		_06_datBaixaPart IS NULL AND
+		_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart) AND
 		
 		/* canviar $data Y-n-j ( 2014-06-15 ) per Data CURRENT */
 				
@@ -135,13 +135,13 @@ INNER JOIN partida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
 INNER JOIN ronda ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
 							 _02_pk_idJocPart = _02_pk_idJocRonda AND
 							 _03_pk_idJugPart = _03_pk_idJugRonda AND
-							 _04_pk_idDatHorPart = _04_pk_idDatHorPartRonda )
+							 _04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )
 WHERE 
 		loginJug <> "admin" AND
 		_02_pk_idJocTorn  = AA.idJoc AND
 		_03_pk_idJugRonda = BB.idUsuari AND
-		_07_datBaixaPart IS NULL AND
-		_06_datFinTorn   >= DATE(_04_pk_idDatHorPart)
+		_06_datBaixaPart IS NULL AND
+		_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart)
 GROUP BY _01_pk_idTorn,_03_pk_idJugRonda
 ORDER BY _01_pk_idTorn, punts DESC;
 
@@ -160,7 +160,7 @@ WHERE
 		CC.idTorn = XX.idTorn AND
 		
 	/* canviar el login del jugador */
-		CC.loginJug = "joan"		
+		CC.loginJug = "$login"		
 		
 ) AS ZZ
 WHERE ranking > 0
@@ -214,6 +214,7 @@ select * from inscrit;
 
 /***********************************************************************************************/
 /* TOTS ELS TORNEIGS ACTIUS ALS QUE ES POT REGISTRAR UN JUGADOR */
+/***********************************************************************************************/
 
 SELECT * 
 FROM torneig
@@ -226,5 +227,22 @@ WHERE
 		_06_datFinTorn >= "$dataTime"
 
 ORDER BY _05_datIniTorn;
+
+
+/***********************************************************************************************/
+/*  APUNTAR-SE A UN TORNEIG  */
+/***********************************************************************************************/
+
+	/* canviar pel login de l'usuari */	
+
+SELECT _01_pk_idUsuari FROM usuari WHERE _04_loginUsuari = "joan";
+
+/* dades a insertar: idTorneig, idJoc, idJugador, data Y-n-j H:i:s ( 2014-06-15 10:10:10 ) per Data CURRENT */
+
+INSERT INTO inscrit (_00_pk_idInscrit,_01_pk_idTorn,_02_pk_idJocInsc,_03_pk_idJugInsc,_04_datAltaInsc)
+VALUES (NULL,?,?,?,?);
+
+
+
 
 

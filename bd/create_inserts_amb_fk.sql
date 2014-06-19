@@ -32,13 +32,14 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `u555588791_pinba`.`admin` ;
 
 CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`admin` (
+  `_00_pk_idAdm_auto` INT NOT NULL AUTO_INCREMENT ,
   `_01_pk_idAdm` INT NOT NULL ,
   `_02_faceAdm` VARCHAR(255) NULL ,
   `_03_twitterAdm` VARCHAR(255) NULL ,
   `_04_datAltaAdm` DATETIME NULL ,
   `_05_datModAdm` DATETIME NULL ,
   `_06_datBaixaAdm` DATETIME NULL ,
-  PRIMARY KEY (`_01_pk_idAdm`) ,
+  PRIMARY KEY (`_00_pk_idAdm_auto`, `_01_pk_idAdm`) ,
   CONSTRAINT `fk_admin_usuari1`
     FOREIGN KEY (`_01_pk_idAdm` )
     REFERENCES `u555588791_pinba`.`usuari` (`_01_pk_idUsuari` )
@@ -53,13 +54,14 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `u555588791_pinba`.`jugador` ;
 
 CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`jugador` (
+  `_00_pk_idJug_auto` INT NOT NULL AUTO_INCREMENT ,
   `_01_pk_idJug` INT NOT NULL ,
   `_02_faceJug` VARCHAR(255) NULL ,
   `_03_twitterJug` VARCHAR(255) NULL ,
   `_04_datAltaJug` DATETIME NULL ,
   `_05_datModJug` DATETIME NULL ,
   `_06_datBaixaJug` DATETIME NULL ,
-  PRIMARY KEY (`_01_pk_idJug`) ,
+  PRIMARY KEY (`_00_pk_idJug_auto`, `_01_pk_idJug`) ,
   CONSTRAINT `fk_jugador_usuari`
     FOREIGN KEY (`_01_pk_idJug` )
     REFERENCES `u555588791_pinba`.`usuari` (`_01_pk_idUsuari` )
@@ -117,13 +119,14 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `u555588791_pinba`.`inscrit` ;
 
 CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`inscrit` (
+  `_00_pk_idInsc_auto` INT NOT NULL AUTO_INCREMENT ,
   `_01_pk_idTornInsc` INT NOT NULL ,
   `_02_pk_idJocInsc` INT NOT NULL ,
   `_03_pk_idJugInsc` INT NOT NULL ,
   `_04_datAltaInsc` DATETIME NULL ,
   `_05_datModInsc` DATETIME NULL ,
   `_06_datBaixaInsc` DATETIME NULL ,
-  PRIMARY KEY (`_01_pk_idTornInsc`, `_03_pk_idJugInsc`, `_02_pk_idJocInsc`) ,
+  PRIMARY KEY (`_00_pk_idInsc_auto`, `_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`) ,
   INDEX `fk_torneig_has_jugador_jugador1` (`_03_pk_idJugInsc` ASC) ,
   CONSTRAINT `fk_torneig_has_jugador_torneig1`
     FOREIGN KEY (`_01_pk_idTornInsc` , `_02_pk_idJocInsc` )
@@ -162,7 +165,8 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `u555588791_pinba`.`ubicacio` ;
 
 CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`ubicacio` (
-  `_01_pk_idUbic` INT NOT NULL AUTO_INCREMENT ,
+  `_00_pk_idUbic_auto` INT NOT NULL AUTO_INCREMENT ,
+  `_01_pk_idUbic` INT NOT NULL ,
   `_02_pk_idMaqUbic` INT NOT NULL ,
   `_03_empUbic` VARCHAR(45) NULL ,
   `_04_dirUbic` VARCHAR(45) NULL ,
@@ -179,7 +183,7 @@ CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`ubicacio` (
   `_15_datAltaUbic` DATETIME NULL ,
   `_16_datModUbic` DATETIME NULL ,
   `_17_datBaixaUbic` DATETIME NULL ,
-  PRIMARY KEY (`_01_pk_idUbic`, `_02_pk_idMaqUbic`) ,
+  PRIMARY KEY (`_00_pk_idUbic_auto`, `_01_pk_idUbic`, `_02_pk_idMaqUbic`) ,
   INDEX `fk_ubicacio_maquina1` (`_02_pk_idMaqUbic` ASC) ,
   CONSTRAINT `fk_ubicacio_maquina1`
     FOREIGN KEY (`_02_pk_idMaqUbic` )
@@ -198,11 +202,11 @@ CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`ronda` (
   `_01_pk_idMaqRonda` INT NOT NULL ,
   `_02_pk_idJocRonda` INT NOT NULL ,
   `_03_pk_idJugRonda` INT NOT NULL ,
-  `_04_pk_idDatHorPartRonda` DATETIME NOT NULL ,
+  `_04_pk_idDatHoraPartRonda` DATETIME NOT NULL ,
   `_05_pk_idRonda` INT NOT NULL ,
   `_06_fotoJugRonda` VARCHAR(45) NULL ,
   `_07_puntsRonda` VARCHAR(45) NULL ,
-  PRIMARY KEY (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`) )
+  PRIMARY KEY (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`) )
 ENGINE = InnoDB;
 
 
@@ -212,9 +216,10 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `u555588791_pinba`.`maqInstall` ;
 
 CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`maqInstall` (
+  `_00_pk_idMaqInst_auto` INT NOT NULL AUTO_INCREMENT ,
   `_01_pk_idMaqInst` INT NOT NULL ,
   `_02_pk_idJocInst` INT NOT NULL ,
-  PRIMARY KEY (`_01_pk_idMaqInst`, `_02_pk_idJocInst`) ,
+  PRIMARY KEY (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) ,
   INDEX `fk_maquina_has_juego_juego1` (`_02_pk_idJocInst` ASC) ,
   CONSTRAINT `fk_maquina_has_juego_maquina1`
     FOREIGN KEY (`_01_pk_idMaqInst` )
@@ -235,20 +240,21 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `u555588791_pinba`.`partida` ;
 
 CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`partida` (
+  `_00_pk_idPart_auto` INT NOT NULL AUTO_INCREMENT ,
   `_01_pk_idMaqPart` INT NOT NULL ,
   `_02_pk_idJocPart` INT NOT NULL ,
   `_03_pk_idJugPart` INT NOT NULL ,
-  `_04_pk_idDatHorPart` DATETIME NOT NULL ,
+  `_04_pk_idDatHoraPart` DATETIME NOT NULL ,
   `_05_datModPart` DATETIME NULL ,
   `_06_datBaixaPart` DATETIME NULL ,
-  PRIMARY KEY (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`) ,
-  INDEX `partida_2_ronda` (`_01_pk_idMaqPart` ASC, `_02_pk_idJocPart` ASC, `_03_pk_idJugPart` ASC, `_04_pk_idDatHorPart` ASC) ,
+  PRIMARY KEY (`_00_pk_idPart_auto`, `_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHoraPart`) ,
+  INDEX `partida_2_ronda` (`_01_pk_idMaqPart` ASC, `_02_pk_idJocPart` ASC, `_03_pk_idJugPart` ASC, `_04_pk_idDatHoraPart` ASC) ,
   INDEX `partida_2_maquina` (`_01_pk_idMaqPart` ASC) ,
   INDEX `partida_2_joc` (`_02_pk_idJocPart` ASC) ,
   INDEX `partida_2_jugador` (`_03_pk_idJugPart` ASC) ,
   CONSTRAINT `partida_2_ronda`
-    FOREIGN KEY (`_01_pk_idMaqPart` , `_02_pk_idJocPart` , `_03_pk_idJugPart` , `_04_pk_idDatHorPart` )
-    REFERENCES `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda` , `_02_pk_idJocRonda` , `_03_pk_idJugRonda` , `_04_pk_idDatHorPartRonda` )
+    FOREIGN KEY (`_01_pk_idMaqPart` , `_02_pk_idJocPart` , `_03_pk_idJugPart` , `_04_pk_idDatHoraPart` )
+    REFERENCES `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda` , `_02_pk_idJocRonda` , `_03_pk_idJugRonda` , `_04_pk_idDatHoraPartRonda` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `partida_2_maquina`
@@ -275,11 +281,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `u555588791_pinba`.`torneigTePartida` ;
 
 CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`torneigTePartida` (
+  `_00_pk_idTTP_auto` INT NOT NULL AUTO_INCREMENT ,
   `_01_pk_idTornTTP` INT NOT NULL ,
   `_02_pk_idMaqTTP` INT NOT NULL ,
   `_03_pk_idJocTTP` INT NOT NULL ,
   `_04_pk_idJugTTP` INT NOT NULL ,
-  PRIMARY KEY (`_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) ,
+  PRIMARY KEY (`_00_pk_idTTP_auto`, `_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) ,
   INDEX `TTP_2_partida` (`_02_pk_idMaqTTP` ASC, `_03_pk_idJocTTP` ASC, `_04_pk_idJugTTP` ASC) ,
   INDEX `TTP_2_torneig` (`_01_pk_idTornTTP` ASC, `_03_pk_idJocTTP` ASC) ,
   CONSTRAINT `TTP_2_partida`
@@ -336,7 +343,7 @@ COMMIT;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`admin` (`_01_pk_idAdm`, `_02_faceAdm`, `_03_twitterAdm`, `_04_datAltaAdm`, `_05_datModAdm`, `_06_datBaixaAdm`) VALUES ('1', NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`admin` (`_00_pk_idAdm_auto`, `_01_pk_idAdm`, `_02_faceAdm`, `_03_twitterAdm`, `_04_datAltaAdm`, `_05_datModAdm`, `_06_datBaixaAdm`) VALUES ('1', '1', NULL, NULL, '2014-05-13', NULL, NULL);
 
 COMMIT;
 
@@ -345,10 +352,10 @@ COMMIT;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`jugador` (`_01_pk_idJug`, `_02_faceJug`, `_03_twitterJug`, `_04_datAltaJug`, `_05_datModJug`, `_06_datBaixaJug`) VALUES ('2', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`jugador` (`_01_pk_idJug`, `_02_faceJug`, `_03_twitterJug`, `_04_datAltaJug`, `_05_datModJug`, `_06_datBaixaJug`) VALUES ('3', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`jugador` (`_01_pk_idJug`, `_02_faceJug`, `_03_twitterJug`, `_04_datAltaJug`, `_05_datModJug`, `_06_datBaixaJug`) VALUES ('4', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`jugador` (`_01_pk_idJug`, `_02_faceJug`, `_03_twitterJug`, `_04_datAltaJug`, `_05_datModJug`, `_06_datBaixaJug`) VALUES ('5', NULL, NULL, '2014-06-15', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`jugador` (`_00_pk_idJug_auto`, `_01_pk_idJug`, `_02_faceJug`, `_03_twitterJug`, `_04_datAltaJug`, `_05_datModJug`, `_06_datBaixaJug`) VALUES ('1', '2', NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`jugador` (`_00_pk_idJug_auto`, `_01_pk_idJug`, `_02_faceJug`, `_03_twitterJug`, `_04_datAltaJug`, `_05_datModJug`, `_06_datBaixaJug`) VALUES ('2', '3', NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`jugador` (`_00_pk_idJug_auto`, `_01_pk_idJug`, `_02_faceJug`, `_03_twitterJug`, `_04_datAltaJug`, `_05_datModJug`, `_06_datBaixaJug`) VALUES ('3', '4', NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`jugador` (`_00_pk_idJug_auto`, `_01_pk_idJug`, `_02_faceJug`, `_03_twitterJug`, `_04_datAltaJug`, `_05_datModJug`, `_06_datBaixaJug`) VALUES ('4', '5', NULL, NULL, '2014-06-15', NULL, NULL);
 
 COMMIT;
 
@@ -357,11 +364,11 @@ COMMIT;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`joc` (`_01_pk_idJoc`, `_02_nomJoc`, `_03_descJoc`, `_04_imgJoc`, `_05_numPartidesJugadesJoc`, `_06_datAltaJoc`, `_07_datModJoc`, `_08_datBaixaJoc`) VALUES ('100', 'ARMAGEDON', 'El Gobierno estaba probando una nueva tecnología para los viajes espaciales, el sistema es inestable y....... !!!! ESTAN ABRIENDO PUERTAS QUE JAMAS DEBERIAN HABER SIDO ABIERTAS ¡¡¡. Además parece ser las Fuerzas Extraterrestres están interesados en esta tecnología también. Menos mal que ,los componentes de la Resistencia solucionán todos los problemas .....y detendrán los lios generados por los gobernantes.\nTendras que:\nCERRAR las puertas del cementerio, antes que los zombies alcancen la ciudad.\nDestruir la SONDA OVNI que está desplegando ROBOTS.\nEntrar en la planta nuclear Y DETENER LA FUGA DE RIESGO BIOLOGICO.\nDestruir LA PUERTA NEGRA con dos potentes bombas.\nLas vacas están siendo ADDUCIDAS, sálvalas y los granjeros te ayudaran.\nCIERRA todas las fugas DEL NUCLEO Yy la ciudad te dara un MEDI-KIT ( KIT MEDICO).\nDestruye OVNIS para conseguir sus armas o completa el BUMPER GIRATORIO.\n', 'armagedon.jpg', NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`joc` (`_01_pk_idJoc`, `_02_nomJoc`, `_03_descJoc`, `_04_imgJoc`, `_05_numPartidesJugadesJoc`, `_06_datAltaJoc`, `_07_datModJoc`, `_08_datBaixaJoc`) VALUES ('101', 'CARS & GIRLS', 'Tu MEJOR AMIGO HACE HACE LA despedida de soltero es este fin de semana. sólo A 1000 MILLAS de distancia y TU NO TE LO QUEIRES PERDER.\nasí que TOMA tu viejo camión y mantener el acelerador a fondo.\nEl viaje:\nEl túnel: acceso directo a través del túnel para obtener 200 millas.\nEl paso: completar para obtener OTRAS 200 MILLAS.\nCallejón sin salida: salir de allí con acceso directo de 200 millas.\nEl combustible:\nEn la Gasolinera conseguir 2 tanques de combustible para evitar la falta de gas.\nLas chicas:\nSUBIR A LAS CHICAS AL COCHE COMPLETANDO LAS DIANAS \"LOVE TRUCK\".\nPROMETISTE llevar cuatro niñas a la fiesta.\nEl garaje:\nGaraje-thornes estará disponible cuando SE ESTROPEE el motor.\nLa Policía:\nTenga cuidado con los radares y los bloqueos de carreteras.\nSi se rompen todos los BLOQUEOS DE CARRETERA se consigue una multa .\nCon tres MULTAS ESTARAS FUERA DE LA LEY, PEREPARATE.\nSpeed:\nACELERA PARA CONSEGUIR MAS VELOCIDAD .\nCuanto más rápido vayas, más rápido se llega a la fiesta.\nConseguir \"COMBOS NITRO \" para una dosis de locura de la aceleración.\n!!!!!BUEN VIAJE ¡¡¡¡¡.\n', 'cars&girls.jpg', NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`joc` (`_01_pk_idJoc`, `_02_nomJoc`, `_03_descJoc`, `_04_imgJoc`, `_05_numPartidesJugadesJoc`, `_06_datAltaJoc`, `_07_datModJoc`, `_08_datBaixaJoc`) VALUES ('102', 'TIME MACHINE', 'La maquina del tiempo esta lista para ser usada, pero un problema elctrico hace que los viajes en el tiempo no accedan a la fecha seleccionada….COMIENZA La aventura.\nSelecciona el objetivo “weird”  encenciendo  las luces de los pasillos de la parte superior.\nDesactiva las palancas  “time” situadas  en la parte media izquierda para desbloquear el pasillo sin salida y atrapar bolas para el multiball.\nMultiball se ejecuta cuando todas las luces de bonus estan iluminandas.\nDesactiva las palancas “explore” situadas ern la parte central derecha  para incrementar tiempo de extra bonus dirante el descuento del reloj.\nHaz que la bola pase por los pasillos “add bonus iluminados” hasta completar el mensaje  bajo el reloj “ time machine ” para incrementar puntuacion de bonus.\nGolpear con la bola las dianas que se encuentra a la derecha y a la izquierda del “ portal temporal humeante”.\nPara ir incrementando el bounus de la puerta  1000, 10.000, 50.000 y  lit special 100.000. Despues introducir la bola en la base de la puerta para visualizar un personaje de la epoca o dimension  en la que estamos actuamente y sumando los bonus acumulados.\n', 'time_machine.jpg', NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`joc` (`_01_pk_idJoc`, `_02_nomJoc`, `_03_descJoc`, `_04_imgJoc`, `_05_numPartidesJugadesJoc`, `_06_datAltaJoc`, `_07_datModJoc`, `_08_datBaixaJoc`) VALUES ('103', 'LUCKY FIRE', 'Cartas (dianas abatibles): eliminar todas las cartas para abrir el casino.\nCasino: para ganar bola extra o para activar el multiplicador.\nMultiplicador campo de juego: multiplica todos los puntajes de 2, 3 o 5 durante 10 segundos\nBumper\'s: aumenta la puntuacion .\nRevolver (dianas abatibles): elimina las dianas de las gun pabrir el banco y aumentar los puntos.\nRecompensa: pasar por las rampas y eliminar las dianas del sheriff para incrementar el valor de la recompensa,\nPasar por la rampa horseshoe para escribir la siguiente letra de recompensa.\nBanco: recoges el el valor de lods bonus guardados o la recompensa del jackpot.\nAgua ramp: activa el letreo de la palabra \"engine\" .\nRodeo: incrementa los puntos del rodeo y enciende las luces de la palabra \"engine\", abre el tunel para la\nLocomotora express ,cuando la palabra \"engine\"esta encendida .\nTúnel: consigues el bonus de la recompensa y el multiplicador del bonus ,o enciende la bola extra cuando se entra.\nJuega a juego de la locomotora (en dmd) si la palabra \"engine esta encendida.\nBala: recoge puntuacion del bonus.\nGoldrush: enciende todas las letras del lingote de oro para activar el modo goldrush, las letras se encienden\nPasando por la rampa de agua, el rodeo, el banco y las cartas. Todas las rampas y las dianas del banco incremeta\nEl valor de \"goldrush\".\nHerradura: deletrea la siguiente letra de la recompensa \"reward\", activa el \"goldrush\" y da valor al multiball.\nOutlaw: abre la mina para recoger las letras \"tnt\".\nMina y la cárcel: deletrean la siguiente letra de \"tnt\" ilumina tosdas las letras para comenzar el multiball.\nSidelanes:\"pasillos laterales\" bola extra cuando esta encendido.\nDuelo nocturno premio: una puntuacion establecida activa el duelo. \n\n', 'lucky_fire.jpg', NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`joc` (`_01_pk_idJoc`, `_02_nomJoc`, `_03_descJoc`, `_04_imgJoc`, `_05_numPartidesJugadesJoc`, `_06_datAltaJoc`, `_07_datModJoc`, `_08_datBaixaJoc`) VALUES ('104', 'PACMAN', 'El objetivo del juego es controlar nuestro personaje a través de un laberinto mientras él va comiendo puntos. Cuando todos los puntos son comidos se pasa al siguiente nivel.\nPulsa en \"Start Game\" para iniciar el juego, mueves con las teclas de flechas del teclado, con la tecla M, apagas el sonido, con P, pausas el juego y Q hace que lo abandones. Existen cuatro fantasmas que recorren el laberinto e intentan atraparnos. Si algún fantasma llegase a tocarnos perdemos una vida. Inicialmente tenemos tres vidas, cuando se han perdido todas las vidas el juego terminará. Cerca de las esquinas del laberinto hay cuatro galletas de superpoder, cuando las comemos, nos volvemos más fuertes, los fantasmas no podrán tocarnos, girarán en dirección opuesta a dónde estamos y se moverán más lentamente, de hecho, si ellos nos tocan, los enviaremos temporalmente a un espacio cerrado en el centro del laberinto y obtendremos puntos por ello. \nTambién podemos obtener bonos en forma de fruta cerca del centro del laberinto. Cuando logramos comer estas frutas obtenemos puntos extra.\n', 'pacman.jpg', NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`joc` (`_01_pk_idJoc`, `_02_nomJoc`, `_03_descJoc`, `_04_imgJoc`, `_05_numPartidesJugadesJoc`, `_06_datAltaJoc`, `_07_datModJoc`, `_08_datBaixaJoc`) VALUES ('100', 'ARMAGEDON', 'El Gobierno estaba probando una nueva tecnología para los viajes espaciales, el sistema es inestable y....... !!!! ESTAN ABRIENDO PUERTAS QUE JAMAS DEBERIAN HABER SIDO ABIERTAS ¡¡¡. Además parece ser las Fuerzas Extraterrestres están interesados en esta tecnología también. Menos mal que ,los componentes de la Resistencia solucionán todos los problemas .....y detendrán los lios generados por los gobernantes.\nTendras que:\nCERRAR las puertas del cementerio, antes que los zombies alcancen la ciudad.\nDestruir la SONDA OVNI que está desplegando ROBOTS.\nEntrar en la planta nuclear Y DETENER LA FUGA DE RIESGO BIOLOGICO.\nDestruir LA PUERTA NEGRA con dos potentes bombas.\nLas vacas están siendo ADDUCIDAS, sálvalas y los granjeros te ayudaran.\nCIERRA todas las fugas DEL NUCLEO Yy la ciudad te dara un MEDI-KIT ( KIT MEDICO).\nDestruye OVNIS para conseguir sus armas o completa el BUMPER GIRATORIO.\n', 'armagedon.jpg', '2', '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`joc` (`_01_pk_idJoc`, `_02_nomJoc`, `_03_descJoc`, `_04_imgJoc`, `_05_numPartidesJugadesJoc`, `_06_datAltaJoc`, `_07_datModJoc`, `_08_datBaixaJoc`) VALUES ('101', 'CARS & GIRLS', 'Tu MEJOR AMIGO HACE HACE LA despedida de soltero es este fin de semana. sólo A 1000 MILLAS de distancia y TU NO TE LO QUEIRES PERDER.\nasí que TOMA tu viejo camión y mantener el acelerador a fondo.\nEl viaje:\nEl túnel: acceso directo a través del túnel para obtener 200 millas.\nEl paso: completar para obtener OTRAS 200 MILLAS.\nCallejón sin salida: salir de allí con acceso directo de 200 millas.\nEl combustible:\nEn la Gasolinera conseguir 2 tanques de combustible para evitar la falta de gas.\nLas chicas:\nSUBIR A LAS CHICAS AL COCHE COMPLETANDO LAS DIANAS \"LOVE TRUCK\".\nPROMETISTE llevar cuatro niñas a la fiesta.\nEl garaje:\nGaraje-thornes estará disponible cuando SE ESTROPEE el motor.\nLa Policía:\nTenga cuidado con los radares y los bloqueos de carreteras.\nSi se rompen todos los BLOQUEOS DE CARRETERA se consigue una multa .\nCon tres MULTAS ESTARAS FUERA DE LA LEY, PEREPARATE.\nSpeed:\nACELERA PARA CONSEGUIR MAS VELOCIDAD .\nCuanto más rápido vayas, más rápido se llega a la fiesta.\nConseguir \"COMBOS NITRO \" para una dosis de locura de la aceleración.\n!!!!!BUEN VIAJE ¡¡¡¡¡.\n', 'cars&girls.jpg', '12', '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`joc` (`_01_pk_idJoc`, `_02_nomJoc`, `_03_descJoc`, `_04_imgJoc`, `_05_numPartidesJugadesJoc`, `_06_datAltaJoc`, `_07_datModJoc`, `_08_datBaixaJoc`) VALUES ('102', 'TIME MACHINE', 'La maquina del tiempo esta lista para ser usada, pero un problema elctrico hace que los viajes en el tiempo no accedan a la fecha seleccionada….COMIENZA La aventura.\nSelecciona el objetivo “weird”  encenciendo  las luces de los pasillos de la parte superior.\nDesactiva las palancas  “time” situadas  en la parte media izquierda para desbloquear el pasillo sin salida y atrapar bolas para el multiball.\nMultiball se ejecuta cuando todas las luces de bonus estan iluminandas.\nDesactiva las palancas “explore” situadas ern la parte central derecha  para incrementar tiempo de extra bonus dirante el descuento del reloj.\nHaz que la bola pase por los pasillos “add bonus iluminados” hasta completar el mensaje  bajo el reloj “ time machine ” para incrementar puntuacion de bonus.\nGolpear con la bola las dianas que se encuentra a la derecha y a la izquierda del “ portal temporal humeante”.\nPara ir incrementando el bounus de la puerta  1000, 10.000, 50.000 y  lit special 100.000. Despues introducir la bola en la base de la puerta para visualizar un personaje de la epoca o dimension  en la que estamos actuamente y sumando los bonus acumulados.\n', 'time_machine.jpg', '0', '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`joc` (`_01_pk_idJoc`, `_02_nomJoc`, `_03_descJoc`, `_04_imgJoc`, `_05_numPartidesJugadesJoc`, `_06_datAltaJoc`, `_07_datModJoc`, `_08_datBaixaJoc`) VALUES ('103', 'LUCKY FIRE', 'Cartas (dianas abatibles): eliminar todas las cartas para abrir el casino.\nCasino: para ganar bola extra o para activar el multiplicador.\nMultiplicador campo de juego: multiplica todos los puntajes de 2, 3 o 5 durante 10 segundos\nBumper\'s: aumenta la puntuacion .\nRevolver (dianas abatibles): elimina las dianas de las gun pabrir el banco y aumentar los puntos.\nRecompensa: pasar por las rampas y eliminar las dianas del sheriff para incrementar el valor de la recompensa,\nPasar por la rampa horseshoe para escribir la siguiente letra de recompensa.\nBanco: recoges el el valor de lods bonus guardados o la recompensa del jackpot.\nAgua ramp: activa el letreo de la palabra \"engine\" .\nRodeo: incrementa los puntos del rodeo y enciende las luces de la palabra \"engine\", abre el tunel para la\nLocomotora express ,cuando la palabra \"engine\"esta encendida .\nTúnel: consigues el bonus de la recompensa y el multiplicador del bonus ,o enciende la bola extra cuando se entra.\nJuega a juego de la locomotora (en dmd) si la palabra \"engine esta encendida.\nBala: recoge puntuacion del bonus.\nGoldrush: enciende todas las letras del lingote de oro para activar el modo goldrush, las letras se encienden\nPasando por la rampa de agua, el rodeo, el banco y las cartas. Todas las rampas y las dianas del banco incremeta\nEl valor de \"goldrush\".\nHerradura: deletrea la siguiente letra de la recompensa \"reward\", activa el \"goldrush\" y da valor al multiball.\nOutlaw: abre la mina para recoger las letras \"tnt\".\nMina y la cárcel: deletrean la siguiente letra de \"tnt\" ilumina tosdas las letras para comenzar el multiball.\nSidelanes:\"pasillos laterales\" bola extra cuando esta encendido.\nDuelo nocturno premio: una puntuacion establecida activa el duelo. \n\n', 'lucky_fire.jpg', '0', '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`joc` (`_01_pk_idJoc`, `_02_nomJoc`, `_03_descJoc`, `_04_imgJoc`, `_05_numPartidesJugadesJoc`, `_06_datAltaJoc`, `_07_datModJoc`, `_08_datBaixaJoc`) VALUES ('104', 'PACMAN', 'El objetivo del juego es controlar nuestro personaje a través de un laberinto mientras él va comiendo puntos. Cuando todos los puntos son comidos se pasa al siguiente nivel.\nPulsa en \"Start Game\" para iniciar el juego, mueves con las teclas de flechas del teclado, con la tecla M, apagas el sonido, con P, pausas el juego y Q hace que lo abandones. Existen cuatro fantasmas que recorren el laberinto e intentan atraparnos. Si algún fantasma llegase a tocarnos perdemos una vida. Inicialmente tenemos tres vidas, cuando se han perdido todas las vidas el juego terminará. Cerca de las esquinas del laberinto hay cuatro galletas de superpoder, cuando las comemos, nos volvemos más fuertes, los fantasmas no podrán tocarnos, girarán en dirección opuesta a dónde estamos y se moverán más lentamente, de hecho, si ellos nos tocan, los enviaremos temporalmente a un espacio cerrado en el centro del laberinto y obtendremos puntos por ello. \nTambién podemos obtener bonos en forma de fruta cerca del centro del laberinto. Cuando logramos comer estas frutas obtenemos puntos extra.\n', 'pacman.jpg', '0', '2014-05-13', NULL, NULL);
 
 COMMIT;
 
@@ -384,15 +391,15 @@ COMMIT;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`inscrit` (`_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('1000', '100', '2', '2014-06-15 10:10:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`inscrit` (`_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('1001', '101', '3', '2014-06-15 10:10:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`inscrit` (`_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('1002', '102', '4', '2014-06-15 10:10:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`inscrit` (`_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('1003', '103', '2', '2014-06-15 10:10:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`inscrit` (`_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('1004', '104', '3', '2014-06-15 10:10:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`inscrit` (`_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('1005', '100', '2', '2014-06-15 10:10:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`inscrit` (`_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('1001', '101', '2', '2014-06-15 10:10:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`inscrit` (`_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('1001', '101', '4', '2014-06-15 10:10:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`inscrit` (`_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('1001', '101', '5', '2014-06-15 10:10:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`inscrit` (`_00_pk_idInsc_auto`, `_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('1', '1000', '100', '2', '2014-06-15 10:10:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`inscrit` (`_00_pk_idInsc_auto`, `_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('2', '1001', '101', '3', '2014-06-15 10:10:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`inscrit` (`_00_pk_idInsc_auto`, `_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('3', '1002', '102', '4', '2014-06-15 10:10:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`inscrit` (`_00_pk_idInsc_auto`, `_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('4', '1003', '103', '2', '2014-06-15 10:10:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`inscrit` (`_00_pk_idInsc_auto`, `_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('5', '1004', '104', '3', '2014-06-15 10:10:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`inscrit` (`_00_pk_idInsc_auto`, `_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('6', '1005', '100', '2', '2014-06-15 10:10:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`inscrit` (`_00_pk_idInsc_auto`, `_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('7', '1001', '101', '2', '2014-06-15 10:10:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`inscrit` (`_00_pk_idInsc_auto`, `_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('8', '1001', '101', '4', '2014-06-15 10:10:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`inscrit` (`_00_pk_idInsc_auto`, `_01_pk_idTornInsc`, `_02_pk_idJocInsc`, `_03_pk_idJugInsc`, `_04_datAltaInsc`, `_05_datModInsc`, `_06_datBaixaInsc`) VALUES ('9', '1001', '101', '5', '2014-06-15 10:10:10', NULL, NULL);
 
 COMMIT;
 
@@ -414,11 +421,11 @@ COMMIT;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`ubicacio` (`_01_pk_idUbic`, `_02_pk_idMaqUbic`, `_03_empUbic`, `_04_dirUbic`, `_05_pobUbic`, `_06_cpUbic`, `_07_provUbic`, `_08_latUbic`, `_09_longUbic`, `_10_altUbic`, `_11_contUbic`, `_12_emailUbic`, `_13_telUbic`, `_14_mobUbic`, `_15_datAltaUbic`, `_16_datModUbic`, `_17_datBaixaUbic`) VALUES ('1', '10', 'astic,sa', 'santa anna,23', 'sabadell', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`ubicacio` (`_01_pk_idUbic`, `_02_pk_idMaqUbic`, `_03_empUbic`, `_04_dirUbic`, `_05_pobUbic`, `_06_cpUbic`, `_07_provUbic`, `_08_latUbic`, `_09_longUbic`, `_10_altUbic`, `_11_contUbic`, `_12_emailUbic`, `_13_telUbic`, `_14_mobUbic`, `_15_datAltaUbic`, `_16_datModUbic`, `_17_datBaixaUbic`) VALUES ('2', '20', 'astic,sa', 'santa anna,23', 'sabadell', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`ubicacio` (`_01_pk_idUbic`, `_02_pk_idMaqUbic`, `_03_empUbic`, `_04_dirUbic`, `_05_pobUbic`, `_06_cpUbic`, `_07_provUbic`, `_08_latUbic`, `_09_longUbic`, `_10_altUbic`, `_11_contUbic`, `_12_emailUbic`, `_13_telUbic`, `_14_mobUbic`, `_15_datAltaUbic`, `_16_datModUbic`, `_17_datBaixaUbic`) VALUES ('3', '30', 'fermol,sl', 'robert,2', 'barcelona', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`ubicacio` (`_01_pk_idUbic`, `_02_pk_idMaqUbic`, `_03_empUbic`, `_04_dirUbic`, `_05_pobUbic`, `_06_cpUbic`, `_07_provUbic`, `_08_latUbic`, `_09_longUbic`, `_10_altUbic`, `_11_contUbic`, `_12_emailUbic`, `_13_telUbic`, `_14_mobUbic`, `_15_datAltaUbic`, `_16_datModUbic`, `_17_datBaixaUbic`) VALUES ('4', '40', 'fermol,sl', 'robert,2', 'barcelona', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`ubicacio` (`_01_pk_idUbic`, `_02_pk_idMaqUbic`, `_03_empUbic`, `_04_dirUbic`, `_05_pobUbic`, `_06_cpUbic`, `_07_provUbic`, `_08_latUbic`, `_09_longUbic`, `_10_altUbic`, `_11_contUbic`, `_12_emailUbic`, `_13_telUbic`, `_14_mobUbic`, `_15_datAltaUbic`, `_16_datModUbic`, `_17_datBaixaUbic`) VALUES ('5', '50', 'iol,sa', 'londres,90', 'mollet', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacio` (`_00_pk_idUbic_auto`, `_01_pk_idUbic`, `_02_pk_idMaqUbic`, `_03_empUbic`, `_04_dirUbic`, `_05_pobUbic`, `_06_cpUbic`, `_07_provUbic`, `_08_latUbic`, `_09_longUbic`, `_10_altUbic`, `_11_contUbic`, `_12_emailUbic`, `_13_telUbic`, `_14_mobUbic`, `_15_datAltaUbic`, `_16_datModUbic`, `_17_datBaixaUbic`) VALUES ('1', '1', '10', 'astic,sa', 'santa anna,23', 'sabadell', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacio` (`_00_pk_idUbic_auto`, `_01_pk_idUbic`, `_02_pk_idMaqUbic`, `_03_empUbic`, `_04_dirUbic`, `_05_pobUbic`, `_06_cpUbic`, `_07_provUbic`, `_08_latUbic`, `_09_longUbic`, `_10_altUbic`, `_11_contUbic`, `_12_emailUbic`, `_13_telUbic`, `_14_mobUbic`, `_15_datAltaUbic`, `_16_datModUbic`, `_17_datBaixaUbic`) VALUES ('2', '2', '20', 'astic,sa', 'santa anna,23', 'sabadell', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacio` (`_00_pk_idUbic_auto`, `_01_pk_idUbic`, `_02_pk_idMaqUbic`, `_03_empUbic`, `_04_dirUbic`, `_05_pobUbic`, `_06_cpUbic`, `_07_provUbic`, `_08_latUbic`, `_09_longUbic`, `_10_altUbic`, `_11_contUbic`, `_12_emailUbic`, `_13_telUbic`, `_14_mobUbic`, `_15_datAltaUbic`, `_16_datModUbic`, `_17_datBaixaUbic`) VALUES ('3', '3', '30', 'fermol,sl', 'robert,2', 'barcelona', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacio` (`_00_pk_idUbic_auto`, `_01_pk_idUbic`, `_02_pk_idMaqUbic`, `_03_empUbic`, `_04_dirUbic`, `_05_pobUbic`, `_06_cpUbic`, `_07_provUbic`, `_08_latUbic`, `_09_longUbic`, `_10_altUbic`, `_11_contUbic`, `_12_emailUbic`, `_13_telUbic`, `_14_mobUbic`, `_15_datAltaUbic`, `_16_datModUbic`, `_17_datBaixaUbic`) VALUES ('4', '4', '40', 'fermol,sl', 'robert,2', 'barcelona', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacio` (`_00_pk_idUbic_auto`, `_01_pk_idUbic`, `_02_pk_idMaqUbic`, `_03_empUbic`, `_04_dirUbic`, `_05_pobUbic`, `_06_cpUbic`, `_07_provUbic`, `_08_latUbic`, `_09_longUbic`, `_10_altUbic`, `_11_contUbic`, `_12_emailUbic`, `_13_telUbic`, `_14_mobUbic`, `_15_datAltaUbic`, `_16_datModUbic`, `_17_datBaixaUbic`) VALUES ('5', '5', '50', 'iol,sa', 'londres,90', 'mollet', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
 
 COMMIT;
 
@@ -427,48 +434,48 @@ COMMIT;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '2', '2014-06-15 14:00:10', '1', NULL, '10');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '2', '2014-06-15 14:00:10', '2', NULL, '20');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '2', '2014-06-15 14:00:10', '3', NULL, '30');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '3', '2014-06-15 14:00:10', '1', NULL, '400');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '3', '2014-06-15 14:00:10', '2', NULL, '500');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '3', '2014-06-15 14:00:10', '3', NULL, '60');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '4', '2014-06-15 14:00:10', '1', NULL, '5');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '4', '2014-06-15 14:00:10', '2', NULL, '10');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '4', '2014-06-15 14:00:10', '3', NULL, '15');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '5', '2014-06-15 14:00:10', '1', NULL, '20');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '5', '2014-06-15 14:00:10', '2', NULL, '25');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '5', '2014-06-15 14:00:10', '3', NULL, '30');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '2', '2014-06-15 14:00:10', '1', NULL, '10');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '2', '2014-06-15 14:00:10', '2', NULL, '20');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '2', '2014-06-15 14:00:10', '3', NULL, '30');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '3', '2014-06-15 14:00:10', '1', NULL, '40');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '3', '2014-06-15 14:00:10', '2', NULL, '50');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '3', '2014-06-15 14:00:10', '3', NULL, '60');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '4', '2014-06-15 14:00:10', '1', NULL, '70');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '4', '2014-06-15 14:00:10', '2', NULL, '80');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '4', '2014-06-15 14:00:10', '3', NULL, '90');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '5', '2014-06-15 14:00:10', '1', NULL, '100');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '5', '2014-06-15 14:00:10', '2', NULL, '110');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '5', '2014-06-15 14:00:10', '3', NULL, '120');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '2', '2014-06-15 14:00:10', '1', NULL, '130');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '2', '2014-06-15 14:00:10', '2', NULL, '140');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '2', '2014-06-15 14:00:10', '3', NULL, '150');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '3', '2014-06-15 14:00:10', '1', NULL, '160');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '3', '2014-06-15 14:00:10', '2', NULL, '170');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '3', '2014-06-15 14:00:10', '3', NULL, '180');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '4', '2014-06-15 14:00:10', '1', NULL, '190');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '4', '2014-06-15 14:00:10', '2', NULL, '200');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '4', '2014-06-15 14:00:10', '3', NULL, '210');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '5', '2014-06-15 14:00:10', '1', NULL, '220');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '5', '2014-06-15 14:00:10', '2', NULL, '230');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '5', '2014-06-15 14:00:10', '3', NULL, '240');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '100', '2', '2014-06-15 14:00:10', '1', NULL, '10');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '100', '2', '2014-06-15 14:00:10', '2', NULL, '90');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '100', '2', '2014-06-15 14:00:10', '3', NULL, '200');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '100', '2', '2014-06-15 14:00:10', '1', NULL, '80');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '100', '2', '2014-06-15 14:00:10', '2', NULL, '20');
-INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHorPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '100', '2', '2014-06-15 14:00:10', '3', NULL, '30');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '2', '2014-06-15 14:00:10', '1', NULL, '10');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '2', '2014-06-15 14:00:10', '2', NULL, '20');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '2', '2014-06-15 14:00:10', '3', NULL, '30');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '3', '2014-06-15 14:00:10', '1', NULL, '400');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '3', '2014-06-15 14:00:10', '2', NULL, '500');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '3', '2014-06-15 14:00:10', '3', NULL, '60');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '4', '2014-06-15 14:00:10', '1', NULL, '5');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '4', '2014-06-15 14:00:10', '2', NULL, '10');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '4', '2014-06-15 14:00:10', '3', NULL, '15');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '5', '2014-06-15 14:00:10', '1', NULL, '20');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '5', '2014-06-15 14:00:10', '2', NULL, '25');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '101', '5', '2014-06-15 14:00:10', '3', NULL, '30');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '2', '2014-06-15 14:00:10', '1', NULL, '10');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '2', '2014-06-15 14:00:10', '2', NULL, '20');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '2', '2014-06-15 14:00:10', '3', NULL, '30');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '3', '2014-06-15 14:00:10', '1', NULL, '40');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '3', '2014-06-15 14:00:10', '2', NULL, '50');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '3', '2014-06-15 14:00:10', '3', NULL, '60');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '4', '2014-06-15 14:00:10', '1', NULL, '70');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '4', '2014-06-15 14:00:10', '2', NULL, '80');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '4', '2014-06-15 14:00:10', '3', NULL, '90');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '5', '2014-06-15 14:00:10', '1', NULL, '100');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '5', '2014-06-15 14:00:10', '2', NULL, '110');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('30', '101', '5', '2014-06-15 14:00:10', '3', NULL, '120');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '2', '2014-06-15 14:00:10', '1', NULL, '130');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '2', '2014-06-15 14:00:10', '2', NULL, '140');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '2', '2014-06-15 14:00:10', '3', NULL, '150');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '3', '2014-06-15 14:00:10', '1', NULL, '160');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '3', '2014-06-15 14:00:10', '2', NULL, '170');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '3', '2014-06-15 14:00:10', '3', NULL, '180');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '4', '2014-06-15 14:00:10', '1', NULL, '190');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '4', '2014-06-15 14:00:10', '2', NULL, '200');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '4', '2014-06-15 14:00:10', '3', NULL, '210');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '5', '2014-06-15 14:00:10', '1', NULL, '220');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '5', '2014-06-15 14:00:10', '2', NULL, '230');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '101', '5', '2014-06-15 14:00:10', '3', NULL, '240');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '100', '2', '2014-06-15 14:00:10', '1', NULL, '10');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '100', '2', '2014-06-15 14:00:10', '2', NULL, '90');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('10', '100', '2', '2014-06-15 14:00:10', '3', NULL, '200');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '100', '2', '2014-06-15 14:00:10', '1', NULL, '80');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '100', '2', '2014-06-15 14:00:10', '2', NULL, '20');
+INSERT INTO `u555588791_pinba`.`ronda` (`_01_pk_idMaqRonda`, `_02_pk_idJocRonda`, `_03_pk_idJugRonda`, `_04_pk_idDatHoraPartRonda`, `_05_pk_idRonda`, `_06_fotoJugRonda`, `_07_puntsRonda`) VALUES ('40', '100', '2', '2014-06-15 14:00:10', '3', NULL, '30');
 
 COMMIT;
 
@@ -477,21 +484,21 @@ COMMIT;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('10', '100');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('10', '101');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('10', '102');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('20', '102');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('20', '103');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('20', '104');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('30', '101');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('30', '103');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('40', '100');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('40', '101');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('40', '102');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('40', '103');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('40', '104');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('50', '103');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('50', '104');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('1', '10', '100');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('2', '10', '101');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('3', '10', '102');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('4', '20', '102');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('5', '20', '103');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('6', '20', '104');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('7', '30', '101');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('8', '30', '103');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('9', '40', '100');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('10', '40', '101');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('11', '40', '102');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('12', '40', '103');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('13', '40', '104');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('14', '50', '103');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('15', '50', '104');
 
 COMMIT;
 
@@ -500,20 +507,20 @@ COMMIT;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('10', '101', '2', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('10', '101', '3', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('10', '101', '4', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('10', '101', '5', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('30', '101', '2', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('30', '101', '3', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('30', '101', '4', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('30', '101', '5', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('40', '101', '2', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('40', '101', '3', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('40', '101', '4', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('40', '101', '5', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('10', '100', '2', '2014-06-15 14:00:10', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`partida` (`_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHorPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('40', '100', '2', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_00_pk_idPart_auto`, `_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHoraPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('1', '10', '101', '2', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_00_pk_idPart_auto`, `_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHoraPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('2', '10', '101', '3', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_00_pk_idPart_auto`, `_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHoraPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('3', '10', '101', '4', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_00_pk_idPart_auto`, `_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHoraPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('4', '10', '101', '5', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_00_pk_idPart_auto`, `_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHoraPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('5', '30', '101', '2', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_00_pk_idPart_auto`, `_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHoraPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('6', '30', '101', '3', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_00_pk_idPart_auto`, `_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHoraPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('7', '30', '101', '4', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_00_pk_idPart_auto`, `_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHoraPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('8', '30', '101', '5', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_00_pk_idPart_auto`, `_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHoraPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('9', '40', '101', '2', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_00_pk_idPart_auto`, `_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHoraPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('10', '40', '101', '3', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_00_pk_idPart_auto`, `_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHoraPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('11', '40', '101', '4', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_00_pk_idPart_auto`, `_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHoraPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('12', '40', '101', '5', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_00_pk_idPart_auto`, `_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHoraPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('13', '10', '100', '2', '2014-06-15 14:00:10', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`partida` (`_00_pk_idPart_auto`, `_01_pk_idMaqPart`, `_02_pk_idJocPart`, `_03_pk_idJugPart`, `_04_pk_idDatHoraPart`, `_05_datModPart`, `_06_datBaixaPart`) VALUES ('14', '40', '100', '2', '2014-06-15 14:00:10', NULL, NULL);
 
 COMMIT;
 
@@ -522,19 +529,20 @@ COMMIT;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('1001', '10', '101', '2');
-INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('1001', '10', '101', '3');
-INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('1001', '10', '101', '4');
-INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('1001', '10', '101', '5');
-INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('1001', '30', '101', '2');
-INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('1001', '30', '101', '3');
-INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('1001', '30', '101', '4');
-INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('1001', '30', '101', '5');
-INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('1001', '40', '101', '2');
-INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('1001', '40', '101', '3');
-INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('1001', '40', '101', '4');
-INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('1001', '40', '101', '5');
-INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('1000', '10', '100', '2');
+INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_00_pk_idTTP_auto`, `_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('1', '1001', '10', '101', '2');
+INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_00_pk_idTTP_auto`, `_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('2', '1001', '10', '101', '3');
+INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_00_pk_idTTP_auto`, `_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('3', '1001', '10', '101', '4');
+INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_00_pk_idTTP_auto`, `_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('4', '1001', '10', '101', '5');
+INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_00_pk_idTTP_auto`, `_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('5', '1001', '30', '101', '2');
+INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_00_pk_idTTP_auto`, `_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('6', '1001', '30', '101', '3');
+INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_00_pk_idTTP_auto`, `_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('7', '1001', '30', '101', '4');
+INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_00_pk_idTTP_auto`, `_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('8', '1001', '30', '101', '5');
+INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_00_pk_idTTP_auto`, `_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('9', '1001', '40', '101', '2');
+INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_00_pk_idTTP_auto`, `_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('10', '1001', '40', '101', '3');
+INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_00_pk_idTTP_auto`, `_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('11', '1001', '40', '101', '4');
+INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_00_pk_idTTP_auto`, `_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('12', '1001', '40', '101', '5');
+INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_00_pk_idTTP_auto`, `_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('13', '1000', '10', '100', '2');
+INSERT INTO `u555588791_pinba`.`torneigTePartida` (`_00_pk_idTTP_auto`, `_01_pk_idTornTTP`, `_02_pk_idMaqTTP`, `_03_pk_idJocTTP`, `_04_pk_idJugTTP`) VALUES ('14', '1000', '40', '100', '2');
 
 COMMIT;
 

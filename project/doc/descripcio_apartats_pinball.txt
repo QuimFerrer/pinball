@@ -58,21 +58,37 @@ Zona d'usuari
 		1. ( 01_query.sql ) PUNTUACIONS. informació de la posició (ranking) i punts dins del ranking
 		2. ( 01_query.sql ) HISTÒRIC. històric de torneigs
 		3. ( 01_query.sql ) BAIXA. possibilitat de donar-se de baixa
-	c.  ( 01_query.sql ) TOTS ELS TORNEIGS. consultar tots els torneigs amb possibilitat d'apuntar-se
+	c.  TOTS ELS TORNEIGS.
+		1. ( 01_query.sql ) consultar tots els torneigs
+		2. ( 01_query.sql ) apuntar-se a un torneig
 
 3. menú administrador
 	a. ( 02_query.sql ) PERFIL. gestio perfil administrador (consulta, modificació)
-	b. PARTIDES. gestió partides (anular / bloquear, desanular / desbloquear)
-	c. JOCS. gestió de jocs
-		--> afegir camp descripcio joc a la database
-	d. TORNEIGS. gestió torneigs: mostrar tots els torneigs per gestionar-los en forma de llista amb botons d'opcions:
-		1. màquines associades als torneigs
-		2. joc associat
-		3. jugadors registrats
+
+	b. ( 02_query.sql ) PARTIDES. gestió partides (llistar, anul.lar / bloquejar, desanul.lar / desbloquejar)
+
+	c. JOCS. gestió de jocs:
+		--> ok <-- afegir camp descripcio joc a la database
+		1. Llistat     : ( 02_query.sql )
+		2. Alta        : ( 02_query.sql )
+		3. Baixa       : ( 02_query.sql )
+		4. Modificació : ( 02_query.sql )
+		5. Actualització partides jugades: ( 02_query.sql )
+
+	d. TORNEIGS. gestió torneigs: mostrar tots els torneigs per gestionar-los:
+		1. Llistat amb joc associat i màquines associades: ( 03_query.sql )
+		2. Alta        : ( 03_query.sql )
+		3. Baixa       : ( 03_query.sql )
+		4. Modificació : ( 03_query.sql )
+		5. jugadors registrats : ( 03_query.sql )
+		6. jugadors registrats amb detall de partides/rondes i punts : ( 03_query.sql )
+
 	e. MÀQUINES. gestió màquines:
 		i. GESTIÓ. mostrar totes les máquines en forma de llista amb botons d'opcions:
-			1. alta, baixa, modificació
-			2. informar:
+			1. alta
+			2. baixa
+			3. modificació
+			4. informar:
 				a. ubicació
 				b. jocs instal.lats
 				c. credits totals
@@ -80,7 +96,9 @@ Zona d'usuari
 		ii. ESTADÍSTIQUES. opcions :
 			1. obtenir recaudació de totes les màquines
 			2. recaudació máx,min,promigs, x zones etc
+
 	f. UBICACIONS. gestió ubicacions.
+
 	g. JUGADORS. gestió jugadors: mostrar relació de jugadors en forma de llista amb botons d'opcions:
 		1. consultar perfil
 		2. baixa (bloqueig)
