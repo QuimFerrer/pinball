@@ -22,19 +22,21 @@ WHERE
 /* canviar $dataTime Y-n-j H:i:s ( 2014-06-15 10:10:10 ) per Data CURRENT */
 
 START TRANSACTION;
-UPDATE usuari SET _02_nomUsuari    = '$nom',
-						_03_cognomUsuari = '$cognom',
-						_06_emailUsuari  = '$email',
-						_07_fotoUsuari   = '$nomFoto',
-						_09_datModUsuari = '$dataTime'
+UPDATE usuari SET _02_nomUsuari     = "$nom",
+						_03_cognomUsuari  = "$cognom",
+						_06_emailUsuari   = "$email",
+						_07_fotoUsuari    = "$nomFoto",
+						_08_datAltaUsuari = "$dataAltaUsuari",						
+						_09_datModUsuari  = "$dataTime"
 WHERE
 		_10_datBaixaUsuari IS NULL AND
 		_04_loginUsuari = "admin";
 
 
-UPDATE admin SET   _02_faceAdm    = '$facebook',
-						 _03_twitterAdm = '$twitter',
-						 _05_datModAdm  = '$dataTime'
+UPDATE admin SET   _02_faceAdm    = "$facebook",
+						 _03_twitterAdm = "$twitter",
+						 _04_datAltaAdm = "$dataAltaAdm",	
+						 _05_datModAdm  = "$dataTime"
 WHERE 
 		_06_datBaixaAdm IS NULL AND
 		(_01_pk_idAdm IN ( SELECT _01_pk_idUsuari AS _01_pk_idAdm FROM usuari
@@ -150,10 +152,11 @@ WHERE
 /* canviar variables per valors  */
 /* canviar $dataTime Y-n-j H:i:s ( 2014-06-15 10:10:10 ) per Data CURRENT */
 
-UPDATE FROM joc SET _02_nomJoc    = "$nomJoc",
-						  _03_descJoc   = "$descJoc",
-						  _04_imgJoc    = "$imgJoc",
-						  _07_datModJoc = "$dataTime"
+UPDATE FROM joc SET _02_nomJoc     = "$nomJoc",
+						  _03_descJoc    = "$descJoc",
+						  _04_imgJoc     = "$imgJoc",
+						  _06_datAltaJoc = "$dataAltaJoc",
+						  _07_datModJoc  = "$dataTime"
 
 WHERE _01_pk_idJoc = "$idJoc";
 
@@ -166,7 +169,7 @@ WHERE _01_pk_idJoc = "$idJoc";
 /* canviar $dataTime Y-n-j H:i:s ( 2014-06-15 10:10:10 ) per Data CURRENT */
 
 UPDATE joc SET _05_numPartidesJugadesJoc = "$partides",
-						  _07_datModJoc = "$dataTime"
+					_07_datModJoc = "$dataTime"
 
 WHERE 
 		_01_pk_idJoc = "$idJoc" AND

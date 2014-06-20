@@ -219,6 +219,8 @@ CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`maqInstall` (
   `_00_pk_idMaqInst_auto` INT NOT NULL AUTO_INCREMENT ,
   `_01_pk_idMaqInst` INT NOT NULL ,
   `_02_pk_idJocInst` INT NOT NULL ,
+  `_03_credJocMaqInst` INT NULL ,
+  `_04_totCredJocMaqInst` INT NULL ,
   PRIMARY KEY (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) ,
   INDEX `fk_maquina_has_juego_juego1` (`_02_pk_idJocInst` ASC) ,
   CONSTRAINT `fk_maquina_has_juego_maquina1`
@@ -408,11 +410,11 @@ COMMIT;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('10', NULL, 'josep guijosa', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('20', NULL, 'josep guijosa', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('30', NULL, 'joan farres', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('40', NULL, 'joan farres', NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('50', NULL, 'miquel farres', NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('10', NULL, 'josep guijosa', '100', '1200', '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('20', NULL, 'josep guijosa', '200', '1500', '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('30', NULL, 'joan farres', '300', '10200', '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('40', NULL, 'joan farres', '400', '5400', '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('50', NULL, 'miquel farres', '500', '3200', '2014-05-13', NULL, NULL);
 
 COMMIT;
 
@@ -484,21 +486,21 @@ COMMIT;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('1', '10', '100');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('2', '10', '101');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('3', '10', '102');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('4', '20', '102');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('5', '20', '103');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('6', '20', '104');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('7', '30', '101');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('8', '30', '103');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('9', '40', '100');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('10', '40', '101');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('11', '40', '102');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('12', '40', '103');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('13', '40', '104');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('14', '50', '103');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) VALUES ('15', '50', '104');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('1', '10', '100', '100', '300');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('2', '10', '101', '100', '800');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('3', '10', '102', '100', '100');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('4', '20', '102', '200', '400');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('5', '20', '103', '200', '900');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('6', '20', '104', '200', '200');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('7', '30', '101', '1000', '8200');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('8', '30', '103', '2000', '2000');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('9', '40', '100', '200', '1000');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('10', '40', '101', '300', '400');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('11', '40', '102', '400', '2000');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('12', '40', '103', '500', '600');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('13', '40', '104', '600', '1400');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('14', '50', '103', '2000', '1200');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('15', '50', '104', '1000', '2000');
 
 COMMIT;
 

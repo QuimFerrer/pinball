@@ -85,17 +85,22 @@ Zona d'usuari
 
 	e. MÀQUINES. gestió màquines:
 		i. GESTIÓ. mostrar totes les máquines en forma de llista amb botons d'opcions:
-			1. alta
-			2. baixa
-			3. modificació
-			4. informar:
+			1. ( 04_query.sql ) alta
+			2. ( 04_query.sql ) baixa
+			3. ( 04_query.sql ) modificació
+			4. ( 04_query.sql ) actualitzar recaudació d'una màquina
+			5. ( 04_query.sql ) llistat de totes les máquines informant:
 				a. ubicació
 				b. jocs instal.lats
 				c. credits totals
 				d. altres ...
 		ii. ESTADÍSTIQUES. opcions :
-			1. obtenir recaudació de totes les màquines
-			2. recaudació máx,min,promigs, x zones etc
+			1. ( 04_query.sql ) obtenir recaudació de totes les màquines amb ranking
+			2. ( 04_query.sql ) recaudació per cada joc
+			2. ( 04_query.sql ) recaudació per cada joc i màquina
+			3. recaudació per propietari de màquina
+			4. recaudació per ubicació (o zona)
+			5. recaudació máx,min,promigs
 
 	f. UBICACIONS. gestió ubicacions.
 

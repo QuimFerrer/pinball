@@ -51,6 +51,7 @@ UPDATE FROM torneig SET _03_nomTorn     = "$nomTorn",
 						      _04_premiTorn   = "$premiTorn",
 						      _05_datIniTorn  = "$dataIniTorn",
 						      _06_datFinTorn  = "$dataFinTorn",
+						      _07_datAltaTorn = "$dataAltaTorn",
 						      _08_datModTorn  = "$dataTime"
 
 WHERE 
