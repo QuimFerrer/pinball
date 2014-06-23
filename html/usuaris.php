@@ -75,7 +75,8 @@ if (isset($_SESSION["login"])) :
 								   { id: '1101', text: 'Consulta 1', img: 'icon-page' },
 								   { id: '1102', text: 'Consulta 2', img: 'icon-page' },
 								   { id: '1103', text: 'Consulta 3', img: 'icon-page' }
-					  		]}
+					  		]},
+					  		{ id: '1120', text: 'Generar Partides',	img:'icon-edit'}
 						 ]
 				}
 			],
@@ -132,7 +133,22 @@ if (isset($_SESSION["login"])) :
 					];
 				    DataGrid("Manteniment d'usuaris", "usuari", columns, e.target);
 				    break;
+			
+				case '1120':
+					columns = [				
+						{ field: '01_pk_idUsuari', caption: 'Usuari', size: '10%' },
+						{ field: '_01_pk_idMaq', caption: 'MAC Maquina', size: '30%' },
+						{ field: '03_cognomUsuari', caption: 'Joc', size: '30%' },
+						{ field: '_04_pk_idDatHorPart', caption: 'Data/Hora', size: '30%' },
+						{ field: '_01_pk_idTorn', caption: 'Torneig', size: '15%' },
+						{ field: '_04_credMaq', caption: 'Credits', size: '15%' },
+						{ field: '_05_pk_idRonda', caption: 'Ronda Nº', size: '15%' },
+						{ field: '_07_puntsRonda', caption: 'Puntuacio Ronda', size: '15%' }
+					];
+				    DataGrid("Manteniment de partides", "partides", columns, e.target);
+				    break;
 
+				    
 				default:
 				    console.log("default");
 			}
