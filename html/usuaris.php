@@ -136,9 +136,9 @@ if (isset($_SESSION["login"])) :
 			
 				case '1120':
 					columns = [				
-						{ field: '01_pk_idUsuari', caption: 'Usuari', size: '10%' },
-						{ field: '_01_pk_idMaq', caption: 'MAC Maquina', size: '30%' },
-						{ field: '03_cognomUsuari', caption: 'Joc', size: '30%' },
+						{ field: '_02_nomUsuari', caption: 'Usuari', size: '10%' },
+						{ field: '_02_macMaq', caption: 'MAC Maquina', size: '30%' },
+						{ field: '_02_nomJoc', caption: 'Joc', size: '30%' },
 						{ field: '_04_pk_idDatHorPart', caption: 'Data/Hora', size: '30%' },
 						{ field: '_01_pk_idTorn', caption: 'Torneig', size: '15%' },
 						{ field: '_04_credMaq', caption: 'Credits', size: '15%' },

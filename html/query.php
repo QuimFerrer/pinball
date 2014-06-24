@@ -10,6 +10,7 @@ include ("../src/seguretat.php");
 	const CONSULTA_ADM = 1020;
 	const MAQUINES 	   = 1040;
 	const USUARIS 	   = 1080;
+	const PARTIDA	   = 1120;
 
 	const CONSULTA_USR = 2020;
 	const TORNEIGS_USR = 2061;
@@ -56,6 +57,16 @@ include ("../src/seguretat.php");
 				$response = dbExec($query);
 				echo json_encode( $response );
 				break;
+				
+			case PARTIDA :
+				$query    = 'SELECT * FROM usuari';
+				$response = dbExec($query);
+				// Preparar array per a retornar al grid tots els registres
+				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
+				echo json_encode( $response );
+				break;
+			
+			
 
 			case CONSULTA_USR :
 				$query    = 'SELECT id, nom, foto FROM productes WHERE id < 3';
