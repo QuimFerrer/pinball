@@ -23,8 +23,10 @@ include ("../src/seguretatLogin.php");
 		</menu>
 		<section>
 			<img src="../resources/img/recreatius/roulette.jpg" height="400" alt="">
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, nemo, ducimus aliquam totam rerum neque asperiores similique ad vel reprehenderit commodi praesentium atque nostrum assumenda mollitia unde voluptatibus quo facilis!</p>
-			<p>Nulla, aliquam, ullam commodi quae repellat molestiae aut cumque dolor porro laudantium blanditiis facilis reprehenderit officiis eius laboriosam at autem tenetur vel nesciunt distinctio aliquid eveniet perferendis nam natus dolore.</p>
+			<p>Jugadors i Jugadores !!  Ludopates i Viciats !! aquesta és la vostra web on podreu gastar tans diners com vulgueu i podreu puntuar en els vostres rankings totes les vostres activitats !! </p>
+			</br>
+			<p>Apunta't ja als torneigs, hi ha molta gent esperan-te!! .... juga ...juga  .. i premi !! ha-ha-ha-ha  (riure malvat)</p>
+			</br>
 			<p>Dolorum, deleniti, cum, voluptate, praesentium dignissimos nulla dolor vero fugit quasi officiis temporibus nobis excepturi iusto dolore iste maxime quos. Rem eius tenetur nihil aperiam veritatis iure ipsam nulla aliquam.</p>
 		</section>
 		<footer>
