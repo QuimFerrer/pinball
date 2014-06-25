@@ -19,10 +19,11 @@ include ("../src/seguretatLogin.php");
 			<h1>Generar Partida</h1>
 		</header>
 		<menu>
-			<?php menu(); ?>
+			<?php //menu(); ?>
 		</menu>
 		<section>
 			<h1>Llista de Torneigs</h1>
+			<!--
 			<?php 
 				$data = date("Y-n-j");
 				// $dataHora = date("Y-n-j H:i:s");
@@ -48,10 +49,12 @@ include ("../src/seguretatLogin.php");
 					echo '</li>';
 				}
 				echo '</ul>';
-			 ?>
+			 ?> -->
+			 
+			 <p> Hola </p>
 		</section>
 		<footer>
-			<?php footer(); ?>
+			<?php //footer(); ?>
 		</footer>
 	</div>
 </body>
