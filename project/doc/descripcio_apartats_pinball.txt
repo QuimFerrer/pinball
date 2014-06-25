@@ -53,60 +53,105 @@ Zona d'usuari
 1. menú test --> per crear registres a la base de dades
 
 2. menú jugador
-	a. ( 00_query.sql ) PERFIL. gestio perfil jugador (consulta, modificació, baixa --> fa logout)
-	b. ELS MEUS TORNEIGS. consultar torneigs apuntants amb:
-		1. ( 01_query.sql ) PUNTUACIONS. informació de la posició (ranking) i punts dins del ranking
-		2. ( 01_query.sql ) HISTÒRIC. històric de torneigs
-		3. ( 01_query.sql ) BAIXA. possibilitat de donar-se de baixa
+	a. PERFIL. gestio perfil jugador:
+		1. ( 01_query.sql ) consulta
+		2. ( 01_query.sql ) modificació
+		3. ( 01_query.sql ) baixa --> fa logout
+	b. ELS MEUS TORNEIGS.
+		1. ( 01_query.sql ) torneigs amb el joc als que està registrat un jugador
+		2. ( 01_query.sql ) torneigs amb els jocs als que está registrat un jugador amb login, el seu nom, el 				    			    codi i nom de joc
+		3. ( 01_query.sql ) PUNTUACIONS. ranking d'un jugador i punts dins del ranking als torneigs registrats
+		4. ( 01_query.sql ) PUNTUACIONS. ranking d'un torneig i punts dins del ranking
+		5. ( 01_query.sql ) HISTÒRIC. ranking històric d'un jugador als torneigs registrats finalitzats i en curs
+		6. ( 01_query.sql ) HISTÒRIC. ranking històric d'un torneig finalitzats i en curs
+		7. ( 01_query.sql ) BAIXA. baixa de la inscripció a un torneig per jugador
 	c.  TOTS ELS TORNEIGS.
-		1. ( 01_query.sql ) consultar tots els torneigs
+		1. ( 01_query.sql ) consultar tots els torneigs actius als que es pot registrar un jugador
 		2. ( 01_query.sql ) apuntar-se a un torneig
 
 3. menú administrador
-	a. ( 02_query.sql ) PERFIL. gestio perfil administrador (consulta, modificació)
+	a. PERFIL. gestio perfil administrador:
+		1. ( 02_query.sql ) consulta perfil administrador / usuari
+		2. ( 02_query.sql ) modificació perfil administrador
 
-	b. ( 02_query.sql ) PARTIDES. gestió partides (llistar, anul.lar / bloquejar, desanul.lar / desbloquejar)
+	b. PARTIDES. gestió partides:
+		1. ( 02_query.sql ) llistar
+		2. ( 02_query.sql ) anul.lar / bloquejar
+		3. ( 02_query.sql ) desanul.lar / desbloquejar)
 
 	c. JOCS. gestió de jocs:
-		--> ok <-- afegir camp descripcio joc a la database
-		1. Llistat     : ( 02_query.sql )
-		2. Alta        : ( 02_query.sql )
-		3. Baixa       : ( 02_query.sql )
-		4. Modificació : ( 02_query.sql )
-		5. Actualització partides jugades: ( 02_query.sql )
+		1. ( 02_query.sql ) Llistat de jocs
+		2. ( 02_query.sql ) Llistat de jocs històric
+		3. ( 02_query.sql ) Alta d'un joc
+		4. ( 02_query.sql ) Baixa d'un joc
+		5. ( 02_query.sql ) Modificació d'un joc
+		6. ( 02_query.sql ) Actualització partides jugades
+		7. ( 02_query.sql ) Llistat de màquines amb els jocs que té assignats amb num de partides jugades i crédits
 
-	d. TORNEIGS. gestió torneigs: mostrar tots els torneigs per gestionar-los:
-		1. Llistat amb joc associat i màquines associades: ( 03_query.sql )
-		2. Alta        : ( 03_query.sql )
-		3. Baixa       : ( 03_query.sql )
-		4. Modificació : ( 03_query.sql )
-		5. jugadors registrats : ( 03_query.sql )
-		6. jugadors registrats amb detall de partides/rondes i punts : ( 03_query.sql )
+	d. TORNEIGS. gestió torneigs
+		1. ( 02_query.sql ) Llistat amb premi, joc associat i màquines que tenen instal.lat el joc
+		2. ( 02_query.sql ) Alta d'un torneig
+		3. ( 02_query.sql ) Baixa d'un torneig
+		4. ( 02_query.sql ) Modificació d'un torneig
+		5. ( 02_query.sql ) llistat de torneigs amb els jugadors registrats amb el seu 						nom, el codi de joc i el nom del joc incloent els torneigs 						amb cap jugador registrat
+		6. ( 02_query.sql ) llistat de torneigs amb els jugadors registrats amb el seu 						nom, el codi de joc i el nom del joc incloent els torneigs 						amb cap jugador registrat (Històric)
+		7. ( 02_query.sql ) llistat de torneigs amb el premi, codi de joc i máquines que 					 tenen instal.lat el joc i els jugadors registrats a cada 						torneig amb les partides, rondes i punts obtinguts
+		8. ( 02_query.sql ) llistat de torneigs amb el premi, codi de joc i máquines que 					 tenen instal.lat el joc i els jugadors registrats a cada 						torneig amb les partides, rondes i punts obtinguts (Històric)
 
 	e. MÀQUINES. gestió màquines:
 		i. GESTIÓ. mostrar totes les máquines en forma de llista amb botons d'opcions:
-			1. ( 04_query.sql ) alta
-			2. ( 04_query.sql ) baixa
-			3. ( 04_query.sql ) modificació
-			4. ( 04_query.sql ) actualitzar recaudació d'una màquina
-			5. ( 04_query.sql ) llistat de totes les máquines informant:
-				a. ubicació
-				b. jocs instal.lats
-				c. credits totals
-				d. altres ...
-		ii. ESTADÍSTIQUES. opcions :
-			1. ( 04_query.sql ) obtenir recaudació de totes les màquines amb ranking
-			2. ( 04_query.sql ) recaudació per cada joc
-			2. ( 04_query.sql ) recaudació per cada joc i màquina
-			3. recaudació per propietari de màquina
-			4. recaudació per ubicació (o zona)
-			5. recaudació máx,min,promigs
+			1. ( 03_query.sql ) alta
+			2. ( 03_query.sql ) baixa
+			3. ( 03_query.sql ) modificació
+			4. ( 03_query.sql ) actualitzar recaudació d'una màquina
+			5. ( 03_query.sql ) llistat de totes les máquines informant: ubicació, jocs instal.lats, crédits totals, propietari, etc.
+			6. ( 03_query.sql ) llistat de totes les máquines informant: ubicació, jocs instal.lats, crédits totals, propietari, etc. Històric
+		ii. ASSIGNACIO DE JOCS:
+			1. ( 03_query.sql ) Alta d'assignació de joc a una màquina
+			2. ( 03_query.sql ) Baixa d'assignació de joc a una màquina
+			3. ( 03_query.sql ) Modificació d'assignació de joc a una màquina
+			4. ( 03_query.sql ) Llistat de jocs assignats a cada màquina amb num de partides jugades i crédits
+		iii. ESTADÍSTIQUES. opcions :
+			 1. ( 03_query.sql ) recaudació per cada màquina amb ranking (max i min)
+			 2. ( 03_query.sql ) recaudació per cada joc amb ranking (max i min)
+			 3. ( 03_query.sql ) recaudació per cada joc i màquina
+			 4. ( 03_query.sql ) recaudació per propietari
+			 5. ( 03_query.sql ) recaudació per propietari i màquina
+			 6. ( 03_query.sql ) recaudació per propietari i joc de cada màquina
+			 7. ( 03_query.sql ) recaudació per provincia, poblacio, cp
+			 8. ( 03_query.sql ) recaudació per poblacio
+			 9. ( 03_query.sql ) recaudació per provincia, poblacio,cp  i màquina
+			10. ( 03_query.sql ) recaudació de cada joc
+			11. ( 03_query.sql ) recaudació de cada joc per poblacio
+			12. ( 03_query.sql ) recaudació de cada joc per provincia, poblacio, cp
+			13. promigs ????
 
-	f. UBICACIONS. gestió ubicacions.
+	f. UBICACIONS.
+		i. Gestió ubicacions.
+			1. ( 04_query.sql ) Alta de l'ubicació d'una màquina
+			2. ( 04_query.sql ) Baixa de l'ubicació d'una màquina
+			3. ( 04_query.sql ) Modificació de l'ubicació d'una màquina
+			4. ( 04_query.sql ) Llistat d'ubicacions (provincia, població, cp)
+			5. ( 04_query.sql ) Llistat d'ubicacions (lat, long, alt)
+			6. ( 04_query.sql ) Llistat d'empreses d'ubicacions amb les seves dades de contacte
+			7. ( 04_query.sql ) Llistat d'empreses d'ubicacions per provincia, població, cp amb les seves dades de contacte
+		ii. Gestió de màquines a les ubicacions
+			1. ( 04_query.sql ) Alta de l'associació d'una màquina a una ubicació
+			2. ( 04_query.sql ) Baixa de l'associació d'una màquina a una ubicació
+			3. ( 04_query.sql ) Modificació de les dades de l'associació d'una màquina a una ubicació
+			4. ( 04_query.sql ) Canvi d'ubicació d'una màquina
+			5. ( 04_query.sql ) Llistat de màquines de cada ubicació (provincia, població, cp)
+			6. ( 04_query.sql ) Llistat de màquines de cada ubicació (lat, long, alt)
+			7. ( 04_query.sql ) Llistat de màquines de cada empresa on estan ubicades les màquines 
 
-	g. JUGADORS. gestió jugadors: mostrar relació de jugadors en forma de llista amb botons d'opcions:
-		1. consultar perfil
-		2. baixa (bloqueig)
-		3. consultar torneigs registrats amb:
-			1. ranquing amb la seva posició de cada torneig
-			2. punts de cada posició
+	g. JUGADORS.
+		i. gestió jugadors: 
+			1. ( 05_query.sql   relació de jugadors en forma de llista amb botons d'opcions:
+			2. ( 05_query.sql ) consultar perfil
+			3. ( 05_query.sql ) anul.lar / bloquejar jugador / usuari
+			4. ( 05_query.sql ) desanul.lar / desbloquejar jugador / usuari
+		ii. rankings
+			1. ( 05_query.sql ) torneigs registrats amb la seva posició i punts de cada torneig
+
+
+

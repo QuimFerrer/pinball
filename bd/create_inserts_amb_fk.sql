@@ -165,31 +165,23 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `u555588791_pinba`.`ubicacio` ;
 
 CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`ubicacio` (
-  `_00_pk_idUbic_auto` INT NOT NULL AUTO_INCREMENT ,
-  `_01_pk_idUbic` INT NOT NULL ,
-  `_02_pk_idMaqUbic` INT NOT NULL ,
-  `_03_empUbic` VARCHAR(45) NULL ,
-  `_04_dirUbic` VARCHAR(45) NULL ,
-  `_05_pobUbic` VARCHAR(45) NULL ,
-  `_06_cpUbic` VARCHAR(45) NULL ,
-  `_07_provUbic` VARCHAR(45) NULL ,
-  `_08_latUbic` VARCHAR(45) NULL ,
-  `_09_longUbic` VARCHAR(45) NULL ,
-  `_10_altUbic` VARCHAR(45) NULL ,
-  `_11_contUbic` VARCHAR(45) NULL ,
-  `_12_emailUbic` VARCHAR(45) NULL ,
-  `_13_telUbic` VARCHAR(15) NULL ,
-  `_14_mobUbic` VARCHAR(15) NULL ,
-  `_15_datAltaUbic` DATETIME NULL ,
-  `_16_datModUbic` DATETIME NULL ,
-  `_17_datBaixaUbic` DATETIME NULL ,
-  PRIMARY KEY (`_00_pk_idUbic_auto`, `_01_pk_idUbic`, `_02_pk_idMaqUbic`) ,
-  INDEX `fk_ubicacio_maquina1` (`_02_pk_idMaqUbic` ASC) ,
-  CONSTRAINT `fk_ubicacio_maquina1`
-    FOREIGN KEY (`_02_pk_idMaqUbic` )
-    REFERENCES `u555588791_pinba`.`maquina` (`_01_pk_idMaq` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `_01_pk_idUbic` INT NOT NULL AUTO_INCREMENT ,
+  `_02_empUbic` VARCHAR(45) NULL ,
+  `_03_dirUbic` VARCHAR(45) NULL ,
+  `_04_pobUbic` VARCHAR(45) NULL ,
+  `_05_cpUbic` VARCHAR(45) NULL ,
+  `_06_provUbic` VARCHAR(45) NULL ,
+  `_07_latUbic` VARCHAR(45) NULL ,
+  `_08_longUbic` VARCHAR(45) NULL ,
+  `_09_altUbic` VARCHAR(45) NULL ,
+  `_10_contUbic` VARCHAR(45) NULL ,
+  `_11_emailUbic` VARCHAR(45) NULL ,
+  `_12_telUbic` VARCHAR(15) NULL ,
+  `_13_mobUbic` VARCHAR(15) NULL ,
+  `_14_datAltaUbic` DATETIME NULL ,
+  `_15_datModUbic` DATETIME NULL ,
+  `_16_datBaixaUbic` DATETIME NULL ,
+  PRIMARY KEY (`_01_pk_idUbic`) )
 ENGINE = InnoDB;
 
 
@@ -219,8 +211,12 @@ CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`maqInstall` (
   `_00_pk_idMaqInst_auto` INT NOT NULL AUTO_INCREMENT ,
   `_01_pk_idMaqInst` INT NOT NULL ,
   `_02_pk_idJocInst` INT NOT NULL ,
-  `_03_credJocMaqInst` INT NULL ,
-  `_04_totCredJocMaqInst` INT NULL ,
+  `_03_numPartidesJugadesMaqInst` INT NULL ,
+  `_04_credJocMaqInst` INT NULL ,
+  `_05_totCredJocMaqInst` INT NULL ,
+  `_06_datAltaMaqInst` DATETIME NULL ,
+  `_07_datModMaqInst` DATETIME NULL ,
+  `_08_datBaixaMaqInst` DATETIME NULL ,
   PRIMARY KEY (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`) ,
   INDEX `fk_maquina_has_juego_juego1` (`_02_pk_idJocInst` ASC) ,
   CONSTRAINT `fk_maquina_has_juego_maquina1`
@@ -319,6 +315,33 @@ CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`productes` (
   `datModPro` DATETIME NULL ,
   `datBaixaPro` DATETIME NULL ,
   PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `u555588791_pinba`.`ubicacioTeMaquina`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `u555588791_pinba`.`ubicacioTeMaquina` ;
+
+CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`ubicacioTeMaquina` (
+  `_00_pk_idUTM` INT NOT NULL AUTO_INCREMENT ,
+  `_01_pk_idUbicUTM` INT NOT NULL ,
+  `_02_pk_idMaqUTM` INT NOT NULL ,
+  `_03_datAltaUTM` DATETIME NULL ,
+  `_04_datModUTM` DATETIME NULL ,
+  `_05_datBaixaUTM` DATETIME NULL ,
+  PRIMARY KEY (`_00_pk_idUTM`, `_01_pk_idUbicUTM`, `_02_pk_idMaqUTM`) ,
+  INDEX `fk_ubicacio_has_maquina1_maquina1` (`_02_pk_idMaqUTM` ASC) ,
+  CONSTRAINT `fk_ubicacio_has_maquina1_ubicacio1`
+    FOREIGN KEY (`_01_pk_idUbicUTM` )
+    REFERENCES `u555588791_pinba`.`ubicacio` (`_01_pk_idUbic` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ubicacio_has_maquina1_maquina1`
+    FOREIGN KEY (`_02_pk_idMaqUTM` )
+    REFERENCES `u555588791_pinba`.`maquina` (`_01_pk_idMaq` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -423,11 +446,11 @@ COMMIT;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`ubicacio` (`_00_pk_idUbic_auto`, `_01_pk_idUbic`, `_02_pk_idMaqUbic`, `_03_empUbic`, `_04_dirUbic`, `_05_pobUbic`, `_06_cpUbic`, `_07_provUbic`, `_08_latUbic`, `_09_longUbic`, `_10_altUbic`, `_11_contUbic`, `_12_emailUbic`, `_13_telUbic`, `_14_mobUbic`, `_15_datAltaUbic`, `_16_datModUbic`, `_17_datBaixaUbic`) VALUES ('1', '1', '10', 'astic,sa', 'santa anna,23', 'sabadell', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`ubicacio` (`_00_pk_idUbic_auto`, `_01_pk_idUbic`, `_02_pk_idMaqUbic`, `_03_empUbic`, `_04_dirUbic`, `_05_pobUbic`, `_06_cpUbic`, `_07_provUbic`, `_08_latUbic`, `_09_longUbic`, `_10_altUbic`, `_11_contUbic`, `_12_emailUbic`, `_13_telUbic`, `_14_mobUbic`, `_15_datAltaUbic`, `_16_datModUbic`, `_17_datBaixaUbic`) VALUES ('2', '2', '20', 'astic,sa', 'santa anna,23', 'sabadell', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`ubicacio` (`_00_pk_idUbic_auto`, `_01_pk_idUbic`, `_02_pk_idMaqUbic`, `_03_empUbic`, `_04_dirUbic`, `_05_pobUbic`, `_06_cpUbic`, `_07_provUbic`, `_08_latUbic`, `_09_longUbic`, `_10_altUbic`, `_11_contUbic`, `_12_emailUbic`, `_13_telUbic`, `_14_mobUbic`, `_15_datAltaUbic`, `_16_datModUbic`, `_17_datBaixaUbic`) VALUES ('3', '3', '30', 'fermol,sl', 'robert,2', 'barcelona', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`ubicacio` (`_00_pk_idUbic_auto`, `_01_pk_idUbic`, `_02_pk_idMaqUbic`, `_03_empUbic`, `_04_dirUbic`, `_05_pobUbic`, `_06_cpUbic`, `_07_provUbic`, `_08_latUbic`, `_09_longUbic`, `_10_altUbic`, `_11_contUbic`, `_12_emailUbic`, `_13_telUbic`, `_14_mobUbic`, `_15_datAltaUbic`, `_16_datModUbic`, `_17_datBaixaUbic`) VALUES ('4', '4', '40', 'fermol,sl', 'robert,2', 'barcelona', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`ubicacio` (`_00_pk_idUbic_auto`, `_01_pk_idUbic`, `_02_pk_idMaqUbic`, `_03_empUbic`, `_04_dirUbic`, `_05_pobUbic`, `_06_cpUbic`, `_07_provUbic`, `_08_latUbic`, `_09_longUbic`, `_10_altUbic`, `_11_contUbic`, `_12_emailUbic`, `_13_telUbic`, `_14_mobUbic`, `_15_datAltaUbic`, `_16_datModUbic`, `_17_datBaixaUbic`) VALUES ('5', '5', '50', 'iol,sa', 'londres,90', 'mollet', NULL, 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacio` (`_01_pk_idUbic`, `_02_empUbic`, `_03_dirUbic`, `_04_pobUbic`, `_05_cpUbic`, `_06_provUbic`, `_07_latUbic`, `_08_longUbic`, `_09_altUbic`, `_10_contUbic`, `_11_emailUbic`, `_12_telUbic`, `_13_mobUbic`, `_14_datAltaUbic`, `_15_datModUbic`, `_16_datBaixaUbic`) VALUES ('1', 'astic,sa', 'santa anna,23', 'sabadell', '08201', 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacio` (`_01_pk_idUbic`, `_02_empUbic`, `_03_dirUbic`, `_04_pobUbic`, `_05_cpUbic`, `_06_provUbic`, `_07_latUbic`, `_08_longUbic`, `_09_altUbic`, `_10_contUbic`, `_11_emailUbic`, `_12_telUbic`, `_13_mobUbic`, `_14_datAltaUbic`, `_15_datModUbic`, `_16_datBaixaUbic`) VALUES ('2', 'kormel,sa', 'paris,23', 'terrassa', '08301', 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacio` (`_01_pk_idUbic`, `_02_empUbic`, `_03_dirUbic`, `_04_pobUbic`, `_05_cpUbic`, `_06_provUbic`, `_07_latUbic`, `_08_longUbic`, `_09_altUbic`, `_10_contUbic`, `_11_emailUbic`, `_12_telUbic`, `_13_mobUbic`, `_14_datAltaUbic`, `_15_datModUbic`, `_16_datBaixaUbic`) VALUES ('3', 'fermol,sl', 'robert,2', 'barcelona', '08081', 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacio` (`_01_pk_idUbic`, `_02_empUbic`, `_03_dirUbic`, `_04_pobUbic`, `_05_cpUbic`, `_06_provUbic`, `_07_latUbic`, `_08_longUbic`, `_09_altUbic`, `_10_contUbic`, `_11_emailUbic`, `_12_telUbic`, `_13_mobUbic`, `_14_datAltaUbic`, `_15_datModUbic`, `_16_datBaixaUbic`) VALUES ('4', 'aisol,sl', 'lliure,2', 'barcelona', '08181', 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacio` (`_01_pk_idUbic`, `_02_empUbic`, `_03_dirUbic`, `_04_pobUbic`, `_05_cpUbic`, `_06_provUbic`, `_07_latUbic`, `_08_longUbic`, `_09_altUbic`, `_10_contUbic`, `_11_emailUbic`, `_12_telUbic`, `_13_mobUbic`, `_14_datAltaUbic`, `_15_datModUbic`, `_16_datBaixaUbic`) VALUES ('5', 'iol,sa', 'londres,90', 'mollet', '08456', 'barcelona', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-05-13', NULL, NULL);
 
 COMMIT;
 
@@ -486,21 +509,21 @@ COMMIT;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('1', '10', '100', '100', '300');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('2', '10', '101', '100', '800');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('3', '10', '102', '100', '100');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('4', '20', '102', '200', '400');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('5', '20', '103', '200', '900');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('6', '20', '104', '200', '200');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('7', '30', '101', '1000', '8200');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('8', '30', '103', '2000', '2000');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('9', '40', '100', '200', '1000');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('10', '40', '101', '300', '400');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('11', '40', '102', '400', '2000');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('12', '40', '103', '500', '600');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('13', '40', '104', '600', '1400');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('14', '50', '103', '2000', '1200');
-INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_credJocMaqInst`, `_04_totCredJocMaqInst`) VALUES ('15', '50', '104', '1000', '2000');
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_numPartidesJugadesMaqInst`, `_04_credJocMaqInst`, `_05_totCredJocMaqInst`, `_06_datAltaMaqInst`, `_07_datModMaqInst`, `_08_datBaixaMaqInst`) VALUES ('1', '10', '100', '1', '100', '300', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_numPartidesJugadesMaqInst`, `_04_credJocMaqInst`, `_05_totCredJocMaqInst`, `_06_datAltaMaqInst`, `_07_datModMaqInst`, `_08_datBaixaMaqInst`) VALUES ('2', '10', '101', '2', '100', '800', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_numPartidesJugadesMaqInst`, `_04_credJocMaqInst`, `_05_totCredJocMaqInst`, `_06_datAltaMaqInst`, `_07_datModMaqInst`, `_08_datBaixaMaqInst`) VALUES ('3', '10', '102', '0', '100', '100', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_numPartidesJugadesMaqInst`, `_04_credJocMaqInst`, `_05_totCredJocMaqInst`, `_06_datAltaMaqInst`, `_07_datModMaqInst`, `_08_datBaixaMaqInst`) VALUES ('4', '20', '102', '0', '200', '400', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_numPartidesJugadesMaqInst`, `_04_credJocMaqInst`, `_05_totCredJocMaqInst`, `_06_datAltaMaqInst`, `_07_datModMaqInst`, `_08_datBaixaMaqInst`) VALUES ('5', '20', '103', '0', '200', '900', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_numPartidesJugadesMaqInst`, `_04_credJocMaqInst`, `_05_totCredJocMaqInst`, `_06_datAltaMaqInst`, `_07_datModMaqInst`, `_08_datBaixaMaqInst`) VALUES ('6', '20', '104', '0', '200', '200', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_numPartidesJugadesMaqInst`, `_04_credJocMaqInst`, `_05_totCredJocMaqInst`, `_06_datAltaMaqInst`, `_07_datModMaqInst`, `_08_datBaixaMaqInst`) VALUES ('7', '30', '101', '6', '1000', '8200', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_numPartidesJugadesMaqInst`, `_04_credJocMaqInst`, `_05_totCredJocMaqInst`, `_06_datAltaMaqInst`, `_07_datModMaqInst`, `_08_datBaixaMaqInst`) VALUES ('8', '30', '103', '0', '2000', '2000', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_numPartidesJugadesMaqInst`, `_04_credJocMaqInst`, `_05_totCredJocMaqInst`, `_06_datAltaMaqInst`, `_07_datModMaqInst`, `_08_datBaixaMaqInst`) VALUES ('9', '40', '100', '1', '200', '1000', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_numPartidesJugadesMaqInst`, `_04_credJocMaqInst`, `_05_totCredJocMaqInst`, `_06_datAltaMaqInst`, `_07_datModMaqInst`, `_08_datBaixaMaqInst`) VALUES ('10', '40', '101', '4', '300', '400', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_numPartidesJugadesMaqInst`, `_04_credJocMaqInst`, `_05_totCredJocMaqInst`, `_06_datAltaMaqInst`, `_07_datModMaqInst`, `_08_datBaixaMaqInst`) VALUES ('11', '40', '102', '0', '400', '2000', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_numPartidesJugadesMaqInst`, `_04_credJocMaqInst`, `_05_totCredJocMaqInst`, `_06_datAltaMaqInst`, `_07_datModMaqInst`, `_08_datBaixaMaqInst`) VALUES ('12', '40', '103', '0', '500', '600', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_numPartidesJugadesMaqInst`, `_04_credJocMaqInst`, `_05_totCredJocMaqInst`, `_06_datAltaMaqInst`, `_07_datModMaqInst`, `_08_datBaixaMaqInst`) VALUES ('13', '40', '104', '0', '600', '1400', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_numPartidesJugadesMaqInst`, `_04_credJocMaqInst`, `_05_totCredJocMaqInst`, `_06_datAltaMaqInst`, `_07_datModMaqInst`, `_08_datBaixaMaqInst`) VALUES ('14', '50', '103', '0', '2000', '1200', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maqInstall` (`_00_pk_idMaqInst_auto`, `_01_pk_idMaqInst`, `_02_pk_idJocInst`, `_03_numPartidesJugadesMaqInst`, `_04_credJocMaqInst`, `_05_totCredJocMaqInst`, `_06_datAltaMaqInst`, `_07_datModMaqInst`, `_08_datBaixaMaqInst`) VALUES ('15', '50', '104', '0', '1000', '2000', NULL, NULL, NULL);
 
 COMMIT;
 
@@ -558,5 +581,18 @@ INSERT INTO `u555588791_pinba`.`productes` (`id`, `nom`, `descripcio`, `preu`, `
 INSERT INTO `u555588791_pinba`.`productes` (`id`, `nom`, `descripcio`, `preu`, `foto`, `datAltaPro`, `datModPro`, `datBaixaPro`) VALUES ('3', 'ROULETTE', 'Rouleta electrónica</br>Triple ruleta electrónica de luces con visualizador de apuestas individual por número.</br>Display informativo LCD, 4 apuestas fijas, turbo, refill, pago manual, contabilidad en totalizadores Mecánicos y electrónicos, 2 hoppers, selector de caída directa, selector de billetes, activación directa a cajón, amplia configuración, reserva de contabilidad encriptada, caducidad del juego por tiempo, atractivos sonidos.', '235', 'roulette.jpg', '2014-05-16', NULL, NULL);
 INSERT INTO `u555588791_pinba`.`productes` (`id`, `nom`, `descripcio`, `preu`, `foto`, `datAltaPro`, `datModPro`, `datBaixaPro`) VALUES ('4', 'COMMA6-A', '<p>Estándar para gaming en Italia.</p></br><p>Cumpliendo los requisitos de</br>homologación que se requieren para el hardware. Dos tampers</br>para detección de apertura de las cajas que protegen placa contra manipulación.  Protocolo de comunicación con Monopolio de Estado. Soporte de tarjeta en la parte inferior. Gráficos y sonido en SD-CARD. Programa Embebido en microcontrolador, etc.</p></br>', '235', 'comma6a.jpg', '2014-05-16', NULL, NULL);
 INSERT INTO `u555588791_pinba`.`productes` (`id`, `nom`, `descripcio`, `preu`, `foto`, `datAltaPro`, `datModPro`, `datBaixaPro`) VALUES ('5', 'STANDARD GAMES', '<p>Placa integral de vídeo de alta resolución, gran velocidad y prestaciones adaptables para cualquier tipo de necesidad, adaptable a cualquier  sistema que necesite un Terminal de vídeo para comunicarse con el usuario gráficamente.</p></br><p>Microcontrolador hitachi h8/2329 , 384 kbytes de flash interna y 32 kbytes de ram interna, 25mhz. El micro dispone de dos DAC con los que se puede generar sonido de alta calidad  (22 ks/s) para   poder realizar orientaciones verbales, acústicas o musicales.</br>1 ADC de 2 entradas.  (Papa poder sensar todas las alimentaciones y mostrarlas en la pantalla de monitor )</br>SD-Card  4 BITS   para almacenamiento de todos los gráficos (128 megas) y sonidos  ilimitados.</br>Ram estática ferrítica  4 mega bits , para gestion de clases en el montaje del video y con retención de datos.</br>Control de  periféricos integrados por ecuación en cpld, (incluido el tiempo de  NMI ).</br>Protección anticopy . Periféricos , antisparck y  DAC para el control del volumen hasta  256 niveles Lógicos</br>Tensión de alimentación desde 8 a 45Volt. Regulador en placa a 3.3Volt.', '235', NULL, '2014-05-16', NULL, NULL);
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `u555588791_pinba`.`ubicacioTeMaquina`
+-- -----------------------------------------------------
+SET AUTOCOMMIT=0;
+USE `u555588791_pinba`;
+INSERT INTO `u555588791_pinba`.`ubicacioTeMaquina` (`_00_pk_idUTM`, `_01_pk_idUbicUTM`, `_02_pk_idMaqUTM`, `_03_datAltaUTM`, `_04_datModUTM`, `_05_datBaixaUTM`) VALUES ('1', '1', '10', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacioTeMaquina` (`_00_pk_idUTM`, `_01_pk_idUbicUTM`, `_02_pk_idMaqUTM`, `_03_datAltaUTM`, `_04_datModUTM`, `_05_datBaixaUTM`) VALUES ('2', '2', '20', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacioTeMaquina` (`_00_pk_idUTM`, `_01_pk_idUbicUTM`, `_02_pk_idMaqUTM`, `_03_datAltaUTM`, `_04_datModUTM`, `_05_datBaixaUTM`) VALUES ('3', '3', '30', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacioTeMaquina` (`_00_pk_idUTM`, `_01_pk_idUbicUTM`, `_02_pk_idMaqUTM`, `_03_datAltaUTM`, `_04_datModUTM`, `_05_datBaixaUTM`) VALUES ('4', '4', '40', NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`ubicacioTeMaquina` (`_00_pk_idUTM`, `_01_pk_idUbicUTM`, `_02_pk_idMaqUTM`, `_03_datAltaUTM`, `_04_datModUTM`, `_05_datBaixaUTM`) VALUES ('5', '5', '50', NULL, NULL, NULL);
 
 COMMIT;
