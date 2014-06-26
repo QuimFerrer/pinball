@@ -20,7 +20,6 @@ WHERE
 
 /* canviar variables amb $ per valors */
 
-START TRANSACTION;
 UPDATE usuari SET _02_nomUsuari     = "$nom",
 						_03_cognomUsuari  = "$cognom",
 						_06_emailUsuari   = "$email",
@@ -44,7 +43,6 @@ WHERE
 		(_01_pk_idAdm IN ( SELECT _01_pk_idUsuari AS _01_pk_idAdm FROM usuari
 		WHERE _04_loginUsuari = "admin"));
 		
-COMMIT;
 
 /* ejemplo
 

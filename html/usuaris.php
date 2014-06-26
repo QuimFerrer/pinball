@@ -162,14 +162,28 @@ if (isset($_SESSION["login"])) :
 			nodes: [ 
 				{ id: '2000', text: 'Opcions', expanded: true, group: true,
 				  nodes: [ 
-						{ id: '2020', text: 'Perfil', img: 'icon-edit' },
-						{ id: '2040', text: 'Baixa', img: 'icon-folder' },
-						{ id: '2060', text: 'Consultes', img: 'icon-folder',
-							nodes: [
-						   { id: '2061', text: 'Torneigs', img: 'icon-page' },
-						   { id: '1102', text: 'Consulta 2', img: 'icon-page' },
-						   { id: '1103', text: 'Consulta 3', img: 'icon-page' }
-						]}
+						{ id: '2020', text: 'Perfil', img: 'icon-folder',
+							nodes: [{ id: '2021', text: 'Consulta', img: 'icon-page' },
+						   			{ id: '2022', text: 'Modificació', img: 'icon-edit' },
+						  			{ id: '2023', text: 'Baixa', img: 'icon-page' } ]},
+
+						{ id: '2040', text: 'Els Meus Torneigs', img: 'icon-folder',
+							nodes: [{ id: '2041', text: 'Consulta', img: 'icon-page' },
+
+						   			{ id: '2042', text: 'Ranking', img: 'icon-folder', 
+						   				nodes: [{ id: '2050', text: 'Actual', img: 'icon-page' },
+						   						{ id: '2051', text: 'Històric', img: 'icon-page' }]},
+						   			
+						   			{ id: '2043', text: 'Baixa', img: 'icon-page' } ]},
+
+						{ id: '2060', text: 'Tots els Torneigs', img: 'icon-folder',
+							nodes: [{ id: '2061', text: 'Consulta', img: 'icon-page' },
+
+						   			{ id: '2062', text: 'Ranking', img: 'icon-folder',
+						   				nodes: [{ id: '2070', text: 'Actual', img: 'icon-page' },
+						   						{ id: '2071', text: 'Històric', img: 'icon-page' }]},
+						   						
+						   			{ id: '2063', text: 'Inscripció', img: 'icon-edit' } ]}
 					]
 				}
 			],
@@ -182,22 +196,96 @@ if (isset($_SESSION["login"])) :
 			var fields;
 
 			switch(e.target) {
-				case '2020':
+				case '2041':
+					columns = [
+						{ field: 'idTorn',  caption: 'Torneig', size: '25%' },
+						{ field: 'nomTorn', caption: 'Nom',     size: '25%' },
+						{ field: 'idJoc',   caption: 'Joc',     size: '25%' },
+						{ field: 'nomJoc',  caption: 'Nom joc', size: '25%' }
+					];
+			    	DataGrid("Torneigs als que estic inscrit", false, columns, e.target);
+				    break;				
+				case '2050':
+					columns = [				
+						{ field: 'idTorn',  caption: 'Torneig', size: '12%' },
+						{ field: 'nomTorn', caption: 'Nom',     size: '12%' },
+						{ field: 'idJoc',   caption: 'Joc',     size: '12%' },
+						{ field: 'nomJoc',  caption: 'Nom joc', size: '12%' },
+						{ field: 'ranking', caption: 'Posició', size: '12%' },
+						{ field: 'punts',   caption: 'Punts',   size: '12%' },
+						{ field: 'totalRanking',   caption: 'Num. Posicions',   size: '12%' }						
+					];
+			    	DataGrid("Ranking dels meus torneigs", false, columns, e.target);
+				    break;
+				case '2051':
+					columns = [				
+						{ field: 'idTorn',  caption: 'Torneig', size: '12%' },
+						{ field: 'nomTorn', caption: 'Nom',     size: '12%' },
+						{ field: 'idJoc',   caption: 'Joc',     size: '12%' },
+						{ field: 'nomJoc',  caption: 'Nom joc', size: '12%' },
+						{ field: 'ranking', caption: 'Posició', size: '12%' },
+						{ field: 'punts',   caption: 'Punts',   size: '12%' },
+						{ field: 'totalRanking',   caption: 'Num. Posicions',   size: '12%' }						
+					];
+			    	DataGrid("Ranking històric dels meus torneigs", false, columns, e.target);				
+				    break;
+				case '2043':
+				    break;				
+				case '2061':
+					columns = [
+						{ field: 'idTorn',  caption: 'Torneig', size: '12%' },
+						{ field: 'nomTorn', caption: 'Nom',     size: '12%' },
+						{ field: 'idJoc',   caption: 'Joc',     size: '12%' },
+						{ field: 'nomJoc',  caption: 'Nom joc', size: '12%' },
+						{ field: 'premiTorn',   caption: 'Premi (€)',  size: '12%' },
+						{ field: 'datIniTorn',  caption: 'Data Inici', size: '12%' },
+						{ field: 'datFinTorn',  caption: 'Data Final', size: '12%' }
+					];
+			    	DataGrid("Torneigs actius per inscripcions", false, columns, e.target);
+				    break;				
+				case '2070':
+					columns = [				
+						{ field: 'idTorn',  caption: 'Torneig', size: '12%' },
+						{ field: 'nomTorn', caption: 'Nom',     size: '12%' },
+						{ field: 'idJoc',   caption: 'Joc',     size: '12%' },
+						{ field: 'nomJoc',  caption: 'Nom joc', size: '12%' },
+						{ field: 'loginJug',caption: 'Jugador', size: '12%' },						
+						{ field: 'ranking', caption: 'Posició', size: '12%' },
+						{ field: 'punts',   caption: 'Punts',   size: '12%' },
+						{ field: 'totalRanking',   caption: 'Num. Posicions',   size: '12%' }						
+					];
+			    	DataGrid("Ranking actual dels torneigs", false, columns, e.target);
+				    break;				
+				case '2071':
+					columns = [				
+						{ field: 'idTorn',  caption: 'Torneig', size: '12%' },
+						{ field: 'nomTorn', caption: 'Nom',     size: '12%' },
+						{ field: 'idJoc',   caption: 'Joc',     size: '12%' },
+						{ field: 'nomJoc',  caption: 'Nom joc', size: '12%' },
+						{ field: 'loginJug',caption: 'Jugador', size: '12%' },						
+						{ field: 'ranking', caption: 'Posició', size: '12%' },
+						{ field: 'punts',   caption: 'Punts',   size: '12%' },
+						{ field: 'totalRanking',   caption: 'Num. Posicions',   size: '12%' }						
+					];
+			    	DataGrid("Ranking històric dels torneigs", false, columns, e.target);				
+				    break;				
+				case '2063':
+				    break;
+
+				case '2090':
 					columns = [				
 						{ field: 'nom', caption: 'usuari', size: '20%' },
 						{ field: 'foto', caption: 'partida', size: '20%' }
 					];
 				    DataGrid("Perfil d'usuari", e.target, columns);
 				    break;
-
-				case '2061':
+				case '2091':
 					columns = [				
-						{ field: 'idTorn', caption: 'Torneig', size: '33%' },
-						{ field: 'nomTorn', caption: 'Nom', size: '33%' },
-						{ field: 'idJoc', caption: 'Joc', size: '33%' }
+						{ field: 'idTorn',  caption: 'Torneig', size: '33%' },
+						{ field: 'nomTorn', caption: 'Nom',     size: '33%' },
+						{ field: 'idJoc',   caption: 'Joc',     size: '33%' }
 					];
-			    	DataGrid("Torneigs als que estic inscrit", false, columns, e.target);
-				    break;
+			    	DataGrid("Torneigs als que estic inscrit", false, columns, e.target);				
 
 				default:
 				    console.log("default");
