@@ -134,18 +134,7 @@ if (isset($_SESSION["login"])) :
 				    DataGrid("Manteniment d'usuaris", "usuari", columns, e.target);
 				    break;
 			
-				case '1120':
-					columns = [				
-						{ field: '_02_nomUsuari', caption: 'Usuari', size: '10%' },
-						{ field: '_02_macMaq', caption: 'MAC Maquina', size: '30%' },
-						{ field: '_02_nomJoc', caption: 'Joc', size: '30%' },
-						{ field: '_04_pk_idDatHorPart', caption: 'Data/Hora', size: '30%' },
-						{ field: '_01_pk_idTorn', caption: 'Torneig', size: '15%' },
-						{ field: '_04_credMaq', caption: 'Credits', size: '15%' },
-						{ field: '_05_pk_idRonda', caption: 'Ronda Nº', size: '15%' },
-						{ field: '_07_puntsRonda', caption: 'Puntuacio Ronda', size: '15%' }
-					];
-				    DataGrid("Manteniment de partides", "partides", columns, e.target);
+				case '1120': location.href="partides.php";  
 				    break;
 
 				    

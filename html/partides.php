@@ -19,42 +19,39 @@ include ("../src/seguretatLogin.php");
 			<h1>Generar Partida</h1>
 		</header>
 		<menu>
-			<?php //menu(); ?>
+			<?php menu(); ?>
 		</menu>
 		<section>
-			<h1>Llista de Torneigs</h1>
-			<!--
+			<h1>Tria les dades de la partida</h1>
+			
 			<?php 
 				$data = date("Y-n-j");
-				// $dataHora = date("Y-n-j H:i:s");
-				$query   = 'SELECT * 
-							FROM torneig
-							INNER JOIN joc ON _02_pk_idJocTorn = _01_pk_idJoc
-							WHERE _06_datFinTorn > "' . $data .'" and 
-							_09_datBaixaTorn IS NULL
-							ORDER BY _05_datIniTorn;';
+				$dataHora = date("Y-n-j H:i:s");
+				$query   = 'SELECT _04_loginUsuari FROM usuari;';
 				$response = dbExec($query);
 
 				echo '<ul class="promo">';
+				//var_dump($response);
+				
 
-				foreach($response as $torn) {
+				foreach($response as $jugador) {
 					echo '<li>';
-					echo '<img src="../resources/img/jocs/'. $torn->_04_imgJoc .'" alt="'. $torn->_02_nomJoc .'">';
-					echo '<h2>Id: '. 			$torn->_01_pk_idTorn .'</h2>';
-					echo '<p><h1>'. 			$torn->_03_nomTorn .'</h1></p>';
-					echo '<p><h2>Joc: '. 		$torn->_02_nomJoc .'</h2></p>';
-					echo '<p><h4>Premi: '. 		$torn->_04_premiTorn .' €</h4></p>';
-					echo '<p>Data d\'inici: '. 	date('j-m-Y',strtotime($torn->_05_datIniTorn)) .'</p>';
-					echo '<p>Data final: '. 	date('j-m-Y',strtotime($torn->_06_datFinTorn)) .'</p>';
+					echo $jugador->_04_loginUsuari;					 
+					//echo '<p>Data d\'inici: '. 	date('j-m-Y',strtotime($torn->_05_datIniTorn)) .'</p>';
+					//echo '<p>Data final: '. 	date('j-m-Y',strtotime($torn->_06_datFinTorn)) .'</p>';
 					echo '</li>';
 				}
+
+				
 				echo '</ul>';
-			 ?> -->
+				echo "Hola dins el php </br>";
+				echo date("Y-n-j H:i:s");
+			 ?>
 			 
-			 <p> Hola </p>
+			 <p> Hola Victor prova d'escriptura... </p>
 		</section>
 		<footer>
-			<?php //footer(); ?>
+			<?php footer(); ?>
 		</footer>
 	</div>
 </body>
