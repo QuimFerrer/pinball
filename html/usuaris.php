@@ -56,10 +56,8 @@ function mostraUsuariLogat()
 
 <?php if (isset($_SESSION["login"])) :
 	if ($_SESSION["login"] == 'admin') :?>
-
 		<script type="text/javascript" src="../js/admin.js"></script>
 	<?php else : ?>
-
 		<script type="text/javascript" src="../js/user.js"></script>
 	<?php endif; ?>
 <?php endif; ?>

@@ -211,7 +211,7 @@ UPDATE ubicacioTeMaquina SET _05_datBaixaUTM = NOW()
 
 WHERE 
 
-	_01_pk_idUbicUTM = "2" AND
+	_01_pk_idUbicUTM = "3" AND
 	_02_pk_idMaqUTM  = "51" AND
 	_05_datBaixaUTM  IS NULL;
 select * from ubicacioTeMaquina;
@@ -219,7 +219,7 @@ UPDATE ubicacioTeMaquina SET _05_datBaixaUTM = NULL
 
 WHERE 
 
-	_01_pk_idUbicUTM = "2" AND
+	_01_pk_idUbicUTM = "3" AND
 	_02_pk_idMaqUTM  = "51" AND
 	_05_datBaixaUTM  IS NOT NULL;
 select * from ubicacioTeMaquina;
@@ -262,9 +262,7 @@ select * from ubicacioTeMaquina;
 /*  3.f.ii.4 - Canvi d'ubicació d'una màquina */
 /************************************************************************************/
 
-START TRANSACTION;
 UPDATE ubicacioTeMaquina SET _05_datBaixaUTM = NOW()
-
 WHERE 
 
 /* canviar les variables */
@@ -272,31 +270,34 @@ WHERE
 	_01_pk_idUbicUTM = "$idUbicVELL" AND
 	_02_pk_idMaqUTM  = "$idMaq" AND
 	_05_datBaixaUTM  IS NULL;
-	
-INSERT INTO ubicacioTeMaquina
-VALUES (NULL,"$idUbicNOU","$idMaq",NOW(),NULL,NULL);
 
+
+/* canviar les variables */	
+	
+INSERT INTO ubicacioTeMaquina VALUES (NULL,"$idUbicNOU","$idMaq",NOW(),NULL,NULL);
 COMMIT;
+
 
 /*
 select * from ubicacioTeMaquina;
-START TRANSACTION;
 UPDATE ubicacioTeMaquina SET _05_datBaixaUTM = NOW()
 
 WHERE 
 	_01_pk_idUbicUTM = "3" AND
 	_02_pk_idMaqUTM  = "51" AND
 	_05_datBaixaUTM  IS NULL;
-select * from ubicacioTeMaquina;
-SELECT ROW_COUNT() INTO @affected_rows;
 
-IF (affected_rows > 0) THEN
-	(INSERT INTO ubicacioTeMaquina
-	VALUES (NULL,"2","51",NOW(),NULL,NULL);)
-    COMMIT;
-ELSE
-    ROLLBACK;
-END IF;
+select * from ubicacioTeMaquina;
+
+START TRANSACTION;
+set autocommit = 0;
+SELECT * FROM ubicacioTeMaquina
+WHERE 
+	_01_pk_idUbicUTM = "2" AND
+	_02_pk_idMaqUTM  = "51" AND
+	_05_datBaixaUTM  IS NULL;
+INSERT INTO ubicacioTeMaquina VALUES (NULL,"2","51",NOW(),NULL,NULL) 
+COMMIT;
 
 select * from ubicacioTeMaquina;
 */

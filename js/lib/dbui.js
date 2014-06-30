@@ -25,8 +25,9 @@ var dbGrid = function() {
         footer          : true,
         toolbar         : true,
         toolbarReload   : false,
-        toolbarColumns  : false,
-        toolbarSearch   : false
+        toolbarColumns  : true,
+        toolbarSearch   : false,
+        toolbarSave     : false
     };
 
     this.setDataTable = function(strTable, strPkName)  { 
@@ -93,7 +94,7 @@ var dbGrid = function() {
             // else
             action       = "../src/dbui.php";
             postData     = { param: table };
-            fnOnDblClick = function(target, eventData) { self.Edit(false); };
+            // fnOnDblClick = function(target, eventData) { self.Edit(false); };
             fnOnError    = function(target, error) { console.log( error.xhr.responseText, error ); };
 
             fnOnLoad = function(target, eventData) {

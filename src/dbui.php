@@ -60,7 +60,7 @@
 				}
 	    		// Eliminar ultima comma ","
 	    		$qry = substr( $qry, 0, -1 ); 
-				$qry = "UPDATE $table SET ". $qry ." WHERE id=$id";
+				$qry = "UPDATE $table SET ". $qry ." WHERE $kName=$id";
 				$data['recid'] = $id;
 
 			else :

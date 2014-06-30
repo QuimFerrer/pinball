@@ -283,7 +283,6 @@ FROM maquina
 */
 
 
-START TRANSACTION;
 CREATE TABLE CC  ENGINE=MEMORY
 SELECT _01_pk_idMaq AS idMaq, _02_macMaq AS macMaq, _03_propMaq AS propMaq,
 _05_totCredMaq AS totalCreditMaq
@@ -302,7 +301,6 @@ SUM(_05_totCredMaq) AS totalCreditMaq
 
 FROM maquina;
 DROP TABLE CC;
-COMMIT;
 
 /***********************************************************************************************/
 /* 3.e.iii.2 - llistat de recaudació per cada joc amd ranking i totals*/
@@ -321,7 +319,6 @@ ORDER BY idJoc,_01_pk_idMaq;
 */
 
 
-START TRANSACTION;
 CREATE TABLE CC  ENGINE=MEMORY
 SELECT _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc, SUM(_05_totCredJocMaqInst) AS totalCreditJoc
 
@@ -346,7 +343,6 @@ FROM CC
 ORDER BY totalCreditJoc;
 
 DROP TABLE CC;
-COMMIT;
 
 
 /***********************************************************************************************/

@@ -74,8 +74,8 @@ var controller = function(e) {
 	            ],
                 onClick: function(target, data) {
                     switch(target) {
-                        case 'opcio_1' : console.log(target,data); break;
-                        case 'opcio_2' : console.log(target,data); break;
+                        case 'opcio_1' : console.log(grid.getSelection()[0]); break;
+                        case 'opcio_2' : grid.reload(); break;
                         case 'opcio_3' : console.log(target,data); break;
                     } 
                 }
@@ -83,7 +83,7 @@ var controller = function(e) {
 			columns = [				
 				{ field: "_01_pk_idTorn", caption: 'ID Torneig', size: '10%' },
 				{ field: "_02_pk_idJocTorn", caption: 'ID Joc', size: '10%' },
-				{ field: "_03_nomTorn", caption: 'Nom del torneig', size: '50%' },
+				{ field: "_03_nomTorn", caption: 'Nom del torneig', size: '50%', editable: { type: 'text' } },
 				{ field: "_04_premiTorn", caption: 'Premi', size: '10%' },
 				{ field: "_05_datIniTorn", caption: 'Inici', size: '10%' },
 				{ field: "_06_datFinTorn", caption: 'Final', size: '10%' }
@@ -102,7 +102,7 @@ var controller = function(e) {
 		          html: { caption: 'Data final', attr: 'size="40"', span: 5 }
 		        }
 		    ];
-		    DataGrid("Llistat de torneigs", "torneig", false, columns, fields, "_01_pk_idTorn");
+		    DataGrid("Llistat de torneigs", "torneig", toolbar, columns, fields, "_01_pk_idTorn");
 		    break;
 // Usuaris
 		case '1080':

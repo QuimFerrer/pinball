@@ -48,8 +48,6 @@ WHERE
 /* 3.g.i.3 - anul.lar / bloquejar jugador / usuari */
 /***********************************************************************************************/
 
-
-START TRANSACTION;
 UPDATE usuari SET _10_datBaixaUsuari = NOW()
 WHERE 
 		_10_datBaixaUsuari IS NULL AND
@@ -66,17 +64,34 @@ WHERE
 		
 		(_01_pk_idJug IN ( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
 		WHERE _04_loginUsuari = "$login"));		 
+		
 
-COMMIT;
-		
-		
+/*
+
+UPDATE usuari SET _10_datBaixaUsuari = NOW()
+WHERE 
+		_10_datBaixaUsuari IS NULL AND		
+		_04_loginUsuari = "miquel";		
+
+START TRANSACTION;
+
+UPDATE jugador SET _06_datBaixaJug  = NOW()
+WHERE
+		 _06_datBaixaJug IS NULL AND
+		(_01_pk_idJug IN ( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
+		WHERE _04_loginUsuari = "miquel"));		 
+
+select * from jugador;
+select * from usuari;
+*/	
+	
 /***********************************************************************************************/
 /* 3.g.i.4 - desanul.lar / desbloquejar jugador / usuari */
 /***********************************************************************************************/
 
 
-START TRANSACTION;
-UPDATE usuari SET _09_datModUsuari = NOW(),
+
+UPDATE usuari SET _09_datModUsuari   = NOW(),
 						_10_datBaixaUsuari = NULL
 WHERE 
 		_10_datBaixaUsuari IS NOT NULL AND
@@ -95,15 +110,29 @@ WHERE
 		(_01_pk_idJug IN ( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
 		WHERE _04_loginUsuari = "$login"));		 
 
-COMMIT;
+/*
 
+UPDATE usuari,jugador SET
+						_09_datModUsuari   = NOW(),
+						_10_datBaixaUsuari = NULL,
+						_05_datModJug    = NOW(),
+						_06_datBaixaJug  = NULL						
+WHERE 
+		_10_datBaixaUsuari IS NOT NULL AND	
+		_04_loginUsuari = "joan" AND
+		_06_datBaixaJug IS NOT NULL;
+
+select * from usuari;
+select * from jugador;
+
+
+*/
 
 /***********************************************************************************************/
 /* 3.g.ii.1 - torneigs registrats amb la seva posició i punts de cada torneig */
 /***********************************************************************************************/
 
 
-START TRANSACTION;
 CREATE TABLE CC  ENGINE=MEMORY
 SELECT _01_pk_idTorn as idTorn,_03_nomTorn as nomTorn, idJoc, aa.nomJoc,_03_pk_idJugRonda as idJug ,
 BB.nomJug, BB.loginJug, sum(_07_puntsRonda) AS punts FROM 
@@ -157,7 +186,7 @@ GROUP BY idTorn, idJug
 ORDER BY idTorn, ranking;
 
 DROP TABLE CC;
-COMMIT;
+
 
 /* select * from cc; 
 */
