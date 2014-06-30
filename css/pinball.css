@@ -26,18 +26,16 @@ header {
 	padding: 3px 0 3px 10px;
 	color: #C7C4E7;
 	background-color: #FFF4F4;
-	box-shadow: 6px 3px 5px #D8D7D7;
-}
+/*	box-shadow: 6px 3px 5px #D8D7D7;
+*/}
 section {
-	margin: 5px;
-	border: 1px solid #E8E8FC;
 	background-color: #FFF;
 }
 footer {
 	clear: both;
-	background-color: #fff;
+	color: #C7C4E7;
+	background-color: #EDF1F6;
 	padding: 10px;
-	border:  1px dashed #D6BDF2;
 	text-align: center;
 }
 /* Icones */
@@ -56,8 +54,12 @@ footer {
 	padding-top: 7px;
 	padding-bottom: 7px;
 	background-color: #165489;
-	color:#FFF;
-	box-shadow: 6px 3px 5px #D8D7D7;
+/*	box-shadow: 6px 3px 5px #D8D7D7;
+*/}
+.menu,
+section,
+header {
+		border-top: 2px solid #E9E9E6;
 }
 .menu ul,
 .menu #dialog {
@@ -140,18 +142,22 @@ footer {
 }
 #grid {
 	width: 83%;
-	height: 550px;
-	float: left;
 }
 #sidebar {
-	float: left;
 	width: 16.8%;
-	height: 550px;
 	margin-right: 1px;
+}
+#grid,
+#sidebar {
+	height: 500px;
+	float: left;
 }
 #toolbar {
 	padding: 4px; 
 	border: 1px solid silver; 
 	border-radius: 3px;
 	margin-bottom: 15px !important;
+}
+.w2ui-node-caption {
+	font-size: 11px !important;
 }

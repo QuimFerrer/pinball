@@ -2,26 +2,29 @@
 
 	if (!isset($_REQUEST['cmd']) ) die('<h1>No es una consulta correcte !</h1>');
 
-	$link = mysql_connect('host', 'usr', 'pwd');
+	$link = mysql_connect('localhost', 'root', '');
 
 	if (!$link)	die('Not connected : ' . mysql_error());
 
-	$db_selected = mysql_select_db('database', $link);
+	$db_selected = mysql_select_db('u555588791_pinba', $link);
 
 	if (!$db_selected) {
 	    die ('No es possible utilitzar bd pinball: ' . mysql_error());
 	}
 
-	$action = $_REQUEST['cmd'];
-	$table  = $_REQUEST['param'];
-	$id	 	= $_REQUEST['recid'];
+	if (isset($_REQUEST['cmd']))    $action = $_REQUEST['cmd'];
+	if (isset($_REQUEST['param']))  $table  = $_REQUEST['param'];
+	if (isset($_REQUEST['recid']))	$id 	= $_REQUEST['recid'];
+
+	$kName  = isset($_REQUEST['keyname']) ? $_REQUEST['keyname'] : 'id';
 	$data   = array();
 	$qry    = "";
 
 	switch ($action)
 	{
 		case 'get-record' :
-			$qry  	= "SELECT * FROM $table WHERE id=$id";
+			$qry  	= "SELECT * FROM $table WHERE $kName=$id";
+			// $qry  	= "SELECT * FROM $table WHERE '_01_pk_idUsuari`=$id";
 			$result = Sql_Exec($qry);
 			$data 	= mysql_fetch_assoc($result);
 			break;
@@ -31,7 +34,7 @@
 			$result = Sql_Exec($qry);
 
 			while ($row = mysql_fetch_assoc($result)) {
-				   $row["recid"] = $row["id"];	
+				   $row["recid"] = current($row);	
 			       $data[] = $row;
 			}
 			// Preparar array per a retornar al grid tots els registres
@@ -40,13 +43,16 @@
 			break;
 
 		case 'delete' :
-			$qry  = "DELETE FROM $table WHERE id=$id";
+			$qry  = "DELETE FROM $table WHERE $kName=$id";
 	    	$sql  = Sql_Exec($qry);
 			$data = array( 'cmd' => 'delete', 'success' => (mysql_affected_rows() != 0) );
 			break;
 
 		case 'save-record' :
-			$record = json_decode($_REQUEST['record']);
+			// if remote
+			// $record = json_decode($_REQUEST['record']);
+			// else
+			$record = (object)$_REQUEST['record'];
 
 			if ($id != 0) :
 				foreach( $record as $key => $value ) {

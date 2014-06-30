@@ -9,6 +9,7 @@ include ("../src/seguretat.php");
 	const FORM_REGISTRE= 1010;
 	const CONSULTA_ADM = 1020;
 	const MAQUINES 	   = 1040;
+	const TORNEIGS 	   = 1060;
 	const USUARIS 	   = 1080;
 	const PARTIDA	   = 1120;
 
@@ -46,6 +47,14 @@ include ("../src/seguretat.php");
 
 			case MAQUINES :
 				$query    = 'SELECT * FROM maquina';
+				$response = dbExec($query);
+				// Preparar array per a retornar al grid tots els registres
+				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
+				echo json_encode( $response );
+				break;
+
+			case TORNEIGS :
+				$query    = 'SELECT * FROM torneig';
 				$response = dbExec($query);
 				// Preparar array per a retornar al grid tots els registres
 				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );

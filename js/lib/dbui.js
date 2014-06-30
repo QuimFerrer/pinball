@@ -13,7 +13,9 @@ var dbGrid = function() {
     var columns = [];
     var base    = "";
     var table   = false;
+    var pkName;
     var dialog;
+    var toolbar;
     var id;
 
     // Propietats per defecte
@@ -27,21 +29,20 @@ var dbGrid = function() {
         toolbarSearch   : false
     };
 
-    this.setDataTable = function(strTable)  { table = strTable; };
+    this.setDataTable = function(strTable, strPkName)  { 
+        table  = strTable; 
+        pkName = strPkName;
+    };
     this.setColumns   = function(cols)      { columns = cols; };
     this.getColumns   = function()          { return columns; };
     this.setForm      = function(form)      { dialog = form;  };
     this.setId        = function(pid)       { id = pid; };
+    this.setToolBar   = function(tools)     { this.toolbar = tools;};
 
     this.Edit = function(mode) { 
-        var recno;
-        if (mode)
-            recno = 0;
-        else
-            recno = grid.getSelection()[0];
-
+        var recno    = mode ? 0 : grid.getSelection()[0];
         dialog.title = mode ? "Afegir" : "Modificar";
-        dialog.Define(recno); 
+        dialog.Define(table, recno, pkName); 
     };
 
     this.Delete = function() {
@@ -50,10 +51,8 @@ var dbGrid = function() {
         if (row.length != 0) {
             w2confirm('Estas segur d\'esborrar?', "Eliminar registre :" + row[0], 
             function (msg) { 
-                if (msg=='Yes') grid.request('delete', { "recid" : row[0] }, action);
-                // No fa res, revisar !
-                // grid.refresh();
-                // grid.select(this.record.recid);
+                if (msg=='Yes') grid.request('delete', { 'recid': row[0], 'keyname': pkName }, action);
+                    grid.reload();
             })
         }  
     };
@@ -68,45 +67,49 @@ var dbGrid = function() {
 
         if (table) {
             // Mode edició 
-            var buttons = 
-            [
-                { type: 'button', id: 'new',  caption: 'Afegir',    img: 'icon-add' },
-                { type: 'button', id: 'edit', caption: 'Modificar', img: 'icon-edit' },
-                { type: 'button', id: 'del',  caption: 'Eliminar',  img: 'icon-delete' }
-                // { type: 'button', id: 'seek', caption: 'Buscar',    img: 'icon-search' }
-            ];
+            if (!this.toolbar) {
+                var buttons = 
+                [
+                    { type: 'button', id: 'new',  caption: 'Afegir',    img: 'icon-add' },
+                    { type: 'button', id: 'edit', caption: 'Modificar', img: 'icon-edit' },
+                    { type: 'button', id: 'del',  caption: 'Eliminar',  img: 'icon-delete' }
+                    // { type: 'button', id: 'seek', caption: 'Buscar',    img: 'icon-search' }
+                ];
 
-            toolbar = { 
-                items: buttons, 
-                onClick: function(target, data) {
+                this.toolbar = { 
+                    items: buttons, 
+                    onClick: function(target, data) {
 
-                    switch(target) {
-                        case 'new' : self.Edit(true); break;
-                        case 'edit': self.Edit(false); break;
-                        case 'del' : self.Delete(); break;
-                    } 
-                }
-            }; 
-
-            action      = "../src/dbuicurl.php";
-            postData    = { param: table };
-            fnOnDblClick  = function(target, eventData) { self.Edit(false); };
-            fnOnError     = function(target, error) { console.log( error.xhr.responseText, error ); };
+                        switch(target) {
+                            case 'new' : self.Edit(true); break;
+                            case 'edit': self.Edit(false); break;
+                            case 'del' : self.Delete(); break;
+                        } 
+                    }
+                }; 
+            }
+            // if remote
+            // action      = "../src/dbuicurl.php";
+            // else
+            action       = "../src/dbui.php";
+            postData     = { param: table };
+            fnOnDblClick = function(target, eventData) { self.Edit(false); };
+            fnOnError    = function(target, error) { console.log( error.xhr.responseText, error ); };
 
             fnOnLoad = function(target, eventData) {
-                alert("load");
-                        var result = JSON.parse(eventData.xhr.responseText);
+                // console.log(eventData.xhr.responseText);
+                var result = JSON.parse(eventData.xhr.responseText);
 
-                        if (typeof result  != 'undefined') {
-                            if (result.cmd == 'delete' && result.success)  {
-                                grid.remove.apply(grid, grid.getSelection());
-                            }
-                        }
+                if (typeof result  != 'undefined') {
+                    if (result.cmd == 'delete' && result.success)  {
+                        grid.remove.apply(grid, grid.getSelection());
+                    }
+                }
             };
 
         } else {
             // Mode consulta
-            options.toolbar = false;
+            if (!this.toolbar) options.toolbar = false;
             action   = "query.php";
             postData = { pid: id };
         }
@@ -117,7 +120,7 @@ var dbGrid = function() {
             url         : action,
             show        : options,
             msgRefresh  : 'Consultant dades',
-            toolbar     : toolbar,
+            toolbar     : this.toolbar,
             columns     : columns,
             postData    : postData,
             onDblClick  : fnOnDblClick,
@@ -151,7 +154,7 @@ var dbForm = function() {
             w2ui['dialog'].record = { 'recid' : data.recid };
         else
             w2ui['dialog'].record = { 'recid' : 0 };
-console.log(data);
+
         w2ui['dialog'].fields.forEach( 
             function(value, index) {
                 if (data)
@@ -162,7 +165,7 @@ console.log(data);
         );
     };
 
-    this.Define = function(recno) {
+    this.Define = function(table, recno, pkName) {
 
         $().w2destroy('dialog');
 
@@ -170,10 +173,10 @@ console.log(data);
             name  : 'dialog',
             url   : action,
             style : 'border: 0px; background-color: transparent;',
+            postData   : { param: table, keyname: pkName },
             msgRefresh : 'Consultant dades',
             msgSaving  : 'Guardant dades',
             fields: fields,            
-            postData: { param: 'productes' },
             actions: {
                 // reset: function() { this.clear(); },
                 Guardar: function() { this.save( { 'recid' : recno } ); },
@@ -181,10 +184,10 @@ console.log(data);
             },
             onSave: function(target, eventData) {
 
-                // console.log(target, eventData);
                 $().w2popup('close');
 
                 if (eventData.status == "success") {
+                    console.log(eventData.xhr.responseText);
                     var result = JSON.parse(eventData.xhr.responseText);
 
                     if (result.rows == 1) {
@@ -220,9 +223,6 @@ console.log(data);
             self.Activate();
         }
     };
-// w2ui.dialog.on('*', function (event) {
-//         console.log('Event: '+ event.type, 'Target: '+ event.target, event);
-//     });
 
     this.Activate = function() {
         $().w2popup('open', {
@@ -230,35 +230,93 @@ console.log(data);
             modal   : true,
             body    : '<div id="form"></div>',
             style   : 'padding: 0px',
-            width   : 520,
-            height  : 400
+            width   : 450,
+            height  : 250
         });
-        $('#form').w2render('dialog');        
+        // $('#form').w2render('dialog');  
+        w2ui['dialog'].render($('#form')[0]); 
     };
 };
 
 /*
  **********************************************************************************************
- *  Api per construir el grid
+ *  Api per construir un grid
  **********************************************************************************************
  */
 
-function DataGrid(title, table, columns, fieldsOrId) {
+function DataGrid(title, table, toolbar, columns, fieldsOrId, pkName) {
     
     if (w2ui.grid)  w2ui['grid'].destroy();
-
+    pkName = typeof pkName !=='undefined' ? pkName: 'id';
+                                                    // Nom de la clau primària (id per defecte)
     var grid   = new dbGrid();                      // Crear el grid
     grid.title = title;                             // Titol a header
     grid.setColumns(columns);                       // Assignar les columnes
 
     if (table) {                                    // Si es passa taula, és editable
-        grid.setDataTable(table);                   // Assignar taula
+        grid.setDataTable(table, pkName);           // Assignar taula i nom clau primaria
         var form = new dbForm();                    // Crear el diàleg d'edició
         form.setFields(fieldsOrId);                 // Assignar els camps al dialeg
         grid.setForm(form);                         // Assignar el formulari al grid
     } else {
         grid.setId(fieldsOrId);                     // Assignar Pid (Id de la petició per a query.php)
     }
-                      
+    grid.setToolBar(toolbar);                       // Barra de botons personalitzada
     grid.Activate();                                // Mostrar el grid
+}
+
+/*
+ **********************************************************************************************
+ *  Api per construir un layout
+ **********************************************************************************************
+ */
+function DataView(url) {
+    if (w2ui.grid)  w2ui['grid'].destroy();
+
+    var pstyle = 'border: 1px solid #dfdfdf; padding: 5px;'
+    
+    $('#grid').w2layout({
+        name: 'grid',
+        panels: [{type: 'main', style: pstyle}]
+    });
+
+    // w2ui['layout'].lock('Carregant dades ...', true);
+    // w2utils.lock("#grid", 'Carregant dades ...', true);
+    w2ui['grid'].load('main', url);
+    // w2utils.unlock("#grid");
+
+   // w2ui['layout'].unlock();
+}
+
+/*
+ **********************************************************************************************
+ *  Api per construir un formulari
+ **********************************************************************************************
+ */
+function DataForm() {
+    if (w2ui.grid)  w2ui['grid'].destroy();
+
+    $('#grid').w2form({ 
+        name  : 'grid',
+        url   : 'query.php',
+        fields: [
+            { name: 'nom',          type: 'text', required: true },
+            { name: 'cognoms',      type: 'text', required: true },
+            { name: 'email',        type: 'email', required: true },
+            { name: 'comentari',    type: 'text', required: true}
+        ],
+        actions: {
+            reset: function () {
+                this.clear();
+            },
+            save: function() {
+                var self = this;
+                this.save( {pid:1000}, function(e) {
+                    console.log(e);
+                    w2alert('Gràcies per la teva col.laboració', 'Missatge');
+                    self.clear();
+                });
+            }
+        }
+    });
 }

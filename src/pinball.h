@@ -50,7 +50,10 @@
     $result = mysql_query($query);
 
     if (!$result) {
-        die('Consulta no valida: ' . mysql_error());
+            $json = array("test" => mysql_error());
+
+        // die('Consulta no valida: ' . mysql_error());
+        return $json;
     }
 
     // Obtenir la consulta en forma d'arrays d'objectes
