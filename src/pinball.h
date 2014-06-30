@@ -2,14 +2,14 @@
 
     define("LOCAL", true);
 
-    function dbExec($query) {
-        if(LOCAL) $response = dbExecLocal($query);
-        else      $response = dbExecRemote($query);
+    function dbExec($query,$tipusResultat=1) {
+        if(LOCAL) $response = dbExecLocal($query,$tipusResultat);
+        else      $response = dbExecRemote($query,$tipusResultat);
         return $response;
     }
 
 
-    function dbExecRemote($query) {
+    function dbExecRemote($query,$tipusResultat) {
     /* dbExec. Connecta amb script remot link.php
      * Executa : string amb consulta SQL
      * Retorna : string JSON
@@ -29,7 +29,7 @@
     return json_decode($response);
 }?>
 
-<?php function dbExecLocal($query) {
+<?php function dbExecLocal($query,$tipusResultat) {
     /* dbExec. Connecta amb script remot link.php
      * Executa : string amb consulta SQL
      * Retorna : string JSON
@@ -50,22 +50,37 @@
     $result = mysql_query($query);
 
     if (!$result) {
-            $json = array("test" => mysql_error());
-
-        // die('Consulta no valida: ' . mysql_error());
-        return $json;
+        die('Consulta no valida: ' . mysql_error());
     }
 
     // Obtenir la consulta en forma d'arrays d'objectes
     // $json = array();
     // while ($obj = mysql_fetch_object($result)) {
     //     $json[] = $obj ;
-    
-    $json = array();
-    while ($obj = mysql_fetch_assoc($result)) {
-        $json[] = (object)array_map('utf8_encode', $obj) ;
 
-    }
+    switch($tipusResultat)
+        {
+        // retorna un array associatiu (SELECT)
+        case 1: 
+            $json = array(); 
+            while ($obj = mysql_fetch_assoc($result)) 
+                $json[] = (object)array_map('utf8_encode', $obj) ;
+            break;
+        // insert
+        case 2:
+            break;
+        // update
+        case 3:
+            break;
+
+        default:
+            $json = true;
+            break;
+        }
+   
+    // if ($result && gettype($result)=="object")
+
+    
     return $json;
 
     // Alliberar resultat

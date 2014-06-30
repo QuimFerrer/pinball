@@ -7,7 +7,7 @@ function controlLogin($user,$pswd)
               WHERE u._04_loginUsuari = "' . $user
               . '" and u._05_pwdUsuari = "' . $pswd 
               . '" and (u._10_datBaixaUsuari IS NULL OR u._10_datBaixaUsuari = "");';
-    $res = dbExecLocal($query);
+    $res = dbExec($query);
 
     if ($res != NULL)
         {
