@@ -3,7 +3,7 @@
 include ("../src/pinball.h");
 include ("../src/seguretat.php"); 
 
-// comprovaSessio();
+comprovaSessio();
 
 	const FORM_CONTACTE= 1000;
 	const FORM_REGISTRE= 1010;
