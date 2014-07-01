@@ -11,11 +11,14 @@ $('#sidebar').w2sidebar({
 					{ id: '1090', text: 'Test', img: 'icon-edit' },
 					{ id: '1100', text: 'Consultes', img: 'icon-folder',
 			  			nodes: [
-						   { id: '1101', text: 'Consulta 1', img: 'icon-page' },
-						   { id: '1102', text: 'Consulta 2', img: 'icon-page' },
-						   { id: '1103', text: 'Consulta 3', img: 'icon-page' }
+						   { id: '1110', text: 'Consulta 1', img: 'icon-page' },
+						   { id: '1120', text: 'Consulta 2', img: 'icon-page' },
+						   { id: '1130', text: 'Consulta 3', img: 'icon-page',
+						   nodes: [
+						   	{ id: '1131', text: 'Sub Consulta 1', img: 'icon-page' }
+						   ]}
 			  		]},
-			  		{ id: '1120', text: 'Generar Partides',	img:'icon-edit'}
+			  		{ id: '1200', text: 'Generar Partides',	img:'icon-edit'}
 				 ]
 		}
 	],
