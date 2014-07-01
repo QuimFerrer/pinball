@@ -145,6 +145,7 @@ header {
 	clear: both;
 	padding: 10px 5px;
 	border-bottom: dashed 2px #F1BBFD;
+	overflow: auto;
 }
 #grid {
 	width: 81%;
