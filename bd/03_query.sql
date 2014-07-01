@@ -15,6 +15,7 @@ select * from maquina;
 */
 /************************************************************************************/
 /*  3.e.i.2 - BAIXA d'UNA màquina   */
+/* implica donar de bloquejar tots els jocs d'aquella màquina */
 /************************************************************************************/
 
 /* canviar variables per valors  */
@@ -24,6 +25,12 @@ UPDATE maquina SET _08_datBaixaMaq = NOW()
 WHERE 
 		_01_pk_idMaq = "$idMaq" AND
 		_08_datBaixaMaq IS NULL;
+
+UPDATE maqinstall SET _08_datBaixaMaqInst = NOW()
+
+WHERE 
+		_01_pk_idMaqInst = "$idMaq" AND
+		_08_datBaixaMaqInst IS NULL;
 
 
 /*
@@ -98,15 +105,15 @@ SELECT * FROM MAQUINA;
 
 
 /***********************************************************************************************/
-/* 3.e.i.5 - llistat de totes les màquines informat de la seva ubicació, jocs instal.lats, credits totals, etc. */
+/* 3.e.i.5 - 3430 - llistat de totes les màquines informat de la seva ubicació, jocs instal.lats, credits totals, etc. */
 /***********************************************************************************************/
 
 
 SELECT MAQ._01_pk_idMaq AS idMaq, MAQ._02_macMaq AS macMaq, MAQ._03_propMaq AS propMaq,
-_01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc, _05_totCredJocMaqInst AS creditsTotals,
+_01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc, _05_totCredJocMaqInst AS totalCredits,
 AA._01_pk_idUbic AS idUbic,
 AA._02_empUbic AS empUbic, AA._04_pobUbic AS pobUbic, AA._06_provUbic AS provUbic,
-MAQ._06_datAltaMaq AS dataAltaMaq, MAQ._08_datBaixaMaq AS dataBaixaMaq
+DATE_FORMAT(MAQ._06_datAltaMaq, "%d-%m-%Y") AS datAltaMaq
 
 FROM
 (SELECT * FROM ubicacio
@@ -129,16 +136,16 @@ GROUP BY idMaq, idUbic, idJoc;
 
 
 /***********************************************************************************************/
-/* 3.e.i.6 - llistat de totes les màquines informat de la seva ubicació, jocs instal.lats,  */
+/* 3.e.i.6 - 3440 - llistat de totes les màquines informat de la seva ubicació, jocs instal.lats,  */
 /*         credits totals, etc. Històric*/
 /***********************************************************************************************/
 
 
 SELECT MAQ._01_pk_idMaq AS idMaq, MAQ._02_macMaq AS macMaq, MAQ._03_propMaq AS propMaq,
-_01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc, _05_totCredJocMaqInst AS creditsTotals,
+_01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc, _05_totCredJocMaqInst AS totalCredits,
 AA._01_pk_idUbic AS idUbic,
 AA._02_empUbic AS empUbic, AA._04_pobUbic AS pobUbic, AA._06_provUbic AS provUbic,
-MAQ._06_datAltaMaq AS dataAltaMaq, MAQ._08_datBaixaMaq AS dataBaixaMaq
+DATE_FORMAT(MAQ._08_datBaixaMaq, "%d-%m-%Y") AS datBaixaMaq
 
 FROM
 (SELECT * FROM ubicacio
@@ -239,11 +246,11 @@ SELECT * FROM MAQINSTALL;
 */ 
 
 /************************************************************************************/
-/*  3.e.ii.4 - Llistat de jocs assignats a cada màquina amb num de partides jugades i crédits  */
+/*  3.e.ii.4 - 3480 - Llistat de jocs assignats a cada màquina amb num de partides jugades i crédits  */
 /************************************************************************************/
 
 SELECT _01_pk_idMaq AS idMaq, _02_macMaq AS macMaq, _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc,
-_03_numPartidesJugadesMaqInst AS numPartides, _05_totCredJocMaqInst AS totalCredit
+_03_numPartidesJugadesMaqInst AS numPartides, _05_totCredJocMaqInst AS totalCredits
 
 FROM joc
 LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
@@ -260,7 +267,7 @@ ORDER BY idMaq,idJoc;
 
 
 /***********************************************************************************************/
-/* 3.e.iii.1 - llistat de totes les màquines informat la recaudació de cada màquina amb ranking i totals*/
+/* 3.e.iii.1 - 3510 - llistat de totes les màquines informat la recaudació de cada màquina amb ranking i totals*/
 /***********************************************************************************************/
 
 /*
@@ -285,25 +292,25 @@ FROM maquina
 
 CREATE TABLE CC  ENGINE=MEMORY
 SELECT _01_pk_idMaq AS idMaq, _02_macMaq AS macMaq, _03_propMaq AS propMaq,
-_05_totCredMaq AS totalCreditMaq
+_05_totCredMaq AS totalCredits
 
 FROM maquina
 
 WHERE  _08_datBaixaMaq IS NULL
 
 GROUP BY idMaq
-ORDER BY totalCreditMaq DESC;
+ORDER BY totalCredits DESC;
 
 SELECT * FROM CC
 UNION
 SELECT "9999" AS idMaq, "TOTAL" AS macMaq, "RECAUDACIÓ" AS propMaq,
-SUM(_05_totCredMaq) AS totalCreditMaq
+SUM(_05_totCredMaq) AS totalCredits
 
 FROM maquina;
 DROP TABLE CC;
 
 /***********************************************************************************************/
-/* 3.e.iii.2 - llistat de recaudació per cada joc amd ranking i totals*/
+/* 3.e.iii.2 - 3520 - llistat de recaudació per cada joc amd ranking i totals*/
 /***********************************************************************************************/
 
 /*
@@ -320,7 +327,7 @@ ORDER BY idJoc,_01_pk_idMaq;
 
 
 CREATE TABLE CC  ENGINE=MEMORY
-SELECT _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc, SUM(_05_totCredJocMaqInst) AS totalCreditJoc
+SELECT _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc, SUM(_05_totCredJocMaqInst) AS totalCredits
 
 FROM joc
 LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
@@ -332,15 +339,15 @@ WHERE
 	_08_datBaixaMaq      IS NULL
 	
 GROUP BY idJoc
-ORDER BY totalCreditJoc;
+ORDER BY totalCredits;
 
 SELECT * FROM CC
 UNION
-SELECT "9999" AS idJoc, "TOTAL RECAUDACIÓ" AS nomJoc, SUM(totalCreditJoc) AS totalCreditJoc
+SELECT "9999" AS idJoc, "TOTAL RECAUDACIÓ" AS nomJoc, SUM(totalCredits) AS totalCredits
 
 FROM CC
 
-ORDER BY totalCreditJoc;
+ORDER BY totalCredits;
 
 DROP TABLE CC;
 
@@ -350,7 +357,7 @@ DROP TABLE CC;
 /***********************************************************************************************/
 
 SELECT _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc,_01_pk_idMaq AS idMaq, _02_macMaq as macMaq,
-_05_totCredJocMaqInst AS totalCreditJocMaq
+_05_totCredJocMaqInst AS totalCredits
 
 FROM joc
 LEFT JOIN maqInstall ON _01_pk_idJoc = _02_pk_idJocInst
@@ -368,7 +375,7 @@ ORDER BY idJoc,idMaq;
 /* 3.e.iii.4 - llistat de recaudació per cada propietari */
 /***********************************************************************************************/
 
-SELECT _03_propMaq AS propMaq, SUM(_05_totCredMaq) AS totalCreditMaq
+SELECT _03_propMaq AS propMaq, SUM(_05_totCredMaq) AS totalCredits
 
 FROM maquina
 
@@ -376,7 +383,7 @@ WHERE
 	_08_datBaixaMaq  IS NULL
 
 GROUP BY propMAq
-ORDER BY propMaq,totalCreditMaq;
+ORDER BY propMaq,totalCredits;
 
 
 /***********************************************************************************************/
@@ -384,7 +391,7 @@ ORDER BY propMaq,totalCreditMaq;
 /***********************************************************************************************/
 
 SELECT _03_propMaq AS propMaq, _01_pk_idMaq AS idMaq, _02_macMaq as macMaq,
-SUM(_05_totCredMaq) AS totalCreditMaq
+SUM(_05_totCredMaq) AS totalCredits
 
 FROM maquina
 
@@ -392,7 +399,7 @@ WHERE
 	_08_datBaixaMaq  IS NULL
 
 GROUP BY propMAq,idMaq
-ORDER BY propMaq,idMaq,totalCreditMaq;
+ORDER BY propMaq,idMaq,totalCredits;
 
 
 
@@ -401,7 +408,7 @@ ORDER BY propMaq,idMaq,totalCreditMaq;
 /***********************************************************************************************/
 
 SELECT _03_propMaq AS propMaq, _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc,_01_pk_idMaq AS idMaq,
-_02_macMaq as macMaq, SUM(_05_totCredJocMaqInst) AS totalCreditJocMaq
+_02_macMaq as macMaq, SUM(_05_totCredJocMaqInst) AS totalCredits
 
 FROM joc
 LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
@@ -413,7 +420,7 @@ WHERE
 	_08_datBaixaMaq      IS NULL
 	
 GROUP BY propMaq, nomJoc, idMaq
-ORDER BY propMaq, nomJoc,totalCreditJocMaq DESC, idMaq;
+ORDER BY propMaq, nomJoc,totalCredits DESC, idMaq;
 
 
 /***********************************************************************************************/
@@ -421,7 +428,7 @@ ORDER BY propMaq, nomJoc,totalCreditJocMaq DESC, idMaq;
 /***********************************************************************************************/
 
 SELECT _06_provUbic AS provincia, _04_pobUbic AS poblacio,_05_cpUbic AS cPostal,
-SUM(_05_totCredMaq) AS totalCreditMaq
+SUM(_05_totCredMaq) AS totalCredits
 
 FROM maquina
 LEFT JOIN ubicacioTeMaquina ON _01_pk_idMaq = _02_pk_idMaqUTM
@@ -433,14 +440,14 @@ WHERE
 	_16_datBaixaUbic IS NULL
 	
 GROUP BY provincia, poblacio, cPostal
-ORDER BY provincia, poblacio, cPostal, totalCreditMaq;
+ORDER BY provincia, poblacio, cPostal, totalCredits;
 
 
 /***********************************************************************************************/
 /* 3.e.iii.8 - llistat de recaudació per poblacio */
 /***********************************************************************************************/
 
-SELECT _04_pobUbic AS poblacio, SUM(_05_totCredMaq) AS totalCreditMaq
+SELECT _04_pobUbic AS poblacio, SUM(_05_totCredMaq) AS totalCredits
 
 FROM maquina
 LEFT JOIN ubicacioTeMaquina ON _01_pk_idMaq = _02_pk_idMaqUTM
@@ -452,15 +459,15 @@ WHERE
 	_16_datBaixaUbic IS NULL
 
 GROUP BY poblacio
-ORDER BY poblacio, totalCreditMaq;
+ORDER BY poblacio, totalCredits;
 
 
 /***********************************************************************************************/
 /* 3.e.iii.9 - llistat de recaudació per provincia, poblacio, cp de cada màquina*/
 /***********************************************************************************************/
 
-SELECT _06_provUbic AS provincia, _04_pobUbic AS poblacio, _05_cpUbic AS cPostal, _01_pk_idMaq AS idMaq, _02_macMaq as macMaq,
-SUM(_05_totCredMaq) AS totalCreditMaq
+SELECT _06_provUbic AS provincia, _04_pobUbic AS poblacio, _05_cpUbic AS cPostal, _01_pk_idMaq AS idMaq,
+_02_macMaq as macMaq, SUM(_05_totCredMaq) AS totalCredits
 
 FROM maquina
 LEFT JOIN ubicacioTeMaquina ON _01_pk_idMaq = _02_pk_idMaqUTM
@@ -472,7 +479,7 @@ WHERE
 	_16_datBaixaUbic IS NULL
 
 GROUP BY provincia, poblacio, cPostal, idMaq
-ORDER BY provincia, poblacio, cPostal, idMaq, totalCreditMaq;
+ORDER BY provincia, poblacio, cPostal, idMaq, totalCredits;
 
 
 
@@ -481,7 +488,7 @@ ORDER BY provincia, poblacio, cPostal, idMaq, totalCreditMaq;
 /***********************************************************************************************/
 
 SELECT _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc,
-SUM(_05_totCredJocMaqInst) AS totalCreditJocMaq
+SUM(_05_totCredJocMaqInst) AS totalCredits
 
 FROM joc
 LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
@@ -493,7 +500,7 @@ WHERE
 	_08_datBaixaMaq      IS NULL
 	
 GROUP BY nomJoc
-ORDER BY totalCreditJocMaq DESC;
+ORDER BY totalCredits DESC;
 
 
 /***********************************************************************************************/
@@ -501,7 +508,7 @@ ORDER BY totalCreditJocMaq DESC;
 /***********************************************************************************************/
 
 SELECT AA._04_pobUbic AS poblacio, _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc,
-MAQ._01_pk_idMaq AS idMaq, MAQ._02_macMaq as macMaq, SUM(_05_totCredJocMaqInst) AS totalCreditJocMaq
+MAQ._01_pk_idMaq AS idMaq, MAQ._02_macMaq as macMaq, SUM(_05_totCredJocMaqInst) AS totalCredits
 
 FROM
 
@@ -522,7 +529,7 @@ WHERE
 	_08_datBaixaMaqInst  IS NULL
 
 GROUP BY poblacio, idJoc, idMaq
-ORDER BY poblacio, idJoc, totalCreditJocMaq DESC;
+ORDER BY poblacio, idJoc, totalCredits DESC;
 
 
 /***********************************************************************************************/
@@ -531,7 +538,7 @@ ORDER BY poblacio, idJoc, totalCreditJocMaq DESC;
 
 SELECT AA._06_provUbic AS provincia, AA._04_pobUbic AS poblacio, AA._05_cpUbic AS cPostal,
 _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc,MAQ._01_pk_idMaq AS idMaq, MAQ._02_macMaq as macMaq,
-SUM(_05_totCredJocMaqInst) AS totalCreditJocMaq
+SUM(_05_totCredJocMaqInst) AS totalCredits
 
 FROM
 
@@ -553,6 +560,6 @@ WHERE
 	_08_datBaixaMaqInst  IS NULL
 
 GROUP BY provincia, poblacio, cPostal, idJoc, idMaq
-ORDER BY provincia, poblacio, cPostal, idJoc, totalCreditJocMaq DESC;
+ORDER BY provincia, poblacio, cPostal, idJoc, totalCredits DESC;
 
 
