@@ -15,7 +15,8 @@ $('#sidebar').w2sidebar({
 						   { id: '1102', text: 'Consulta 2', img: 'icon-page' },
 						   { id: '1103', text: 'Consulta 3', img: 'icon-page' }
 			  		]},
-			  		{ id: '1120', text: 'Generar Partides',	img:'icon-edit'},
+			  		{ id: '1120', text: 'Partides',	img:'icon-edit'},
+			  		{ id: '1200', text: 'Partides Victor',	img:'icon-edit'},			  		
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 					{ id: '3000', text: 'Perfil', img: 'icon-edit' },
@@ -203,6 +204,10 @@ var controller = function(e) {
 			];
 		    DataGrid("Manteniment de partides", "partides", false, false, columns, e.target);
 		    break;
+
+		case '1200': location.href="partides.php";  
+			break;
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
