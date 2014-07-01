@@ -25,7 +25,7 @@ comprovaSessio();
 		<menu>
 			<?php menu(); ?>
 		</menu>
-		<section>
+		<section class="staticPage">
 			<h1>Llista de jocs</h1>
 			<?php 
 				$query    = 'SELECT * FROM joc';

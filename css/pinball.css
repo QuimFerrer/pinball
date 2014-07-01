@@ -29,7 +29,13 @@ header {
 /*	box-shadow: 6px 3px 5px #D8D7D7;
 */}
 section {
-	background-color: #FFF;
+	background-color: #fff;
+	border: 1px solid #E9E9E6;
+	padding: 1px;
+	overflow: auto;
+}
+section.staticPage{
+	padding: 15px 20px;
 }
 footer {
 	clear: both;
@@ -140,12 +146,14 @@ header {
 	clear: both;
 	padding: 10px 5px;
 	border-bottom: dashed 2px #F1BBFD;
+	overflow: auto;
 }
 #grid {
-	width: 83%;
+	width: 81%;
+	background-color: #EDF1F6;
 }
 #sidebar {
-	width: 16.8%;
+	width: 18.8%;
 	margin-right: 1px;
 }
 #grid,
@@ -161,4 +169,7 @@ header {
 }
 .w2ui-node-caption {
 	font-size: 11px !important;
+}
+td.w2ui-node-data {
+	padding: 0 !important;
 }

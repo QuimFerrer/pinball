@@ -25,7 +25,7 @@ comprovaSessio();
 		<menu>
 			<?php menu(); ?>
 		</menu>
-		<section>
+		<section class="staticPage">
 			<hgroup>
 				<h2>Formulari de contacte</h2><br>
 				<h3>Ens interessa conèixer la teva opinió</h3>				

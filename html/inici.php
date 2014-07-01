@@ -24,7 +24,7 @@ comprovaSessio();
 		<menu>
 			<?php menu(); ?>
 		</menu>
-		<section>
+		<section class="staticPage">
 			<img src="../resources/img/recreatius/roulette.jpg" height="400" alt="">
 			<p>Jugadors i Jugadores !!  Ludopates i Viciats !! aquesta és la vostra web on podreu gastar tans diners com vulgueu i podreu puntuar en els vostres rankings totes les vostres activitats !! </p>
 			</br>

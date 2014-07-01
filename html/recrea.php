@@ -24,7 +24,7 @@ comprovaSessio();
 		<menu>
 			<?php menu(); ?>
 		</menu>
-		<section>
+		<section class="staticPage">
 			<h1>Llista de productes</h1>
 			<?php 
 				$query    = 'SELECT * FROM productes';

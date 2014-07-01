@@ -22,7 +22,7 @@ include ("../src/seguretatLogin.php");
 		<menu>
 			<?php menu(); ?>
 		</menu>
-		<section>
+		<section class="staticPage">
 			<hgroup>
 				<h2>Formulari de registre</h2><br>
 			</hgroup>
