@@ -6,8 +6,8 @@ Varis
 --> ok. <-- 4. afegir dates modificacio i baixa a taula de productes
 5. modificar dbExecLocal per adaptar-ho a insert, update, delete
 --> ok. <-- 6.control.lar amb login que el usuari no està donat de baixa
-7. alinear dreta o centre de camps al grid
-8. preguntar que fa el pinball.js (dona un error a la consola al pulsar botó sortir) i el login.js
+7. alinear dreta o centre de camps al grid --> ,attr: 'align=center' 
+8. treure el login.js
 
 
 Recreatius

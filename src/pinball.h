@@ -1,24 +1,26 @@
 <?php 
 
-    define("LOCAL", true);
+define("LOCAL", true);
 
-    function creaJSONError($estat,$msg,$numerr)
-    {
-        $buildjson = array('estat' => $estat, 'msg' => $msg, 'numerr' => $numerr);
-        $json = array();
-        array_push($json, $buildjson);
-        return (json_encode($json));
-    }       
-
-
-    function dbExec($query,$tipusResultat=1) {
-        if(LOCAL) $response = dbExecLocal($query,$tipusResultat);
-        else      $response = dbExecRemote($query,$tipusResultat);
-        return $response;
+function dbExec($query,$tipusResultat=1) {
+    if(LOCAL) $response = dbExecLocal ($query, $tipusResultat);
+    else      $response = dbExecRemote($query, $tipusResultat);
+    return $response;
     }
 
+function controlErrorQuery($response)
+{
+    $error = $response[0];
+    if ( $error->status )
+        $response = array("status" => "error", "message" => "Error " . $error->numerr . "." . $error->msg);
+    else
+        $response = array('total' => count($response[1]), 'page' => 0, 'records' => $response[1]);
+    if ($_SESSION['endTime'] === "SI")
+        $response = array("status" => "error", "message" => "La sessió ha expirat. Torna a fer Login a l'aplicació.");
+    return ($response);
+}
 
-    function dbExecRemote($query,$tipusResultat) {
+function dbExecRemote($query,$tipusResultat) {
     /* dbExec. Connecta amb script remot link.php
      * Executa : string amb consulta SQL
      * Retorna : string JSON
@@ -36,16 +38,16 @@
     curl_close($ch);
 
     return json_decode($response);
-}?>
+    }
 
-<?php function dbExecLocal($query,$tipusResultat) {
+function dbExecLocal($query,$tipusResultat) {
     /* dbExec. Connecta amb script remot link.php
      * Executa : string amb consulta SQL
      * Retorna : string JSON
      */
          
-    $error = creaJSONError(false,"","");
-    $json  = array();
+    $estat  = array();    
+    $dades  = array();
 
     if (!isset($query) ) die('<h1>No es una consulta correcte !</h1>');
 
@@ -62,39 +64,34 @@
     $result = mysql_query($query);
 
     if (!$result)
-        {
-        // $error = creaJSONError(true,mysql_error(),mysql_errno());
-        die('Consulta no valida: ' . mysql_error());
-        }
+        $estat = (object)array('status' => true, 'msg' => mysql_error(), 'numerr' => mysql_errno());
     else
-    {
-    switch($tipusResultat)
         {
-        // retorna un array associatiu (SELECT)
-        case 1: 
-            // $json = array(); 
-            while ($obj = mysql_fetch_assoc($result)) 
-                $json[] = (object)array_map('utf8_encode', $obj) ;
-            break;
-        // insert
-        case 2:
-            break;
-        // update
-        case 3:
-            break;
+        switch($tipusResultat)
+            {
+            // retorna un array associatiu (SELECT)
+            case 1:
+                while ($obj = mysql_fetch_assoc($result)) 
+                    $dades[] = (object)array_map('utf8_encode', $obj) ;
+                break;
+            // insert
+            case 2:
+                break;
+            // update
+            case 3:
+                break;
 
-        default:
-            $json = true;
-            break;
+            default:
+                $dades = true;
+                break;
+            }
         }
-    }
    
-    // $res = array();
-    // array_push($res, $error);
-    // array_push($res, $json);    
-    // return $res;
-
-    return $json;
+    $retorn = array();
+    array_push($retorn, $estat);
+    array_push($retorn, $dades);    
+    
+    return $retorn;
     
     // Alliberar resultat
     mysql_free_result($result);
@@ -102,7 +99,9 @@
     // Tancar connexió
     mysql_close($link);
 
-}?>
+}
+
+?>
 
 <?php function menu() { 
 

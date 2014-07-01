@@ -1,10 +1,12 @@
 <?php 
-ob_start();
-session_start();
 
+ob_start();
 
 include ("../src/pinball.h");
+include ("../src/seguretat.php");
 include ("../src/seguretatLogin.php");
+
+comprovaSessio();
 
 ?>
 <!doctype html>
@@ -33,7 +35,7 @@ include ("../src/seguretatLogin.php");
 			echo "Hola 1 dins el php </br>";
 			
 			$query   = 'SELECT _04_loginUsuari FROM usuari;';
-			$response = dbExec($query);
+			$response = dbExec($query)[1];
 			$_SESSION['resultat']=$response;
 			$resultat = $response;
 			var_dump($_SESSION['resultat']); // Resultat: .... 
@@ -74,7 +76,7 @@ include ("../src/seguretatLogin.php");
 			//[4]=> object(stdClass)#5 (1) { ["_04_loginUsuari"]=> string(3) "rob" } } 
 		 
 			  $query   = 'INSERT INTO joc VALUES (NULL,"' .$_SESSION['resultat'][3]->_04_loginUsuari .'","descJoc45","imgJoc45",0,NOW(),NULL,NULL);';
-			  $response = dbExec($query);
+			  $response = dbExec($query)[1];
 			  echo $response;
 			  
 			  $_SESSION['emplenat']="NO";

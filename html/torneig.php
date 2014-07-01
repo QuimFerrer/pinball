@@ -32,7 +32,7 @@ include ("../src/seguretatLogin.php");
 							WHERE _06_datFinTorn > "' . $data .'" and 
 							_09_datBaixaTorn IS NULL
 							ORDER BY _05_datIniTorn;';
-				$response = dbExec($query);
+				$response = dbExec($query)[1];
 
 				echo '<ul class="promo">';
 

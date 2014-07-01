@@ -29,7 +29,7 @@ comprovaSessio();
 			<h1>Llista de jocs</h1>
 			<?php 
 				$query    = 'SELECT * FROM joc';
-				$response = dbExec($query);
+				$response = dbExec($query)[1];
 
 				echo '<ul class="promo">';
 

@@ -214,7 +214,7 @@ var controller = function(e) {
 
 		case '3110':
 			columns = [			   	
-				{ field: 'idMaq',          caption: 'Maq',         size: '4%' },
+				{ field: 'idMaq',          caption: 'Maq',         size: '4%',attr: 'align=center' },
 				{ field: 'idJoc',          caption: 'Joc',         size: '4%' },
 				{ field: 'nomJoc',         caption: 'Nom Joc',     size: '12%' },
 				{ field: 'idUser',         caption: 'Jug',         size: '4%' },
@@ -225,7 +225,7 @@ var controller = function(e) {
 				{ field: 'nomTorn',        caption: 'Torneig',     size: '10%' },
 				{ field: 'datIniTorn',     caption: 'Inici Torn.', size: '9%' },
 				{ field: 'datFinTorn',     caption: 'Final Torn.', size: '9%' },
-				{ field: 'datBaixaPart',   caption: 'DataBaixa',   size: '9%' }
+				{ field: 'datBaixaPart',   caption: 'DataBaixa',   size: '9%'}
 				];
 			DataGrid("Partides per màquina", false, true, columns, e.target);				
 			break;

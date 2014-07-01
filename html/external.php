@@ -18,7 +18,7 @@ include ("../src/seguretatLogin.php");
 	<h1>Llista de jocs</h1>
 	<?php 
 		$query    = 'SELECT * FROM joc';
-		$response = dbExecLocal($query);
+		$response = dbExec($query)[1];
 
 		echo '<ul class="promo">';
 

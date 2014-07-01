@@ -28,7 +28,7 @@ comprovaSessio();
 			<h1>Llista de productes</h1>
 			<?php 
 				$query    = 'SELECT * FROM productes';
-				$response = dbExec($query);
+				$response = dbExec($query)[1];
 
 				echo '<ul class="promo">';
 

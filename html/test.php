@@ -3,8 +3,7 @@
 include ("../src/pinball.h");
 include ("../src/seguretat.php"); 
 
-session_start();
-$aa = isEndSession();
+isEndSessionInQuery();
 
 	const FORM_CONTACTE= 1000;
 	const FORM_REGISTRE= 1010;
@@ -93,7 +92,7 @@ $pid = 3110;
 
 			case CONSULTA_ADM :
 				$query    = 'SELECT @var:=@var+1 as recid, p.* FROM productes as p, (SELECT @var:=0) as r';
-				$response = dbExec($query);
+				$response = dbExec($query)[1];
 
 				// // Respectar format que espera el grid'
 				// foreach($response as $row) {
@@ -109,36 +108,30 @@ $pid = 3110;
 			case MAQUINES :
 				$query    = 'SELECT * FROM maquina';
 				$response = dbExec($query);
-				// Preparar array per a retornar al grid tots els registres
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));
 				break;
 
 			case TORNEIGS :
 				$query    = 'SELECT * FROM torneig';
 				$response = dbExec($query);
-				// Preparar array per a retornar al grid tots els registres
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));
 				break;
 
 			case USUARIS :
 				$query    = 'SELECT @var:=@var+1 as recid, p.* FROM usuari as p, (SELECT @var:=0) as r';
 				$response = dbExec($query);
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));
 				break;
 				
 			case PARTIDA :
 				$query    = 'SELECT * FROM usuari';
 				$response = dbExec($query);
-				// Preparar array per a retornar al grid tots els registres
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));				
 				break;
 
 			case CONSULTA_USR_2020 :
 				$query    = 'SELECT id, nom, foto FROM productes WHERE id < 3';
-				$response = dbExec($query);
+				$response = dbExec($query)[1];
 
 				$records = array();
 				foreach($response as $row) {
@@ -160,8 +153,7 @@ $pid = 3110;
 								_04_datAltaInsc  IS NOT NULL AND _01_pk_idJug = 2';
 
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));				
 				break;
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -182,7 +174,7 @@ $pid = 3110;
 									DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y %H:%i:%s") AS datBaixaPart
 							FROM
 								(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug,_04_loginUsuari AS loginJug FROM usuari) AS BB,
-								partida
+								partida,
 									LEFT JOIN torneigTePartida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
 							          							   _03_pk_idJocTTP = _02_pk_idJocPart AND
 						         	 							   _04_pk_idJugTTP = _03_pk_idJugPart )
@@ -193,16 +185,10 @@ $pid = 3110;
 							GROUP BY idMaq, nomJoc, loginUser, datHoraPartida, nomTorn, datIniTorn
 							ORDER BY idMaq, nomJoc, loginUser, datHoraPartida, nomTorn, datIniTorn;';
 				$response = dbExec($query);
-				// $error = json_decode($response[0])[0];
-				// if ( $error->estat )
-				// 	$response = array("status"	=> "error", "message"	=> "Error " . $error->numerr . "." . $error->msg);
-				// else
-				// 	$response = array( 'total' => count($response[1]), 'page' => 0, 'records' => $response[1]);
-				if ($_SESSION['endTime'] === "SI")
-					$response = array("status"	=> "error", "message"	=> "La sessió ha expirat. Torna a fer Login a l'aplicació.");
-				var_dump($aa);
-				var_dump($_SESSION);
-				echo json_encode( $response );	
+				var_dump($response);				
+				$ee = controlErrorQuery($response);
+				var_dump($ee);				
+				echo json_encode(controlErrorQuery($response));
 				break;
 
 			case PARTIDES_X_JUGADOR_3120 :

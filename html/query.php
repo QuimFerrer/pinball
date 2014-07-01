@@ -90,7 +90,7 @@ isEndSessionInQuery();
 
 			case CONSULTA_ADM :
 				$query    = 'SELECT @var:=@var+1 as recid, p.* FROM productes as p, (SELECT @var:=0) as r';
-				$response = dbExec($query);
+				$response = dbExec($query)[1];
 
 				// // Respectar format que espera el grid'
 				// foreach($response as $row) {
@@ -106,36 +106,30 @@ isEndSessionInQuery();
 			case MAQUINES :
 				$query    = 'SELECT * FROM maquina';
 				$response = dbExec($query);
-				// Preparar array per a retornar al grid tots els registres
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));
 				break;
 
 			case TORNEIGS :
 				$query    = 'SELECT * FROM torneig';
 				$response = dbExec($query);
-				// Preparar array per a retornar al grid tots els registres
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));
 				break;
 
 			case USUARIS :
 				$query    = 'SELECT @var:=@var+1 as recid, p.* FROM usuari as p, (SELECT @var:=0) as r';
 				$response = dbExec($query);
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));
 				break;
 				
 			case PARTIDA :
 				$query    = 'SELECT * FROM usuari';
 				$response = dbExec($query);
-				// Preparar array per a retornar al grid tots els registres
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));				
 				break;
 
 			case CONSULTA_USR_2020 :
 				$query    = 'SELECT id, nom, foto FROM productes WHERE id < 3';
-				$response = dbExec($query);
+				$response = dbExec($query)[1];
 
 				$records = array();
 				foreach($response as $row) {
@@ -157,8 +151,7 @@ isEndSessionInQuery();
 								_04_datAltaInsc  IS NOT NULL AND _01_pk_idJug = 2';
 
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));				
 				break;
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -179,7 +172,7 @@ isEndSessionInQuery();
 									DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y %H:%i:%s") AS datBaixaPart
 							FROM
 								(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug,_04_loginUsuari AS loginJug FROM usuari) AS BB,
-								partida
+								partida,
 									LEFT JOIN torneigTePartida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
 							          							   _03_pk_idJocTTP = _02_pk_idJocPart AND
 						         	 							   _04_pk_idJugTTP = _03_pk_idJugPart )
@@ -190,21 +183,7 @@ isEndSessionInQuery();
 							GROUP BY idMaq, nomJoc, loginUser, datHoraPartida, nomTorn, datIniTorn
 							ORDER BY idMaq, nomJoc, loginUser, datHoraPartida, nomTorn, datIniTorn;';
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response);
-				echo json_encode( $response );	
-//////////////////////////////////////////////////////////////////////////				
-				// $response = dbExec($query);
-				// $error = json_decode($response[0])[0];
-				// if ( $error->estat )
-				// 	$response = array("status"	=> "error", "message"	=> "Error " . $error->numerr . "." . $error->msg);
-				// else
-				// 	$response = array( 'total' => count($response[1]), 'page' => 0, 'records' => $response[1]);
-
-				// if ($_SESSION['endTime'] === "SI")
-				// 	$response = array("status"	=> "error", "message"	=> "La sessió ha expirat. Torna a fer Login a l'aplicació.");
-
-				// echo json_encode( $response );	
-//////////////////////////////////////////////////////////////////////////								
+				echo json_encode(controlErrorQuery($response));
 				break;
 
 			case PARTIDES_X_JUGADOR_3120 :
@@ -232,8 +211,7 @@ isEndSessionInQuery();
 							GROUP BY loginJug, idMaq, nomJoc, datHoraPartida, nomTorn, datIniTorn
 							ORDER BY loginJug, idMaq, nomJoc, datHoraPartida, nomTorn, datIniTorn;';
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));
 				break;
 
 			case ALTA_JOCS_3210 :
@@ -249,8 +227,7 @@ isEndSessionInQuery();
 							FROM joc
 							WHERE _08_datBaixaJoc IS NULL;';
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));				
 				break;
 			case JOCS_HISTORIC_3240 :
 				$query    = 'SELECT _01_pk_idjoc AS idJoc, 
@@ -261,8 +238,7 @@ isEndSessionInQuery();
 									DATE_FORMAT(_08_datBaixaJoc, "%d-%m-%Y %H:%i:%s") AS datBaixaJoc
 							FROM joc;';
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));				
 				break;			
 			case JOCS_X_MAQUINA_3250 :
 				$query    = 'SELECT _01_pk_idJoc AS idJoc,
@@ -281,8 +257,7 @@ isEndSessionInQuery();
 							GROUP BY idJoc,idMaq
 							ORDER BY idJoc,idMaq;';
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));				
 				break;
 			case JOCS_X_MAQUINA_HISTORIC_3260 :
 				$query    = 'SELECT _01_pk_idJoc AS idJoc,
@@ -300,8 +275,7 @@ isEndSessionInQuery();
 							GROUP BY idJoc,idMaq
 							ORDER BY idJoc,idMaq;';
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));				
 				break;
 
 			case ALTA_TORNEIGS_3310 :
@@ -324,11 +298,9 @@ isEndSessionInQuery();
 								INNER JOIN maquina    ON _01_pk_idMaqInst = _01_pk_idMaq
 							GROUP BY idTorn,idMaq;';
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));				
 				break;
 			case TORNEIGS_AMB_JUGADORS_ACTUAL_3350 :
-
 				$query    = 'SELECT _01_pk_idTorn    AS idTorn,
 									_03_nomTorn      AS nomTorn,
 									_04_premiTorn    AS premiTorn,
@@ -351,8 +323,7 @@ isEndSessionInQuery();
 								_10_datBaixaUsuari IS NULL
 							ORDER BY idTorn, idUser;';
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));
 				break;
 			case TORNEIGS_AMB_JUGADORS_HISTORIC_3360 :
 				$query    = 'SELECT _01_pk_idTorn    AS idTorn,
@@ -375,8 +346,7 @@ isEndSessionInQuery();
 									INNER JOIN usuari  ON _01_pk_idJug  = _01_pk_idUsuari
 							ORDER BY idTorn, idUSer;';				
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
+				echo json_encode(controlErrorQuery($response));				
 				break;	
 			case TORNEIGS_AMB_MAQUINES_ACTUAL_3380 :
 				$query    = 'SELECT _01_pk_idTorn    AS idTorn,
@@ -408,8 +378,7 @@ isEndSessionInQuery();
 							GROUP BY idTorn,idMaq,idUsuari,datHoraPartida,rondaPart
 							ORDER BY idTorn,idMaq,idUsuari,datHoraPartida,rondaPart;';
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
+				echo json_encode(controlErrorQuery($response));				
 				break;	
 			case TORNEIGS_AMB_MAQUINES_HISTORIC_3390 :
 				$query    = 'SELECT _01_pk_idTorn    AS idTorn,
@@ -440,8 +409,7 @@ isEndSessionInQuery();
 							GROUP BY idTorn,idMaq,idUsuari,datHoraPartida,rondaPart
 							ORDER BY idTorn,idMaq,idUsuari,datHoraPartida,rondaPart;';
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
+				echo json_encode(controlErrorQuery($response));				
 				break;	
 
 			case ALTA_MAQUINES_3410 :
@@ -477,8 +445,6 @@ isEndSessionInQuery();
 								_08_datBaixaMaqInst  IS NULL
 							GROUP BY idMaq, idUbic, idJoc;';
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
 				break;
 			case LLISTAT_MAQUINES_HISTORIC_3440 :
 				$query    = 'SELECT MAQ._01_pk_idMaq AS idMaq,
@@ -503,8 +469,6 @@ isEndSessionInQuery();
 								AA._01_pk_idMaq  = MAQ._01_pk_idMaq
 							GROUP BY idMaq, idUbic, idJoc;';
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
 				break;
 
 			case ALTA_ASSIGNACIO_JOC_MAQUINA_3460 :
@@ -529,8 +493,7 @@ isEndSessionInQuery();
 							GROUP BY idMaq,idJoc
 							ORDER BY idMaq,idJoc;';
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
+				echo json_encode(controlErrorQuery($response));				
 				break;
 			case RECAUDACIO_X_MAQ_AMB_RANKING_3510 :
 				$query    = 'CREATE TABLE CC  ENGINE=MEMORY
@@ -542,19 +505,27 @@ isEndSessionInQuery();
 							WHERE  _08_datBaixaMaq IS NULL
 							GROUP BY idMaq
 							ORDER BY totalCredits DESC;';
-				$response = dbExec($query,0);							
-				$query    = 'SELECT * FROM CC
-							UNION
-							SELECT ""      AS idMaq,
-								   ""      AS macMaq,
-								   "TOTAL" AS propMaq,
-								   SUM(_05_totCredMaq) AS totalCredits
-							FROM maquina;';
-				$response = dbExec($query);							
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				$query    = 'DROP TABLE CC;';
-				$response1 = dbExec($query,0);
-				echo json_encode( $response );			
+				$response = dbExec($query,0);
+				$response1 = controlErrorQuery($response);				
+				if ( !($respose[0]->status) )
+					{
+					$query    = 'SELECT * FROM CC
+								UNION
+								SELECT ""      AS idMaq,
+									   ""      AS macMaq,
+									   "TOTAL" AS propMaq,
+								   		SUM(_05_totCredMaq) AS totalCredits
+								FROM maquina;';
+					$response  = dbExec($query);	
+					$response1 = controlErrorQuery($response);
+					if (!($response[0]->status))
+						{
+						$query    = 'DROP TABLE CC;';
+						$response = dbExec($query,0);
+						$response1 = controlErrorQuery($response);
+						}
+					}
+				echo json_encode( $response1 );
 				break;			
 			case RECAUDACIO_X_JOC_AMB_RANKING_3520 :
 				$query    = 'CREATE TABLE CC  ENGINE=MEMORY
@@ -586,70 +557,59 @@ isEndSessionInQuery();
 				break;			
 			case RECAUDACIO_X_JOC_I_MAQ_3530 :
 				$query    = '';
+				echo json_encode(controlErrorQuery($response));				
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
 				break;			
 			case RECAUDACIO_X_PROPIETARI_3540 :	
 				$query    = '';
+				echo json_encode(controlErrorQuery($response));				
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
 				break;			
 			case RECAUDACIO_X_PROPIETARI_I_MAQ_3550 :		
 				$query    = '';
+				echo json_encode(controlErrorQuery($response));				
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
 				break;			
 			case RECAUDACIO_X_PROPIETARI_I_JOC_3560 :
 				$query    = '';
+				echo json_encode(controlErrorQuery($response));				
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
 				break;			
 			case RECAUDACIO_X_PROV_CP_POB_3570 :
 				$query    = '';
+				echo json_encode(controlErrorQuery($response));				
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
 				break;			
 			case RECAUDACIO_X_POBLACIO_3580 :		
 				$query    = '';
+				echo json_encode(controlErrorQuery($response));				
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
 				break;			
 			case RECAUDACIO_X_PROV_CP_POB_MAQ_3590 :
 				$query    = '';
+				echo json_encode(controlErrorQuery($response));				
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
 				break;			
 			case RECAUDACIO_X_JOC_3600 :	
 				$query    = '';
+				echo json_encode(controlErrorQuery($response));				
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
 				break;			
 			case RECAUDACIO_X_JOC_POB_3610 :			
 				$query    = '';
+				echo json_encode(controlErrorQuery($response));				
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
 				break;			
 			case RECAUDACIO_X_JOC_PROV_POB_CP_3620 :
 				$query    = '';
+				echo json_encode(controlErrorQuery($response));				
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
 				break;			
 
 			case PLANTILLA :
 				$query    = '';
+				echo json_encode(controlErrorQuery($response));				
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
 				break;
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -676,8 +636,7 @@ isEndSessionInQuery();
 								_04_datAltaInsc    IS NOT NULL AND
 								_04_loginUsuari = "' . $_SESSION["login"] . '" ' . ' ORDER BY nomTorn;';
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );
+				echo json_encode(controlErrorQuery($response));				
 				break;	
 
 			case CONSULTA_USR_RANKING_ACTUAL_5050 :
@@ -803,10 +762,6 @@ isEndSessionInQuery();
 				break;				
 
 			case BAIXA_USR_TORN_5043 :
-				// $query    = ' ';
-				// $response = dbExec($query);
-				// $response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				// echo json_encode( $response );				
 				break;				
 
 			case CONSULTA_USR_TOTS_TORNEIGS_5061 :
@@ -832,8 +787,7 @@ isEndSessionInQuery();
 									GROUP BY _01_pk_idTorn)
 							ORDER BY datIniTorn;';
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				echo json_encode( $response );			
+				echo json_encode(controlErrorQuery($response));				
 				break;				
 
 			case CONSULTA_RANKING_ACTUAL_5070 :
@@ -957,10 +911,6 @@ isEndSessionInQuery();
 				break;				
 
 			case INSCRIPCIO_USR_TORNEIG_5063 :
-				// $query    = ' ';
-				// $response = dbExec($query);
-				// $response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				// echo json_encode( $response );			
 				break;				
 
 			default:

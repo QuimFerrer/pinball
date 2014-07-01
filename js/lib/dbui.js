@@ -116,10 +116,8 @@ var dbGrid = function() {
             fnOnError    = function(target, error)
                 { 
                 // console.log( error.xhr.responseText, error ); 
-
-                
-                // if (target == "grid" && error.message.indexOf("expirat"))                    
-                //     document.getElementsByTagName("META")[0].content = "4;URL= ../html/logout.php";
+                if (target == "grid" && error.message.indexOf("expirat")>0)
+                    document.getElementsByTagName("META")[0].content = "4;URL= ../html/logout.php";
                 };
         }
 
