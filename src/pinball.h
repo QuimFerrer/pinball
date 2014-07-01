@@ -10,9 +10,9 @@ function dbExec($query,$tipusResultat=1) {
 
 function controlErrorQuery($response)
 {
-    $error = $response[0];
-    if ( $error->status )
-        $response = array("status" => "error", "message" => "Error " . $error->numerr . "." . $error->msg);
+    $estat = $response[0];
+    if ( $estat->error )
+        $response = array("status" => "error", "message" => "Error " . $estat->numerr . "." . $estat->msg);
     else
         $response = array('total' => count($response[1]), 'page' => 0, 'records' => $response[1]);
     if ($_SESSION['endTime'] === "SI")
@@ -46,7 +46,7 @@ function dbExecLocal($query,$tipusResultat) {
      * Retorna : string JSON
      */
          
-    $estat  = array();    
+    $estat = (object)array('error' => false, 'msg' => '' , 'numerr' => 0);
     $dades  = array();
 
     if (!isset($query) ) die('<h1>No es una consulta correcte !</h1>');
@@ -64,7 +64,7 @@ function dbExecLocal($query,$tipusResultat) {
     $result = mysql_query($query);
 
     if (!$result)
-        $estat = (object)array('status' => true, 'msg' => mysql_error(), 'numerr' => mysql_errno());
+        $estat = (object)array('error' => true, 'msg' => mysql_error(), 'numerr' => mysql_errno());
     else
         {
         switch($tipusResultat)

@@ -172,7 +172,7 @@ isEndSessionInQuery();
 									DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y %H:%i:%s") AS datBaixaPart
 							FROM
 								(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug,_04_loginUsuari AS loginJug FROM usuari) AS BB,
-								partida,
+								partida
 									LEFT JOIN torneigTePartida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
 							          							   _03_pk_idJocTTP = _02_pk_idJocPart AND
 						         	 							   _04_pk_idJugTTP = _03_pk_idJugPart )
@@ -496,6 +496,8 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));				
 				break;
 			case RECAUDACIO_X_MAQ_AMB_RANKING_3510 :
+				$query    = 'DROP TABLE CC;';
+				$response  = dbExec($query,0);
 				$query    = 'CREATE TABLE CC  ENGINE=MEMORY
 							SELECT _01_pk_idMaq   AS idMaq,
 								   _02_macMaq     AS macMaq,
@@ -505,9 +507,9 @@ isEndSessionInQuery();
 							WHERE  _08_datBaixaMaq IS NULL
 							GROUP BY idMaq
 							ORDER BY totalCredits DESC;';
-				$response = dbExec($query,0);
+				$response  = dbExec($query,0);
 				$response1 = controlErrorQuery($response);				
-				if ( !($respose[0]->status) )
+				if ( !($response[0]->error) )
 					{
 					$query    = 'SELECT * FROM CC
 								UNION
@@ -518,12 +520,8 @@ isEndSessionInQuery();
 								FROM maquina;';
 					$response  = dbExec($query);	
 					$response1 = controlErrorQuery($response);
-					if (!($response[0]->status))
-						{
-						$query    = 'DROP TABLE CC;';
-						$response = dbExec($query,0);
-						$response1 = controlErrorQuery($response);
-						}
+					$query    = 'DROP TABLE CC;';
+					$response  = dbExec($query,0);
 					}
 				echo json_encode( $response1 );
 				break;			

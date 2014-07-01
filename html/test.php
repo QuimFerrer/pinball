@@ -77,7 +77,7 @@ isEndSessionInQuery();
 	
 	$pid = isset($_REQUEST['pid']) ? (int) $_REQUEST['pid'] : 0;
 
-$pid = 3110;
+$pid = 3510;
 
 	if ($pid > 0) {
 
@@ -174,7 +174,7 @@ $pid = 3110;
 									DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y %H:%i:%s") AS datBaixaPart
 							FROM
 								(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug,_04_loginUsuari AS loginJug FROM usuari) AS BB,
-								partida,
+								partida
 									LEFT JOIN torneigTePartida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
 							          							   _03_pk_idJocTTP = _02_pk_idJocPart AND
 						         	 							   _04_pk_idJugTTP = _03_pk_idJugPart )
@@ -185,9 +185,9 @@ $pid = 3110;
 							GROUP BY idMaq, nomJoc, loginUser, datHoraPartida, nomTorn, datIniTorn
 							ORDER BY idMaq, nomJoc, loginUser, datHoraPartida, nomTorn, datIniTorn;';
 				$response = dbExec($query);
-				var_dump($response);				
-				$ee = controlErrorQuery($response);
-				var_dump($ee);				
+				// var_dump($response);				
+				// $ee = controlErrorQuery($response);
+				// var_dump($ee);				
 				echo json_encode(controlErrorQuery($response));
 				break;
 
@@ -526,19 +526,32 @@ $pid = 3110;
 							WHERE  _08_datBaixaMaq IS NULL
 							GROUP BY idMaq
 							ORDER BY totalCredits DESC;';
-				$response = dbExec($query,0);							
-				$query    = 'SELECT * FROM CC
-							UNION
-							SELECT ""      AS idMaq,
-								   ""      AS macMaq,
-								   "TOTAL" AS propMaq,
-								   SUM(_05_totCredMaq) AS totalCredits
-							FROM maquina;';
-				$response = dbExec($query);							
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response );
-				$query    = 'DROP TABLE CC;';
-				$response1 = dbExec($query,0);
-				echo json_encode( $response );			
+				$response  = dbExec($query,0);
+				var_dump($response[0]);
+				var_dump($response[1]);
+				$response1 = controlErrorQuery($response);				
+				if ( !($response[0]->error) )
+					{
+					$query    = 'SELECT * FROM CC
+								UNION
+								SELECT ""      AS idMaq,
+									   ""      AS macMaq,
+									   "TOTAL" AS propMaq,
+								   		SUM(_05_totCredMaq) AS totalCredits
+								FROM maquina;';
+					$response  = dbExec($query);	
+					$response1 = controlErrorQuery($response);
+					if (!($response[0]->error))
+						{
+						$query    = 'DROP TABLE CC;';
+						$response  = dbExec($query,0);
+						$response2 = controlErrorQuery($response);
+						// les dades estan a la 2ona query, si dona error aquí
+						// agafa aquest últim error
+						if ($response[0]->error) $response1 = $response2;
+						}
+					}
+				echo json_encode( $response1 );
 				break;			
 			case RECAUDACIO_X_JOC_AMB_RANKING_3520 :
 				$query    = 'CREATE TABLE CC  ENGINE=MEMORY
