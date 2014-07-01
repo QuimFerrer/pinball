@@ -15,12 +15,67 @@ $('#sidebar').w2sidebar({
 						   { id: '1102', text: 'Consulta 2', img: 'icon-page' },
 						   { id: '1103', text: 'Consulta 3', img: 'icon-page' }
 			  		]},
-			  		{ id: '1120', text: 'Generar Partides',	img:'icon-edit'}
-				 ]
-		}
-	],
-	onClick: function(e){ controller(e) }
-});
+			  		{ id: '1120', text: 'Generar Partides',	img:'icon-edit'},
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+					{ id: '3000', text: 'Perfil', img: 'icon-edit' },
+					{ id: '3100', text: 'Partides', img: 'icon-folder',
+					nodes: [{ id: '3110', text: 'per màquina',  img: 'icon-page' },
+							{ id: '3120', text: 'per jugador',  img: 'icon-page' },
+							{ id: '3130', text: 'bloquejar',    img: 'icon-page' },
+							{ id: '3140', text: 'desbloquejar', img: 'icon-page' }]},
+					{ id: '3200', text: 'Jocs', img: 'icon-folder',
+					nodes: [{ id: '3210', text: 'Alta',  img: 'icon-edit' },
+							{ id: '3220', text: 'Gestió',  img: 'icon-edit' },							
+							{ id: '3230', text: 'Llistat',  img: 'icon-page' },
+							{ id: '3240', text: 'Històric', img: 'icon-page' },
+							{ id: '3245', text: 'Màquines', img: 'icon-folder',									
+							nodes: [{ id: '3250', text: 'Actual',  img: 'icon-page' },
+									{ id: '3260', text: 'Històric',  img: 'icon-page' }]}]},
+					{ id: '3300', text: 'Torneigs', img: 'icon-folder',
+					nodes: [{ id: '3310', text: 'Alta',  img: 'icon-edit' },
+							{ id: '3315', text: 'Gestió',  img: 'icon-edit' },							
+							{ id: '3320', text: 'Relació',  img: 'icon-page' },
+							{ id: '3330', text: 'Llistats',  img: 'icon-folder',
+							nodes: [{ id: '3340', text: 'Jugadors',  img: 'icon-folder',
+									nodes: [{ id: '3350', text: 'Actual',  img: 'icon-page' },
+											{ id: '3360', text: 'Històric',  img: 'icon-page' }]},
+									{ id: '3370', text: 'Màquines',  img: 'icon-folder',
+									nodes: [{ id: '3380', text: 'Actual',  img: 'icon-page' },
+											{ id: '3390', text: 'Històric',  img: 'icon-page' } ]}]}]},
+					{ id: '3400', text: 'Màquines', img: 'icon-folder',
+					nodes: [{ id: '3410', text: 'Alta',  img: 'icon-edit' },
+							{ id: '3420', text: 'Gestió',  img: 'icon-edit' },							
+							{ id: '3430', text: 'Llistat',  img: 'icon-page' },
+							{ id: '3440', text: 'Històric',  img: 'icon-page' },									
+							{ id: '3450', text: 'Assignar Jocs',  img: 'icon-folder',
+							nodes: [{ id: '3460', text: 'Alta',  img: 'icon-edit' },
+									{ id: '3470', text: 'Gestió',  img: 'icon-edit' },									
+									{ id: '3480', text: 'Llistat',  img: 'icon-page' }]},
+							{ id: '3500', text: 'Recaudacions',  img: 'icon-folder',
+							nodes: [{ id: '3510', text: 'Maq i Ranking',  img: 'icon-page' },
+									{ id: '3520', text: 'Joc i Ranking',  img: 'icon-page' },
+									{ id: '3530', text: 'Joc i Maq',  img: 'icon-page' },
+									{ id: '3540', text: 'Propietari',  img: 'icon-page' },
+									{ id: '3550', text: 'Propiet i Maq',  img: 'icon-page' },
+									{ id: '3560', text: 'Propiet i Joc',  img: 'icon-page' },
+									{ id: '3570', text: 'Prov-CP-Pob',  img: 'icon-page' },
+									{ id: '3580', text: 'Població',  img: 'icon-page' },
+									{ id: '3590', text: 'Prov-CP-Pob-Maq',  img: 'icon-page' },
+									{ id: '3600', text: 'Joc',  img: 'icon-page' },
+									{ id: '3610', text: 'Joc i Població',  img: 'icon-page' },											
+									{ id: '3620', text: 'Joc-Prov-CP-Pob',  img: 'icon-page' }]},
+							{ id: '3700', text: 'Estadístiques',  img: 'icon-folder',
+							nodes: [{ id: '3710', text: '1',  img: 'icon-page' },
+									{ id: '3720', text: '2',  img: 'icon-page' },									
+									{ id: '3730', text: '3',  img: 'icon-page' }]}]},											
+							{ id: '3800', text: 'Ubicacions', img: 'icon-folder' },
+							{ id: '3900', text: 'Jugadors', img: 'icon-folder' }
+						 ]
+				}
+			],
+			onClick: function(e){ controller(e) }
+		});
 /*
  * Paràmetres DataGrid(title, table, toolbar, columns, fieldsOrId, pkName)
  */
@@ -146,9 +201,277 @@ var controller = function(e) {
 				{ field: '_05_pk_idRonda', caption: 'Ronda Nº', size: '15%' },
 				{ field: '_07_puntsRonda', caption: 'Puntuacio Ronda', size: '15%' }
 			];
-		    DataGrid("Manteniment de partides", "partides", false, columns, e.target);
+		    DataGrid("Manteniment de partides", "partides", false, false, columns, e.target);
 		    break;
 
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+
+		case '3110':
+			columns = [			   	
+				{ field: 'idMaq',          caption: 'Maq',         size: '4%' },
+				{ field: 'idJoc',          caption: 'Joc',         size: '4%' },
+				{ field: 'nomJoc',         caption: 'Nom Joc',     size: '12%' },
+				{ field: 'idUser',         caption: 'Jug',         size: '4%' },
+				{ field: 'loginUser',      caption: 'login',       size: '7%' },
+				{ field: 'nomUser',        caption: 'Nom',         size: '8%' },
+				{ field: 'datHoraPartida', caption: 'Data Hora',   size: '16%' },
+				{ field: 'idTorn',         caption: 'idTorn',      size: '6%' },
+				{ field: 'nomTorn',        caption: 'Torneig',     size: '10%' },
+				{ field: 'datIniTorn',     caption: 'Inici Torn.', size: '9%' },
+				{ field: 'datFinTorn',     caption: 'Final Torn.', size: '9%' },
+				{ field: 'datBaixaPart',   caption: 'DataBaixa',   size: '9%' }
+				];
+			DataGrid("Partides per màquina", false, true, columns, e.target);				
+			break;
+		case '3120':
+			columns = [			   	
+				{ field: 'idUser',         caption: 'Jug',         size: '4%' },
+				{ field: 'loginUser',      caption: 'login',       size: '7%' },
+				{ field: 'nomUser',        caption: 'Nom',         size: '8%' },
+				{ field: 'idMaq',          caption: 'Maq',         size: '4%' },
+				{ field: 'idJoc',          caption: 'Joc',         size: '4%' },
+				{ field: 'nomJoc',         caption: 'Nom Joc',     size: '12%' },
+				{ field: 'datHoraPartida', caption: 'Data Hora',   size: '16%' },
+				{ field: 'idTorn',         caption: 'idTorn',      size: '6%' },
+				{ field: 'nomTorn',        caption: 'Torneig',     size: '10%' },
+				{ field: 'datIniTorn',     caption: 'Inici Torn.', size: '9%' },
+				{ field: 'datFinTorn',     caption: 'Final Torn.', size: '9%' },
+				{ field: 'datBaixaPart',   caption: 'DataBaixa',   size: '9%' }
+				];
+		  	DataGrid("Partides per jugador", false, true, columns, e.target);
+		    break;
+			
+		case '3130':
+			break;
+		case '3140':
+		    break;
+		case '3210':
+		    break;
+		case '3230':
+			columns = [			   	
+				{ field: 'idJoc',       caption: 'Joc',           size: '5%' },
+				{ field: 'nomJoc',      caption: 'Nom Joc',       size: '20%' },
+				{ field: 'numPartides', caption: 'Num. partides', size: '10%' },
+				{ field: 'datAltaJoc',  caption: 'Data Alta',     size: '20%' },
+				{ field: 'datModJoc',   caption: 'Data Modif.',   size: '20%' }
+				];
+			DataGrid("Jocs", false, true, columns, e.target);
+			break;
+		case '3240':
+			columns = [			   	
+				{ field: 'idJoc',       caption: 'Joc',           size: '5%' },
+				{ field: 'nomJoc',      caption: 'Nom Joc',       size: '20%' },
+				{ field: 'numPartides', caption: 'Num. partides', size: '10%' },
+				{ field: 'datAltaJoc',  caption: 'Data Alta',     size: '20%' },
+				{ field: 'datModJoc',   caption: 'Data Modif.',   size: '20%' },
+				{ field: 'datBaixaJoc', caption: 'Data Baixa',    size: '20%' }
+				];
+			DataGrid("Jocs. Històric", false, true, columns, e.target);
+			break;
+		case '3250':
+			columns = [			   	
+				{ field: 'idJoc',       caption: 'Joc',           size: '10%' },
+				{ field: 'nomJoc',      caption: 'Nom Joc',       size: '20%' },
+				{ field: 'idMaq',       caption: 'Maq',           size: '10%' },
+				{ field: 'macMaq',      caption: 'Mac',           size: '15%' },
+				{ field: 'numPartides', caption: 'Num. partides', size: '10%' },
+				{ field: 'totalCredit', caption: 'Total crèdit (€)',  size: '10%' }
+				];
+	    	DataGrid("Jocs amb màquines instal.lades", false, true, columns, e.target);
+		    break;
+		case '3260':
+			columns = [			   	
+				{ field: 'idJoc',       caption: 'Joc',           size: '6%' },
+				{ field: 'nomJoc',      caption: 'Nom Joc',       size: '15%' },
+				{ field: 'idMaq',       caption: 'Maq',           size: '6%' },
+				{ field: 'macMaq',      caption: 'Mac',           size: '9%' },
+				{ field: 'numPartides', caption: 'Num. partides', size: '6%' },
+				{ field: 'totalCredits',caption: 'Crèdits (€)',   size: '9%' },
+				{ field: 'datAltaJoc',  caption: 'Data Alta',     size: '16%' },
+				{ field: 'datModJoc',   caption: 'Data Modif.',   size: '16%' },
+				{ field: 'datBaixaJoc', caption: 'Data Baixa',    size: '16%' }						
+				];
+			DataGrid("Jocs amb màquines instal.lades. Històric", false, true, columns, e.target);
+			break;				    
+		case '3300':
+			break;
+		case '3310':
+			break;
+		case '3320':
+			columns = [
+				{ field: 'idTorn',       caption: 'idTorn',      size: '6%' },
+				{ field: 'nomTorn',      caption: 'Torneig',     size: '15%' },
+				{ field: 'premiTorn',    caption: 'Premi (€)',   size: '9%' },
+				{ field: 'idJoc',        caption: 'Joc',         size: '6%' },
+				{ field: 'nomJoc',       caption: 'Nom Joc',     size: '15%' },
+				{ field: 'datIniTorn',   caption: 'Inici Torn.', size: '9%' },
+				{ field: 'datFinTorn',   caption: 'Final Torn.', size: '9%' },
+				{ field: 'idMaq',        caption: 'Maq',         size: '6%' },
+				{ field: 'macMaq',       caption: 'Mac',         size: '10%' },
+				{ field: 'datBaixaTorn', caption: 'DataBaixa',   size: '15%' }
+				];
+			DataGrid("Relació de Torneigs", false, true, columns, e.target);
+			break;				    
+		case '3350':
+			columns = [				
+				{ field: 'idTorn',     caption: 'idTorn',      size: '6%' },
+				{ field: 'nomTorn',    caption: 'Torneig',     size: '15%' },
+				{ field: 'premiTorn',  caption: 'Premi (€)',   size: '9%' },
+				{ field: 'idJoc',      caption: 'Joc',         size: '6%' },						
+				{ field: 'nomJoc',     caption: 'Nom Joc',     size: '15%' },						
+				{ field: 'idUser',     caption: 'Jug',         size: '6%' },
+				{ field: 'loginUser',  caption: 'login',       size: '7%' },
+				{ field: 'nomUser',    caption: 'Nom',         size: '8%' },
+				{ field: 'datIniTorn', caption: 'Inici Torn.', size: '9%' },
+				{ field: 'datFinTorn', caption: 'Final Torn.', size: '9%' }
+				];
+			DataGrid("Jugadors dels Torneigs", false, true, columns, e.target);				
+			break;
+		case '3360':
+			columns = [				
+				{ field: 'idTorn',       caption: 'idTorn',      size: '6%' },
+				{ field: 'nomTorn',      caption: 'Torneig',     size: '13%' },
+				{ field: 'premiTorn',    caption: 'Premi (€)',   size: '8%' },
+				{ field: 'idJoc',        caption: 'Joc',         size: '6%' },						
+				{ field: 'nomJoc',       caption: 'Nom Joc',     size: '13%' },
+				{ field: 'loginUser',    caption: 'login',       size: '6%' },
+				{ field: 'nomUser',      caption: 'Jugador',     size: '8%' },
+				{ field: 'datIniTorn',   caption: 'Inici Torn.', size: '9%' },
+				{ field: 'datFinTorn',   caption: 'Final Torn.', size: '9%' },
+				{ field: 'datBaixaTorn', caption: 'Baixa Torn',  size: '9%' },
+				{ field: 'datBaixaUser', caption: 'Baixa Jug',   size: '9%' }						
+				];
+			DataGrid("Històric de jugadors dels Torneigs", false, true, columns, e.target);								
+			break;
+		case '3380':
+			columns = [				
+				{ field: 'idTorn',       caption: 'idTorn',      size: '6%' },
+				{ field: 'nomTorn',      caption: 'Torneig',     size: '15%' },
+				{ field: 'premiTorn',    caption: 'Premi (€)',   size: '8%' },
+				{ field: 'idJoc',        caption: 'Joc',         size: '6%' },	
+				{ field: 'nomJoc',       caption: 'Nom Joc',     size: '13%' },											
+				{ field: 'idMaq',        caption: 'Maq',         size: '6%' },
+				{ field: 'idUser',       caption: 'Jug',         size: '6%' },
+				{ field: 'nomUser',      caption: 'Nom',         size: '8%' },
+				{ field: 'rondaPart',    caption: 'Ronda',       size: '6%' },						
+				{ field: 'punts',        caption: 'Punts',       size: '6%' },						
+				{ field: 'datHoraPartida', caption: 'Data Hora Partida',   size: '16%' }
+				];
+			DataGrid("Màquines dels Torneigs", false, true, columns, e.target);				
+			break;
+		case '3390':
+			columns = [				
+				{ field: 'nomTorn',        caption: 'Torneig',     size: '13%' },
+				{ field: 'premiTorn',      caption: 'Premi (€)',   size: '8%' },
+				{ field: 'nomJoc',         caption: 'Nom Joc',     size: '13%' },											
+				{ field: 'idMaq',          caption: 'Maq',         size: '5%' },
+				{ field: 'nomUser',        caption: 'Jugador',     size: '8%' },
+				{ field: 'rondaPart',      caption: 'Ronda',       size: '5%' },						
+				{ field: 'punts',          caption: 'Punts',       size: '5%' },						
+				{ field: 'datHoraPartida', caption: 'Data Hora Partida',size: '16%' },
+				{ field: 'datBaixaTorn',   caption: 'Baixa Torn',  size: '9%' },
+				{ field: 'datBaixaPart',   caption: 'Baixa Part',  size: '9%' }						
+				];
+	    	DataGrid("Històric de màquines dels Torneigs", false, true, columns, e.target);				
+		    break;
+
+		case '3410':
+		    break;
+		case '3420':
+		    break;				    
+		case '3430':
+			columns = [
+				{ field: 'idMaq',          caption: 'Maq',         size: '5%' },
+				{ field: 'macMaq',         caption: 'Mac',         size: '7%' },
+				{ field: 'propMaq',        caption: 'Propietari',  size: '17%' },							
+				{ field: 'idJoc',          caption: 'Joc',         size: '5%' },							
+				{ field: 'nomJoc',         caption: 'Nom Joc',     size: '13%' },											
+				{ field: 'totalCredits',   caption: 'Crèdits (€)', size: '9%' },
+				{ field: 'idUbic',         caption: 'Ubic',        size: '5%' },
+				{ field: 'empUbic',        caption: 'Empresa',     size: '12%' },
+				{ field: 'pobUbic',        caption: 'Població',    size: '8%' },						
+				{ field: 'provUbic',       caption: 'Provincia',   size: '8%' },						
+				{ field: 'datAltaMaq',     caption: 'Alta Maq',    size: '9%' }
+				];
+		   	DataGrid("Llistat de màquines", false, true, columns, e.target);
+		    break;
+		case '3440':
+			columns = [
+				{ field: 'idMaq',          caption: 'Maq',         size: '5%' },
+				{ field: 'macMaq',         caption: 'Mac',         size: '7%' },
+				{ field: 'propMaq',        caption: 'Propietari',  size: '17%' },							
+				{ field: 'idJoc',          caption: 'Joc',         size: '5%' },							
+				{ field: 'nomJoc',         caption: 'Nom Joc',     size: '13%' },											
+				{ field: 'totalCredits',   caption: 'Crèdits (€)', size: '9%' },
+				{ field: 'idUbic',         caption: 'Ubic',        size: '5%' },
+				{ field: 'empUbic',        caption: 'Empresa',     size: '12%' },
+				{ field: 'pobUbic',        caption: 'Població',    size: '8%' },						
+				{ field: 'provUbic',       caption: 'Provincia',   size: '8%' },
+				{ field: 'datBaixaMaq',    caption: 'Baixa Maq',   size: '9%' }						
+			];
+		   	DataGrid("Llistat històric de màquines", false, true, columns, e.target);				
+		    break;				    				    
+		case '3460':
+		    break;
+		case '3470':
+		    break;
+		case '3480':
+			columns = [
+				{ field: 'idMaq',        caption: 'Maq',           size: '8%' },
+				{ field: 'macMaq',       caption: 'Mac',           size: '13%' },
+				{ field: 'idJoc',        caption: 'Joc',           size: '8%' },							
+				{ field: 'nomJoc',       caption: 'Nom Joc',       size: '15%' },											
+				{ field: 'numPartides',  caption: 'Num. partides', size: '8%' },
+				{ field: 'totalCredits', caption: 'Crèdits (€)',   size: '10%' }
+			];
+		   	DataGrid("Llistat de jocs assignats a cada màquina", false, true, columns, e.target);				
+		    break;				    				    				    
+		case '3510':
+			columns = [
+				{ field: 'idMaq',        caption: 'Maq',           size: '8%' },
+				{ field: 'macMaq',       caption: 'Mac',           size: '13%' },
+				{ field: 'propMaq',      caption: 'Propietari',    size: '17%' },						
+				{ field: 'totalCredits', caption: 'Crèdits (€)', size: '10%' }
+			];
+		   	DataGrid("Ranking de recaudacions per màquina", false, true, columns, e.target);				
+		    break;
+		case '3520':
+			columns = [
+				{ field: 'idJoc',        caption: 'Joc',           size: '15%' },							
+				{ field: 'nomJoc',       caption: 'Nom Joc',       size: '15%' },											
+				{ field: 'totalCredits', caption: 'Crèdits (€)',   size: '15%' }
+			];
+		   	DataGrid("Ranking de recaudacions per joc", false, true, columns, e.target);				
+		    break;
+		case '3530':
+		    break;
+		case '3540':
+		    break;
+		case '3550':
+			break;
+		case '3560':
+		    break;
+		case '3570':
+		    break;
+		case '3580':
+		    break;
+		case '3590':
+		    break;
+		case '3600':
+		    break;
+		case '3610':
+		    break;
+		case '3620':
+		    break;
+
+		case '3710':
+		    break;
+		case '3720':
+		    break;
+		case '3730':
+		    break;				    
+			    
 		    
 		default:
 		    console.log("default");

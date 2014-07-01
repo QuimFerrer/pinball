@@ -1,7 +1,7 @@
 <?php
 
 // tiempo máximo de sesión
-define("TIMEOUT",1000);
+define("TIMEOUT",100000);
 
 function comprovaSessio()
 {
@@ -42,6 +42,15 @@ function isEndSession()
             $_SESSION["lastAccessTime"] = $now;
         }
     return ($_SESSION['endTime']);
+}
+
+// obté la sessió i si ha caducat des de query.php
+
+function isEndSessionInQuery()
+{
+session_name("loginUsuari"); 
+session_start();
+isEndSession();
 }
 
 function controlLogout()

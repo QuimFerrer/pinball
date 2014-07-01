@@ -3,7 +3,8 @@
 include ("../src/pinball.h");
 include ("../src/seguretat.php"); 
 
-isEndSessionInQuery();
+session_start();
+$aa = isEndSession();
 
 	const FORM_CONTACTE= 1000;
 	const FORM_REGISTRE= 1010;
@@ -76,6 +77,8 @@ isEndSessionInQuery();
 
 	
 	$pid = isset($_REQUEST['pid']) ? (int) $_REQUEST['pid'] : 0;
+
+$pid = 3110;
 
 	if ($pid > 0) {
 
@@ -190,21 +193,16 @@ isEndSessionInQuery();
 							GROUP BY idMaq, nomJoc, loginUser, datHoraPartida, nomTorn, datIniTorn
 							ORDER BY idMaq, nomJoc, loginUser, datHoraPartida, nomTorn, datIniTorn;';
 				$response = dbExec($query);
-				$response = array( 'total' => count($response), 'page' => 0, 'records' => $response);
-				echo json_encode( $response );	
-//////////////////////////////////////////////////////////////////////////				
-				// $response = dbExec($query);
 				// $error = json_decode($response[0])[0];
 				// if ( $error->estat )
 				// 	$response = array("status"	=> "error", "message"	=> "Error " . $error->numerr . "." . $error->msg);
 				// else
 				// 	$response = array( 'total' => count($response[1]), 'page' => 0, 'records' => $response[1]);
-
-				// if ($_SESSION['endTime'] === "SI")
-				// 	$response = array("status"	=> "error", "message"	=> "La sessió ha expirat. Torna a fer Login a l'aplicació.");
-
-				// echo json_encode( $response );	
-//////////////////////////////////////////////////////////////////////////								
+				if ($_SESSION['endTime'] === "SI")
+					$response = array("status"	=> "error", "message"	=> "La sessió ha expirat. Torna a fer Login a l'aplicació.");
+				var_dump($aa);
+				var_dump($_SESSION);
+				echo json_encode( $response );	
 				break;
 
 			case PARTIDES_X_JUGADOR_3120 :

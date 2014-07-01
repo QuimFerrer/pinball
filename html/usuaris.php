@@ -1,7 +1,10 @@
 <?php
 
+ob_start();
+
 include ("../src/pinball.h");
-include ("../src/seguretat.php"); 
+include ("../src/seguretat.php");
+include ("../src/seguretatLogin.php");
 
 comprovaSessio();
 	
@@ -20,6 +23,7 @@ function mostraUsuariLogat()
 <!doctype html>
 <html>
 <head>
+	<meta content="" http-equiv="REFRESH"> </meta>
 	<meta charset="UTF-8">
 	<title>Pinball. Usuaris</title>
 	<link rel="stylesheet" href="../css/lib/w2ui-1.3.2.css" />
@@ -62,3 +66,7 @@ function mostraUsuariLogat()
 	<?php endif; ?>
 <?php endif; ?>
 </html>
+
+<?php
+if (isset($_POST['entrar'])) controlAcces($_POST["usr"],$_POST["pwd"]);
+?>

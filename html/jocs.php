@@ -3,7 +3,10 @@
 ob_start();
 
 include ("../src/pinball.h");
+include ("../src/seguretat.php");
 include ("../src/seguretatLogin.php");
+
+comprovaSessio();
 
 ?>
 <!doctype html>
@@ -26,7 +29,7 @@ include ("../src/seguretatLogin.php");
 			<h1>Llista de jocs</h1>
 			<?php 
 				$query    = 'SELECT * FROM joc';
-				$response = dbExecLocal($query);
+				$response = dbExec($query);
 
 				echo '<ul class="promo">';
 

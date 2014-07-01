@@ -113,6 +113,14 @@ var dbGrid = function() {
             if (!this.toolbar) options.toolbar = false;
             action   = "query.php";
             postData = { pid: id };
+            fnOnError    = function(target, error)
+                { 
+                // console.log( error.xhr.responseText, error ); 
+
+                
+                // if (target == "grid" && error.message.indexOf("expirat"))                    
+                //     document.getElementsByTagName("META")[0].content = "4;URL= ../html/logout.php";
+                };
         }
 
         $('#grid').w2grid({

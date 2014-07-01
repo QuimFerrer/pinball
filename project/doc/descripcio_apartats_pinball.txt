@@ -1,11 +1,13 @@
 Varis
 
-1. buscar icones pel menú
+--> ok. <-- 1. buscar icones pel menú
 --> ok. <-- 2. maquillar pàgina Logout
 --> ok. <-- 3. crear taula productes a la base de dades
 --> ok. <-- 4. afegir dates modificacio i baixa a taula de productes
 5. modificar dbExecLocal per adaptar-ho a insert, update, delete
 --> ok. <-- 6.control.lar amb login que el usuari no està donat de baixa
+7. alinear dreta o centre de camps al grid
+8. preguntar que fa el pinball.js (dona un error a la consola al pulsar botó sortir) i el login.js
 
 
 Recreatius
@@ -54,83 +56,86 @@ Zona d'usuari
 
 2. menú jugador
 	a. PERFIL. gestio perfil jugador:
-		1. ( 01_query.sql ) 2021 - consulta
-		2. ( 01_query.sql ) 2022 - modificació
-		3. ( 01_query.sql ) 2023 - baixa --> fa logout
+		1. ( 01_query.sql ) 5020 - consulta
+		2. ( 01_query.sql ) 5020 - modificació
+		3. ( 01_query.sql ) 5020 - baixa --> fa logout
 	b. ELS MEUS TORNEIGS.
 		1. anul.lat ( 01_query.sql ) torneigs amb el joc als que està registrat un jugador
-		2. ( 01_query.sql ) 2041 - torneigs amb els jocs als que está registrat un jugador amb login, el seu nom, el codi i nom de joc
-		3. ( 01_query.sql ) 2050 - PUNTUACIONS. ranking d'un jugador i punts dins del ranking als torneigs registrats
-		4. ( 01_query.sql ) 2051 - HISTÒRIC. ranking històric d'un jugador als torneigs registrats finalitzats i en curs
-		5. ( 01_query.sql ) 2043 - BAIXA. baixa de la inscripció a un torneig per jugador
+		2. ( 01_query.sql ) 5041 - torneigs amb els jocs als que está registrat un jugador amb login, el seu nom, el codi i nom de joc
+		3. ( 01_query.sql ) 5050 - PUNTUACIONS. ranking d'un jugador i punts dins del ranking als torneigs registrats
+		4. ( 01_query.sql ) 5051 - HISTÒRIC. ranking històric d'un jugador als torneigs registrats finalitzats i en curs
+		5. ( 01_query.sql ) 5043 - BAIXA. baixa de la inscripció a un torneig per jugador
 	c.  TOTS ELS TORNEIGS.
-		1. ( 01_query.sql ) 2061 - consultar tots els torneigs actius als que es pot registrar un jugador
-		2. ( 01_query.sql ) 2070 - PUNTUACIONS. ranking d'un torneig i punts dins del ranking
-		3. ( 01_query.sql ) 2071 - HISTÒRIC. ranking històric d'un torneig finalitzats i en curs
-		4. ( 01_query.sql ) 2063 - apuntar-se a un torneig
+		1. ( 01_query.sql ) 5061 - consultar tots els torneigs actius als que es pot registrar un jugador
+		2. ( 01_query.sql ) 5070 - PUNTUACIONS. ranking d'un torneig i punts dins del ranking
+		3. ( 01_query.sql ) 5071 - HISTÒRIC. ranking històric d'un torneig finalitzats i en curs
+		4. ( 01_query.sql ) 5063 - apuntar-se a un torneig
 
 3. menú administrador
 	a. PERFIL. gestio perfil administrador:
-		1. ( 02_query.sql ) consulta perfil administrador / usuari
-		2. ( 02_query.sql ) modificació perfil administrador
+		1. ( 02_query.sql ) 3000 - consulta perfil administrador / usuari
+		2. ( 02_query.sql ) 3000 - modificació perfil administrador
 
 	b. PARTIDES. gestió partides:
-		1. ( 02_query.sql ) llistar
-		2. ( 02_query.sql ) anul.lar / bloquejar
-		3. ( 02_query.sql ) desanul.lar / desbloquejar)
+		1. ( 02_query.sql ) 3110 - llistar partides per màquina
+		2. ( 02_query.sql ) 3120 - llistar partides per jugador
+		3. ( 02_query.sql ) 3130 - anul.lar / bloquejar
+		4. ( 02_query.sql ) 3140 - desanul.lar / desbloquejar)
 
 	c. JOCS. gestió de jocs:
-		1. ( 02_query.sql ) Llistat de jocs
-		2. ( 02_query.sql ) Llistat de jocs històric
-		3. ( 02_query.sql ) Alta d'un joc
-		4. ( 02_query.sql ) Baixa d'un joc
-		5. ( 02_query.sql ) Modificació d'un joc
+		1. ( 02_query.sql ) 3230 - Llistat de jocs
+		2. ( 02_query.sql ) 3240 - Llistat de jocs històric
+		3. ( 02_query.sql ) 3210 - Alta d'un joc
+		4. ( 02_query.sql ) 3220 - Baixa d'un joc
+		5. ( 02_query.sql ) 3220 - Modificació d'un joc
 		6. ( 02_query.sql ) Actualització partides jugades
-		7. ( 02_query.sql ) Llistat de màquines amb els jocs que té assignats amb num de partides jugades i crédits
+		7. ( 02_query.sql ) 3250 - Llistat de jocs amb les màquines a on estan instal.lats i amb num de partides jugades i crédits
+		8. ( 02_query.sql ) 3260 - Llistat de jocs amb les màquines a on estan instal.lats i amb num de partides jugades i crédits. (Històric)
 
 	d. TORNEIGS. gestió torneigs
-		1. ( 02_query.sql ) Llistat amb premi, joc associat i màquines que tenen instal.lat el joc
-		2. ( 02_query.sql ) Alta d'un torneig
-		3. ( 02_query.sql ) Baixa d'un torneig
-		4. ( 02_query.sql ) Modificació d'un torneig
-		5. ( 02_query.sql ) llistat de torneigs amb els jugadors registrats amb el seu 						nom, el codi de joc i el nom del joc incloent els torneigs 						amb cap jugador registrat
-		6. ( 02_query.sql ) llistat de torneigs amb els jugadors registrats amb el seu 						nom, el codi de joc i el nom del joc incloent els torneigs 						amb cap jugador registrat (Històric)
-		7. ( 02_query.sql ) llistat de torneigs amb el premi, codi de joc i máquines que 					 tenen instal.lat el joc i els jugadors registrats a cada 						torneig amb les partides, rondes i punts obtinguts
-		8. ( 02_query.sql ) llistat de torneigs amb el premi, codi de joc i máquines que 					 tenen instal.lat el joc i els jugadors registrats a cada 						torneig amb les partides, rondes i punts obtinguts (Històric)
+		1. ( 02_query.sql ) 3310 - Alta d'un torneig
+		2. ( 02_query.sql ) 3320 - Baixa d'un torneig
+		3. ( 02_query.sql ) 3320 - Modificació d'un torneig
+		4. ( 02_query.sql ) 3320 - Llistat amb premi, joc associat i màquines que tenen instal.lat el joc
+		5. ( 02_query.sql ) 3350 - llistat de torneigs amb els jugadors registrats amb 							   el seu nom, el codi de joc i el nom del joc incloent 						   els torneigs amb cap jugador registrat
+		6. ( 02_query.sql ) 3360 - llistat de torneigs amb els jugadors registrats amb 							   el seu nom, el codi de joc i el nom del joc incloent 						   els torneigs amb cap jugador registrat (Històric)
+		7. ( 02_query.sql ) 3380 - llistat de torneigs amb el premi, codi de joc i 								   máquines que tenen instal.lat el joc i els jugadors 							   registrats a cada torneig amb les partides, rondes i 						   punts obtinguts
+		8. ( 02_query.sql ) 3390 - llistat de torneigs amb el premi, codi de joc i 								   máquines que tenen instal.lat el joc i els jugadors 							   registrats a cada torneig amb les partides, rondes i 						   punts obtinguts (Històric)
 
 	e. MÀQUINES. gestió màquines:
 		i. GESTIÓ. mostrar totes les máquines en forma de llista amb botons d'opcions:
-			1. ( 03_query.sql ) alta
-			2. ( 03_query.sql ) baixa
-			3. ( 03_query.sql ) modificació
+			1. ( 03_query.sql ) 3410 - alta
+			2. ( 03_query.sql ) 3420 - baixa
+			3. ( 03_query.sql ) 3420 - modificació
 			4. ( 03_query.sql ) actualitzar recaudació d'una màquina
-			5. ( 03_query.sql ) llistat de totes les máquines informant: ubicació, jocs instal.lats, crédits totals, propietari, etc.
-			6. ( 03_query.sql ) llistat de totes les máquines informant: ubicació, jocs instal.lats, crédits totals, propietari, etc. Històric
+			5. ( 03_query.sql ) 3430 - llistat de totes les máquines informant: ubicació, jocs instal.lats, crédits totals, propietari, etc.
+			6. ( 03_query.sql ) 3440 - llistat de totes les máquines informant: ubicació, jocs instal.lats, crédits totals, propietari, etc. Històric
 		ii. ASSIGNACIO DE JOCS:
-			1. ( 03_query.sql ) Alta d'assignació de joc a una màquina
-			2. ( 03_query.sql ) Baixa d'assignació de joc a una màquina
-			3. ( 03_query.sql ) Modificació d'assignació de joc a una màquina
-			4. ( 03_query.sql ) Llistat de jocs assignats a cada màquina amb num de partides jugades i crédits
-		iii. ESTADÍSTIQUES. opcions :
-			 1. ( 03_query.sql ) recaudació per cada màquina amb ranking (max i min)
-			 2. ( 03_query.sql ) recaudació per cada joc amb ranking (max i min)
-			 3. ( 03_query.sql ) recaudació per cada joc i màquina
-			 4. ( 03_query.sql ) recaudació per propietari
-			 5. ( 03_query.sql ) recaudació per propietari i màquina
-			 6. ( 03_query.sql ) recaudació per propietari i joc de cada màquina
-			 7. ( 03_query.sql ) recaudació per provincia, poblacio, cp
-			 8. ( 03_query.sql ) recaudació per poblacio
-			 9. ( 03_query.sql ) recaudació per provincia, poblacio,cp  i màquina
-			10. ( 03_query.sql ) recaudació de cada joc
-			11. ( 03_query.sql ) recaudació de cada joc per poblacio
-			12. ( 03_query.sql ) recaudació de cada joc per provincia, poblacio, cp
-			13. promigs ????
+			1. ( 03_query.sql ) 3460 - Alta d'assignació de joc a una màquina
+			2. ( 03_query.sql ) 3470 - Baixa d'assignació de joc a una màquina
+			3. ( 03_query.sql ) 3470 - Modificació d'assignació de joc a una màquina
+			4. ( 03_query.sql ) 3480 - Llistat de jocs assignats a cada màquina amb num de partides jugades i crédits
+		iii. RECAUDACIONS. opcions :
+			 1. ( 03_query.sql ) 3510 - recaudació per cada màquina amb ranking (max i min)
+			 2. ( 03_query.sql ) 3520 - recaudació per cada joc amb ranking (max i min)
+			 3. ( 03_query.sql ) 3530 - recaudació per cada joc i màquina
+			 4. ( 03_query.sql ) 3540 - recaudació per propietari
+			 5. ( 03_query.sql ) 3550 - recaudació per propietari i màquina
+			 6. ( 03_query.sql ) 3560 - recaudació per propietari i joc de cada màquina
+			 7. ( 03_query.sql ) 3570 - recaudació per provincia, poblacio, cp
+			 8. ( 03_query.sql ) 3580 - recaudació per poblacio
+			 9. ( 03_query.sql ) 3590 - recaudació per provincia, poblacio,cp  i màquina
+			10. ( 03_query.sql ) 3600 - recaudació de cada joc
+			11. ( 03_query.sql ) 3610 - recaudació de cada joc per poblacio
+			12. ( 03_query.sql ) 3620 - recaudació de cada joc per provincia, poblacio,cp
+		iv. ESTADÍSTIQUES. opcions :
+			 1. promigs ????
 
 	f. UBICACIONS.
 		i. Gestió ubicacions.
-			1. ( 04_query.sql ) Alta de l'ubicació d'una màquina
-			2. ( 04_query.sql ) Baixa de l'ubicació d'una màquina
-			3. ( 04_query.sql ) Modificació de l'ubicació d'una màquina
+			1. ( 04_query.sql ) 3810 - Alta de l'ubicació d'una màquina
+			2. ( 04_query.sql ) 3820 - Baixa de l'ubicació d'una màquina
+			3. ( 04_query.sql ) 3820 - Modificació de l'ubicació d'una màquina
 			4. ( 04_query.sql ) Llistat d'ubicacions (provincia, població, cp)
 			5. ( 04_query.sql ) Llistat d'ubicacions (lat, long, alt)
 			6. ( 04_query.sql ) Llistat d'empreses d'ubicacions amb les seves dades de contacte
@@ -155,3 +160,4 @@ Zona d'usuari
 
 
 
+canviar id pk de taules: maquina, ubicacio, joc, torneig

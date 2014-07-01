@@ -2,6 +2,15 @@
 
     define("LOCAL", true);
 
+    function creaJSONError($estat,$msg,$numerr)
+    {
+        $buildjson = array('estat' => $estat, 'msg' => $msg, 'numerr' => $numerr);
+        $json = array();
+        array_push($json, $buildjson);
+        return (json_encode($json));
+    }       
+
+
     function dbExec($query,$tipusResultat=1) {
         if(LOCAL) $response = dbExecLocal($query,$tipusResultat);
         else      $response = dbExecRemote($query,$tipusResultat);
@@ -35,6 +44,9 @@
      * Retorna : string JSON
      */
          
+    $error = creaJSONError(false,"","");
+    $json  = array();
+
     if (!isset($query) ) die('<h1>No es una consulta correcte !</h1>');
 
     $link = mysql_connect("localhost", "root", "");
@@ -49,20 +61,18 @@
 
     $result = mysql_query($query);
 
-    if (!$result) {
+    if (!$result)
+        {
+        // $error = creaJSONError(true,mysql_error(),mysql_errno());
         die('Consulta no valida: ' . mysql_error());
-    }
-
-    // Obtenir la consulta en forma d'arrays d'objectes
-    // $json = array();
-    // while ($obj = mysql_fetch_object($result)) {
-    //     $json[] = $obj ;
-
+        }
+    else
+    {
     switch($tipusResultat)
         {
         // retorna un array associatiu (SELECT)
         case 1: 
-            $json = array(); 
+            // $json = array(); 
             while ($obj = mysql_fetch_assoc($result)) 
                 $json[] = (object)array_map('utf8_encode', $obj) ;
             break;
@@ -77,12 +87,15 @@
             $json = true;
             break;
         }
+    }
    
-    // if ($result && gettype($result)=="object")
+    // $res = array();
+    // array_push($res, $error);
+    // array_push($res, $json);    
+    // return $res;
 
-    
     return $json;
-
+    
     // Alliberar resultat
     mysql_free_result($result);
 
@@ -102,6 +115,7 @@
                 <li><a id="empresa"     href="../html/empresa.php">Empresa</a></li>
                 <li><a id="jocs"        href="../html/jocs.php">Pinball kit</a></li>
                 <li><a id="contacte"    href="../html/contacte.php">Contactar</a></li>
+                <li><a id="informes"    href="../html/usuaris.php">Informes</a></li>                
                 <li><a id="logout"      href="../html/logout.php">Sortir</a></li>
             </ul>
         </div>

@@ -3,7 +3,10 @@
 ob_start();
 
 include ("../src/pinball.h");
+include ("../src/seguretat.php");
 include ("../src/seguretatLogin.php");
+
+comprovaSessio();
 
 ?>
 <!doctype html>
