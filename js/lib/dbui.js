@@ -303,18 +303,13 @@ function DataView(url) {
  *  Api per construir un formulari
  **********************************************************************************************
  */
-function DataForm(fields, actions) {
+function DataForm(record, actions) {
     if (w2ui.grid)  w2ui['grid'].destroy();
 
     $('#grid').w2form({ 
         name  : 'grid',
         url   : 'query.php',
-        fields: [
-            { name: 'nom',          type: 'text', required: true },
-            { name: 'cognoms',      type: 'text', required: true },
-            { name: 'email',        type: 'email', required: true },
-            { name: 'comentari',    type: 'text', required: true}
-        ],
+        fields: record,
         actions: {
             reset: function () {
                 this.clear();
