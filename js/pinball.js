@@ -4,7 +4,6 @@
 
  $(document).ready(function(){
 	     $("#I_User").change(function(){
-	    alert("he seleccionat un usuari") });
-	     
-	     
+	    alert("he seleccionat un usuari");
+	    });
 	    });
