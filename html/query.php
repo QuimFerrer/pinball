@@ -1311,6 +1311,9 @@ isEndSessionInQuery();
 				break;				
 
 			case BAIXA_USR_TORN_5043 :
+				$ret = array("test"=>"val");
+				echo json_encode($ret);
+				// echo "({val:'test'})";
 				break;				
 
 			case CONSULTA_USR_TOTS_TORNEIGS_5061 :
@@ -1495,7 +1498,8 @@ isEndSessionInQuery();
 				die ("error");
 		}
 	} else {
-		die ("error");
+		print_r($_REQUEST);
+		// die ("error");
 	}
 
 ?>
