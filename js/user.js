@@ -3,24 +3,18 @@ $('#sidebar').w2sidebar({
 	name: 'sidebar',
 	nodes: [ 
 		{ id: '5000', text: 'Opcions', expanded: true, group: true,
-		  nodes: [ 
-				{ id: '5020', text: 'Perfil', img: 'icon-page'},
-				{ id: '5040', text: 'Els Meus Torneigs', img: 'icon-folder',
+		  nodes: [ 	{ id: '5020', text: 'Perfil', img: 'icon-page'},
+				    { id: '5040', text: 'Els Meus Torneigs', img: 'icon-folder',
 					nodes: [{ id: '5041', text: 'Consulta', img: 'icon-page' },
-
 				   			{ id: '5042', text: 'Ranking', img: 'icon-folder', 
 				   				nodes: [{ id: '5050', text: 'Actual', img: 'icon-page' },
-				   						{ id: '5051', text: 'Històric', img: 'icon-page' }]},
-						   			
+				   						{ id: '5051', text: 'Històric', img: 'icon-page' }]},						   			
 				   			{ id: '5043', text: 'Baixa', img: 'icon-page' } ]},
-
-				{ id: '5060', text: 'Tots els Torneigs', img: 'icon-folder',
+					{ id: '5060', text: 'Tots els Torneigs', img: 'icon-folder',
 					nodes: [{ id: '5061', text: 'Consulta', img: 'icon-page' },
-
 				   			{ id: '5062', text: 'Ranking', img: 'icon-folder',
 				   				nodes: [{ id: '5070', text: 'Actual', img: 'icon-page' },
-				   						{ id: '5071', text: 'Històric', img: 'icon-page' }]},
-					   						
+				   						{ id: '5071', text: 'Històric', img: 'icon-page' }]},					   		
 				   			{ id: '5063', text: 'Inscripció', img: 'icon-edit' } ]}
 			]
 		}
@@ -35,6 +29,18 @@ var controller = function(e) {
 	var fields;
 
 	switch(e.target) {
+
+		case '5020':
+	        fields: [
+	            { name: 'Nom',          type: 'text', required: true },
+	            { name: 'Cognoms',      type: 'text', required: true },
+	            { name: 'eMail',        type: 'email', required: true },
+	            { name: 'Foto',         type: 'text', required: true },
+	            { name: 'Facebook',     type: 'text', required: true },
+	            { name: 'Twitter',      type: 'text', required: true },	            
+	        	];
+		    DataForm();
+		    break;
 		case '5041':
 			columns = [
 				{ field: 'idTorn',  caption: 'Torneig', size: '25%' },
@@ -68,8 +74,6 @@ var controller = function(e) {
 			];
 		   	DataGrid("Ranking històric dels meus torneigs", false, true, columns, e.target);				
 		    break;
-		case '5043':				
-		    break;				
 		case '5061':
 			columns = [
 				{ field: 'idTorn',  caption: 'Torneig', size: '12%' },
@@ -109,24 +113,6 @@ var controller = function(e) {
 	    	DataGrid("Ranking històric dels torneigs", false, true, columns, e.target);				
 		    break;				
 		case '5063':
-		    break;
-
-		case '2020':
-			columns = [				
-				{ field: 'nom', caption: 'usuari', size: '20%' },
-				{ field: 'foto', caption: 'foto', size: '20%' }
-			];
-		    DataGrid("Perfil d'usuari", false, true, columns, e.target);
-		    DataForm();
-		    break;
-
-		case '2021':
-			columns = [				
-				{ field: 'idTorn', caption: 'Torneig', size: '33%' },
-				{ field: 'nomTorn', caption: 'Nom', size: '33%' },
-				{ field: 'idJoc', caption: 'Joc', size: '33%' }
-			];
-	    	DataGrid("Torneigs als que estic inscrit", false, true, columns, e.target);
 		    break;
 
 		default:

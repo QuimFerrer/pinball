@@ -12,10 +12,9 @@ function mostraUsuariLogat()
 {
 	if (isset($_SESSION["login"]))
 		{
-	  	if ($_SESSION["login"] == 'admin')
-  			echo '<h2>Aministrador</h2>';
-		else
-			echo '<h2>Usuari</h2>';
+		$nom = $_SESSION["nomUsr"] . ' ' . $_SESSION["cognomUsr"];
+	  	if ($_SESSION["login"] == 'admin') $nom = 'Administrador - ' . $nom;
+		echo '<h2>' . $nom . '</h2>';
 		}
 }
 ?>

@@ -6,9 +6,8 @@ Varis
 --> ok. <-- 4. afegir dates modificacio i baixa a taula de productes
 5. modificar dbExecLocal per adaptar-ho a insert, update, delete
 --> ok. <-- 6.control.lar amb login que el usuari no està donat de baixa
-7. alinear dreta o centre de camps al grid --> ,attr: 'align=center' 
-8. treure el login.js
-9. preguntar si ha de sortir el ranking de tots els torneigs o només dels torneigs als que el jugador estigui inscrit
+--> ok. <-- 7. alinear dreta o centre de camps al grid --> ,attr: 'align=center' 
+--> ok. <-- 8. treure el login.js
 
 Recreatius
 
