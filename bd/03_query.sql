@@ -353,10 +353,10 @@ DROP TABLE CC;
 
 
 /***********************************************************************************************/
-/* 3.e.iii.3 - llistat de recaudació per cada joc i màquina*/
+/* 3.e.iii.3 - 3530 - llistat de recaudació per cada joc i màquina*/
 /***********************************************************************************************/
 
-SELECT _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc,_01_pk_idMaq AS idMaq, _02_macMaq as macMaq,
+SELECT _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc,_01_pk_idMaq AS idMaq, _02_macMaq AS macMaq,
 _05_totCredJocMaqInst AS totalCredits
 
 FROM joc
@@ -372,7 +372,7 @@ ORDER BY idJoc,idMaq;
 
 
 /***********************************************************************************************/
-/* 3.e.iii.4 - llistat de recaudació per cada propietari */
+/* 3.e.iii.4 - 3540 - llistat de recaudació per cada propietari */
 /***********************************************************************************************/
 
 SELECT _03_propMaq AS propMaq, SUM(_05_totCredMaq) AS totalCredits
@@ -387,10 +387,10 @@ ORDER BY propMaq,totalCredits;
 
 
 /***********************************************************************************************/
-/* 3.e.iii.5 - llistat de recaudació per cada propietari de màquina*/
+/* 3.e.iii.5 - 3550 - llistat de recaudació per cada propietari de màquina*/
 /***********************************************************************************************/
 
-SELECT _03_propMaq AS propMaq, _01_pk_idMaq AS idMaq, _02_macMaq as macMaq,
+SELECT _03_propMaq AS propMaq, _01_pk_idMaq AS idMaq, _02_macMaq AS macMaq,
 SUM(_05_totCredMaq) AS totalCredits
 
 FROM maquina
@@ -404,11 +404,11 @@ ORDER BY propMaq,idMaq,totalCredits;
 
 
 /***********************************************************************************************/
-/* 3.e.iii.6 - llistat de recaudació de cada propietari per cada joc i màquina*/
+/* 3.e.iii.6 - 3560 - llistat de recaudació de cada propietari per cada joc i màquina*/
 /***********************************************************************************************/
 
 SELECT _03_propMaq AS propMaq, _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc,_01_pk_idMaq AS idMaq,
-_02_macMaq as macMaq, SUM(_05_totCredJocMaqInst) AS totalCredits
+_02_macMaq AS macMaq, SUM(_05_totCredJocMaqInst) AS totalCredits
 
 FROM joc
 LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
@@ -424,7 +424,7 @@ ORDER BY propMaq, nomJoc,totalCredits DESC, idMaq;
 
 
 /***********************************************************************************************/
-/* 3.e.iii.7 - llistat de recaudació per provincia, poblacio, cp */
+/* 3.e.iii.7 - 3570 - llistat de recaudació per provincia, poblacio, cp */
 /***********************************************************************************************/
 
 SELECT _06_provUbic AS provincia, _04_pobUbic AS poblacio,_05_cpUbic AS cPostal,
@@ -444,7 +444,7 @@ ORDER BY provincia, poblacio, cPostal, totalCredits;
 
 
 /***********************************************************************************************/
-/* 3.e.iii.8 - llistat de recaudació per poblacio */
+/* 3.e.iii.8 - 3580 - llistat de recaudació per poblacio */
 /***********************************************************************************************/
 
 SELECT _04_pobUbic AS poblacio, SUM(_05_totCredMaq) AS totalCredits
@@ -463,11 +463,11 @@ ORDER BY poblacio, totalCredits;
 
 
 /***********************************************************************************************/
-/* 3.e.iii.9 - llistat de recaudació per provincia, poblacio, cp de cada màquina*/
+/* 3.e.iii.9 - 3590 llistat de recaudació per provincia, poblacio, cp de cada màquina*/
 /***********************************************************************************************/
 
 SELECT _06_provUbic AS provincia, _04_pobUbic AS poblacio, _05_cpUbic AS cPostal, _01_pk_idMaq AS idMaq,
-_02_macMaq as macMaq, SUM(_05_totCredMaq) AS totalCredits
+_02_macMaq AS macMaq, SUM(_05_totCredMaq) AS totalCredits
 
 FROM maquina
 LEFT JOIN ubicacioTeMaquina ON _01_pk_idMaq = _02_pk_idMaqUTM
@@ -484,7 +484,7 @@ ORDER BY provincia, poblacio, cPostal, idMaq, totalCredits;
 
 
 /***********************************************************************************************/
-/* 3.e.iii.10 - llistat de recaudació per joc*/
+/* 3.e.iii.10 - 3600 - llistat de recaudació per joc*/
 /***********************************************************************************************/
 
 SELECT _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc,
@@ -504,11 +504,11 @@ ORDER BY totalCredits DESC;
 
 
 /***********************************************************************************************/
-/* 3.e.iii.11 - llistat de recaudació per joc de cada poblacio que tingui màquines instal.lades*/
+/* 3.e.iii.11 - 3610 - llistat de recaudació per joc de cada poblacio que tingui màquines instal.lades*/
 /***********************************************************************************************/
 
 SELECT AA._04_pobUbic AS poblacio, _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc,
-MAQ._01_pk_idMaq AS idMaq, MAQ._02_macMaq as macMaq, SUM(_05_totCredJocMaqInst) AS totalCredits
+MAQ._01_pk_idMaq AS idMaq, MAQ._02_macMaq AS macMaq, SUM(_05_totCredJocMaqInst) AS totalCredits
 
 FROM
 
@@ -533,11 +533,11 @@ ORDER BY poblacio, idJoc, totalCredits DESC;
 
 
 /***********************************************************************************************/
-/* 3.e.iii.12 - llistat de recaudació per joc de cada provincia, poblacio, cp que tingui màquines instal.lades */
+/* 3.e.iii.12 - 3620 - llistat de recaudació per joc de cada provincia, poblacio, cp que tingui màquines instal.lades */
 /***********************************************************************************************/
 
 SELECT AA._06_provUbic AS provincia, AA._04_pobUbic AS poblacio, AA._05_cpUbic AS cPostal,
-_01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc,MAQ._01_pk_idMaq AS idMaq, MAQ._02_macMaq as macMaq,
+_01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc,MAQ._01_pk_idMaq AS idMaq, MAQ._02_macMaq AS macMaq,
 SUM(_05_totCredJocMaqInst) AS totalCredits
 
 FROM

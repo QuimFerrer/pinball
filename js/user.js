@@ -50,9 +50,9 @@ var controller = function(e) {
 				{ field: 'nomTorn', caption: 'Nom',     size: '12%' },
 				{ field: 'idJoc',   caption: 'Joc',     size: '12%' },
 				{ field: 'nomJoc',  caption: 'Nom joc', size: '12%' },
-				{ field: 'ranking', caption: 'Posició', size: '12%' },
-				{ field: 'punts',   caption: 'Punts',   size: '12%' },
-				{ field: 'totalRanking',   caption: 'Posicions Ranking',   size: '12%' }						
+				{ field: 'ranking', caption: 'Posició', size: '12%',attr: 'align=center' },
+				{ field: 'punts',   caption: 'Punts',   size: '12%',attr: 'align=right' },
+				{ field: 'totalRanking',   caption: 'Posicions Ranking',   size: '12%',attr: 'align=center' }						
 			];
 		   	DataGrid("Ranking dels meus torneigs", false, true, columns, e.target);
 		    break;
@@ -62,9 +62,9 @@ var controller = function(e) {
 				{ field: 'nomTorn', caption: 'Nom',     size: '12%' },
 				{ field: 'idJoc',   caption: 'Joc',     size: '12%' },
 				{ field: 'nomJoc',  caption: 'Nom joc', size: '12%' },
-				{ field: 'ranking', caption: 'Posició', size: '12%' },
-				{ field: 'punts',   caption: 'Punts',   size: '12%' },
-				{ field: 'totalRanking',   caption: 'Posicions Ranking',   size: '12%' }						
+				{ field: 'ranking', caption: 'Posició', size: '12%',attr: 'align=center' },
+				{ field: 'punts',   caption: 'Punts',   size: '12%',attr: 'align=right' },
+				{ field: 'totalRanking',   caption: 'Posicions Ranking',   size: '12%',attr: 'align=center' }						
 			];
 		   	DataGrid("Ranking històric dels meus torneigs", false, true, columns, e.target);				
 		    break;
@@ -76,7 +76,7 @@ var controller = function(e) {
 				{ field: 'nomTorn', caption: 'Nom',     size: '12%' },
 				{ field: 'idJoc',   caption: 'Joc',     size: '12%' },
 				{ field: 'nomJoc',  caption: 'Nom joc', size: '12%' },
-				{ field: 'premiTorn',   caption: 'Premi (€)',  size: '12%' },
+				{ field: 'premiTorn',   caption: 'Premi (€)',  size: '12%',attr: 'align=center' },
 				{ field: 'datIniTorn',  caption: 'Data Inici', size: '12%' },
 				{ field: 'datFinTorn',  caption: 'Data Final', size: '12%' }
 			];
@@ -89,9 +89,9 @@ var controller = function(e) {
 				{ field: 'idJoc',   caption: 'Joc',     size: '12%' },
 				{ field: 'nomJoc',  caption: 'Nom joc', size: '12%' },
 				{ field: 'loginJug',caption: 'Jugador', size: '12%' },						
-				{ field: 'ranking', caption: 'Posició', size: '12%' },
-				{ field: 'punts',   caption: 'Punts',   size: '12%' },
-				{ field: 'totalRanking',   caption: 'Posicions Ranking',   size: '12%' }						
+				{ field: 'ranking', caption: 'Posició', size: '12%',attr: 'align=center' },
+				{ field: 'punts',   caption: 'Punts',   size: '12%',attr: 'align=right' },
+				{ field: 'totalRanking',   caption: 'Posicions Ranking',   size: '12%',attr: 'align=center' }						
 			];
 		    DataGrid("Ranking actual dels torneigs", false, true, columns, e.target);
 			break;				
@@ -102,9 +102,9 @@ var controller = function(e) {
 				{ field: 'idJoc',   caption: 'Joc',     size: '12%' },
 				{ field: 'nomJoc',  caption: 'Nom joc', size: '12%' },
 				{ field: 'loginJug',caption: 'Jugador', size: '12%' },						
-				{ field: 'ranking', caption: 'Posició', size: '12%' },
-				{ field: 'punts',   caption: 'Punts',   size: '12%' },
-				{ field: 'totalRanking',   caption: 'Posicions Ranking',   size: '12%' }						
+				{ field: 'ranking', caption: 'Posició', size: '12%',attr: 'align=center' },
+				{ field: 'punts',   caption: 'Punts',   size: '12%',attr: 'align=right' },
+				{ field: 'totalRanking',   caption: 'Posicions Ranking',   size: '12%',attr: 'align=center' }
 			];
 	    	DataGrid("Ranking històric dels torneigs", false, true, columns, e.target);				
 		    break;				

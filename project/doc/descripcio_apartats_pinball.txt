@@ -8,7 +8,7 @@ Varis
 --> ok. <-- 6.control.lar amb login que el usuari no està donat de baixa
 7. alinear dreta o centre de camps al grid --> ,attr: 'align=center' 
 8. treure el login.js
-
+9. preguntar si ha de sortir el ranking de tots els torneigs o només dels torneigs als que el jugador estigui inscrit
 
 Recreatius
 
@@ -136,28 +136,25 @@ Zona d'usuari
 			1. ( 04_query.sql ) 3810 - Alta de l'ubicació d'una màquina
 			2. ( 04_query.sql ) 3820 - Baixa de l'ubicació d'una màquina
 			3. ( 04_query.sql ) 3820 - Modificació de l'ubicació d'una màquina
-			4. ( 04_query.sql ) Llistat d'ubicacions (provincia, població, cp)
-			5. ( 04_query.sql ) Llistat d'ubicacions (lat, long, alt)
-			6. ( 04_query.sql ) Llistat d'empreses d'ubicacions amb les seves dades de contacte
-			7. ( 04_query.sql ) Llistat d'empreses d'ubicacions per provincia, població, cp amb les seves dades de contacte
+			4. ( 04_query.sql ) 3840 - Llistat d'ubicacions (provincia, població, cp)
+			5. ( 04_query.sql ) 3850 - Llistat d'ubicacions (lat, long, alt)
+			6. ( 04_query.sql ) 3860 - Llistat d'empreses d'ubicacions amb les seves dades de contacte
+			7. ( 04_query.sql ) 3870 - Llistat d'empreses d'ubicacions per provincia, població, cp amb les seves dades de contacte
 		ii. Gestió de màquines a les ubicacions
-			1. ( 04_query.sql ) Alta de l'associació d'una màquina a una ubicació
-			2. ( 04_query.sql ) Baixa de l'associació d'una màquina a una ubicació
-			3. ( 04_query.sql ) Modificació de les dades de l'associació d'una màquina a una ubicació
-			4. ( 04_query.sql ) Canvi d'ubicació d'una màquina
-			5. ( 04_query.sql ) Llistat de màquines de cada ubicació (provincia, població, cp)
-			6. ( 04_query.sql ) Llistat de màquines de cada ubicació (lat, long, alt)
-			7. ( 04_query.sql ) Llistat de màquines de cada empresa on estan ubicades les màquines 
+			1. ( 04_query.sql ) 3890 - Alta de l'associació d'una màquina a una ubicació
+			2. ( 04_query.sql ) 3900 - Baixa de l'associació d'una màquina a una ubicació
+			3. ( 04_query.sql ) 3900 - Modificació de les dades de l'associació d'una màquina a una ubicació
+			4. ( 04_query.sql ) 3910 - Canvi d'ubicació d'una màquina
+			5. ( 04_query.sql ) 3930 - Llistat de màquines de cada ubicació (provincia, població, cp)
+			6. ( 04_query.sql ) 3940 - Llistat de màquines de cada ubicació (lat, long, alt)
+			7. ( 04_query.sql ) 3950 - Llistat de màquines de cada empresa on estan ubicades les màquines 
 
 	g. JUGADORS.
 		i. gestió jugadors: 
-			1. ( 05_query.sql   relació de jugadors en forma de llista amb botons d'opcions:
-			2. ( 05_query.sql ) consultar perfil
-			3. ( 05_query.sql ) anul.lar / bloquejar jugador / usuari
-			4. ( 05_query.sql ) desanul.lar / desbloquejar jugador / usuari
+			1. ( 05_query.sql   SENSE US - relació de jugadors en forma de llista amb botons d'opcions
+			2. ( 05_query.sql ) 4010 - consultar perfil en forma de relació de jugadors
+			3. ( 05_query.sql ) 4020 - bloquejar jugador / usuari
+			4. ( 05_query.sql ) 4030 - desbloquejar jugador / usuari
 		ii. rankings
-			1. ( 05_query.sql ) torneigs registrats amb la seva posició i punts de cada torneig
+			1. ( 05_query.sql ) 4040 - torneigs registrats amb la seva posició i punts de cada torneig
 
-
-
-canviar id pk de taules: maquina, ubicacio, joc, torneig
