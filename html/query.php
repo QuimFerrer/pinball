@@ -90,10 +90,10 @@ isEndSessionInQuery();
 	const INSCRIPCIO_USR_TORNEIG_5063          = 5063;	
 
 	
-	$pid = isset($_REQUEST['pid']) ? (int) $_REQUEST['pid'] : 0;
+	$pid 	  = isset($_REQUEST['pid']) ? (int) $_REQUEST['pid'] : 0;
+	$usrLogin = isset($_REQUEST['params']) ? $_REQUEST['params'] : $_SESSION["login"];
 
 	if ($pid > 0) {
-
 		switch ($pid) {
 			case FORM_CONTACTE:
 				echo json_encode($_REQUEST['record']);
@@ -869,7 +869,7 @@ isEndSessionInQuery();
 								_08_datBaixaJoc    IS NULL AND
 								_06_datBaixaInsc   IS NULL AND	
 								_04_datAltaInsc    IS NOT NULL AND
-								_04_loginUsuari = "' . $_SESSION["login"] . '" ' . ' ORDER BY nomTorn;';
+								_04_loginUsuari = "' . $usrLogin . '" ' . ' ORDER BY nomTorn;';
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
 				break;	

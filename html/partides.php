@@ -27,16 +27,20 @@ comprovaSessio();
 		//var params={UserAjax:iuserlogin};
 		//pantallajoc(iuserlogin);
 		
-		$.ajax("query.php")
-		.done( function(e) {
-		    alert( e);
+		$.ajax({
+			url: "query.php",
+			data: {pid:'5041', params:iuserlogin}
+		})
+		.always( function(e) {
+		    console.log(e);
+		})
+		.error( function(e) {
+		    console.log(e);
 		});
-		
+	
 		/*
 		$.ajax({
-		    type: 'POST',
 		    data: {pid:5041}, //'$_REQUEST['5041']',
-		    datatype: 'json',
 		    url:'query.php',
 		    done:function(e){
 		       console.log(e);
