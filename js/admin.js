@@ -3,23 +3,7 @@ $('#sidebar').w2sidebar({
 	name: 'sidebar',
 	nodes: [ 
 		{ id: '2000', text: 'Opcions', expanded: true, group: true,
-		  nodes: [ 
-					{ id: '1020', text: 'Productes', img: 'icon-edit' },
-					{ id: '1040', text: 'Màquines', img: 'icon-folder' },
-					{ id: '1060', text: 'Torneigs', img: 'icon-page' },
-					{ id: '1080', text: 'Usuaris', img: 'icon-edit' },
-					{ id: '1090', text: 'Test', img: 'icon-edit' },
-					{ id: '1100', text: 'Consultes', img: 'icon-folder',
-			  			nodes: [
-						   { id: '1101', text: 'Consulta 1', img: 'icon-page' },
-						   { id: '1102', text: 'Consulta 2', img: 'icon-page' },
-						   { id: '1103', text: 'Consulta 3', img: 'icon-page' }
-			  		]},
-			  		{ id: '1120', text: 'Partides',	img:'icon-edit'},
-			  		{ id: '1200', text: 'Partides Victor',	img:'icon-edit'},			  		
-////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////
-					{ id: '3000', text: 'Perfil', img: 'icon-edit' },
+		  nodes: [  { id: '3000', text: 'Perfil', img: 'icon-edit' },
 					{ id: '3100', text: 'Partides', img: 'icon-folder',
 					nodes: [{ id: '3110', text: 'per màquina',  img: 'icon-page' },
 							{ id: '3120', text: 'per jugador',  img: 'icon-page' },
@@ -90,7 +74,15 @@ $('#sidebar').w2sidebar({
 					nodes: [{ id: '4010', text: 'Perfils',  img: 'icon-page' },
 							{ id: '4020', text: 'Bloquejar',  img: 'icon-page' },
 							{ id: '4030', text: 'Desbloquejar',    img: 'icon-page' },
-							{ id: '4040', text: 'Torneigs registrats', img: 'icon-page' }]},					
+							{ id: '4040', text: 'Torneigs registrats', img: 'icon-page' }]},
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////							
+					{ id: '1020', text: 'Productes', img: 'icon-edit' },
+					{ id: '1060', text: 'Torneigs', img: 'icon-page' },
+					{ id: '1080', text: 'Usuaris', img: 'icon-edit' },
+					{ id: '1090', text: 'Test', img: 'icon-edit' },
+			  		{ id: '1120', text: 'Partides',	img:'icon-edit'},
+			  		{ id: '1200', text: 'Partides Victor',	img:'icon-edit'},							
 					]
 				}
 			],
@@ -129,15 +121,6 @@ var controller = function(e) {
 		        }
 		    ];
 		    DataGrid("Manteniment de productes", "productes", false, columns, fields);
-		    break;
-// Màquines
-		case '1040':
-			columns = [				
-				{ field: '_01_pk_idMaq', caption: 'ID Maquina', size: '10%' },
-				{ field: '_03_propMaq', caption: 'Nom del propietari', size: '50%' },
-				{ field: '_06_datAltaMaq', caption: 'Data alta', size: '40%' }
-			];
-		    DataGrid("Llistat de màquines", false, false, columns, e.target);
 		    break;
 // Torneigs
 		case '1060':
@@ -572,8 +555,172 @@ var controller = function(e) {
 		case '3720':
 		    break;
 		case '3730':
-		    break;				    
-			    
+		    break;			
+
+
+		case '3810':
+		    break;			
+		case '3820':
+		    break;			
+		case '3840':
+			columns = [
+				{ field: 'provincia',      caption: 'Provincia',   size: '8%' },												
+				{ field: 'poblacio',       caption: 'Població',    size: '8%' },						
+				{ field: 'cPostal',        caption: 'Codi postal', size: '6%' },						
+				{ field: 'idUbic',         caption: 'Ubic',        size: '4%' },
+				{ field: 'empUbic',        caption: 'Empresa',     size: '8%' },
+				{ field: 'dirUbic',        caption: 'Adreça',      size: '8%' },
+				{ field: 'latitut',        caption: 'Lat',         size: '5%' },
+				{ field: 'longitut',       caption: 'Lng',         size: '5%' },				
+				{ field: 'altitut',        caption: 'Alt',         size: '5%' },				
+				{ field: 'contactUbic',    caption: 'Contacte',    size: '8%' },
+				{ field: 'emailContacte',  caption: 'eMail',       size: '8%' },				
+				{ field: 'telefonContacte',caption: 'Telef.',      size: '8%' },	
+				{ field: 'mobilContacte',  caption: 'Mòbil',       size: '8%' },	
+				{ field: 'datAltaUbic',    caption: 'Data Alta',   size: '5%' },
+				{ field: 'datBaixaUbic',   caption: 'Data Baixa',  size: '5%' }
+			];
+		   	DataGrid("Llistat d'ubicacions per cada provincia, poblacio i codi postal", false, true, columns, e.target);
+		    break;			
+		case '3850':
+			columns = [
+				{ field: 'latitut',        caption: 'Lat',         size: '5%' },
+				{ field: 'longitut',       caption: 'Lng',         size: '5%' },				
+				{ field: 'altitut',        caption: 'Alt',         size: '5%' },				
+				{ field: 'idUbic',         caption: 'Ubic',        size: '4%' },
+				{ field: 'empUbic',        caption: 'Empresa',     size: '8%' },
+				{ field: 'dirUbic',        caption: 'Adreça',      size: '8%' },			
+				{ field: 'provincia',      caption: 'Provincia',   size: '8%' },
+				{ field: 'cPostal',        caption: 'Codi postal', size: '6%' },				
+				{ field: 'poblacio',       caption: 'Població',    size: '8%' },
+				{ field: 'contactUbic',    caption: 'Contacte',    size: '8%' },
+				{ field: 'emailContacte',  caption: 'eMail',       size: '8%' },				
+				{ field: 'telefonContacte',caption: 'Telef.',      size: '8%' },	
+				{ field: 'mobilContacte',  caption: 'Mòbil',       size: '8%' },	
+				{ field: 'datAltaUbic',    caption: 'Data Alta',   size: '5%' },
+				{ field: 'datBaixaUbic',   caption: 'Data Baixa',  size: '5%' }
+			];
+		   	DataGrid("Llistat d'ubicacions per coordenades (Latitut, Longitut i Altitut)", false, true, columns, e.target);		
+		    break;			
+		case '3860':
+			columns = [
+				{ field: 'idUbic',         caption: 'Ubic',        size: '4%' },
+				{ field: 'empUbic',        caption: 'Empresa',     size: '8%' },
+				{ field: 'dirUbic',        caption: 'Adreça',      size: '8%' },			
+				{ field: 'provincia',      caption: 'Provincia',   size: '8%' },												
+				{ field: 'cPostal',        caption: 'Codi postal', size: '6%' },				
+				{ field: 'poblacio',       caption: 'Població',    size: '8%' },				
+				{ field: 'contactUbic',    caption: 'Contacte',    size: '8%' },
+				{ field: 'emailContacte',  caption: 'eMail',       size: '8%' },				
+				{ field: 'telefonContacte',caption: 'Telef.',      size: '8%' },	
+				{ field: 'mobilContacte',  caption: 'Mòbil',       size: '8%' },	
+				{ field: 'datAltaUbic',    caption: 'Data Alta',   size: '5%' },
+				{ field: 'datBaixaUbic',   caption: 'Data Baixa',  size: '5%' }
+			];
+		   	DataGrid("Llistat d'empreses d'ubicacions", false, true, columns, e.target);
+		    break;			
+		case '3870':
+			columns = [
+				{ field: 'provincia',      caption: 'Provincia',   size: '8%' },												
+				{ field: 'cPostal',        caption: 'Codi postal', size: '6%' },				
+				{ field: 'poblacio',       caption: 'Població',    size: '8%' },			
+				{ field: 'idUbic',         caption: 'Ubic',        size: '4%' },
+				{ field: 'empUbic',        caption: 'Empresa',     size: '8%' },
+				{ field: 'dirUbic',        caption: 'Adreça',      size: '8%' },			
+				{ field: 'contactUbic',    caption: 'Contacte',    size: '8%' },
+				{ field: 'emailContacte',  caption: 'eMail',       size: '8%' },				
+				{ field: 'telefonContacte',caption: 'Telef.',      size: '8%' },	
+				{ field: 'mobilContacte',  caption: 'Mòbil',       size: '8%' },	
+				{ field: 'datAltaUbic',    caption: 'Data Alta',   size: '5%' },
+				{ field: 'datBaixaUbic',   caption: 'Data Baixa',  size: '5%' }
+			];
+		   	DataGrid("Llistat d'empreses d'ubicacions per provincia, codi postal i població", false, true, columns, e.target);		
+		    break;		
+
+		case '3890':
+		    break;			
+		case '3900':
+		    break;
+		case '3910':
+		    break;
+
+		case '3930':
+			columns = [
+				{ field: 'provincia',    caption: 'Provincia',   size: '10%' },				
+				{ field: 'poblacio',     caption: 'Població',    size: '15%' },			
+				{ field: 'cPostal',      caption: 'Codi postal', size: '8%' },				
+				{ field: 'idMaq',        caption: 'Maq',         size: '6%' },
+				{ field: 'macMaq',       caption: 'Mac',         size: '15%' },				
+				{ field: 'totalCredits', caption: 'Crèdits (€)', size: '10%',attr: 'align=right' }				
+			];
+		   	DataGrid("Llistat de les màquines de cada ubicació per provincia, població i codi postal", false, true, columns, e.target);
+		    break;			
+		case '3940':
+			columns = [
+				{ field: 'latitut',      caption: 'Lat',         size: '10%' },
+				{ field: 'longitut',     caption: 'Lng',         size: '10%' },				
+				{ field: 'altitut',      caption: 'Alt',         size: '10%' },				
+				{ field: 'provincia',    caption: 'Provincia',   size: '10%' },
+				{ field: 'poblacio',     caption: 'Població',    size: '15%' },
+				{ field: 'idMaq',        caption: 'Maq',         size: '8%' },
+				{ field: 'macMaq',       caption: 'Mac',         size: '15%' },
+				{ field: 'totalCredits', caption: 'Crèdits (€)', size: '10%',attr: 'align=right' }
+			];
+		   	DataGrid("Llistat de màquines de cada ubicació per coordenades (Latitut, Longitut i Altitut)", false, true, columns, e.target);		
+		    break;			
+		case '3950':
+			columns = [
+				{ field: 'idUbic',         caption: 'Ubic',        size: '4%' },
+				{ field: 'empUbic',        caption: 'Empresa',     size: '8%' },
+				{ field: 'dirUbic',        caption: 'Adreça',      size: '8%' },
+				{ field: 'provincia',      caption: 'Provincia',   size: '8%' },												
+				{ field: 'cPostal',        caption: 'Codi postal', size: '4%' },				
+				{ field: 'poblacio',       caption: 'Població',    size: '8%' },							
+				{ field: 'contactUbic',    caption: 'Contacte',    size: '8%' },
+				{ field: 'emailContacte',  caption: 'eMail',       size: '8%' },				
+				{ field: 'telefonContacte',caption: 'Telef.',      size: '8%' },	
+				{ field: 'mobilContacte',  caption: 'Mòbil',       size: '8%' },
+				{ field: 'idMaq',          caption: 'Maq',         size: '8%' },
+				{ field: 'macMaq',         caption: 'Mac',         size: '10%' },				
+				{ field: 'totalCredits',   caption: 'Crèdits (€)', size: '10%',attr: 'align=right' }				
+			];
+		   	DataGrid("Llistat d'empreses d'ubicacions per provincia, codi postal i població", false, true, columns, e.target);				
+		    break;			
+		case '4010':
+			columns = [
+				{ field: 'idUsr', 		caption: 'idUsr', 	size: '5%' },
+				{ field: 'nomUsr', 		caption: 'Nom', 	size: '10%' },
+				{ field: 'cogUsr', 		caption: 'Cognoms', size: '10%' },
+				{ field: 'loginUsr', 	caption: 'Login',   size: '7%' },				
+				{ field: 'emailUsr', 	caption: 'eMail', 	size: '10%' },
+				{ field: 'fotoUsr', 	caption: 'Foto', 	size: '10%' },
+				{ field: 'facebookUsr', caption: 'Facebook',size: '10%' },	
+				{ field: 'twitterUsr',  caption: 'Twitter', size: '8%' },
+				{ field: 'datAltaUsr',  caption: 'Data Alta',  size: '10%' },
+				{ field: 'datModUsr',   caption: 'Data Modif.',size: '10%' },				
+				{ field: 'datBaixaUsr', caption: 'Data Baixa', size: '10%' }
+			];
+		   	DataGrid("Relació de jugadors", false, true, columns, e.target);				
+		    break;			
+		case '4020':
+		    break;			
+		case '4030':
+		    break;			
+		case '4040':
+			columns = [
+				{ field: 'idJug',        caption: 'Jug',         size: '5%' },
+				{ field: 'nomJug',       caption: 'Nom',         size: '8%' },
+				{ field: 'loginJug',     caption: 'login',       size: '8%' },
+				{ field: 'idTorn',       caption: 'idTorn',      size: '6%' },
+				{ field: 'nomTorn',      caption: 'Torneig',     size: '12%' },
+				{ field: 'idJoc',        caption: 'Joc',         size: '5%' },
+				{ field: 'nomJoc',       caption: 'Nom Joc',     size: '12%' },						
+				{ field: 'ranking',      caption: 'Posició',     size: '6%',attr: 'align=center' },
+				{ field: 'punts',        caption: 'Punts',       size: '8%',attr: 'align=right' },
+				{ field: 'totalRanking', caption: 'Posicions Ranking',   size: '12%',attr: 'align=center' }						
+			];
+		   	DataGrid("Rankin i punts dels torneigs registrats per cada jugador", false, true, columns, e.target);
+		    break;			
 		    
 		default:
 		    console.log("default");

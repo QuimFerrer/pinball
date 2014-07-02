@@ -110,7 +110,7 @@ select * from ubicacio;
 */
 		
 /************************************************************************************/
-/*  3.f.i.4 - Llistat d'ubicacions (provincia, població, cp)   */
+/*  3.f.i.4 - 3840 - Llistat d'ubicacions (provincia, població, cp)   */
 /************************************************************************************/
 
 SELECT _06_provUbic AS provincia,_04_pobUbic AS poblacio,_05_cpUbic AS cPostal,
@@ -118,7 +118,9 @@ _01_pk_idUbic AS idUbic, _02_empUbic AS empUbic, _03_dirUbic AS dirUbic,
 _07_latUbic AS latitut, _08_longUbic AS longitut, _09_altUbic AS altitut,
 _10_contUbic AS contactUbic, _11_emailUbic AS emailContacte, _12_telUbic AS telefonContacte,
 _13_mobUbic AS mobilContacte,
-_14_datAltaUbic AS dataAlta, _15_datModUbic AS dataModif,_16_datBaixaUbic AS dataBaixa
+DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y")  AS datAltaUbic,
+DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y") AS datBaixaUbic
+
 
 FROM ubicacio
 
@@ -128,7 +130,7 @@ ORDER BY provincia, poblacio, cPostal;
 
 
 /************************************************************************************/
-/*  3.f.i.5 - Llistat d'ubicacions (lat, long, alt)   */
+/*  3.f.i.5 - 3850 - Llistat d'ubicacions (lat, long, alt)   */
 /************************************************************************************/
 
 SELECT _07_latUbic AS latitut, _08_longUbic AS longitut, _09_altUbic AS altitut,
@@ -136,7 +138,8 @@ _01_pk_idUbic AS idUbic, _02_empUbic AS empUbic, _03_dirUbic AS dirUbic,
 _06_provUbic AS provincia,_05_cpUbic AS cPostal,_04_pobUbic AS poblacio,
 _10_contUbic AS contactUbic, _11_emailUbic AS emailContacte, _12_telUbic AS telefonContacte,
 _13_mobUbic AS mobilContacte,
-_14_datAltaUbic AS dataAlta, _15_datModUbic AS dataModif,_16_datBaixaUbic AS dataBaixa
+DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y")  AS datAltaUbic,
+DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y") AS datBaixaUbic
 
 FROM ubicacio
 
@@ -145,15 +148,15 @@ ORDER BY latitut, longitut, altitut;
 
 
 /************************************************************************************/
-/*  3.f.i.6 - Llistat d'empreses d'ubicacions amb les seves dades de contacte   */
+/*  3.f.i.6 - 3860 - Llistat d'empreses d'ubicacions amb les seves dades de contacte   */
 /************************************************************************************/
 
 SELECT _01_pk_idUbic AS idUbic, _02_empUbic AS empUbic, _03_dirUbic AS dirUbic,
 _06_provUbic AS provincia,_05_cpUbic AS cPostal,_04_pobUbic AS poblacio,
 _10_contUbic AS contactUbic, _11_emailUbic AS emailContacte, _12_telUbic AS telefonContacte,
 _13_mobUbic AS mobilContacte,
-_14_datAltaUbic AS dataAlta, _15_datModUbic AS dataModif,_16_datBaixaUbic AS dataBaixa
-
+DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y")  AS datAltaUbic,
+DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y") AS datBaixaUbic
 
 FROM ubicacio
 
@@ -161,14 +164,15 @@ ORDER BY empUbic;
 
 
 /************************************************************************************/
-/*  3.f.i.7 - Llistat d'empreses d'ubicacions per provincia, població, cp amb les seves dades de contacte   */
+/*  3.f.i.7 - 3870 - Llistat d'empreses d'ubicacions per provincia, població, cp amb les seves dades de contacte   */
 /************************************************************************************/
 
 SELECT _06_provUbic AS provincia,_04_pobUbic AS poblacio,_05_cpUbic AS cPostal,
 _01_pk_idUbic AS idUbic,_02_empUbic AS empUbic, _03_dirUbic AS dirUbic,
 _10_contUbic AS contactUbic, _11_emailUbic AS emailContacte, _12_telUbic AS telefonContacte,
 _13_mobUbic AS mobilContacte,
-_14_datAltaUbic AS dataAlta, _15_datModUbic AS dataModif,_16_datBaixaUbic AS dataBaixa
+DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y")  AS datAltaUbic,
+DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y") AS datBaixaUbic
 
 FROM ubicacio
 
@@ -304,12 +308,11 @@ select * from ubicacioTeMaquina;
 
 
 /************************************************************************************/
-/*  3.f.ii.5 - Llistat de màquines de cada ubicació (provincia, població, cp) */
+/*  3.f.ii.5 - 3930 - Llistat de les màquines de cada ubicació (provincia, població, cp) */
 /************************************************************************************/
 
-
 SELECT _06_provUbic AS provincia, _04_pobUbic AS poblacio, _05_cpUbic AS cPostal,
-_01_pk_idMaq AS idMaq, _02_macMaq as macMaq, SUM(_05_totCredMaq) AS totalCreditMaq
+_01_pk_idMaq AS idMaq, _02_macMaq AS macMaq, SUM(_05_totCredMaq) AS totalCredits
 
 FROM ubicacio
 INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
@@ -321,17 +324,17 @@ WHERE
 	_16_datBaixaUbic IS NULL
 	
 GROUP BY provincia, poblacio, cPostal, _01_pk_idUbic, idMaq
-ORDER BY provincia, poblacio, cPostal, _01_pk_idUbic, idMaq, totalCreditMaq;
+ORDER BY provincia, poblacio, cPostal, _01_pk_idUbic, idMaq, totalCredits;
 
 
 /************************************************************************************/
-/*  3.f.ii.6 - Llistat de màquines de cada ubicació (lat, long, alt)) */
+/*  3.f.ii.6 - 3940 - Llistat de màquines de cada ubicació (lat, long, alt)) */
 /************************************************************************************/
 
 
 SELECT _07_latUbic AS latitut, _08_longUbic AS longitut, _09_altUbic AS altitut,
 _06_provUbic AS provincia, _04_pobUbic AS poblacio,
-_01_pk_idMaq AS idMaq, _02_macMaq as macMaq, SUM(_05_totCredMaq) AS totalCreditMaq
+_01_pk_idMaq AS idMaq, _02_macMaq as macMaq, SUM(_05_totCredMaq) AS totalCredits
 
 FROM ubicacio
 INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
@@ -343,20 +346,20 @@ WHERE
 	_16_datBaixaUbic IS NULL
 	
 GROUP BY latitut, longitut, altitut, _01_pk_idUbic, idMaq
-ORDER BY latitut, longitut, altitut, _01_pk_idUbic, idMaq, totalCreditMaq;
+ORDER BY latitut, longitut, altitut, _01_pk_idUbic, idMaq, totalCredits;
 
 
 
 /************************************************************************************/
-/*  3.f.ii.7 - Llistat de màquines de cada empresa on estan ubicades les màquines */
+/*  3.f.ii.7 - 3950 - Llistat de màquines de cada empresa on estan ubicades les màquines */
 /************************************************************************************/
 
 
-SELECT _02_empUbic AS empUbic, _03_dirUbic AS dirUbic,
+SELECT _01_pk_idUbic AS idUbic,_02_empUbic AS empUbic, _03_dirUbic AS dirUbic,
 _06_provUbic AS provincia,_05_cpUbic AS cPostal,_04_pobUbic AS poblacio,
 _10_contUbic AS contactUbic, _11_emailUbic AS emailContacte, _12_telUbic AS telefonContacte,
 _13_mobUbic AS mobilContacte,
-_01_pk_idMaq AS idMaq, _02_macMaq as macMaq, SUM(_05_totCredMaq) AS totalCreditMaq
+_01_pk_idMaq AS idMaq, _02_macMaq AS macMaq, SUM(_05_totCredMaq) AS totalCredits
 
 FROM ubicacio
 INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
@@ -368,5 +371,5 @@ WHERE
 	_16_datBaixaUbic IS NULL
 	
 GROUP BY empUbic, _01_pk_idUbic, idMaq
-ORDER BY empUbic, _01_pk_idUbic, idMaq, totalCreditMaq;
+ORDER BY empUbic, _01_pk_idUbic, idMaq, totalCredits;
 

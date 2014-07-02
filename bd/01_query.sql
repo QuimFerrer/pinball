@@ -5,7 +5,7 @@ SELECT @rn:=@rn+1 AS ‘recid’, j.* FROM jugador AS j, (SELECT @rn:=0) rr;
 
 
 /**********************************************usuari*************************************************/
-/* 2.a.1 - 2021 - consulta perfil jugador / usuari */
+/* 2.a.1 - 5021 - consulta perfil jugador / usuari */
 /***********************************************************************************************/
 
 
@@ -36,7 +36,7 @@ WHERE
 */
 
 /***********************************************************************************************/
-/* 2.a.2 - 2022 - modificacio perfil jugador */
+/* 2.a.2 - 5022 - modificacio perfil jugador */
 /***********************************************************************************************/
 
 /* canviar variables amb $ per valors */
@@ -91,7 +91,7 @@ COMMIT;
 */
 
 /***********************************************************************************************/
-/* 2.a.3 - 2023 - baixa perfil usuari / jugador */
+/* 2.a.3 - 5023 - baixa perfil usuari / jugador */
 /***********************************************************************************************/
 
 
@@ -176,10 +176,11 @@ WHERE
 
 
 /***********************************************************************************************/
-/* 2.b.2 - 2041 - torneigs amb els jocs als que está registrat un jugador amb login, el seu nom, el codi i nom de joc */
+/* 2.b.2 - 5041 - torneigs amb els jocs als que está registrat un jugador amb login, el seu nom, el codi i nom de joc */
 /***********************************************************************************************/
 
-SELECT _01_pk_idTorn AS idTorn,_03_nomTorn AS nomTorn,_01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc 
+SELECT _01_pk_idTorn AS recid,_01_pk_idTorn AS idTorn,
+_03_nomTorn AS nomTorn,_01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc 
 FROM usuari
 LEFT JOIN jugador  ON _01_pk_idUsuari = _01_pk_idJug
 LEFT JOIN inscrit  ON _01_pk_idJug    = _03_pk_idJugInsc
@@ -217,7 +218,7 @@ WHERE
 */
 
 /***********************************************************************************************/
-/* 2.b.3 - 2050 - PUNTUACIONS. ranking d'un jugador i punts dins del ranking als torneigs registrats */
+/* 2.b.3 - 5050 - PUNTUACIONS. ranking d'un jugador i punts dins del ranking als torneigs registrats */
 /****************************************************************************/
 
 
@@ -279,7 +280,7 @@ DROP TABLE CC;
 */
 
 /***********************************************************************************************/
-/* 2.b.4 - 2051 - HISTÒRIC. ranking històric d'un jugador als torneigs registrats finalitzats i en curs */
+/* 2.b.4 - 5051 - HISTÒRIC. ranking històric d'un jugador als torneigs registrats finalitzats i en curs */
 /****************************************************************************/
 
 
@@ -337,7 +338,7 @@ DROP TABLE CC;
 
 
 /****************************************************************************/
-/*  2.b.5 - 2043 - baixa de la inscripció a un torneig per jugador
+/*  2.b.5 - 5043 - baixa de la inscripció a un torneig per jugador
 /****************************************************************************/
 
 UPDATE inscrit SET _06_datBaixaInsc  = NOW()
@@ -379,7 +380,7 @@ select * from inscrit;
 */
 
 /***********************************************************************************************/
-/* 2.c.1 - 2061 - consultar tots els torneigs actius als que es pot registrar un jugador */
+/* 2.c.1 - 5061 - consultar tots els torneigs actius als que es pot registrar un jugador */
 /***********************************************************************************************/
 
 SELECT _01_pk_idTorn AS idTorn,_03_nomTorn AS nomTorn, _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc,
@@ -406,7 +407,7 @@ ORDER BY _05_datIniTorn;
 
 
 /***********************************************************************************************/
-/* 2.c.2 - 2070 - PUNTUACIONS. ranking d'un torneig i punts dins del ranking */
+/* 2.c.2 - 5070 - PUNTUACIONS. ranking d'un torneig i punts dins del ranking */
 /****************************************************************************/
 
 
@@ -467,7 +468,7 @@ DROP TABLE CC;
 
 
 /***********************************************************************************************/
-/* 2.c.3 - 2071 - HISTÒRIC. ranking històric d'un torneig finalitzats i en curs */
+/* 2.c.3 - 5071 - HISTÒRIC. ranking històric d'un torneig finalitzats i en curs */
 /****************************************************************************/
 
 
@@ -519,7 +520,7 @@ DROP TABLE CC;
 
 
 /***********************************************************************************************/
-/* 2.c.4 - 2063 - apuntar-se a un torneig  */
+/* 2.c.4 - 5063 - apuntar-se a un torneig  */
 /***********************************************************************************************/
 
 	/* canviar pel login de l'usuari */	
