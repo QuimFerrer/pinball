@@ -38,7 +38,7 @@ comprovaSessio();
 			$response = dbExec($query)[1];
 			$_SESSION['resultat']=$response;
 			$resultat = $response;
-			var_dump($_SESSION['resultat']); // Resultat: .... 
+			//var_dump($_SESSION['resultat']); // Resultat: .... 
 			//array(5) { 
 			//[0]=> object(stdClass)#1 (1) { ["_04_loginUsuari"]=> string(5) "admin" } 
 			//[1]=> object(stdClass)#2 (1) { ["_04_loginUsuari"]=> string(4) "joan" } 
@@ -66,8 +66,7 @@ comprovaSessio();
 			if (($_SESSION['emplenat'])=="SI"){
 			echo "<p>soc a l'insert</p>";
 			 
-			// var_dump($resultat);
-			var_dump($_SESSION['resultat']);
+			//var_dump($_SESSION['resultat']);
 			//array(5) { 
 			//[0]=> object(stdClass)#1 (1) { ["_04_loginUsuari"]=> string(5) "admin" } 
 			//[1]=> object(stdClass)#2 (1) { ["_04_loginUsuari"]=> string(4) "joan" } 
