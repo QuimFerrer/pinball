@@ -86,7 +86,7 @@ Zona d'usuari
 		2. ( 02_query.sql ) 3240 - Llistat de jocs històric
 		3. ( 02_query.sql ) 3210 - Alta d'un joc
 		4. ( 02_query.sql ) 3220 - Baixa d'un joc
-		5. ( 02_query.sql ) 3220 - Modificació d'un joc
+		5. ( 02_query.sql ) 3225 - Modificació d'un joc
 		6. ( 02_query.sql ) Actualització partides jugades
 		7. ( 02_query.sql ) 3250 - Llistat de jocs amb les màquines a on estan instal.lats i amb num de partides jugades i crédits
 		8. ( 02_query.sql ) 3260 - Llistat de jocs amb les màquines a on estan instal.lats i amb num de partides jugades i crédits. (Històric)

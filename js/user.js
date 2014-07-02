@@ -1,12 +1,11 @@
 // Sidebar per l'Usuari
 $('#sidebar').w2sidebar({
 	name: 'sidebar',
-	nodes: [ 
-		{ id: '5000', text: 'Opcions', expanded: true, group: true,
-		  nodes: [ 	{ id: '5020', text: 'Perfil', img: 'icon-page'},
-				    { id: '5040', text: 'Els Meus Torneigs', img: 'icon-folder',
-					nodes: [{ id: '5041', text: 'Consulta', img: 'icon-page' },
-				   			{ id: '5042', text: 'Ranking', img: 'icon-folder', 
+	nodes: [ { id: '5000', text: 'Opcions', expanded: true, group: true,
+		  	nodes: [ { id: '5020', text: 'Perfil', img: 'icon-page'},
+				     { id: '5040', text: 'Els Meus Torneigs', img: 'icon-folder',
+					  nodes: [{ id: '5041', text: 'Consulta', img: 'icon-page' },
+				   			  { id: '5042', text: 'Ranking', img: 'icon-folder', 
 				   				nodes: [{ id: '5050', text: 'Actual', img: 'icon-page' },
 				   						{ id: '5051', text: 'Històric', img: 'icon-page' }]},						   			
 				   			{ id: '5043', text: 'Baixa', img: 'icon-page' } ]},

@@ -16,13 +16,17 @@ isEndSessionInQuery();
 	const USUARIS_1080  	 = 1080;
 	const PARTIDA_1120	     = 1120;
 
-	const PARTIDES_X_MAQUINA_3110              = 3000;
+	const MODIFICA_PERFIL_ADM_3000             = 3000;
 
 	const PARTIDES_X_MAQUINA_3110              = 3110; //
 	const PARTIDES_X_JUGADOR_3120              = 3120; //
 
-	const ALTA_JOCS_3210					   = 3210;
-	const GESTIO_JOCS_3220 		 	           = 3220;
+	const BLOQUEJAR_PARTIDES_3130              = 3130;
+	const DESBLOQUEJAR_PARTIDES_3130           = 3140; 
+
+	const ALTA_JOC_3210						   = 3210;
+	const BAIXA_JOC_3220					   = 3220;
+	const MODIFICACIO_JOC_3225 		           = 3225;	
 	const JOCS_ACTUAL_3230 		 	           = 3230; //
 	const JOCS_HISTORIC_3240 	 	           = 3240; //
 	const JOCS_X_MAQUINA_3250 		           = 3250; //
@@ -92,6 +96,7 @@ isEndSessionInQuery();
 	const CONSULTA_RANKING_HISTORIC_5071       = 5071; //
 	const INSCRIPCIO_USR_TORNEIG_5063          = 5063;	
 
+	const PLANTILLA = 9999;
 	
 	$pid = isset($_REQUEST['pid']) ? (int) $_REQUEST['pid'] : 0;
 	$usrLogin = isset($_REQUEST['params']) ? $_REQUEST['params'] : $_SESSION["login"];	
@@ -115,6 +120,13 @@ isEndSessionInQuery();
 	if ($pid > 0) {
 
 		switch ($pid) {
+
+			case PLANTILLA :
+				$query    = '';			
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));
+				break;
+
 			case FORM_CONTACTE_1000:
 				echo json_encode($_REQUEST['record']);
 				break;
@@ -156,20 +168,32 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));				
 				break;
 
-			case CONSULTA_USR_2020 :
-				$query    = 'SELECT id, nom, foto FROM productes WHERE id < 3';
-				$response = dbExec($query)[1];
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
 
-				$records = array();
-				foreach($response as $row) {
-					$records[] = (object) array('recid'=>(int)$row->id, 'nom'=>$row->nom, 'foto'=>$row->foto);
-				}
-
-				echo json_encode( $records );
+			case MODIFICA_PERFIL_ADM_3000 :
+				$query    = 'UPDATE usuari SET _02_nomUsuari     = "$nom",
+											   _03_cognomUsuari  = "$cognom",
+						                       _06_emailUsuari   = "$email",
+						                       _07_fotoUsuari    = "$nomFoto",
+						                       _08_datAltaUsuari = "$dataAltaUsuari",						
+						                       _09_datModUsuari  = NOW()
+							WHERE
+								_10_datBaixaUsuari IS NULL AND
+								_04_loginUsuari = "admin";';
+				$response = dbExec($query,0);
+				$query    = 'UPDATE admin SET  _02_faceAdm    = "$facebook",
+						 					   _03_twitterAdm = "$twitter",
+						 					   _04_datAltaAdm = "$dataAltaAdm",	
+						 					   _05_datModAdm  = NOW()
+							WHERE 
+									_06_datBaixaAdm IS NULL AND
+									(_01_pk_idAdm IN
+										( SELECT _01_pk_idUsuari AS _01_pk_idAdm FROM usuari
+											WHERE _04_loginUsuari = "admin"));';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));							
 				break;
-
-///////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////
 
 			case PARTIDES_X_MAQUINA_3110 :
 				$query    = 'SELECT _01_pk_idMaqPart AS idMaq,
@@ -228,9 +252,61 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));
 				break;
 
-			case ALTA_JOCS_3210 :
+			case BLOQUEJAR_PARTIDES_3130 :
+				$query    = 'UPDATE partida SET _06_datBaixaPart  = NOW()
+							 WHERE 
+								_06_datBaixaPart IS NULL AND
+								_00_pk_idPart_auto = "$idPartida";';			
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));
 				break;
-			case GESTIO_JOCS_3220 :
+
+			case DESBLOQUEJAR_PARTIDES_3140 : 
+				$query    = 'UPDATE partida SET _06_datBaixaPart  = NULL
+ 							 WHERE 
+									_06_datBaixaPart IS NOT NULL AND
+									_00_pk_idPart_auto = "$idPartida";';			
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));
+				break;
+
+			case ALTA_JOC_3210 :
+				$query    = 'INSERT INTO joc 
+								VALUES (NULL,
+										"$nomJoc",
+										"$descJoc",
+										"$imgJoc",0,NOW(),NULL,NULL);';			
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));
+				break;
+			case BAIXA_JOC_3220 :
+				$query    = 'UPDATE joc SET _08_datBaixaJoc = NOW()
+							WHERE 
+								_01_pk_idJoc = "$idJoc" AND
+								_08_datBaixaJoc IS NULL;';
+				$response = dbExec($query,0);
+				$query    = 'UPDATE torneig SET _09_datBaixaTorn = NOW()
+							WHERE 
+								_02_pk_idJocTorn = "$idJoc" AND
+								_09_datBaixaTorn IS NULL;';
+				$response = dbExec($query,0);
+				$query    = 'UPDATE maqinstall SET _08_datBaixaMaqInst = NOW()
+							WHERE 
+								_02_pk_idJocInst = "$idJoc" AND
+								_08_datBaixaMaqInst IS NULL;';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
+				break;				
+			case MODIFICACIO_JOC_3225 :
+				$query    = 'UPDATE joc SET   _02_nomJoc      = "$nomJoc",
+											  _03_descJoc     = "$descJoc",
+											  _04_imgJoc      = "$imgJoc",
+											  _06_datAltaJoc  = "$dataAltaJoc",
+											  _07_datModJoc   = NOW(),
+											  _08_datBaixaJoc = "$dataBaixaJoc"						  
+							WHERE _01_pk_idJoc = "$idJoc";';			
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));			
 				break;
 			case JOCS_ACTUAL_3230 :
 				$query    = 'SELECT _01_pk_idjoc AS idJoc, 
@@ -1013,6 +1089,19 @@ isEndSessionInQuery();
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
+
+			case CONSULTA_USR_5020 :
+				// $query    = 'SELECT id, nom, foto FROM productes WHERE id < 3';
+				// $response = dbExec($query)[1];
+
+				// $records = array();
+				// foreach($response as $row) {
+				// 	$records[] = (object) array('recid'=>(int)$row->id, 'nom'=>$row->nom, 'foto'=>$row->foto);
+				// }
+
+				// echo json_encode( $records );
+				break;
+
 			case MODIF_PERFIL_USR_5022 :
 				$query    = 'UPDATE usuari SET _02_nomUsuari    = "$nom",
 								               _03_cognomUsuari = "$cognom",
