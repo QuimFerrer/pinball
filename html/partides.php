@@ -23,23 +23,32 @@ comprovaSessio();
 	$(document).ready(function(){
 	    $("#I_User").change(function(){
 		var iuserlogin = document.getElementById("I_User").value;
-		alert(iuserlogin);
-		var params={UserAjax:iuserlogin};
+		//alert(iuserlogin);
+		//var params={UserAjax:iuserlogin};
 		//pantallajoc(iuserlogin);
 		
+		$.ajax("query.php")
+		.done( function(e) {
+		    alert( e);
+		});
+		
+		/*
 		$.ajax({
 		    type: 'POST',
-		    data: '$_REQUEST['5041']',
-		    datatype: 'text',
+		    data: {pid:5041}, //'$_REQUEST['5041']',
+		    datatype: 'json',
 		    url:'query.php',
-		    success: function(dadesjugador){pantallajoc(dadesjugador);} // sense coma al final si es la última
+		    done:function(e){
+		       console.log(e);
+		    }//dadesjugador){pantallajoc(dadesjugador);} // sense coma al final si es la última
 		    //error: 	function(){$("#confirmerror").html("Error en les dades");}
 		    });
-	    });
+		*/
+		});
 	    }); 
 	    
 	    function pantallajoc(dades){
-	    alert(dades);
+	    //alert(dades);
 	    }
 	     
 	 </script>
