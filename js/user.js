@@ -12,7 +12,7 @@ $('#sidebar').w2sidebar({
 				   				nodes: [{ id: '5050', text: 'Actual', img: 'icon-page' },
 				   						{ id: '5051', text: 'Històric', img: 'icon-page' }]},
 						   			
-				   			{ id: '5043', text: 'Baixa', img: 'icon-page' } ]},
+				   			{ id: '5043', text: 'Baixa', img: 'icon-delete' } ]},
 
 				{ id: '5060', text: 'Tots els Torneigs', img: 'icon-folder',
 					nodes: [{ id: '5061', text: 'Consulta', img: 'icon-page' },
@@ -36,14 +36,37 @@ var controller = function(e) {
 
 	switch(e.target) {
 		case '5041':
+            toolbar = { 
+                items: [
+	                { type: 'button', id: 'baixa',  caption: 'baixa', img: 'icon-delete' }
+	            ],
+                onClick: function(target, data) {
+                    console.log(grid.getSelection()[0]); //5043
+					w2ui['grid'].lock('Carregant dades ...', true);
+					$.ajax({
+						url: "query.php",
+						data: {pid: "5043"}
+					})
+					.done(function(e) {
+						console.log(e);
+					})
+					.fail(function(e) {
+						console.log(e);
+					})
+					.always(function(e) {
+						w2ui['grid'].unlock();
+					});
+                }
+            };
 			columns = [
 				{ field: 'idTorn',  caption: 'Torneig', size: '25%' },
 				{ field: 'nomTorn', caption: 'Nom',     size: '25%' },
 				{ field: 'idJoc',   caption: 'Joc',     size: '25%' },
 				{ field: 'nomJoc',  caption: 'Nom joc', size: '25%' }
 			];
-	    	DataGrid("Torneigs als que estic inscrit", false, true, columns, e.target);
-		    break;				
+	    	DataGrid("Torneigs als que estic inscrit", false, toolbar, columns, e.target);
+		    break;
+
 		case '5050':
 			columns = [				
 				{ field: 'idTorn',  caption: 'Torneig', size: '12%' },
@@ -68,8 +91,7 @@ var controller = function(e) {
 			];
 		   	DataGrid("Ranking històric dels meus torneigs", false, true, columns, e.target);				
 		    break;
-		case '5043':				
-		    break;				
+			
 		case '5061':
 			columns = [
 				{ field: 'idTorn',  caption: 'Torneig', size: '12%' },

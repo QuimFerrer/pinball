@@ -172,6 +172,22 @@ var dbForm = function() {
         );
     };
 
+    this.Request = function(params) {
+        w2ui['grid'].lock('Carregant dades ...', true);
+
+        w2ui['dialog'].request(params, 
+            function( data ){
+                if (data.status !== 'error') {
+                    self.Load(data);
+                    w2ui['grid'].unlock();
+                    self.Activate();
+                } else {
+                    console.log( data.responseText );  // status, message, responseText
+                }
+            }
+        );    
+    };
+
     this.Define = function(table, recno, pkName) {
 
         $().w2destroy('dialog');
@@ -211,20 +227,7 @@ var dbForm = function() {
         });
 
         if (recno > 0) {
-
-            w2ui['grid'].lock('Carregant dades ...', true);
-
-            w2ui['dialog'].request( { 'recid' : recno }, 
-                function( data ){
-                    if (data.status !== 'error') {
-                        self.Load(data);
-                        w2ui['grid'].unlock();
-                        self.Activate();
-                    } else {
-                        console.log( data.responseText );  // status, message, responseText
-                    }
-                }
-            );
+            self.Request({'recid':recno}); 
         } else {
             self.Load();  // Blank
             self.Activate();
@@ -300,7 +303,7 @@ function DataView(url) {
  *  Api per construir un formulari
  **********************************************************************************************
  */
-function DataForm() {
+function DataForm(fields, actions) {
     if (w2ui.grid)  w2ui['grid'].destroy();
 
     $('#grid').w2form({ 

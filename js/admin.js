@@ -167,6 +167,9 @@ var controller = function(e) {
 		        { name: "_03_nomTorn", type: 'text', required: true,
 		          html: { caption: 'Nom', attr: 'size="40"', span: 5 }
 		        },
+		        { name: "Joc", type: 'list', required: true,
+		          fldName: "_02_pk_idJocTorn", table: "joc", editable: false
+		        },
 		        { name: "_04_premiTorn", type: 'float', required: false,
 		          html: { caption: 'Premi', attr: 'size="40"', span: 5 }
 		        },
@@ -177,7 +180,7 @@ var controller = function(e) {
 		          html: { caption: 'Data final', attr: 'size="40"', span: 5 }
 		        }
 		    ];
-		    DataGrid("Llistat de torneigs", "torneig", toolbar, columns, fields, "_01_pk_idTorn");
+		    DataGrid("Llistat de torneigs", "torneig", false, columns, fields, "_01_pk_idTorn");
 		    break;
 // Usuaris
 		case '1080':
