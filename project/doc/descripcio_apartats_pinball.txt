@@ -8,14 +8,17 @@ Varis
 --> ok. <-- 6.control.lar amb login que el usuari no està donat de baixa
 --> ok. <-- 7. alinear dreta o centre de camps al grid --> ,attr: 'align=center' 
 --> ok. <-- 8. treure el login.js
-9. posar al titol dels grids llistat o relació
+--> ok. <-- 9. posar al titol dels grids llistat o relació
 10. registre amb enviament de mail
 11. guardar password encriptat
 12. enviament de mail de contacte
-13. pregunta al Quim per posar columnes per filtrar/buscar els resultats 
+--> ok. <-- 13. pregunta al Quim per posar columnes per filtrar/buscar els resultats 
 14. que el TOTAL d'alguns llistat pugui sortir amb una linia de totals del grid
-15. posar un aopció de menú per llistar les dades de cada taula
+15. posar un opció de menú per llistar les dades de cada taula
 16. gestió de reset password
+17. revisar query 3110
+
+
 
 Recreatius
 
@@ -117,6 +120,7 @@ Zona d'usuari
 			4. ( 03_query.sql ) 3430 - actualitzar recaudació d'una màquina
 			5. ( 03_query.sql ) 3440 - llistat de totes les máquines informant: ubicació, jocs instal.lats, crédits totals, propietari, etc.
 			6. ( 03_query.sql ) 3450 - llistat de totes les máquines informant: ubicació, jocs instal.lats, crédits totals, propietari, etc. Històric
+			7. ( 03_query.sql ) 3456 - màquines disponibles de cada torneig per cada jugador. 
 		ii. ASSIGNACIO DE JOCS:
 			1. ( 03_query.sql ) 3460 - Alta d'assignació de joc a una màquina
 			2. ( 03_query.sql ) 3470 - Baixa d'assignació de joc a una màquina

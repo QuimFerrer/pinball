@@ -22,6 +22,8 @@ CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`usuari` (
   `_08_datAltaUsuari` DATETIME NULL ,
   `_09_datModUsuari` DATETIME NULL ,
   `_10_datBaixaUsuari` DATETIME NULL ,
+  `_11_activacioUsuari` VARCHAR(32) NULL ,
+  `_12_estatUsuari` TINYINT(1)  NULL ,
   PRIMARY KEY (`_01_pk_idUsuari`) )
 ENGINE = InnoDB;
 
@@ -355,11 +357,11 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`) VALUES ('2', 'joan', 'salas', 'joan', 'joan', 'jsalas@gmail.com', NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`) VALUES ('3', 'josep', 'puig', 'josep', 'josep', 'jpuig@gmail.com', NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`) VALUES ('4', 'miquel', 'roca', 'miquel', 'miquel', 'mroca@gmail.com', NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`) VALUES ('5', 'rob', 'lopez', 'rob', 'rob', 'rob@gmail.com', NULL, '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`) VALUES ('1', 'admin', 'admin', 'admin', 'admin', 'admadm@gmail.com', NULL, '2014-06-15', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`, `_11_activacioUsuari`, `_12_estatUsuari`) VALUES ('2', 'joan', 'salas', 'joan', 'joan', 'jsalas@gmail.com', NULL, '2014-05-13', NULL, NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`, `_11_activacioUsuari`, `_12_estatUsuari`) VALUES ('3', 'josep', 'puig', 'josep', 'josep', 'jpuig@gmail.com', NULL, '2014-05-13', NULL, NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`, `_11_activacioUsuari`, `_12_estatUsuari`) VALUES ('4', 'miquel', 'roca', 'miquel', 'miquel', 'mroca@gmail.com', NULL, '2014-05-13', NULL, NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`, `_11_activacioUsuari`, `_12_estatUsuari`) VALUES ('5', 'rob', 'lopez', 'rob', 'rob', 'rob@gmail.com', NULL, '2014-05-13', NULL, NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`, `_11_activacioUsuari`, `_12_estatUsuari`) VALUES ('1', 'admin', 'admin', 'admin', 'admin', 'admadm@gmail.com', NULL, '2014-06-15', NULL, NULL, NULL, NULL);
 
 COMMIT;
 
@@ -433,11 +435,11 @@ COMMIT;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('10', NULL, 'josep guijosa', '100', '1200', '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('20', NULL, 'josep guijosa', '200', '1500', '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('30', NULL, 'joan farres', '300', '10200', '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('40', NULL, 'joan farres', '400', '5400', '2014-05-13', NULL, NULL);
-INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('50', NULL, 'miquel farres', '500', '3200', '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('10', '12:FF:RT:3E:4R:55', 'josep guijosa', '100', '1200', '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('20', '3E:00:00:3E:R4', 'josep guijosa', '200', '1500', '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('30', '45:RT:HY:E3:Q1', 'joan farres', '300', '10200', '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('40', 'GH:00:87:5T:OP', 'joan farres', '400', '5400', '2014-05-13', NULL, NULL);
+INSERT INTO `u555588791_pinba`.`maquina` (`_01_pk_idMaq`, `_02_macMaq`, `_03_propMaq`, `_04_credMaq`, `_05_totCredMaq`, `_06_datAltaMaq`, `_07_datModMaq`, `_08_datBaixaMaq`) VALUES ('50', 'SD:34:00:12:4D', 'miquel farres', '500', '3200', '2014-05-13', NULL, NULL);
 
 COMMIT;
 

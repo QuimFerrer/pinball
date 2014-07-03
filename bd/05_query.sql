@@ -115,11 +115,41 @@ UPDATE usuari,jugador SET
 						_06_datBaixaJug  = NULL						
 WHERE 
 		_10_datBaixaUsuari IS NOT NULL AND	
-		_04_loginUsuari = "joan" AND
+		_04_loginUsuari = "rob" AND
 		_06_datBaixaJug IS NOT NULL;
+
 
 select * from usuari;
 select * from jugador;
+
+UPDATE usuari SET _09_datModUsuari   = NOW(),
+						_10_datBaixaUsuari = NULL
+WHERE 
+		_10_datBaixaUsuari IS NOT NULL AND
+		_01_pk_idUsuari = "5";
+
+UPDATE jugador SET _05_datModJug    = NOW(),
+						 _06_datBaixaJug  = NULL
+WHERE
+		 _06_datBaixaJug IS NOT NULL AND
+		 _01_pk_idJug = "5";
+
+select * from usuari;
+select * from jugador;
+
+UPDATE usuari SET _09_datModUsuari   = NOW(),
+						_10_datBaixaUsuari = NULL
+WHERE 
+		_10_datBaixaUsuari IS NOT NULL AND
+		_04_loginUsuari = "rob";		
+
+UPDATE jugador SET _05_datModJug    = NOW(),
+						 _06_datBaixaJug  = NULL
+WHERE
+		 _06_datBaixaJug IS NOT NULL AND
+		(_01_pk_idJug IN ( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
+		WHERE _04_loginUsuari = "rob"));		 
+
 
 
 */

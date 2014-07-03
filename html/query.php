@@ -48,6 +48,8 @@ isEndSessionInQuery();
 	const ACTUALITZA_RACAUDACIO_MAQ_3430       = 3430;		
 	const LLISTAT_MAQUINES_3440 	           = 3440; //
 	const LLISTAT_MAQUINES_HISTORIC_3450 	   = 3450; //
+	const LLISTAT_MAQS_X_TORNEIG_I_JUG_3455    = 3455;		
+	const LLISTAT_MAQS_X_TORNEIG_3456    	   = 3456;
 
 	const ALTA_ASSIGNACIO_JOC_MAQUINA_3460	   = 3460;
 	const BAIXA_ASSIGNACIO_JOC_MAQUINA_3470    = 3470;
@@ -105,7 +107,6 @@ isEndSessionInQuery();
 	const CONSULTA_RANKING_HISTORIC_5071       = 5071; //
 	const INSCRIPCIO_USR_TORNEIG_5063          = 5063;	
 
-	const PLANTILLA = 9999;
 	
 	$pid      = isset($_REQUEST['pid'])       ? (int) $_REQUEST['pid'] : 0;
 	$usrLogin = isset($_REQUEST['params'])    ? $_REQUEST['params'] : $_SESSION["login"];	
@@ -135,12 +136,6 @@ isEndSessionInQuery();
 	if ($pid > 0) {
 
 		switch ($pid) {
-
-			case PLANTILLA :
-				$query    = '';			
-				$response = dbExec($query);
-				echo json_encode(controlErrorQuery($response));
-				break;
 
 			case FORM_CONTACTE_1000:
 				echo json_encode($_REQUEST['record']);
@@ -210,12 +205,13 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));							
 				break;
 			case PARTIDES_X_MAQUINA_3110 :
-				$query    = 'SELECT _01_pk_idMaqPart AS idMaq,
-									_02_pk_idJocTorn AS idJoc,
-									_02_nomJoc       AS nomJoc, 
-									BB.idUsuari      AS idUser,
-									BB.loginJug      AS loginUser,
-									BB.nomJug        AS nomUser,
+				$query    = 'SELECT _00_pk_idPart_auto AS recid,
+									_01_pk_idMaqPart   AS idMaq,
+									_02_pk_idJocTorn   AS idJoc,
+									_02_nomJoc         AS nomJoc, 
+									BB.idUsuari        AS idUser,
+									BB.loginJug        AS loginUser,
+									BB.nomJug          AS nomUser,
 									DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
 									_01_pk_idTorn AS idTorn,
 									_03_nomTorn AS nomTorn,
@@ -308,6 +304,7 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));			
 				break;				
 			case MODIFICACIO_JOC_3225 :
+
 				$query    = 'UPDATE joc SET   _02_nomJoc      = "$nomJoc",
 											  _03_descJoc     = "$descJoc",
 											  _04_imgJoc      = "$imgJoc",
@@ -332,6 +329,7 @@ isEndSessionInQuery();
 			case JOCS_HISTORIC_3240 :
 				$query    = 'SELECT _01_pk_idjoc AS idJoc, 
 									_02_nomJoc AS nomJoc, 
+									_04_imgJoc AS imgJoc, 
 									_05_numPartidesJugadesJoc AS numPartides,
 									DATE_FORMAT(_06_datAltaJoc,  "%d-%m-%Y %H:%i:%s") AS datAltaJoc,
 									DATE_FORMAT(_07_datModJoc, "%d-%m-%Y %H:%i:%s")   AS datModJoc,
@@ -649,7 +647,63 @@ isEndSessionInQuery();
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
 				break;
-
+			case LLISTAT_MAQS_X_TORNEIG_I_JUG_3455 :
+				$query    = 'SELECT _01_pk_idMaq    AS idMaq,
+									_02_macMaq      AS macMaq,
+									_01_pk_idJoc    AS idJoc,
+									_02_nomJoc      AS nomJoc,
+									_01_pk_idUsuari AS idJug,
+									_04_loginUsuari AS loginUsuari,
+									_01_pk_idTorn   AS idTorn,
+									_03_nomTorn     AS nomTorn
+							FROM usuari
+								LEFT JOIN jugador    ON _01_pk_idUsuari = _01_pk_idJug
+								LEFT JOIN inscrit    ON _01_pk_idJug    = _03_pk_idJugInsc
+								INNER JOIN torneig   ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
+								INNER JOIN joc       ON _02_pk_idJocTorn = _01_pk_idJoc
+								LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
+								INNER JOIN maquina   ON _01_pk_idMaqInst = _01_pk_idMaq
+							WHERE 
+									_10_datBaixaUsuari   IS NULL AND
+									_09_datBaixaTorn     IS NULL AND
+									_08_datBaixaJoc      IS NULL AND
+									_06_datBaixaInsc     IS NULL AND	
+									_08_datBaixaMaqInst  IS NULL AND
+									_08_datBaixaMaq      IS NULL AND
+									_04_datAltaInsc      IS NOT NULL AND
+									_04_loginUsuari = "' . $loginUsr . '"
+							ORDER BY idMaq,idJoc,idJug;';
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));	
+				break;
+			case LLISTAT_MAQS_X_TORNEIG_3456 :
+				$query    = 'SELECT _01_pk_idMaq    AS idMaq,
+									_02_macMaq      AS macMaq,
+									_01_pk_idJoc    AS idJoc,
+									_02_nomJoc      AS nomJoc,
+									_01_pk_idUsuari AS idJug,
+									_04_loginUsuari AS loginUsuari,
+									_01_pk_idTorn   AS idTorn,
+									_03_nomTorn     AS nomTorn
+							FROM usuari
+								LEFT JOIN jugador    ON _01_pk_idUsuari = _01_pk_idJug
+								LEFT JOIN inscrit    ON _01_pk_idJug    = _03_pk_idJugInsc
+								INNER JOIN torneig   ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
+								INNER JOIN joc       ON _02_pk_idJocTorn = _01_pk_idJoc
+								LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
+								INNER JOIN maquina   ON _01_pk_idMaqInst = _01_pk_idMaq
+							WHERE 
+									_10_datBaixaUsuari   IS NULL AND
+									_09_datBaixaTorn     IS NULL AND
+									_08_datBaixaJoc      IS NULL AND
+									_06_datBaixaInsc     IS NULL AND	
+									_08_datBaixaMaqInst  IS NULL AND
+									_08_datBaixaMaq      IS NULL AND
+									_04_datAltaInsc      IS NOT NULL
+							ORDER BY idMaq,idJoc,idJug;';
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));	
+				break;						
 			case ALTA_ASSIGNACIO_JOC_MAQUINA_3460 :
 				$query    = 'INSERT INTO maqInstall
 								VALUES (NULL,
@@ -1221,16 +1275,14 @@ isEndSessionInQuery();
 											   _10_datBaixaUsuari = NULL
 								WHERE 
 									_10_datBaixaUsuari IS NOT NULL AND
-									_04_loginUsuari = "' . $usrLogin . '";';
+									_01_pk_idUsuari = "' . $idUsr . '";';	
 				$response  = dbExec($query,0);
 				$query    = 'UPDATE jugador SET _05_datModJug    = NOW(),
 						 						_06_datBaixaJug  = NULL
 								WHERE
 									 _06_datBaixaJug IS NOT NULL AND
-									(_01_pk_idJug IN
-											( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
-												WHERE _04_loginUsuari = "' . $usrLogin . '"));';
-				$response  = dbExec($query,0);			
+									 _01_pk_idJug = "' . $idUsr . '";';									 
+				$response  = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;		
 			case TORNEIGS_REGISTRATS_X_JUGADOR_4040 :

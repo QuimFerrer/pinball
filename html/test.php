@@ -31,23 +31,30 @@ isEndSessionInQuery();
 	const JOCS_HISTORIC_3240 	 	           = 3240; //
 	const JOCS_X_MAQUINA_3250 		           = 3250; //
 	const JOCS_X_MAQUINA_HISTORIC_3260         = 3260; //	
+	const ACTUALITZA_NUM_PARTIDES_JUGADES_3270 = 3270;
 
-	const ALTA_TORNEIGS_3310				   = 3310;
-	const GESTIO_TORNEIGS_3315 				   = 3315;
-	const RELACIO_TORNEIGS_3320 	           = 3320; //	
+	const ALTA_TORNEIG_3310				       = 3310;
+	const BAIXA_TORNEIG_3320 				   = 3320;
+	const MODIFICACIO_TORNEIG_3330 			   = 3330;	
+	const RELACIO_TORNEIGS_3340 	           = 3340; //	
 	const TORNEIGS_AMB_JUGADORS_ACTUAL_3350    = 3350; //
 	const TORNEIGS_AMB_JUGADORS_HISTORIC_3360  = 3360; //
 	const TORNEIGS_AMB_MAQUINES_ACTUAL_3380    = 3380; //
 	const TORNEIGS_AMB_MAQUINES_HISTORIC_3390  = 3390; //
 
-	const ALTA_MAQUINES_3410				   = 3410;
-	const GESTIO_MAQUINES_3420 				   = 3420;
-	const LLISTAT_MAQUINES_3430 	           = 3430; //
-	const LLISTAT_MAQUINES_HISTORIC_3440 	   = 3440; //
+	const ALTA_MAQUINA_3410					   = 3410;
+	const BAIXA_MAQUINA_3420 				   = 3420;
+	const MODIFICACIO_MAQUINA_3425 			   = 3425;	
+	const ACTUALITZA_RACAUDACIO_MAQ_3430       = 3430;		
+	const LLISTAT_MAQUINES_3440 	           = 3440; //
+	const LLISTAT_MAQUINES_HISTORIC_3450 	   = 3450; //
+	const LLISTAT_MAQS_X_TORNEIG_I_JUG_3455    = 3455;	
+	const LLISTAT_MAQS_X_TORNEIG_3456    	   = 3456;
 
 	const ALTA_ASSIGNACIO_JOC_MAQUINA_3460	   = 3460;
-	const GESTIO_ASSIGNACIO_JOC_MAQUINA_3470   = 3470;
-	const LLISTAT_ASSIGNACIO_JOC_MAQUINA_3480  = 3480; //
+	const BAIXA_ASSIGNACIO_JOC_MAQUINA_3470    = 3470;
+	const MODIF_ASSIGNACIO_JOC_MAQUINA_3480    = 3480;	
+	const LLISTAT_ASSIGNACIO_JOC_MAQUINA_3490  = 3490; //
 
 	const RECAUDACIO_X_MAQ_AMB_RANKING_3510    = 3510; //
 	const RECAUDACIO_X_JOC_AMB_RANKING_3520    = 3520; //
@@ -62,16 +69,18 @@ isEndSessionInQuery();
 	const RECAUDACIO_X_JOC_POB_3610    	  	   = 3610; //			
 	const RECAUDACIO_X_JOC_PROV_POB_CP_3620    = 3620; //	
 
-	const ALTA_UBICACIONS_3810				   = 3810;
-	const GESTIO_UBICACIONS_3820 			   = 3820;
+	const ALTA_UBICACIO_3810				   = 3810;
+	const BAIXA_UBICACIO_3820 				   = 3820;
+	const MODIFICACIO_UBICACIO_3830 		   = 3830;	
 	const LLISTAT_UBICS_X_PROV_POB_3840        = 3840; //
 	const LLISTAT_UBICS_X_COORDENADES_3850     = 3850; //
 	const LLISTAT_UBICS_X_EMPRESA_3860         = 3860; //	
 	const LLISTAT_UBICS_X_EMPRESA_PROV_POB_3870= 3870; //		
 
-	const ALTA_MAQS_X_UBICACIO_3890			   = 3890;
-	const GESTIO_MAQS_X_UBICACIO_3900	       = 3900;	
-	const CANVI_MAQS_UBICACIO_3910 			   = 3910;
+	const ALTA_MAQ_X_UBICACIO_3880			   = 3880;
+	const BAIXA_MAQ_X_UBICACIO_3890	 	       = 3890;	
+	const MODIFICACIO_MAQ_X_UBICACIO_3900	   = 3900;
+	const CANVI_MAQ_D_UBICACIO_3910 		   = 3910;
 	const LLISTAT_MAQS_X_UBIC_PROV_POB_3930    = 3930; //
 	const LLISTAT_MAQS_X_UBIC_COORDENADES_3940 = 3940; //
 	const LLISTAT_MAQS_X_EMPRESA_3950          = 3950; //	
@@ -86,10 +95,11 @@ isEndSessionInQuery();
 ////////////////////////////////////////////////////////////////////////////////////
 
 	const CONSULTA_USR_5020					   = 5020;
+	const GET_DADES_PERFIL_USR_5021			   = 5021;	
 	const MODIF_PERFIL_USR_5022           	   = 5022;
 	const BAIXA_PERFIL_USR_5023           	   = 5023;
 	const CONSULTA_USR_TORNEIGS_5041           = 5041; //
-	const BAIXA_USR_TORN_5043                  = 5043;	
+	const BAIXA_USR_TORN_5043                  = 5043; //
 	const CONSULTA_USR_RANKING_ACTUAL_5050     = 5050; //
 	const CONSULTA_USR_RANKING_HISTORIC_5051   = 5051; //
 	const CONSULTA_USR_TOTS_TORNEIGS_5061      = 5061; //
@@ -99,11 +109,18 @@ isEndSessionInQuery();
 
 	const PLANTILLA = 9999;
 	
-	$pid = isset($_REQUEST['pid']) ? (int) $_REQUEST['pid'] : 0;
-	$usrLogin = isset($_REQUEST['params']) ? $_REQUEST['params'] : $_SESSION["login"];	
-$pid = 5041;
-$usrLogin = "joan";
+	$pid      = isset($_REQUEST['pid'])       ? (int) $_REQUEST['pid'] : 0;
+	$usrLogin = isset($_REQUEST['params'])    ? $_REQUEST['params'] : $_SESSION["login"];	
+	$idTorn   = isset($_REQUEST['idTorn'])    ? $_REQUEST['idTorn'] : "";
+	$idPart   = isset($_REQUEST['idPart'])    ? $_REQUEST['idPart'] : "";
+	$idMaq    = isset($_REQUEST['idMaq'])     ? $_REQUEST['idMaq'] : "";
+	$idJoc    = isset($_REQUEST['idJoc'])     ? $_REQUEST['idJoc'] : "";	
+	$idUsr    = isset($_REQUEST['idUsr'])     ? $_REQUEST['idUsr'] : "";		
+	$idUbic   = isset($_REQUEST['idUbic'])    ? $_REQUEST['idUbic'] : "";
+	$idUbicNOU= isset($_REQUEST['idUbicNOU']) ? $_REQUEST['idUbicNOU'] : "";
 
+
+$pid = 3456;
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -196,7 +213,6 @@ $usrLogin = "joan";
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));							
 				break;
-
 			case PARTIDES_X_MAQUINA_3110 :
 				$query    = 'SELECT _01_pk_idMaqPart AS idMaq,
 									_02_pk_idJocTorn AS idJoc,
@@ -225,7 +241,6 @@ $usrLogin = "joan";
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));
 				break;
-
 			case PARTIDES_X_JUGADOR_3120 :
 				$query    = 'SELECT BB.idUsuari      AS idUser,
 									BB.loginJug      AS loginUser,
@@ -253,25 +268,22 @@ $usrLogin = "joan";
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));
 				break;
-
 			case BLOQUEJAR_PARTIDES_3130 :
 				$query    = 'UPDATE partida SET _06_datBaixaPart  = NOW()
 							 WHERE 
 								_06_datBaixaPart IS NULL AND
-								_00_pk_idPart_auto = "$idPartida";';			
+								_00_pk_idPart_auto = "' . $idPart . '";';			
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));
 				break;
-
 			case DESBLOQUEJAR_PARTIDES_3140 : 
 				$query    = 'UPDATE partida SET _06_datBaixaPart  = NULL
  							 WHERE 
 									_06_datBaixaPart IS NOT NULL AND
-									_00_pk_idPart_auto = "$idPartida";';			
+									_00_pk_idPart_auto = "' . $idPart . '";';			
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));
 				break;
-
 			case ALTA_JOC_3210 :
 				$query    = 'INSERT INTO joc 
 								VALUES (NULL,
@@ -284,17 +296,17 @@ $usrLogin = "joan";
 			case BAIXA_JOC_3220 :
 				$query    = 'UPDATE joc SET _08_datBaixaJoc = NOW()
 							WHERE 
-								_01_pk_idJoc = "$idJoc" AND
+								_01_pk_idJoc = "' . $idJoc . '" AND
 								_08_datBaixaJoc IS NULL;';
 				$response = dbExec($query,0);
 				$query    = 'UPDATE torneig SET _09_datBaixaTorn = NOW()
 							WHERE 
-								_02_pk_idJocTorn = "$idJoc" AND
+								_02_pk_idJocTorn = "' . $idJoc . '" AND
 								_09_datBaixaTorn IS NULL;';
 				$response = dbExec($query,0);
 				$query    = 'UPDATE maqinstall SET _08_datBaixaMaqInst = NOW()
 							WHERE 
-								_02_pk_idJocInst = "$idJoc" AND
+								_02_pk_idJocInst = "' . $idJoc . '" AND
 								_08_datBaixaMaqInst IS NULL;';
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
@@ -306,8 +318,8 @@ $usrLogin = "joan";
 											  _06_datAltaJoc  = "$dataAltaJoc",
 											  _07_datModJoc   = NOW(),
 											  _08_datBaixaJoc = "$dataBaixaJoc"						  
-							WHERE _01_pk_idJoc = "$idJoc";';			
-				$response = dbExec($query);
+							WHERE _01_pk_idJoc = "' . $idJoc . '";';			
+				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;
 			case JOCS_ACTUAL_3230 :
@@ -369,12 +381,51 @@ $usrLogin = "joan";
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
 				break;
-
-			case ALTA_TORNEIGS_3310 :
+			case ACTUALITZA_NUM_PARTIDES_JUGADES_3270 :
+				$query    = 'UPDATE joc
+								SET _05_numPartidesJugadesJoc = "$NumPartides",
+									_07_datModJoc = NOW()
+							WHERE 
+								_01_pk_idJoc = "' . $idJoc . '" AND
+								_08_datBaixaJoc IS NULL;';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));				
 				break;
-			case GESTIO_TORNEIGS_3315 :
-				break;				
-			case RELACIO_TORNEIGS_3320 :		
+			case ALTA_TORNEIG_3310 :
+				$query    = 'INSERT INTO torneig 
+								VALUES (NULL,
+										"' . $idJoc . '",
+										"$nomTorn",
+										"$premiTorn",
+										"$dataIniciTorn",
+										"$dataFinTorn",NOW(),NULL,NULL);';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));				
+				break;
+			case BAIXA_TORNEIG_3320 :
+				$query    = 'UPDATE torneig SET _09_datBaixaTorn = NOW()
+								WHERE 
+									_01_pk_idTorn    = "' . $idTorn . '" AND
+									_02_pk_idJocTorn = "' . $idJoc  . '" AND
+									_09_datBaixaTorn IS NULL;';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
+				break;
+			case MODIFICACIO_TORNEIG_3330 :
+				$query    = 'UPDATE torneig SET _03_nomTorn     = "$nomTorn",
+					    						_04_premiTorn   = "$premiTorn",
+								   	       		_05_datIniTorn  = "$dataIniTorn",
+												_06_datFinTorn  = "$dataFinTorn",
+												_07_datAltaTorn = "$dataAltaTorn",
+												_08_datModTorn  = NOW(),
+												_09_datBaixaTorn = "$dataBaixaTorn"						 
+							WHERE 
+									_01_pk_idTorn    = "' . $idTorn . '" AND
+									_02_pk_idJocTorn = "' . $idJoc  . '";';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
+				break;								
+			case RELACIO_TORNEIGS_3340 :		
 				$query    = 'SELECT _01_pk_idTorn AS idTorn,
 									_03_nomTorn   AS nomTorn,
 									_04_premiTorn AS premiTorn,
@@ -504,12 +555,50 @@ $usrLogin = "joan";
 				echo json_encode(controlErrorQuery($response));
 				break;	
 
-			case ALTA_MAQUINES_3410 :
+			case ALTA_MAQUINA_3410 :
+				$query    = 'INSERT INTO maquina 
+								VALUES (NULL,
+										"$macMaq",
+										"$propMaq",0,0,NOW(),NULL,NULL);';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));				
 				break;			
-			case GESTIO_MAQUINES_3420 :
+			case BAIXA_MAQUINA_3420 :
+				$query    = 'UPDATE maquina SET _08_datBaixaMaq = NOW()
+								WHERE 
+									_01_pk_idMaq = "' . $idMaq . '" AND
+									_08_datBaixaMaq IS NULL;';
+				$response = dbExec($query,0);
+				$query    = 'UPDATE maqinstall SET _08_datBaixaMaqInst = NOW()
+								WHERE 
+									_01_pk_idMaqInst = "' . $idMaq . '" AND
+									_08_datBaixaMaqInst IS NULL;';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
 				break;
-
-			case LLISTAT_MAQUINES_3430 :
+			case MODIFICACIO_MAQUINA_3425 :
+				$query    = 'UPDATE maquina SET _02_macMaq      = "$macMaq",
+										        _03_propMaq     = "$propMaq",
+										        _04_credMaq     = "$credMaq",
+										        _05_totCredMaq  = "$totCredMaq",
+										        _06_datAltaMaq  = "$dataAltaMaq",
+										        _07_datModMaq   = NOW(),
+												_08_datBaixaMaq = "$dataBaixaMaq"						      
+								WHERE
+									_01_pk_idMaq    = "' . $idMaq . '";';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
+				break;
+			case ACTUALITZA_RACAUDACIO_MAQ_3430 :
+				$query    = 'UPDATE maquina SET _04_credMaq     = "$credMaq",
+ 										        _05_totCredMaq  = _05_totCredMaq + "$credMaq",
+										        _07_datModMaq   = NOW()
+								WHERE 
+									_01_pk_idMaq    = "' . $idMaq . '" AND
+									_08_datBaixaMaq IS NULL;';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
+			case LLISTAT_MAQUINES_3440 :
 				$query    = 'SELECT MAQ._01_pk_idMaq AS idMaq,
 									MAQ._02_macMaq   AS macMaq,
 									MAQ._03_propMaq  AS propMaq,
@@ -539,7 +628,7 @@ $usrLogin = "joan";
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
 				break;
-			case LLISTAT_MAQUINES_HISTORIC_3440 :
+			case LLISTAT_MAQUINES_HISTORIC_3450 :
 				$query    = 'SELECT MAQ._01_pk_idMaq AS idMaq,
 									MAQ._02_macMaq   AS macMaq,
 									MAQ._03_propMaq  AS propMaq,
@@ -564,13 +653,95 @@ $usrLogin = "joan";
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
 				break;
-
-			case ALTA_ASSIGNACIO_JOC_MAQUINA_3460 :
-				break;			
-			case GESTIO_ASSIGNACIO_JOC_MAQUINA_3470 :
+			case LLISTAT_MAQS_X_TORNEIG_I_JUG_3455 :
+				$query    = 'SELECT _01_pk_idMaq    AS idMaq,
+									_02_macMaq      AS macMaq,
+									_01_pk_idJoc    AS idJoc,
+									_02_nomJoc      AS nomJoc,
+									_01_pk_idUsuari AS idJug,
+									_04_loginUsuari AS loginUsuari,
+									_01_pk_idTorn   AS idTorn,
+									_03_nomTorn     AS nomTorn
+							FROM usuari
+								LEFT JOIN jugador    ON _01_pk_idUsuari = _01_pk_idJug
+								LEFT JOIN inscrit    ON _01_pk_idJug    = _03_pk_idJugInsc
+								INNER JOIN torneig   ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
+								INNER JOIN joc       ON _02_pk_idJocTorn = _01_pk_idJoc
+								LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
+								INNER JOIN maquina   ON _01_pk_idMaqInst = _01_pk_idMaq
+							WHERE 
+									_10_datBaixaUsuari   IS NULL AND
+									_09_datBaixaTorn     IS NULL AND
+									_08_datBaixaJoc      IS NULL AND
+									_06_datBaixaInsc     IS NULL AND	
+									_08_datBaixaMaqInst  IS NULL AND
+									_08_datBaixaMaq      IS NULL AND
+									_04_datAltaInsc      IS NOT NULL AND
+									_04_loginUsuari = "' . $loginUsr . '"
+							ORDER BY idMaq,idJoc,idJug;';
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));	
 				break;
-
-			case LLISTAT_ASSIGNACIO_JOC_MAQUINA_3480 :
+			case LLISTAT_MAQS_X_TORNEIG_3456 :
+				$query    = 'SELECT _01_pk_idMaq    AS idMaq,
+									_02_macMaq      AS macMaq,
+									_01_pk_idJoc    AS idJoc,
+									_02_nomJoc      AS nomJoc,
+									_01_pk_idUsuari AS idJug,
+									_04_loginUsuari AS loginUsuari,
+									_01_pk_idTorn   AS idTorn,
+									_03_nomTorn     AS nomTorn
+							FROM usuari
+								LEFT JOIN jugador    ON _01_pk_idUsuari = _01_pk_idJug
+								LEFT JOIN inscrit    ON _01_pk_idJug    = _03_pk_idJugInsc
+								INNER JOIN torneig   ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
+								INNER JOIN joc       ON _02_pk_idJocTorn = _01_pk_idJoc
+								LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
+								INNER JOIN maquina   ON _01_pk_idMaqInst = _01_pk_idMaq
+							WHERE 
+									_10_datBaixaUsuari   IS NULL AND
+									_09_datBaixaTorn     IS NULL AND
+									_08_datBaixaJoc      IS NULL AND
+									_06_datBaixaInsc     IS NULL AND	
+									_08_datBaixaMaqInst  IS NULL AND
+									_08_datBaixaMaq      IS NULL AND
+									_04_datAltaInsc      IS NOT NULL
+							ORDER BY idMaq,idJoc,idJug;';
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));	
+				break;						
+			case ALTA_ASSIGNACIO_JOC_MAQUINA_3460 :
+				$query    = 'INSERT INTO maqInstall
+								VALUES (NULL,
+										"' . $idMaq . '",
+										"' . $idJoc . '",0,0,0,NOW(),NULL,NULL);';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
+				break;			
+			case BAIXA_ASSIGNACIO_JOC_MAQUINA_3470 :
+				$query    = 'UPDATE maqInstall SET _08_datBaixaMaqInst = NOW()
+								WHERE 
+									_01_pk_idMaqInst  = "' . $idMaq . '" AND
+									_02_pk_idJocInst  = "' . $idJoc . '" AND
+									_08_datBaixaMaqInst  IS NULL;';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
+				break;
+			case MODIF_ASSIGNACIO_JOC_MAQUINA_3480 :
+				$query    = 'UPDATE maqInstall SET 
+											_03_numPartidesJugadesMaqInst    = "$parcialCreditsJoc",
+											_04_credJocMaqInst    = "$parcialCreditsJoc",
+											_05_totCredJocMaqInst = "$totalCreditsJoc",										
+											_06_datAltaMaqInst    = "$dataAltaMaqInst",
+											_07_datModMaqInst     = NOW(),
+											_08_datBaixaMaqInst   = "$dataBaixaMaqInst"
+								WHERE 
+									_01_pk_idMaqInst = "' . $idMaq . '" AND
+									_02_pk_idJocInst = "' . $idJoc . '";';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
+				break;				
+			case LLISTAT_ASSIGNACIO_JOC_MAQUINA_3490 :
 				$query    = 'SELECT _01_pk_idMaq AS idMaq,
 									_02_macMaq   AS macMaq,
 									_01_pk_idJoc AS idJoc,
@@ -836,10 +1007,54 @@ $usrLogin = "joan";
 				echo json_encode(controlErrorQuery($response));				
 				break;			
 
-			case ALTA_UBICACIONS_3810 :
+			case ALTA_UBICACIO_3810 :
+				$query    = 'INSERT INTO ubicacio
+								VALUES (NULL,
+										"$empUbic",
+										"$dirUbic",
+										"$pobUbic",
+										"$cpUbic",
+										"$provUbic",
+										"$latUbic",
+										"$longUbic",
+										"$altUbic",
+										"$contactoUbic",
+										"$emailUbic",
+										"$telUbic",
+										"$mobilUbic",NOW(),NULL,NULL);';
+				$response = dbExec($query,0);				
+				echo json_encode(controlErrorQuery($response));
 				break;
-			case GESTIO_UBICACIONS_3820 :
+			case BAIXA_UBICACIO_3820 :
+				$query    = 'UPDATE ubicacio SET _16_datBaixaUbic = NOW()
+								WHERE 
+									_01_pk_idUbic = "' . $idUbic . '" AND
+									_16_datBaixaUbic IS NULL;';
+				$response = dbExec($query,0);				
+				echo json_encode(controlErrorQuery($response));			
 				break;			
+			case MODIFICACIO_UBICACIO_3830 :
+				$query    = 'UPDATE ubicacio SET 
+											_02_empUbic     = "$emp",
+											_03_dirUbic     = "$dir",
+											_04_pobUbic     = "$pob",
+											_05_cpUbic      = "$cp",
+											_06_provUbic    = "$prov",
+											_07_latUbic     = "$latitut",
+											_08_longUbic    = "&longitud",
+											_09_altUbic     = "&altitud",
+											_10_contUbic    = "$personaContacte",
+											_11_emailUbic   = "$emailContacte",
+											_12_telUbic     = "$telContacte",
+											_13_mobUbic     = "$mobilContacte",
+											_14_datAltaUbic = "$dataAltaUbic",
+											_15_datModUbic  = NOW(),
+											_16_datBaixaUbic= "$dataBaixaUbic"
+								WHERE 
+									_01_pk_idUbic = "' . $idUbic . '";';
+				$response = dbExec($query,0);				
+				echo json_encode(controlErrorQuery($response));			
+				break;
 			case LLISTAT_UBICS_X_PROV_POB_3840 :
 				$query    = 'SELECT _06_provUbic     AS provincia,
 									_04_pobUbic      AS poblacio,
@@ -919,12 +1134,50 @@ $usrLogin = "joan";
 							ORDER BY provincia, poblacio, cPostal;';
 				$response = dbExec($query);				
 				echo json_encode(controlErrorQuery($response));				
+				break;
+			case ALTA_MAQ_X_UBICACIO_3880 :
+				$query    = 'INSERT INTO ubicacioTeMaquina
+								VALUES (NULL,
+										"' . $idUbic . '",
+										"' . $idMaq . '",
+										NOW(),NULL,NULL);';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
 				break;			
-			case ALTA_MAQS_X_UBICACIO_3890 :
+			case BAIXA_MAQ_X_UBICACIO_3890 :
+				$query    = 'UPDATE ubicacioTeMaquina SET _05_datBaixaUTM = NOW()
+								WHERE 
+									_01_pk_idUbicUTM = "' . $idUbic . '" AND
+									_02_pk_idMaqUTM  = "' . $idMaq . '" AND
+									_05_datBaixaUTM  IS NULL;';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
 				break;			
-			case GESTIO_MAQS_X_UBICACIO_3900 :
-				break;			
-			case CANVI_MAQS_UBICACIO_3910 :
+			case MODIFICACIO_MAQ_X_UBICACIO_3900 :
+				$query    = 'UPDATE ubicacioTeMaquina SET 
+														_03_datAltaUTM  = "$dataAltaUTM",
+														_04_datModUTM   = NOW(),
+														_05_datBaixaUTM = "$dataBaixaUTM"
+								WHERE 
+									_01_pk_idUbicUTM = "' . $idUbic . '" AND
+									_02_pk_idMaqUTM  = "' . $idMaq . '";';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
+				break;				
+			case CANVI_MAQ_D_UBICACIO_3910 :
+				$query    = 'UPDATE ubicacioTeMaquina SET _05_datBaixaUTM = NOW()
+								WHERE 
+									_01_pk_idUbicUTM = "' . $idUbic . '" AND
+									_02_pk_idMaqUTM  = "' . $idMaq . '" AND
+									_05_datBaixaUTM  IS NULL;';
+				$response = dbExec($query,0);
+				$query    = 'INSERT INTO ubicacioTeMaquina
+								VALUES (NULL,
+										"' . $idUbicNOU . '",
+										"' . $idMaq . '",
+										NOW(),NULL,NULL);';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
 				break;			
 			case LLISTAT_MAQS_X_UBIC_PROV_POB_3930 :
 				$query    = 'SELECT _06_provUbic AS provincia,
@@ -993,7 +1246,8 @@ $usrLogin = "joan";
 				echo json_encode(controlErrorQuery($response));				
 				break;			
 			case PERFILS_JUGADORS_4010 :
-				$query    = 'SELECT _01_pk_idUsuari  AS idUsr,
+				$query    = 'SELECT _01_pk_idUsuari  AS recid,
+				 					_01_pk_idUsuari  AS idUsr,
 									_02_nomUsuari    AS nomUsr,
 									_03_cognomUsuari AS cogUsr,
 									_04_loginUsuari  AS loginUsr,
@@ -1007,11 +1261,35 @@ $usrLogin = "joan";
 							FROM usuari
 								LEFT JOIN jugador ON _01_pk_idUsuari = _01_pk_idJug;';
 				$response = dbExec($query);				
-				echo json_encode(controlErrorQuery($response));				
+				echo json_encode(controlErrorQuery($response));
 				break;			
 			case BLOQUEJAR_JUGADOR_4020 :
+				$query    = 'UPDATE usuari SET _10_datBaixaUsuari = NOW()
+								WHERE 
+									_10_datBaixaUsuari IS NULL AND
+									_01_pk_idUsuari = "' . $idUsr . '";';
+				$response  = dbExec($query,0);
+				$query    = 'UPDATE jugador SET _06_datBaixaJug  = NOW()
+								WHERE
+									 _06_datBaixaJug IS NULL AND
+									 _01_pk_idJug = "' . $idUsr . '";';
+				$response  = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));				
 				break;			
 			case DESBLOQUEJAR_JUGADOR_4030 :
+				$query    = 'UPDATE usuari SET _09_datModUsuari   = NOW(),
+											   _10_datBaixaUsuari = NULL
+								WHERE 
+									_10_datBaixaUsuari IS NOT NULL AND
+									_01_pk_idUsuari = "' . $idUsr . '";';	
+				$response  = dbExec($query,0);
+				$query    = 'UPDATE jugador SET _05_datModJug    = NOW(),
+						 						_06_datBaixaJug  = NULL
+								WHERE
+									 _06_datBaixaJug IS NOT NULL AND
+									 _01_pk_idJug = "' . $idUsr . '";';									 
+				$response  = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
 				break;		
 			case TORNEIGS_REGISTRATS_X_JUGADOR_4040 :
 				$query    = 'DROP TABLE CC;';
@@ -1103,7 +1381,22 @@ $usrLogin = "joan";
 
 				// echo json_encode( $records );
 				break;
-
+			case GET_DADES_PERFIL_USR_5021 :
+				$query    = 'SELECT _01_pk_idUsuari  AS idUsr,
+									_02_nomUsuari    AS nomUsr,
+									_03_cognomUsuari AS cogUsr,
+									_04_loginUsuari  AS loginUsr,
+									_05_pwdUsuari    AS passwordUsr,
+									_06_emailUsuari  AS emailUsr,
+									_07_fotoUsuari   AS fotoUsr,
+									_02_faceJug      AS facebookUsr,
+									_03_twitterJug   AS twitterUsr
+							FROM usuari
+								LEFT JOIN jugador ON _01_pk_idUsuari = _01_pk_idJug
+							WHERE
+								_10_datBaixaUsuari IS NULL AND
+								_06_datBaixaJug    IS NULL AND
+								_04_loginUsuari = "' . $usrLogin . '";';
 			case MODIF_PERFIL_USR_5022 :
 				$query    = 'UPDATE usuari SET _02_nomUsuari    = "$nom",
 								               _03_cognomUsuari = "$cognom",
@@ -1170,9 +1463,9 @@ $usrLogin = "joan";
 								_06_datBaixaInsc IS NULL AND
 								(_02_pk_idJocInsc IN 
 									( SELECT _02_pk_idJocTorn AS _02_pk_idJocInsc FROM torneig 
-										WHERE _01_pk_idTornInsc = "$idTorneig" )) AND
+										WHERE _01_pk_idTornInsc = "' . $idTorn . '" )) AND
 		
-								_01_pk_idTornInsc = "$idTorneig" AND
+								_01_pk_idTornInsc = "' . $idTorn . '" AND
 								(_03_pk_idJugInsc IN 
 									( SELECT _01_pk_idUsuari AS _03_pk_idJugInsc FROM usuari
 										WHERE _04_loginUsuari = "' . $usrLogin . '"));';			
@@ -1313,6 +1606,9 @@ $usrLogin = "joan";
 				break;				
 
 			case BAIXA_USR_TORN_5043 :
+				$ret = array("test"=>"val");
+				echo json_encode($ret);
+				// echo "({val:'test'})";
 				break;				
 
 			case CONSULTA_USR_TOTS_TORNEIGS_5061 :
@@ -1352,7 +1648,8 @@ $usrLogin = "joan";
 						 			_03_pk_idJugRonda AS idJug,
 						 			BB.nomJug,
 						 			BB.loginJug,
-						 			sum(_07_puntsRonda) AS punts
+						 			sum(_07_puntsRonda) AS punts,
+						 			IF(BB.nomJug = "' . $usrLogin . '",_01_pk_idTorn,"0") AS idTornInscrit
 							FROM 
 								(SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
 								(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug, _04_loginUsuari AS loginJug FROM usuari) AS BB,
@@ -1386,7 +1683,12 @@ $usrLogin = "joan";
 								SELECT CC.*, find_in_set(CC.punts,XX.LLISTA_PUNTS) AS ranking, XX.numRK AS totalRanking
 								FROM 
 									CC,
-									(SELECT CC.idTorn, COUNT(*) AS numRK, group_concat(CC.punts ORDER BY CC.punts DESC) AS LLISTA_PUNTS FROM CC GROUP BY CC.idTorn) AS XX,
+									(SELECT CC.idTorn,
+											COUNT(*) AS numRK,
+											group_concat(CC.punts ORDER BY CC.punts DESC) AS LLISTA_PUNTS,
+	   	  									group_concat(CC.idTornInscrit ORDER BY CC.idTornInscrit DESC) AS LLISTA_TORNS
+											FROM CC
+											GROUP BY CC.idTorn) AS XX,
 									jugador
 										LEFT JOIN inscrit ON _01_pk_idJug = _03_pk_idJugInsc
 										INNER JOIN torneig ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
@@ -1397,6 +1699,7 @@ $usrLogin = "joan";
 									_04_datAltaInsc  IS NOT NULL AND		
 									CC.idJug  = _01_pk_idJug AND
 									CC.idTorn = XX.idTorn AND
+									SUBSTRING_INDEX(XX.LLISTA_TORNS, ",", 1)>0 AND
 									_06_datFinTorn   >= CURDATE() ) AS ZZ
 								WHERE ranking BETWEEN 1 AND 10
 								GROUP BY idTorn, idJug
@@ -1420,7 +1723,8 @@ $usrLogin = "joan";
 						 			_03_pk_idJugRonda AS idJug,
 						 			BB.nomJug,
 						 			BB.loginJug,
-						 			sum(_07_puntsRonda) AS punts
+						 			sum(_07_puntsRonda) AS punts,
+						 			IF(BB.nomJug = "' . $usrLogin . '",_01_pk_idTorn,"0") AS idTornInscrit						 			
 							FROM 
 								(SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
 								(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug, _04_loginUsuari AS loginJug FROM usuari) AS BB,
@@ -1453,7 +1757,12 @@ $usrLogin = "joan";
 								SELECT CC.*, find_in_set(CC.punts,XX.LLISTA_PUNTS) AS ranking, XX.numRK AS totalRanking
 								FROM 
 									CC,
-									(SELECT CC.idTorn, COUNT(*) AS numRK, group_concat(CC.punts ORDER BY CC.punts DESC) AS LLISTA_PUNTS FROM CC GROUP BY CC.idTorn) AS XX,
+									(SELECT CC.idTorn,
+											COUNT(*) AS numRK,
+											group_concat(CC.punts ORDER BY CC.punts DESC) AS LLISTA_PUNTS,
+	   	  									group_concat(CC.idTornInscrit ORDER BY CC.idTornInscrit DESC) AS LLISTA_TORNS
+											FROM CC
+											GROUP BY CC.idTorn) AS XX,
 									jugador
 										LEFT JOIN inscrit ON _01_pk_idJug = _03_pk_idJugInsc
 										INNER JOIN torneig ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
@@ -1461,6 +1770,7 @@ $usrLogin = "joan";
 									_06_datBaixaJug  IS NULL AND
 									_09_datBaixaTorn IS NULL AND
 									CC.idJug  = _01_pk_idJug AND
+									SUBSTRING_INDEX(XX.LLISTA_TORNS, ",", 1)>0 AND
 									CC.idTorn = XX.idTorn ) AS ZZ
 								WHERE ranking BETWEEN 1 AND 10
 								GROUP BY idTorn, idJug
@@ -1497,7 +1807,8 @@ $usrLogin = "joan";
 				die ("error");
 		}
 	} else {
-		die ("error");
+		print_r($_REQUEST);
+		// die ("error");
 	}
 
 ?>

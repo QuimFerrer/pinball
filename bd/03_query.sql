@@ -162,6 +162,35 @@ WHERE
 GROUP BY idMaq, idUbic, idJoc;
 
 
+/***********************************************************************************************/
+/* 3.e.i.7 - 3455 - maquines de cada torneig i joc per usuari */
+/***********************************************************************************************/
+
+SELECT _01_pk_idMaq AS idMaq, _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc,
+_01_pk_idUsuari AS idJug, _04_loginUsuari, _01_pk_idTorn AS idTorn,
+_03_nomTorn AS nomTorn
+
+FROM usuari
+LEFT JOIN jugador    ON _01_pk_idUsuari = _01_pk_idJug
+LEFT JOIN inscrit    ON _01_pk_idJug    = _03_pk_idJugInsc
+INNER JOIN torneig   ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
+INNER JOIN joc       ON _02_pk_idJocTorn = _01_pk_idJoc
+LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
+INNER JOIN maquina   ON _01_pk_idMaqInst = _01_pk_idMaq
+
+WHERE 
+		_10_datBaixaUsuari IS NULL AND
+		_09_datBaixaTorn   IS NULL AND
+		_08_datBaixaJoc    IS NULL AND
+		_06_datBaixaInsc   IS NULL AND	
+		_08_datBaixaMaqInst  IS NULL AND
+		_08_datBaixaMaq      IS NULL AND
+		_04_datAltaInsc    IS NOT NULL AND
+		_04_loginUsuari = "joan"
+		
+ORDER BY idMaq,idJoc,idJug;
+
+
 /************************************************************************************/
 /*  3.e.ii.1 - 3460 - Alta d'assignació de joc a una màquina   */
 /************************************************************************************/

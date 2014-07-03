@@ -76,7 +76,7 @@ COMMIT;
 /* 3.b.1 - 3110 - llistar partides per màquina  */
 /************************************************************************************/
 
-SELECT _01_pk_idMaqPart AS idMaq, _02_pk_idJocTorn AS idJoc,_02_nomJoc AS nomJoc, 
+SELECT  _01_pk_idMaqPart AS idMaq,_00_pk_idPart_auto AS idPart, _02_pk_idJocTorn AS idJoc,_02_nomJoc AS nomJoc, 
 BB.idUsuari AS idUser, BB.loginJug AS loginUser, BB.nomJug AS nomUser,
 DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
 _01_pk_idTorn AS idTorn, _03_nomTorn AS nomTorn, DATE_FORMAT(_05_datIniTorn, "%d-%m-%Y") AS datIniTorn,
@@ -95,8 +95,45 @@ INNER JOIN torneig 			ON ( _01_pk_idTornTTP = _01_pk_idTorn AND
 										  _03_pk_idJocTTP  = _02_pk_idJocTorn)
 INNER JOIN joc 				ON (_02_pk_idJocTorn = _01_pk_idJoc)
 
-GROUP BY idMaq, nomJoc, loginUser, datHoraPartida, nomTorn, datIniTorn
-ORDER BY idMaq, nomJoc, loginUser, datHoraPartida, nomTorn, datIniTorn;
+GROUP BY loginUser, idMaq
+ORDER BY idMaq, nomTorn, idJoc, loginUser, datHoraPartida,  datIniTorn;
+
+
+
+
+
+SELECT  _01_pk_idMaqPart AS idMaq,_00_pk_idPart_auto AS idPart,TT.idJoc AS idJoc, JJ.nomJoc AS nomJoc,
+BB.idUsuari AS idUser, BB.loginJug AS loginUser, BB.nomJug AS nomUser,
+DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
+TT.idTorn AS idTorn, TT.nomTorn AS nomTorn, 
+
+/*
+DATE_FORMAT(_05_datIniTorn, "%d-%m-%Y") AS datIniTorn,
+DATE_FORMAT(_06_datFinTorn, "%d-%m-%Y") AS datFinTorn, 
+*/
+DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y %H:%i:%s") AS datBaixaPart
+
+FROM
+
+(SELECT _01_pk_idUsuari AS idUsuari , _02_nomUsuari AS nomJug,_04_loginUsuari AS loginJug FROM usuari
+WHERE _01_pk_idUsuari = PP._03_pk_idJugPart
+) AS BB,
+(SELECT _01_pk_idTorn   AS idTorn   , _02_pk_idJocTorn AS idJoc, _03_nomTorn AS nomTorn FROM torneig) AS TT,
+(SELECT _01_pk_idJoc    AS idJoc    , _02_nomJoc AS nomJoc FROM joc) AS JJ,
+
+partida AS PP
+
+WHERE 
+				BB.idUsuari = _03_pk_idJugPart AND
+				TT.idJoc    = _02_pk_idJocPart AND
+
+
+
+GROUP BY loginUser, idMaq
+ORDER BY idMaq, nomTorn, idJoc, loginUser, datHoraPartida,  datIniTorn;
+
+
+
 
 
 /*
@@ -213,7 +250,8 @@ WHERE _08_datBaixaJoc IS NULL;
 /* 3.c.2 - 3240 -llistat de jocs històric  */
 /************************************************************************************/
 
-SELECT _01_pk_idjoc AS idJoc, _02_nomJoc AS nomJoc, _05_numPartidesJugadesJoc AS numPartides,
+SELECT _01_pk_idjoc AS idJoc, _02_nomJoc AS nomJoc, _04_imgJoc AS imgJoc, 
+_05_numPartidesJugadesJoc AS numPartides,
 DATE_FORMAT(_06_datAltaJoc,  "%d-%m-%Y %H:%i:%s") AS datAltaJoc,
 DATE_FORMAT(_07_datModJoc, "%d-%m-%Y %H:%i:%s")   AS datModJoc,
 DATE_FORMAT(_08_datBaixaJoc, "%d-%m-%Y %H:%i:%s") AS datBaixaJoc
