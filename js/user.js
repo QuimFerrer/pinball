@@ -67,15 +67,21 @@ var controller = function(e) {
 			            function (msg) { 
 
 			                if (msg=='Yes') {
+<<<<<<< HEAD
 								w2ui['grid'].lock('Consultant dades ...', true);
 // Cal passar PK
 								$.ajax({url: "query.php", data: {pid: "5043", record: row[0]}})
+=======
+								w2ui['grid'].lock('Actualitzant dades ...', true);
+
+								$.ajax({url: "query.php", data: {pid: "5043", idTorn: row[0]}})
+>>>>>>> aa4a2690cd8291543b16f8fe43abc90560829dd4
 								.done(function(e) {
-									console.log(e);
-				                    // w2ui['grid'].reload();
+									// console.log(e);
+				                    w2ui['grid'].reload();
 								})
 								.fail(function(error) { 
-									console.log(error);	
+									// console.log(error);	
 								})
 								.always(function() { 
 									w2ui['grid'].unlock();
