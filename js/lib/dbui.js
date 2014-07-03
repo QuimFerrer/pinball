@@ -98,7 +98,7 @@ var dbGrid = function() {
             fnOnError    = function(target, error) { console.log( error.xhr.responseText, error ); };
 
             fnOnLoad = function(target, eventData) {
-                // console.log(eventData.xhr.responseText);
+                console.log(eventData.xhr.responseText);
                 var result = JSON.parse(eventData.xhr.responseText);
 
                 if (typeof result  != 'undefined') {
@@ -151,9 +151,10 @@ var dbForm = function() {
     var self   = this;
     var title  = "";
     var fields;
+    var pid;
 
     this.setFields = function(fieldList) {
-        fields = fieldList;
+        this.fields = fieldList;
     };
 
     this.Load = function(data) {
@@ -199,10 +200,10 @@ var dbForm = function() {
             postData   : { param: table, keyname: pkName },
             msgRefresh : 'Consultant dades',
             msgSaving  : 'Guardant dades',
-            fields: fields,            
+            fields: this.fields,            
             actions: {
                 // reset: function() { this.clear(); },
-                Guardar: function() { this.save( { 'recid' : recno } ); },
+                Guardar: function() { this.save( {'recid': recno, 'pid':this.pid} ); },
                 Sortir:  function() { $().w2popup('close'); }
             },
             onSave: function(target, eventData) {
@@ -235,16 +236,19 @@ var dbForm = function() {
     };
 
     this.Activate = function() {
+        var height = this.fields.length*29; // Cada camp x 29 px
+        height+=134; // barra de botons
+
         $().w2popup('open', {
             title   : self.title,
             modal   : true,
             body    : '<div id="form"></div>',
             style   : 'padding: 0px',
             width   : 450,
-            height  : 250
+            height  : height
         });
-        // $('#form').w2render('dialog');  
-        w2ui['dialog'].render($('#form')[0]); 
+        $('#form').w2render('dialog'); // Formes equivalents
+        // w2ui['dialog'].render($('#form')[0]); 
     };
 };
 
@@ -254,7 +258,7 @@ var dbForm = function() {
  **********************************************************************************************
  */
 
-function DataGrid(title, table, toolbar, columns, fieldsOrId, pkName) {
+function DataGrid(title, table, toolbar, columns, fieldsOrId, pid, pkName) {
     
     if (w2ui.grid)  w2ui['grid'].destroy();
     pkName = typeof pkName !=='undefined' ? pkName: 'id';
@@ -266,6 +270,7 @@ function DataGrid(title, table, toolbar, columns, fieldsOrId, pkName) {
     if (table) {                                    // Si es passa taula, és editable
         grid.setDataTable(table, pkName);           // Assignar taula i nom clau primaria
         var form = new dbForm();                    // Crear el diàleg d'edició
+        form.pid = pid;                             // Petició diferent per a save()
         form.setFields(fieldsOrId);                 // Assignar els camps al dialeg
         grid.setForm(form);                         // Assignar el formulari al grid
     } else {

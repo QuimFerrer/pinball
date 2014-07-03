@@ -157,8 +157,12 @@ var controller = function(e) {
 		        { name: "_03_nomTorn", type: 'text', required: true,
 		          html: { caption: 'Nom', attr: 'size="40"', span: 5 }
 		        },
-		        { name: "Joc", type: 'list', required: true,
-		          fldName: "_02_pk_idJocTorn", table: "joc", editable: false
+		        { name: "_02_pk_idJocTorn", type: 'list', 
+		          html: { caption: 'Joc', attr: 'readonly', span: 5 },
+				  options: {
+				  	url: '../src/dbui.php?cmd=ld&param=joc',   
+				  	showNone: false     // shows first element - none - with empty value
+				  }
 		        },
 		        { name: "_04_premiTorn", type: 'float', required: false,
 		          html: { caption: 'Premi', attr: 'size="40"', span: 5 }

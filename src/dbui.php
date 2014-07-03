@@ -22,9 +22,18 @@
 
 	switch ($action)
 	{
+		case 'ld' :
+			$qry  	= "SELECT * FROM $table";
+			$result = Sql_Exec($qry);
+
+			while ($row = mysql_fetch_object($result)) {
+			       $data[] = $row->_01_pk_idJoc; //. "-". $row->_02_nomJoc;
+			}
+			$data = array("items"=>$data);
+			break;
+
 		case 'get-record' :
 			$qry  	= "SELECT * FROM $table WHERE $kName=$id";
-			// $qry  	= "SELECT * FROM $table WHERE '_01_pk_idUsuari`=$id";
 			$result = Sql_Exec($qry);
 			$data 	= mysql_fetch_assoc($result);
 			break;
@@ -49,36 +58,41 @@
 			break;
 
 		case 'save-record' :
-			// if remote
-			// $record = json_decode($_REQUEST['record']);
-			// else
-			$record = (object)$_REQUEST['record'];
 
-			if ($id != 0) :
-				foreach( $record as $key => $value ) {
-					if ($key != 'recid') $qry .= $key .'="'. $value .'",';
-				}
-	    		// Eliminar ultima comma ","
-	    		$qry = substr( $qry, 0, -1 ); 
-				$qry = "UPDATE $table SET ". $qry ." WHERE $kName=$id";
-				$data['recid'] = $id;
-
+			if($_REQUEST['pid']) :
+			 	$data = CustomQuery($_REQUEST['pid'], $id, $_REQUEST['record']);
 			else :
-				$sKey=""; $sVal="";
-				foreach( $record as $key => $value ) {
-					if ($key  != 'recid') {
-						$sKey .= $key .",";
-						$sVal .= "'". $value ."',";
-					}
-				}
-				$sKey = substr( $sKey, 0, -1 );  
-        		$sVal = substr( $sVal, 0, -1 );  
-				$qry  = "INSERT INTO $table (". $sKey . ") VALUES (". $sVal . ")";
-				$data['recid'] = mysql_insert_id();	// Comptador retornat per l'operació INSERT
-			endif;
+				// if remote
+				// $record = json_decode($_REQUEST['record']);
+				// else
+				$record = (object)$_REQUEST['record'];
 
-			$sql = Sql_Exec($qry);
-			$data['rows']  = mysql_affected_rows();
+				if ($id != 0) :
+					foreach( $record as $key => $value ) {
+						if ($key != 'recid') $qry .= $key .'="'. $value .'",';
+					}
+		    		// Eliminar ultima comma ","
+		    		$qry = substr( $qry, 0, -1 ); 
+					$qry = "UPDATE $table SET ". $qry ." WHERE $kName=$id";
+					$data['recid'] = $id;
+
+				else :
+					$sKey=""; $sVal="";
+					foreach( $record as $key => $value ) {
+						if ($key  != 'recid') {
+							$sKey .= $key .",";
+							$sVal .= "'". $value ."',";
+						}
+					}
+					$sKey = substr( $sKey, 0, -1 );  
+	        		$sVal = substr( $sVal, 0, -1 );  
+					$qry  = "INSERT INTO $table (". $sKey . ") VALUES (". $sVal . ")";
+					$data['recid'] = mysql_insert_id();	// Comptador retornat per l'operació INSERT
+				endif;
+
+				$sql = Sql_Exec($qry);
+				$data['rows']  = mysql_affected_rows();
+			endif;
 			break;
 	}
 
