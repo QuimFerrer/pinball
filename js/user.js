@@ -67,15 +67,15 @@ var controller = function(e) {
 			            function (msg) { 
 
 			                if (msg=='Yes') {
-								w2ui['grid'].lock('Consultant dades ...', true);
+								w2ui['grid'].lock('Actualitzant dades ...', true);
 
-								$.ajax({url: "query.php", data: {pid: "5043", record: row[0]}})
+								$.ajax({url: "query.php", data: {pid: "5043", idTorn: row[0]}})
 								.done(function(e) {
-									console.log(e);
-				                    // w2ui['grid'].reload();
+									// console.log(e);
+				                    w2ui['grid'].reload();
 								})
 								.fail(function(error) { 
-									console.log(error);	
+									// console.log(error);	
 								})
 								.always(function() { 
 									w2ui['grid'].unlock();

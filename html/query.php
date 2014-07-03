@@ -84,7 +84,7 @@ isEndSessionInQuery();
 ////////////////////////////////////////////////////////////////////////////////////
 //   OPCIONS D'USUARI
 ////////////////////////////////////////////////////////////////////////////////////
-	
+
 	const CONSULTA_USR_5020					   = 5020;
 	const MODIF_PERFIL_USR_5022           	   = 5022;
 	const BAIXA_PERFIL_USR_5023           	   = 5023;
@@ -99,8 +99,9 @@ isEndSessionInQuery();
 
 	const PLANTILLA = 9999;
 	
-	$pid = isset($_REQUEST['pid']) ? (int) $_REQUEST['pid'] : 0;
+	$pid      = isset($_REQUEST['pid']) ? (int) $_REQUEST['pid'] : 0;
 	$usrLogin = isset($_REQUEST['params']) ? $_REQUEST['params'] : $_SESSION["login"];	
+	$idTorn   = isset($_REQUEST['idTorn']) ? $_REQUEST['idTorn'] : "";		
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -1169,9 +1170,9 @@ isEndSessionInQuery();
 								_06_datBaixaInsc IS NULL AND
 								(_02_pk_idJocInsc IN 
 									( SELECT _02_pk_idJocTorn AS _02_pk_idJocInsc FROM torneig 
-										WHERE _01_pk_idTornInsc = "$idTorneig" )) AND
+										WHERE _01_pk_idTornInsc = "' . $idTorn . '" )) AND
 		
-								_01_pk_idTornInsc = "$idTorneig" AND
+								_01_pk_idTornInsc = "' . $idTorn . '" AND
 								(_03_pk_idJugInsc IN 
 									( SELECT _01_pk_idUsuari AS _03_pk_idJugInsc FROM usuari
 										WHERE _04_loginUsuari = "' . $usrLogin . '"));';			
