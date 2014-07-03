@@ -22,7 +22,7 @@ isEndSessionInQuery();
 	const PARTIDES_X_JUGADOR_3120              = 3120; //
 
 	const BLOQUEJAR_PARTIDES_3130              = 3130;
-	const DESBLOQUEJAR_PARTIDES_3130           = 3140; 
+	const DESBLOQUEJAR_PARTIDES_3140           = 3140; 
 
 	const ALTA_JOC_3210						   = 3210;
 	const BAIXA_JOC_3220					   = 3220;
@@ -84,7 +84,8 @@ isEndSessionInQuery();
 ////////////////////////////////////////////////////////////////////////////////////
 //   OPCIONS D'USUARI
 ////////////////////////////////////////////////////////////////////////////////////
-
+	
+	const CONSULTA_USR_5020					   = 5020;
 	const MODIF_PERFIL_USR_5022           	   = 5022;
 	const BAIXA_PERFIL_USR_5023           	   = 5023;
 	const CONSULTA_USR_TORNEIGS_5041           = 5041; //
