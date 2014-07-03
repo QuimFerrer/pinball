@@ -377,6 +377,19 @@ WHERE
 select * from inscrit;
 
 
+UPDATE inscrit SET _06_datBaixaInsc  = NULL
+WHERE 
+		_06_datBaixaInsc IS NOT NULL AND
+		(_02_pk_idJocInsc IN ( SELECT _02_pk_idJocTorn AS _02_pk_idJocInsc FROM torneig WHERE   
+		_01_pk_idTornInsc = 1003 )) AND
+		
+		_01_pk_idTornInsc = 1003 AND
+	
+		(_03_pk_idJugInsc IN ( SELECT _01_pk_idUsuari AS _03_pk_idJugInsc FROM usuari
+		WHERE _04_loginUsuari = "joan"));
+
+select * from inscrit;
+
 */
 
 /***********************************************************************************************/
@@ -407,15 +420,20 @@ ORDER BY _05_datIniTorn;
 
 
 /***********************************************************************************************/
-/* 2.c.2 - 5070 - PUNTUACIONS. ranking d'un torneig i punts dins del ranking */
+/* 2.c.2 - 5070 - PUNTUACIONS. ranking i punts dins del ranking dels torneigs que està inscrit el jugador  */
 /****************************************************************************/
 
 
 CREATE TABLE CC  ENGINE=MEMORY
-SELECT _01_pk_idTorn as idTorn,_03_nomTorn as nomTorn, idJoc, aa.nomJoc,_03_pk_idJugRonda as idJug ,
-BB.nomJug, BB.loginJug, sum(_07_puntsRonda) AS punts FROM 
+SELECT _01_pk_idTorn AS idTorn,_03_nomTorn AS nomTorn, idJoc, aa.nomJoc,_03_pk_idJugRonda AS idJug ,
+BB.nomJug, BB.loginJug, SUM(_07_puntsRonda) AS punts, IF(BB.nomJug = "rob",_01_pk_idTorn,"0") AS idTornInscrit
+
+FROM 
+
 (SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
+
 (SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug, _04_loginUsuari AS loginJug FROM usuari) AS BB,
+
 torneig
 LEFT JOIN torneigTePartida ON (_01_pk_idTorn = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
 INNER JOIN partida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
@@ -436,12 +454,22 @@ WHERE
 GROUP BY _01_pk_idTorn,_03_pk_idJugRonda
 ORDER BY _01_pk_idTorn, punts DESC;
 
+SELECT * 
 
-SELECT * FROM
-( 
+FROM
+(
 SELECT CC.*, find_in_set(CC.punts,XX.LLISTA_PUNTS) AS ranking, XX.numRK AS totalRanking
-FROM CC,
-(SELECT CC.idTorn, COUNT(*) AS numRK, group_concat(CC.punts ORDER BY CC.punts DESC) AS LLISTA_PUNTS FROM CC GROUP BY CC.idTorn) AS XX,
+
+FROM 
+	CC,
+	(SELECT CC.idTorn,
+			  COUNT(*) AS numRK,
+			  group_concat(CC.punts ORDER BY CC.punts DESC) AS LLISTA_PUNTS,
+	   	  group_concat(CC.idTornInscrit ORDER BY CC.idTornInscrit DESC) AS LLISTA_TORNS
+	FROM CC
+	GROUP BY CC.idTorn
+	) AS XX,
+
 jugador
 LEFT JOIN inscrit ON _01_pk_idJug = _03_pk_idJugInsc
 INNER JOIN torneig ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
@@ -452,6 +480,7 @@ WHERE
 		_04_datAltaInsc  IS NOT NULL AND		
 		CC.idJug  = _01_pk_idJug AND
 		CC.idTorn = XX.idTorn AND
+		SUBSTRING_INDEX(XX.LLISTA_TORNS, ',', 1)>0 AND
 		_06_datFinTorn   >= CURDATE()
 		
 ) AS ZZ
@@ -473,8 +502,9 @@ DROP TABLE CC;
 
 
 CREATE TABLE CC  ENGINE=MEMORY
-SELECT _01_pk_idTorn as idTorn,_03_nomTorn as nomTorn, idJoc, aa.nomJoc,_03_pk_idJugRonda as idJug ,
-BB.nomJug, BB.loginJug, sum(_07_puntsRonda) AS punts FROM 
+SELECT _01_pk_idTorn AS idTorn,_03_nomTorn AS nomTorn, idJoc, aa.nomJoc,_03_pk_idJugRonda AS idJug ,
+BB.nomJug, BB.loginJug, SUM(_07_puntsRonda) AS punts, IF(BB.nomJug = "rob",_01_pk_idTorn,"0") AS idTornInscrit
+FROM 
 (SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
 (SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug, _04_loginUsuari AS loginJug FROM usuari) AS BB,
 torneig
@@ -501,7 +531,11 @@ SELECT * FROM
 ( 
 SELECT CC.*, find_in_set(CC.punts,XX.LLISTA_PUNTS) AS ranking, XX.numRK AS totalRanking
 FROM CC,
-(SELECT CC.idTorn, COUNT(*) AS numRK, group_concat(CC.punts ORDER BY CC.punts DESC) AS LLISTA_PUNTS FROM CC GROUP BY CC.idTorn) AS XX,
+(SELECT CC.idTorn,
+		  COUNT(*) AS numRK,
+		  group_concat(CC.punts ORDER BY CC.punts DESC) AS LLISTA_PUNTS,
+		  group_concat(CC.idTornInscrit ORDER BY CC.idTornInscrit DESC) AS LLISTA_TORNS
+		  FROM CC GROUP BY CC.idTorn) AS XX,
 jugador
 LEFT JOIN inscrit ON _01_pk_idJug = _03_pk_idJugInsc
 INNER JOIN torneig ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
@@ -509,6 +543,7 @@ WHERE
 		_06_datBaixaJug  IS NULL AND
 		_09_datBaixaTorn IS NULL AND
 		CC.idJug = _01_pk_idJug AND
+		SUBSTRING_INDEX(XX.LLISTA_TORNS, ',', 1)>0 AND		
 		CC.idTorn = XX.idTorn	
 ) AS ZZ
 WHERE ranking BETWEEN 1 AND 10

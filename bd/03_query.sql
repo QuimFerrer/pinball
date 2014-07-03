@@ -1,5 +1,5 @@
 /************************************************************************************/
-/*  3.e.i.1 - ALTA de MAQUINA   */
+/*  3.e.i.1 - 3410 - ALTA de MAQUINA   */
 /************************************************************************************/
 
 /* canviar les variables */
@@ -14,7 +14,7 @@ VALUES (NULL,"abc","Josep Perez",0,0,NOW(),NULL,NULL);
 select * from maquina;
 */
 /************************************************************************************/
-/*  3.e.i.2 - BAIXA d'UNA màquina   */
+/*  3.e.i.2 - 3420 - BAIXA d'UNA màquina   */
 /* implica donar de bloquejar tots els jocs d'aquella màquina */
 /************************************************************************************/
 
@@ -44,7 +44,7 @@ WHERE
 */
 
 /************************************************************************************/
-/* 3.e.i.3 -  MODIFICACIO d'UNA Máquina  */
+/* 3.e.i.3 -  3425 - MODIFICACIO d'UNA Máquina  */
 /************************************************************************************/
 
 /* canviar variables per valors  */
@@ -77,7 +77,7 @@ SELECT * FROM MAQUINA;
 */
 
 /************************************************************************************/
-/* 3.e.i.4 - Actualització recaudació d'una Máquina  */
+/* 3.e.i.4 - 3430 - Actualització recaudació d'una Máquina  */
 /************************************************************************************/
 
 /* canviar variables per valors  */
@@ -105,7 +105,7 @@ SELECT * FROM MAQUINA;
 
 
 /***********************************************************************************************/
-/* 3.e.i.5 - 3430 - llistat de totes les màquines informat de la seva ubicació, jocs instal.lats, credits totals, etc. */
+/* 3.e.i.5 - 3440 - llistat de totes les màquines informat de la seva ubicació, jocs instal.lats, credits totals, etc. */
 /***********************************************************************************************/
 
 
@@ -136,7 +136,7 @@ GROUP BY idMaq, idUbic, idJoc;
 
 
 /***********************************************************************************************/
-/* 3.e.i.6 - 3440 - llistat de totes les màquines informat de la seva ubicació, jocs instal.lats,  */
+/* 3.e.i.6 - 3450 - llistat de totes les màquines informat de la seva ubicació, jocs instal.lats,  */
 /*         credits totals, etc. Històric*/
 /***********************************************************************************************/
 
@@ -163,7 +163,7 @@ GROUP BY idMaq, idUbic, idJoc;
 
 
 /************************************************************************************/
-/*  3.e.ii.1 - Alta d'assignació de joc a una màquina   */
+/*  3.e.ii.1 - 3460 - Alta d'assignació de joc a una màquina   */
 /************************************************************************************/
 
 /* canviar les variables */
@@ -179,7 +179,7 @@ select * from maqInstall;
 */
 
 /************************************************************************************/
-/*  3.e.ii.2 - Baixa d'assignació de joc a una màquina  */
+/*  3.e.ii.2 - 3470 -Baixa d'assignació de joc a una màquina  */
 /************************************************************************************/
 
 /* canviar les variables */
@@ -209,7 +209,7 @@ SELECT * FROM MAQINSTALL;
 
 
 /************************************************************************************/
-/*  3.e.ii.3 - Modificació d'assignació de joc a una màquina   */
+/*  3.e.ii.3 - 3480 - Modificació d'assignació de joc a una màquina   */
 /************************************************************************************/
 
 /* canviar les variables */

@@ -303,7 +303,7 @@ SELECT * FROM JOC;
 */
 
 /************************************************************************************/
-/* 3.c.6 - actualització de partides jugades a un joc   */
+/* 3.c.6 - 3270 - actualització de partides jugades a un joc   */
 /************************************************************************************/
 
 /* canviar variables per valors  */
@@ -366,7 +366,7 @@ GROUP BY idJoc,idMaq
 ORDER BY idJoc,idMaq;
 
 /************************************************************************************/
-/*  3.d.1 - alta d'un torneig   */
+/*  3.d.1 - 3310 - alta d'un torneig   */
 /************************************************************************************/
 
 /* canviar les variables */
@@ -382,7 +382,7 @@ SELECT * FROM TORNEIG;
 */
 
 /************************************************************************************/
-/*  3.d.2 - Baixa d'un torneig   */
+/*  3.d.2 - 3320 - Baixa d'un torneig   */
 /************************************************************************************/
 
 
@@ -410,7 +410,7 @@ SELECT * FROM TORNEIG;
 */
 
 /************************************************************************************/
-/*  3.d.3 - Modificació d'un torneig   */
+/*  3.d.3 - 3330 - Modificació d'un torneig   */
 /************************************************************************************/
 
 /* canviar variables per valors  */
@@ -443,7 +443,7 @@ SELECT * FROM TORNEIG;
 */
 
 /***********************************************************************************************/
-/* 3.d.4 - 3320 - llistat de torneigs amb el premi, codi de joc i máquines que tenen instal.lat el joc */
+/* 3.d.4 - 3340 - llistat de torneigs amb el premi, codi de joc i máquines que tenen instal.lat el joc */
 /***********************************************************************************************/
 
 SELECT _01_pk_idTorn AS idTorn, _03_nomTorn AS nomTorn, _04_premiTorn AS premiTorn, _01_pk_idJoc AS idJoc,
