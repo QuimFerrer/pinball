@@ -8,6 +8,14 @@ Varis
 --> ok. <-- 6.control.lar amb login que el usuari no està donat de baixa
 --> ok. <-- 7. alinear dreta o centre de camps al grid --> ,attr: 'align=center' 
 --> ok. <-- 8. treure el login.js
+9. posar al titol dels grids llistat o relació
+10. registre amb enviament de mail
+11. guardar password encriptat
+12. enviament de mail de contacte
+13. pregunta al Quim per posar columnes per filtrar/buscar els resultats 
+14. que el TOTAL d'alguns llistat pugui sortir amb una linia de totals del grid
+15. posar un aopció de menú per llistar les dades de cada taula
+16. gestió de reset password
 
 Recreatius
 
@@ -87,15 +95,15 @@ Zona d'usuari
 		3. ( 02_query.sql ) 3210 - Alta d'un joc
 		4. ( 02_query.sql ) 3220 - Baixa d'un joc
 		5. ( 02_query.sql ) 3225 - Modificació d'un joc
-		6. ( 02_query.sql ) Actualització partides jugades
+		6. ( 02_query.sql ) 3270 - Actualització partides jugades
 		7. ( 02_query.sql ) 3250 - Llistat de jocs amb les màquines a on estan instal.lats i amb num de partides jugades i crédits
 		8. ( 02_query.sql ) 3260 - Llistat de jocs amb les màquines a on estan instal.lats i amb num de partides jugades i crédits. (Històric)
 
 	d. TORNEIGS. gestió torneigs
 		1. ( 02_query.sql ) 3310 - Alta d'un torneig
 		2. ( 02_query.sql ) 3320 - Baixa d'un torneig
-		3. ( 02_query.sql ) 3320 - Modificació d'un torneig
-		4. ( 02_query.sql ) 3320 - Llistat amb premi, joc associat i màquines que tenen instal.lat el joc
+		3. ( 02_query.sql ) 3330 - Modificació d'un torneig
+		4. ( 02_query.sql ) 3340 - Llistat amb premi, joc associat i màquines que tenen instal.lat el joc
 		5. ( 02_query.sql ) 3350 - llistat de torneigs amb els jugadors registrats amb 							   el seu nom, el codi de joc i el nom del joc incloent 						   els torneigs amb cap jugador registrat
 		6. ( 02_query.sql ) 3360 - llistat de torneigs amb els jugadors registrats amb 							   el seu nom, el codi de joc i el nom del joc incloent 						   els torneigs amb cap jugador registrat (Històric)
 		7. ( 02_query.sql ) 3380 - llistat de torneigs amb el premi, codi de joc i 								   máquines que tenen instal.lat el joc i els jugadors 							   registrats a cada torneig amb les partides, rondes i 						   punts obtinguts
@@ -105,15 +113,15 @@ Zona d'usuari
 		i. GESTIÓ. mostrar totes les máquines en forma de llista amb botons d'opcions:
 			1. ( 03_query.sql ) 3410 - alta
 			2. ( 03_query.sql ) 3420 - baixa
-			3. ( 03_query.sql ) 3420 - modificació
-			4. ( 03_query.sql ) actualitzar recaudació d'una màquina
-			5. ( 03_query.sql ) 3430 - llistat de totes les máquines informant: ubicació, jocs instal.lats, crédits totals, propietari, etc.
-			6. ( 03_query.sql ) 3440 - llistat de totes les máquines informant: ubicació, jocs instal.lats, crédits totals, propietari, etc. Històric
+			3. ( 03_query.sql ) 3425 - modificació
+			4. ( 03_query.sql ) 3430 - actualitzar recaudació d'una màquina
+			5. ( 03_query.sql ) 3440 - llistat de totes les máquines informant: ubicació, jocs instal.lats, crédits totals, propietari, etc.
+			6. ( 03_query.sql ) 3450 - llistat de totes les máquines informant: ubicació, jocs instal.lats, crédits totals, propietari, etc. Històric
 		ii. ASSIGNACIO DE JOCS:
 			1. ( 03_query.sql ) 3460 - Alta d'assignació de joc a una màquina
 			2. ( 03_query.sql ) 3470 - Baixa d'assignació de joc a una màquina
-			3. ( 03_query.sql ) 3470 - Modificació d'assignació de joc a una màquina
-			4. ( 03_query.sql ) 3480 - Llistat de jocs assignats a cada màquina amb num de partides jugades i crédits
+			3. ( 03_query.sql ) 3480 - Modificació d'assignació de joc a una màquina
+			4. ( 03_query.sql ) 3490 - Llistat de jocs assignats a cada màquina amb num de partides jugades i crédits
 		iii. RECAUDACIONS. opcions :
 			 1. ( 03_query.sql ) 3510 - recaudació per cada màquina amb ranking (max i min)
 			 2. ( 03_query.sql ) 3520 - recaudació per cada joc amb ranking (max i min)
@@ -134,14 +142,14 @@ Zona d'usuari
 		i. Gestió ubicacions.
 			1. ( 04_query.sql ) 3810 - Alta de l'ubicació d'una màquina
 			2. ( 04_query.sql ) 3820 - Baixa de l'ubicació d'una màquina
-			3. ( 04_query.sql ) 3820 - Modificació de l'ubicació d'una màquina
+			3. ( 04_query.sql ) 3830 - Modificació de l'ubicació d'una màquina
 			4. ( 04_query.sql ) 3840 - Llistat d'ubicacions (provincia, població, cp)
 			5. ( 04_query.sql ) 3850 - Llistat d'ubicacions (lat, long, alt)
 			6. ( 04_query.sql ) 3860 - Llistat d'empreses d'ubicacions amb les seves dades de contacte
 			7. ( 04_query.sql ) 3870 - Llistat d'empreses d'ubicacions per provincia, població, cp amb les seves dades de contacte
 		ii. Gestió de màquines a les ubicacions
-			1. ( 04_query.sql ) 3890 - Alta de l'associació d'una màquina a una ubicació
-			2. ( 04_query.sql ) 3900 - Baixa de l'associació d'una màquina a una ubicació
+			1. ( 04_query.sql ) 3880 - Alta de l'associació d'una màquina a una ubicació
+			2. ( 04_query.sql ) 3890 - Baixa de l'associació d'una màquina a una ubicació
 			3. ( 04_query.sql ) 3900 - Modificació de les dades de l'associació d'una màquina a una ubicació
 			4. ( 04_query.sql ) 3910 - Canvi d'ubicació d'una màquina
 			5. ( 04_query.sql ) 3930 - Llistat de màquines de cada ubicació (provincia, població, cp)

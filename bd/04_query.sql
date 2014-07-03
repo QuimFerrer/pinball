@@ -1,5 +1,5 @@
 /************************************************************************************/
-/*  3.f.i.1 - alta d'ubicació d'una màquina   */
+/*  3.f.i.1 - 3810 - alta d'ubicació d'una màquina   */
 /************************************************************************************/
 
 /* canviar les variables */
@@ -21,7 +21,7 @@ select * from ubicacio;
 */
 
 /************************************************************************************/
-/*  3.f.i.2 - baixa d'ubicació d'una màquina   */
+/*  3.f.i.2 - 3820 - baixa d'ubicació d'una màquina   */
 /************************************************************************************/
 
 
@@ -54,7 +54,7 @@ WHERE
 
 
 /************************************************************************************/
-/*  3.f.i.3 - modificació d'ubicació d'una màquina   */
+/*  3.f.i.3 - 3830 - modificació d'ubicació d'una màquina   */
 /************************************************************************************/
 
 /* canviar les variables */
@@ -180,7 +180,7 @@ ORDER BY provincia, poblacio, cPostal;
 
 
 /************************************************************************************/
-/*  3.f.ii.1 - Alta de l'associació d'una màquina a una ubicació   */
+/*  3.f.ii.1 - 3880 - Alta de l'associació d'una màquina a una ubicació   */
 /************************************************************************************/
 
 /* canviar les variables */
@@ -195,7 +195,7 @@ select * from ubicacioTeMaquina;
 */
 
 /************************************************************************************/
-/*  3.f.ii.2 - Baixa de l'associació d'una màquina a una ubicació   */
+/*  3.f.ii.2 - 3890 - Baixa de l'associació d'una màquina a una ubicació   */
 /************************************************************************************/
 
 UPDATE ubicacioTeMaquina SET _05_datBaixaUTM = NOW()
@@ -231,7 +231,7 @@ select * from ubicacioTeMaquina;
 */
 
 /************************************************************************************/
-/*  3.f.ii.3 - Modificació de les dades de l'associació d'una màquina a una ubicació   */
+/*  3.f.ii.3 - 3900 -Modificació de les dades de l'associació d'una màquina a una ubicació   */
 /************************************************************************************/
 
 /* canviar les variables */
@@ -263,7 +263,7 @@ select * from ubicacioTeMaquina;
 */ 
 
 /************************************************************************************/
-/*  3.f.ii.4 - Canvi d'ubicació d'una màquina */
+/*  3.f.ii.4 - 3910 - Canvi d'ubicació d'una màquina */
 /************************************************************************************/
 
 UPDATE ubicacioTeMaquina SET _05_datBaixaUTM = NOW()
@@ -279,7 +279,6 @@ WHERE
 /* canviar les variables */	
 	
 INSERT INTO ubicacioTeMaquina VALUES (NULL,"$idUbicNOU","$idMaq",NOW(),NULL,NULL);
-COMMIT;
 
 
 /*

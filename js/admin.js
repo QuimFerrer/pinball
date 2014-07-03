@@ -11,7 +11,8 @@ $('#sidebar').w2sidebar({
 							{ id: '3140', text: 'desbloquejar', img: 'icon-page' }]},
 					{ id: '3200', text: 'Jocs', img: 'icon-folder',
 					nodes: [{ id: '3210', text: 'Alta',  img: 'icon-edit' },
-							{ id: '3220', text: 'Gestió',  img: 'icon-edit' },							
+							{ id: '3220', text: 'Baixa',  img: 'icon-edit' },
+							{ id: '3225', text: 'Modificació',  img: 'icon-edit' },							
 							{ id: '3230', text: 'Llistat',  img: 'icon-page' },
 							{ id: '3240', text: 'Històric', img: 'icon-page' },
 							{ id: '3245', text: 'Màquines', img: 'icon-folder',									
@@ -19,10 +20,11 @@ $('#sidebar').w2sidebar({
 									{ id: '3260', text: 'Històric',  img: 'icon-page' }]}]},
 					{ id: '3300', text: 'Torneigs', img: 'icon-folder',
 					nodes: [{ id: '3310', text: 'Alta',  img: 'icon-edit' },
-							{ id: '3315', text: 'Gestió',  img: 'icon-edit' },							
-							{ id: '3320', text: 'Relació',  img: 'icon-page' },
-							{ id: '3330', text: 'Llistats',  img: 'icon-folder',
-							nodes: [{ id: '3340', text: 'Jugadors',  img: 'icon-folder',
+							{ id: '3320', text: 'Baixa',  img: 'icon-edit' },					
+							{ id: '3330', text: 'Modificació',  img: 'icon-edit' },
+							{ id: '3340', text: 'Relació',  img: 'icon-page' },
+							{ id: '3345', text: 'Llistats',  img: 'icon-folder',
+							nodes: [{ id: '3346', text: 'Jugadors',  img: 'icon-folder',
 									nodes: [{ id: '3350', text: 'Actual',  img: 'icon-page' },
 											{ id: '3360', text: 'Històric',  img: 'icon-page' }]},
 									{ id: '3370', text: 'Màquines',  img: 'icon-folder',
@@ -30,13 +32,16 @@ $('#sidebar').w2sidebar({
 											{ id: '3390', text: 'Històric',  img: 'icon-page' } ]}]}]},
 					{ id: '3400', text: 'Màquines', img: 'icon-folder',
 					nodes: [{ id: '3410', text: 'Alta',  img: 'icon-edit' },
-							{ id: '3420', text: 'Gestió',  img: 'icon-edit' },							
-							{ id: '3430', text: 'Llistat',  img: 'icon-page' },
-							{ id: '3440', text: 'Històric',  img: 'icon-page' },									
-							{ id: '3450', text: 'Assignar Jocs',  img: 'icon-folder',
+							{ id: '3420', text: 'Baixa',  img: 'icon-edit' },
+							{ id: '3425', text: 'Modificació',  img: 'icon-edit' },							
+							{ id: '3430', text: 'Act. Recaudació',  img: 'icon-edit' },														
+							{ id: '3440', text: 'Llistat',  img: 'icon-page' },
+							{ id: '3450', text: 'Històric',  img: 'icon-page' },									
+							{ id: '3455', text: 'Assignar Jocs',  img: 'icon-folder',
 							nodes: [{ id: '3460', text: 'Alta',  img: 'icon-edit' },
-									{ id: '3470', text: 'Gestió',  img: 'icon-edit' },									
-									{ id: '3480', text: 'Llistat',  img: 'icon-page' }]},
+									{ id: '3470', text: 'Baixa',  img: 'icon-edit' },
+									{ id: '3480', text: 'Modificació',  img: 'icon-edit' },									
+									{ id: '3490', text: 'Llistat',  img: 'icon-page' }]},
 							{ id: '3500', text: 'Recaudacions',  img: 'icon-folder',
 							nodes: [{ id: '3510', text: 'Maq i Ranking',  img: 'icon-page' },
 									{ id: '3520', text: 'Joc i Ranking',  img: 'icon-page' },
@@ -56,15 +61,17 @@ $('#sidebar').w2sidebar({
 									{ id: '3730', text: '3',  img: 'icon-page' }]}]},											
 					{ id: '3800', text: 'Ubicacions', img: 'icon-folder',
 					nodes: [{ id: '3810', text: 'Alta',  img: 'icon-edit' },
-							{ id: '3820', text: 'Gestió',  img: 'icon-edit' },							
-							{ id: '3830', text: 'Llistats',  img: 'icon-folder',
+							{ id: '3820', text: 'Baixa',  img: 'icon-edit' },
+							{ id: '3830', text: 'Modificació',  img: 'icon-edit' },							
+							{ id: '3835', text: 'Llistats',  img: 'icon-folder',
 							nodes: [{ id: '3840', text: 'Prov, Pob i CP',  img: 'icon-page' },
 									{ id: '3850', text: 'Coordenades',  img: 'icon-page' },							
 									{ id: '3860', text: 'Empreses',  img: 'icon-page' },
 									{ id: '3870', text: 'Empr.Prov-Pob',  img: 'icon-page' }]},
-							{ id: '3880', text: 'Màquines',  img: 'icon-folder',
-							nodes: [{ id: '3890', text: 'Alta',  img: 'icon-edit' },
-									{ id: '3900', text: 'Gestió',  img: 'icon-edit' },
+							{ id: '3875', text: 'Màquines',  img: 'icon-folder',
+							nodes: [{ id: '3880', text: 'Alta',  img: 'icon-edit' },
+									{ id: '3890', text: 'Baixa',  img: 'icon-edit' },
+									{ id: '3900', text: 'Modificació',  img: 'icon-edit' },									
 									{ id: '3910', text: 'Canvi ubicació',  img: 'icon-page' },
 									{ id: '3920', text: 'Llistats',  img: 'icon-folder',
 									nodes: [{ id: '3930', text: 'Prov i Pob',  img: 'icon-page' },
@@ -72,8 +79,8 @@ $('#sidebar').w2sidebar({
 											{ id: '3950', text: 'Empreses',  img: 'icon-page' }]}]}]},
 					{ id: '4000', text: 'Jugadors', img: 'icon-folder',
 					nodes: [{ id: '4010', text: 'Perfils',  img: 'icon-page' },
-							{ id: '4020', text: 'Bloquejar',  img: 'icon-page' },
-							{ id: '4030', text: 'Desbloquejar',    img: 'icon-page' },
+							{ id: '4020', text: 'Bloquejar',  img: 'icon-edit' },
+							{ id: '4030', text: 'Desbloquejar',    img: 'icon-edit' },
 							{ id: '4040', text: 'Torneigs registrats', img: 'icon-page' }]},
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////							
@@ -217,6 +224,10 @@ var controller = function(e) {
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 
+
+		case '3000':
+			break;
+
 		case '3110':
 			columns = [			   	
 				{ field: 'idMaq',          caption: 'Maq',         size: '4%' },
@@ -256,7 +267,12 @@ var controller = function(e) {
 			break;
 		case '3140':
 		    break;
+
 		case '3210':
+		    break;
+		case '3220':
+		    break;
+		case '3225':
 		    break;
 		case '3230':
 			columns = [			   	
@@ -277,7 +293,7 @@ var controller = function(e) {
 				{ field: 'datModJoc',   caption: 'Data Modif.',   size: '20%' },
 				{ field: 'datBaixaJoc', caption: 'Data Baixa',    size: '20%' }
 				];
-			DataGrid("Jocs. Històric", false, true, columns, e.target);
+			DataGrid("Històric de jocs", false, true, columns, e.target);
 			break;
 		case '3250':
 			columns = [			   	
@@ -302,13 +318,15 @@ var controller = function(e) {
 				{ field: 'datModJoc',   caption: 'Data Modif.',   size: '16%' },
 				{ field: 'datBaixaJoc', caption: 'Data Baixa',    size: '16%' }						
 				];
-			DataGrid("Jocs amb màquines instal.lades. Històric", false, true, columns, e.target);
+			DataGrid("Històric de jocs amb màquines instal.lades", false, true, columns, e.target);
 			break;				    
-		case '3300':
-			break;
 		case '3310':
 			break;
 		case '3320':
+			break;
+		case '3330':
+			break;
+		case '3340':
 			columns = [
 				{ field: 'idTorn',       caption: 'idTorn',      size: '6%' },
 				{ field: 'nomTorn',      caption: 'Torneig',     size: '15%' },
@@ -390,7 +408,12 @@ var controller = function(e) {
 		    break;
 		case '3420':
 		    break;				    
+		case '3425':
+		    break;		    
 		case '3430':
+		    break;				    
+
+		case '3440':
 			columns = [
 				{ field: 'idMaq',          caption: 'Maq',         size: '5%' },
 				{ field: 'macMaq',         caption: 'Mac',         size: '7%' },
@@ -404,9 +427,9 @@ var controller = function(e) {
 				{ field: 'provUbic',       caption: 'Provincia',   size: '8%' },						
 				{ field: 'datAltaMaq',     caption: 'Alta Maq',    size: '9%' }
 				];
-		   	DataGrid("Llistat de màquines", false, true, columns, e.target);
+		   	DataGrid("Màquines", false, true, columns, e.target);
 		    break;
-		case '3440':
+		case '3450':
 			columns = [
 				{ field: 'idMaq',          caption: 'Maq',         size: '5%' },
 				{ field: 'macMaq',         caption: 'Mac',         size: '7%' },
@@ -420,13 +443,15 @@ var controller = function(e) {
 				{ field: 'provUbic',       caption: 'Provincia',   size: '8%' },
 				{ field: 'datBaixaMaq',    caption: 'Baixa Maq',   size: '9%' }						
 			];
-		   	DataGrid("Llistat històric de màquines", false, true, columns, e.target);				
+		   	DataGrid("Històric de màquines", false, true, columns, e.target);				
 		    break;				    				    
 		case '3460':
 		    break;
 		case '3470':
 		    break;
 		case '3480':
+		    break;		   
+		case '3490':
 			columns = [
 				{ field: 'idMaq',        caption: 'Maq',           size: '8%' },
 				{ field: 'macMaq',       caption: 'Mac',           size: '13%' },
@@ -435,7 +460,7 @@ var controller = function(e) {
 				{ field: 'numPartides',  caption: 'Num. partides', size: '8%' },
 				{ field: 'totalCredits', caption: 'Crèdits (€)',   size: '10%',attr: 'align=right' }
 			];
-		   	DataGrid("Llistat de jocs assignats a cada màquina", false, true, columns, e.target);				
+		   	DataGrid("Jocs assignats a cada màquina", false, true, columns, e.target);				
 		    break;				    				    				    
 		case '3510':
 			columns = [
@@ -562,6 +587,8 @@ var controller = function(e) {
 		    break;			
 		case '3820':
 		    break;			
+		case '3830':
+		    break;		    
 		case '3840':
 			columns = [
 				{ field: 'provincia',      caption: 'Provincia',   size: '8%' },												
@@ -580,7 +607,7 @@ var controller = function(e) {
 				{ field: 'datAltaUbic',    caption: 'Data Alta',   size: '5%' },
 				{ field: 'datBaixaUbic',   caption: 'Data Baixa',  size: '5%' }
 			];
-		   	DataGrid("Llistat d'ubicacions per cada provincia, poblacio i codi postal", false, true, columns, e.target);
+		   	DataGrid("Ubicacions per cada provincia, poblacio i codi postal", false, true, columns, e.target);
 		    break;			
 		case '3850':
 			columns = [
@@ -600,7 +627,7 @@ var controller = function(e) {
 				{ field: 'datAltaUbic',    caption: 'Data Alta',   size: '5%' },
 				{ field: 'datBaixaUbic',   caption: 'Data Baixa',  size: '5%' }
 			];
-		   	DataGrid("Llistat d'ubicacions per coordenades (Latitut, Longitut i Altitut)", false, true, columns, e.target);		
+		   	DataGrid("Ubicacions per coordenades (Latitut, Longitut i Altitut)", false, true, columns, e.target);		
 		    break;			
 		case '3860':
 			columns = [
@@ -617,7 +644,7 @@ var controller = function(e) {
 				{ field: 'datAltaUbic',    caption: 'Data Alta',   size: '5%' },
 				{ field: 'datBaixaUbic',   caption: 'Data Baixa',  size: '5%' }
 			];
-		   	DataGrid("Llistat d'empreses d'ubicacions", false, true, columns, e.target);
+		   	DataGrid("Empreses d'ubicacions", false, true, columns, e.target);
 		    break;			
 		case '3870':
 			columns = [
@@ -634,11 +661,13 @@ var controller = function(e) {
 				{ field: 'datAltaUbic',    caption: 'Data Alta',   size: '5%' },
 				{ field: 'datBaixaUbic',   caption: 'Data Baixa',  size: '5%' }
 			];
-		   	DataGrid("Llistat d'empreses d'ubicacions per provincia, codi postal i població", false, true, columns, e.target);		
+		   	DataGrid("Empreses d'ubicacions per provincia, codi postal i població", false, true, columns, e.target);		
 		    break;		
 
-		case '3890':
+		case '3880':
 		    break;			
+		case '3890':
+		    break;		    
 		case '3900':
 		    break;
 		case '3910':
@@ -653,7 +682,7 @@ var controller = function(e) {
 				{ field: 'macMaq',       caption: 'Mac',         size: '15%' },				
 				{ field: 'totalCredits', caption: 'Crèdits (€)', size: '10%',attr: 'align=right' }				
 			];
-		   	DataGrid("Llistat de les màquines de cada ubicació per provincia, població i codi postal", false, true, columns, e.target);
+		   	DataGrid("Màquines de cada ubicació per provincia, població i codi postal", false, true, columns, e.target);
 		    break;			
 		case '3940':
 			columns = [
@@ -666,7 +695,7 @@ var controller = function(e) {
 				{ field: 'macMaq',       caption: 'Mac',         size: '15%' },
 				{ field: 'totalCredits', caption: 'Crèdits (€)', size: '10%',attr: 'align=right' }
 			];
-		   	DataGrid("Llistat de màquines de cada ubicació per coordenades (Latitut, Longitut i Altitut)", false, true, columns, e.target);		
+		   	DataGrid("Màquines de cada ubicació per coordenades (Latitut, Longitut i Altitut)", false, true, columns, e.target);		
 		    break;			
 		case '3950':
 			columns = [
@@ -684,9 +713,40 @@ var controller = function(e) {
 				{ field: 'macMaq',         caption: 'Mac',         size: '10%' },				
 				{ field: 'totalCredits',   caption: 'Crèdits (€)', size: '10%',attr: 'align=right' }				
 			];
-		   	DataGrid("Llistat d'empreses d'ubicacions per provincia, codi postal i població", false, true, columns, e.target);				
+		   	DataGrid("Empreses d'ubicacions per provincia, codi postal i població", false, true, columns, e.target);				
 		    break;			
 		case '4010':
+            toolbar = { 
+                items: [
+	                { type: 'button', id: 'lock',    caption: 'bloquejar', img: 'icon-delete' },
+	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' }	                
+	            ],
+                onClick: function(target, data) {
+			        var row = w2ui['grid'].getSelection();
+
+			        if (row.length != 0) {
+			            w2confirm('Estas segur ?', "Bloquejar un jugador", 
+			            function (msg) { 
+
+			                if (msg=='Yes') {
+								w2ui['grid'].lock('Actualitzant dades ...', true);
+
+								$.ajax({url: "query.php", data: {pid: "4020", idUsr: row[0]}})
+								.done(function(e) {
+									// console.log(e);
+				                    w2ui['grid'].reload();
+								})
+								.fail(function(error) { 
+									// console.log(error);	
+								})
+								.always(function() { 
+									w2ui['grid'].unlock();
+								});
+			                }
+			            })
+			        }  
+                }
+            };
 			columns = [
 				{ field: 'idUsr', 		caption: 'idUsr', 	size: '5%' },
 				{ field: 'nomUsr', 		caption: 'Nom', 	size: '10%' },
@@ -700,7 +760,7 @@ var controller = function(e) {
 				{ field: 'datModUsr',   caption: 'Data Modif.',size: '10%' },				
 				{ field: 'datBaixaUsr', caption: 'Data Baixa', size: '10%' }
 			];
-		   	DataGrid("Relació de jugadors", false, true, columns, e.target);				
+		   	DataGrid("Relació de jugadors", false, toolbar, columns, e.target);				
 		    break;			
 		case '4020':
 		    break;			
@@ -719,7 +779,7 @@ var controller = function(e) {
 				{ field: 'punts',        caption: 'Punts',       size: '8%',attr: 'align=right' },
 				{ field: 'totalRanking', caption: 'Posicions Ranking',   size: '12%',attr: 'align=center' }						
 			];
-		   	DataGrid("Rankin i punts dels torneigs registrats per cada jugador", false, true, columns, e.target);
+		   	DataGrid("Ranking i punts dels torneigs registrats per cada jugador", false, true, columns, e.target);
 		    break;			
 		    
 		default:
