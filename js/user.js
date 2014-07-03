@@ -68,7 +68,7 @@ var controller = function(e) {
 
 			                if (msg=='Yes') {
 								w2ui['grid'].lock('Consultant dades ...', true);
-
+// Cal passar PK
 								$.ajax({url: "query.php", data: {pid: "5043", record: row[0]}})
 								.done(function(e) {
 									console.log(e);
