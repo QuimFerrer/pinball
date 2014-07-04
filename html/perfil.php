@@ -91,16 +91,17 @@
 			}
 		},
 		onLoad: function(eventData) {
-			console.log(eventData);
-            var row = JSON.parse(eventData.xhr.responseText);
+            var result = JSON.parse(eventData.xhr.responseText);
+            var row = result[1];
+            result = row[0];
 			eventData.preventDefault();
-			console.log(row);
+			console.log(result);
 
-	        w2ui['dialog'].fields.forEach( 
-	            function(value, index) {
-	                if (row) w2ui['dialog'].record[value.name] = row[value.name];
-	            }
-	        );
+			for (var i in result) {
+				w2ui['dialog'].record[i] = result[i];
+				console.log(i, result[i]);
+			}
+			w2ui['dialog'].refresh();
 		} 
 	});
 </script>

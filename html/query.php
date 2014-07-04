@@ -94,8 +94,7 @@ isEndSessionInQuery();
 //   OPCIONS D'USUARI
 ////////////////////////////////////////////////////////////////////////////////////
 
-	const CONSULTA_USR_5020					   = 5020;
-	const GET_DADES_PERFIL_USR_5021			   = 5021;	
+	const GET_DADES_PERFIL_USR_5020			   = 5020;	
 	const MODIF_PERFIL_USR_5022           	   = 5022;
 	const BAIXA_PERFIL_USR_5023           	   = 5023;
 	const CONSULTA_USR_TORNEIGS_5041           = 5041; //
@@ -1380,13 +1379,7 @@ isEndSessionInQuery();
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 
-			case CONSULTA_USR_5020 :
-			// case GET_DADES_PERFIL_USR_5020 :
-				$response = array("nomUsr"=>"Quim");
-				echo json_encode($response);
-				break;
-				
-			case GET_DADES_PERFIL_USR_5021 :
+			case GET_DADES_PERFIL_USR_5020 :
 				$query    = 'SELECT _01_pk_idUsuari  AS idUsr,
 									_02_nomUsuari    AS nomUsr,
 									_03_cognomUsuari AS cogUsr,
@@ -1402,6 +1395,10 @@ isEndSessionInQuery();
 								_10_datBaixaUsuari IS NULL AND
 								_06_datBaixaJug    IS NULL AND
 								_04_loginUsuari = "' . $usrLogin . '";';
+				$response = dbExec($query,1);
+				echo json_encode($response);	
+				break;
+
 			case MODIF_PERFIL_USR_5022 :
 				$query    = 'UPDATE usuari SET _02_nomUsuari    = "$nom",
 								               _03_cognomUsuari = "$cognom",
