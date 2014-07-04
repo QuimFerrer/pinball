@@ -55,23 +55,25 @@
 
 	if(w2ui['form']) w2ui['form'].destroy();
 
-	$('#form').w2form({ 
-		name     : 'form',
-		recid    : 1,
+	$("#form").w2form({ 
+		name     : 'dialog',
+		recid    : "1",
 		header   : 'El meu perfil',
 		url      : 'query.php',
 		postData : {pid:5020},
-		// formURL  : '../pages/demo/demo-forms.html', 
 		fields: [
 			{ name: 'nomUsr', type: 'text', required: false },
 			{ name: 'cogUsr', type: 'text', required: false },
 			{ name: 'loginUsr', type: 'text', required: false },
 			{ name: 'passwordUsr', type: 'text', required: false },
 			{ name: 'emailUsr', type: 'text', required: false },
-			{ name: 'fotoUsr', type: 'upload', required: false },
+			{ name: 'fotoUsr', type: 'text', required: false },
 			{ name: 'facebookUsr', type: 'text', required: false },
 			{ name: 'twitterUsr', type: 'text', required: false }
 		],
+		record : {
+			nomUser : "Quim"
+		},
 		actions: {
 			reset: function () {
 				this.clear();
@@ -79,20 +81,27 @@
 			save: function () {
 				var obj = this;
 				this.save({}, function (data) { 
+					console.log(data);
 					if (data.status == 'error') {
 						console.log('ERROR: '+ data.message);
 						return;
 					}
 					obj.clear();
 				});
-			},
-		}, 
-		onLoad: function (data) {
-			console.log(data.xhr.responseText);
-		}
+			}
+		},
+		onLoad: function(eventData) {
+			console.log(eventData);
+            var row = JSON.parse(eventData.xhr.responseText);
+			eventData.preventDefault();
+			console.log(row);
+
+	        w2ui['dialog'].fields.forEach( 
+	            function(value, index) {
+	                if (row) w2ui['dialog'].record[value.name] = row[value.name];
+	            }
+	        );
+		} 
 	});
-	// w2ui['form'].on('refresh', function (event) {
-	// 	console.log(event);
-	// });
 </script>
 </html>
