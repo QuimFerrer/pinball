@@ -36,7 +36,7 @@ isEndSessionInQuery();
 	const ALTA_TORNEIG_3310				       = 3310;
 	const BAIXA_TORNEIG_3320 				   = 3320;
 	const MODIFICACIO_TORNEIG_3330 			   = 3330;	
-	const RELACIO_TORNEIGS_3340 	           = 3340; //	
+	const RELACIO_TORNEIGS_3340 	           = 3340; //
 	const TORNEIGS_AMB_JUGADORS_ACTUAL_3350    = 3350; //
 	const TORNEIGS_AMB_JUGADORS_HISTORIC_3360  = 3360; //
 	const TORNEIGS_AMB_MAQUINES_ACTUAL_3380    = 3380; //
@@ -107,16 +107,30 @@ isEndSessionInQuery();
 	const CONSULTA_RANKING_HISTORIC_5071       = 5071; //
 	const INSCRIPCIO_USR_TORNEIG_5063          = 5063;	
 
+///////////////////////////////////////////////////////////////////////////////////
+//
+//		QUERIES DE GENERACIÓ DE PARTIDES
+//
+///////////////////////////////////////////////////////////////////////////////////
+
+	const PARTIDES_RELACIO_TORNEIGS_6000	   = 6000; //
+
+
+
+
 	
-	$pid      = isset($_REQUEST['pid'])       ? (int) $_REQUEST['pid'] : 0;
-	$usrLogin = isset($_REQUEST['params'])    ? $_REQUEST['params'] : $_SESSION["login"];	
-	$idTorn   = isset($_REQUEST['idTorn'])    ? $_REQUEST['idTorn'] : "";
-	$idPart   = isset($_REQUEST['idPart'])    ? $_REQUEST['idPart'] : "";
-	$idMaq    = isset($_REQUEST['idMaq'])     ? $_REQUEST['idMaq'] : "";
-	$idJoc    = isset($_REQUEST['idJoc'])     ? $_REQUEST['idJoc'] : "";	
-	$idUsr    = isset($_REQUEST['idUsr'])     ? $_REQUEST['idUsr'] : "";		
-	$idUbic   = isset($_REQUEST['idUbic'])    ? $_REQUEST['idUbic'] : "";
-	$idUbicNOU= isset($_REQUEST['idUbicNOU']) ? $_REQUEST['idUbicNOU'] : "";
+	$pid      = isset($_REQUEST['pid'])        ? (int) $_REQUEST['pid'] : 0;
+	$usrLogin = isset($_REQUEST['idUserPart']) ? $_REQUEST['idUserPart'] : $_SESSION["login"];	
+	$idTorn   = isset($_REQUEST['idTorn'])     ? $_REQUEST['idTorn'] : "";
+	$idPart   = isset($_REQUEST['idPart'])     ? $_REQUEST['idPart'] : "";
+	$idMaq    = isset($_REQUEST['idMaq'])      ? $_REQUEST['idMaq'] : "";
+	$idJoc    = isset($_REQUEST['idJoc'])      ? $_REQUEST['idJoc'] : "";	
+	$idUsr    = isset($_REQUEST['idUsr'])      ? $_REQUEST['idUsr'] : "";		
+	$idUbic   = isset($_REQUEST['idUbic'])     ? $_REQUEST['idUbic'] : "";
+	$idUbicNOU= isset($_REQUEST['idUbicNOU'])  ? $_REQUEST['idUbicNOU'] : "";
+
+	$opcio 	  = isset($_REQUEST['novaopcio'])  ? $_REQUEST['novaopcio'] : "";
+
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -421,7 +435,7 @@ isEndSessionInQuery();
 									_02_pk_idJocTorn = "' . $idJoc  . '";';
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
-				break;								
+				break;
 			case RELACIO_TORNEIGS_3340 :		
 				$query    = 'SELECT _01_pk_idTorn AS idTorn,
 									_03_nomTorn   AS nomTorn,
@@ -1795,6 +1809,38 @@ isEndSessionInQuery();
 				echo json_encode( $response );		
 				break;				
 
+			case PARTIDES_RELACIO_TORNEIGS_6000 :
+				$query    = 'SELECT _01_pk_idMaq    AS idMaq,
+									_02_macMaq      AS macMaq,
+									_01_pk_idJoc    AS idJoc,
+									_02_nomJoc      AS nomJoc,
+									_01_pk_idUsuari AS idJug,
+									_04_loginUsuari AS loginUsuari,
+									_01_pk_idTorn   AS idTorn,
+									_03_nomTorn     AS nomTorn
+							FROM usuari
+								LEFT JOIN jugador    ON _01_pk_idUsuari = _01_pk_idJug
+								LEFT JOIN inscrit    ON _01_pk_idJug    = _03_pk_idJugInsc
+								INNER JOIN torneig   ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
+								INNER JOIN joc       ON _02_pk_idJocTorn = _01_pk_idJoc
+								LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
+								INNER JOIN maquina   ON _01_pk_idMaqInst = _01_pk_idMaq
+							WHERE 
+									_10_datBaixaUsuari   IS NULL AND
+									_09_datBaixaTorn     IS NULL AND
+									_08_datBaixaJoc      IS NULL AND
+									_06_datBaixaInsc     IS NULL AND	
+									_08_datBaixaMaqInst  IS NULL AND
+									_08_datBaixaMaq      IS NULL AND
+									_04_datAltaInsc      IS NOT NULL AND
+									(_04_loginUsuari =  "' . $usrLogin .'") and 
+									(_03_nomTorn = "' .$opcio .'")
+
+							ORDER BY nomTorn,idJoc,idMaq,idJug;';
+			 
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));				
+				break;							
 			default:
 				die ("error");
 		}
