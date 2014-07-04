@@ -190,6 +190,7 @@ var dbForm = function() {
     };
 
     this.Define = function(table, recno, pkName) {
+        var self = this;
 
         $().w2destroy('dialog');
 
@@ -203,7 +204,7 @@ var dbForm = function() {
             fields: this.fields,            
             actions: {
                 // reset: function() { this.clear(); },
-                Guardar: function() { this.save( {'recid': recno, 'pid':this.pid} ); },
+                Guardar: function() { this.save( {'recid': recno, 'pid':self.pid} ); },
                 Sortir:  function() { $().w2popup('close'); }
             },
             onSave: function(target, eventData) {

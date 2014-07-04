@@ -84,7 +84,6 @@
 		    		// Eliminar ultima comma ","
 		    		$qry = substr( $qry, 0, -1 ); 
 					$qry = "UPDATE $table SET ". $qry ." WHERE $kName=$id";
-					$data['recid'] = $id;
 
 				else :
 					$sKey=""; $sVal="";
@@ -97,10 +96,10 @@
 					$sKey = substr( $sKey, 0, -1 );  
 	        		$sVal = substr( $sVal, 0, -1 );  
 					$qry  = "INSERT INTO $table (". $sKey . ") VALUES (". $sVal . ")";
-					$data['recid'] = mysql_insert_id();	// Comptador retornat per l'operació INSERT
 				endif;
 
 				$sql = Sql_Exec($qry);
+				$data['recid'] = ($id != 0) ? $id : mysql_insert_id();
 				$data['rows']  = mysql_affected_rows();
 			endif;
 			break;

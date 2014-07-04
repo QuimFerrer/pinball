@@ -41,8 +41,8 @@
 			<div class="w2ui-field"><input name="twitterUsr" type="text" maxlength="100" size="60"/></div>
 		</div>
 		<div class="w2ui-buttons">
-			<input type="button" value="Reset" name="reset">
-			<input type="button" value="Save" name="save">
+			<input type="button" value="Guardar" name="save">
+			<input type="button" value="Baixa" name="reset">
 		</div>
 		<img src="../resources/img/avatar.jpg" alt="" class="perfil">
 	</div>
@@ -52,40 +52,45 @@
 <script type="text/javascript" src="../js/pinball.js"></script>
 <script>
 // http://localhost/pinball/src/dbui.php?cmd=get-record&param=usuari&recid=2&keyname=_01_pk_idUsuari
+
+	if(w2ui['form']) w2ui['form'].destroy();
+
 	$('#form').w2form({ 
-	name     : 'form',
-	recid    : 1,
-	header   : 'El meu perfil',
-	url      : 'query.php',
-	postData : {pid:5020},
-	// formURL  : '../pages/demo/demo-forms.html', 
-	fields: [
-		{ name: 'nomUsr', type: 'text', required: false },
-		{ name: 'cogUsr', type: 'text', required: false },
-		{ name: 'loginUsr', type: 'text', required: false },
-		{ name: 'passwordUsr', type: 'text', required: false },
-		{ name: 'emailUsr', type: 'text', required: false },
-		{ name: 'fotoUsr', type: 'upload', required: false },
-		{ name: 'facebookUsr', type: 'text', required: false },
-		{ name: 'twitterUsr', type: 'text', required: false }
-	],
-	actions: {
-		reset: function () {
-			this.clear();
-		},
-		save: function () {
-			var obj = this;
-			this.save({}, function (data) { 
-				if (data.status == 'error') {
-					console.log('ERROR: '+ data.message);
-					return;
-				}
-				obj.clear();
-			});
+		name     : 'form',
+		recid    : 1,
+		header   : 'El meu perfil',
+		url      : 'query.php',
+		postData : {pid:5020},
+		// formURL  : '../pages/demo/demo-forms.html', 
+		fields: [
+			{ name: 'nomUsr', type: 'text', required: false },
+			{ name: 'cogUsr', type: 'text', required: false },
+			{ name: 'loginUsr', type: 'text', required: false },
+			{ name: 'passwordUsr', type: 'text', required: false },
+			{ name: 'emailUsr', type: 'text', required: false },
+			{ name: 'fotoUsr', type: 'upload', required: false },
+			{ name: 'facebookUsr', type: 'text', required: false },
+			{ name: 'twitterUsr', type: 'text', required: false }
+		],
+		actions: {
+			reset: function () {
+				this.clear();
+			},
+			save: function () {
+				var obj = this;
+				this.save({}, function (data) { 
+					if (data.status == 'error') {
+						console.log('ERROR: '+ data.message);
+						return;
+					}
+					obj.clear();
+				});
+			},
+		}, 
+		onLoad: function (data) {
+			console.log(data.xhr.responseText);
 		}
-	}
 	});
-	// all event listener
 	// w2ui['form'].on('refresh', function (event) {
 	// 	console.log(event);
 	// });
