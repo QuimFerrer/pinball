@@ -16,6 +16,10 @@
 	if (isset($_REQUEST['param']))  $table  = $_REQUEST['param'];
 	if (isset($_REQUEST['recid']))	$id 	= $_REQUEST['recid'];
 
+
+	$pid      = isset($_REQUEST['pid'])       ? (int) $_REQUEST['pid'] : 0;
+
+
 	$kName  = isset($_REQUEST['keyname']) ? $_REQUEST['keyname'] : 'id';
 	$data   = array();
 	$qry    = "";
@@ -59,13 +63,19 @@
 
 		case 'save-record' :
 
-			if($_REQUEST['pid']) :
-			 	$data = CustomQuery($_REQUEST['pid'], $id, $_REQUEST['record']);
+			$record = (object)$_REQUEST['record'];
+
+			// if($_REQUEST['pid']) :
+			//  	$data = CustomQuery($_REQUEST['pid'], $id, $record);
+
+			if($pid) :
+			 	$data = customQuery($pid, $id, $_REQUEST['record']);			 
 			else :
 				// if remote
 				// $record = json_decode($_REQUEST['record']);
 				// else
-				$record = (object)$_REQUEST['record'];
+
+				// $record = (object)$_REQUEST['record'];
 
 				if ($id != 0) :
 					foreach( $record as $key => $value ) {
@@ -109,4 +119,29 @@
 
 		return $result;
 	}
+
+	function customQuery($pid, $id, $record)
+	{
+		switch($pid)
+			{
+			case '3230':
+				$query    = 'INSERT INTO joc 
+								VALUES (NULL,"' .
+										$record['_02_nomJoc']  . '","' .
+										$record['_03_descJoc'] . '","' .
+										$record['_04_imgJoc']  . '","
+										0,NOW(),NULL,NULL);';			
+				$sql = Sql_Exec($query);
+				// $response = dbExec($query,0);
+				// echo json_encode(controlErrorQuery($response));
+				$data['recid'] = mysql_insert_id();
+				$data['rows']  = mysql_affected_rows()+10;				
+				break;
+			default:
+				$data = "";
+				break;
+			}
+		return ($data);
+	}
+
  ?>

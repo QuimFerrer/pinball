@@ -16,7 +16,8 @@ Varis
 14. que el TOTAL d'alguns llistat pugui sortir amb una linia de totals del grid
 15. posar un opció de menú per llistar les dades de cada taula
 16. gestió de reset password
-17. revisar query 3110
+--> ok. <-- 17. revisar query 3110
+18. incloure errors d'apertura de base de dades del pinball.h en la gestió d'errors
 
 
 
