@@ -211,16 +211,28 @@ var dbForm = function() {
 
                 $().w2popup('close');
 
+                // var result = JSON.parse(eventData.xhr.responseText);
+                // if (result.recid == 999999 && result.rows == 999999)
+                //     {
+                //         eventData.status = "fail";
+                //         w2alert("Error a l'accès a la base de dades", 'Missatge');
+                //         eventData.preventDefault();
+                //     }
+
                 if (eventData.status == "success") {
                     console.log(eventData.xhr.responseText);
                     var result = JSON.parse(eventData.xhr.responseText);
-
+                    
+                    console.log(result, this.record, recno);
+                    
                     if (result.rows == 1) {
                         if (recno > 0) {
                             grid.set(result.recid, this.record, true);
                         } else  {
                             this.record.recid = result.recid;
-                            grid.add(this.record);
+                            this.record[pkName] = result.recid;                            
+                            // grid.add(this.record);
+                            grid.reload();                            
                         }
                     } 
                 }

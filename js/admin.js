@@ -6,9 +6,7 @@ $('#sidebar').w2sidebar({
 		  nodes: [  { id: '3000', text: 'Perfil', img: 'icon-edit' },
 					{ id: '3100', text: 'Partides', img: 'icon-folder',
 					nodes: [{ id: '3110', text: 'per màquina',  img: 'icon-page' },
-							{ id: '3120', text: 'per jugador',  img: 'icon-page' },
-							{ id: '3130', text: 'bloquejar',    img: 'icon-page' },
-							{ id: '3140', text: 'desbloquejar', img: 'icon-page' }]},
+							{ id: '3120', text: 'per jugador',  img: 'icon-page' }]},
 					{ id: '3200', text: 'Jocs', img: 'icon-folder',
 					nodes: [{ id: '3230', text: 'Manteniment',  img: 'icon-edit' },
 							{ id: '3240', text: 'Històric', img: 'icon-page' },
@@ -16,10 +14,8 @@ $('#sidebar').w2sidebar({
 							nodes: [{ id: '3250', text: 'Actual',  img: 'icon-page' },
 									{ id: '3260', text: 'Històric',  img: 'icon-page' }]}]},
 					{ id: '3300', text: 'Torneigs', img: 'icon-folder',
-					nodes: [{ id: '3310', text: 'Alta',  img: 'icon-edit' },
-							{ id: '3320', text: 'Baixa',  img: 'icon-edit' },					
-							{ id: '3330', text: 'Modificació',  img: 'icon-edit' },
-							{ id: '3340', text: 'Relació',  img: 'icon-page' },
+					nodes: [{ id: '3310', text: 'Alta',  img: 'icon-page' },
+							{ id: '3340', text: 'Manteniment',  img: 'icon-page' },
 							{ id: '3345', text: 'Llistats',  img: 'icon-folder',
 							nodes: [{ id: '3346', text: 'Jugadors',  img: 'icon-folder',
 									nodes: [{ id: '3350', text: 'Actual',  img: 'icon-page' },
@@ -289,7 +285,7 @@ var controller = function(e) {
 			        var row = w2ui['grid'].getSelection();
 				    if (row.length != 0)
 				    	{
-				    	console.log(row);
+				    	// console.log(row);
 				    	switch(target)
 				    		{
 				    		case 'lock':
@@ -416,7 +412,21 @@ var controller = function(e) {
 				{ field: 'macMaq',       caption: 'Mac',         size: '10%' },
 				{ field: 'datBaixaTorn', caption: 'DataBaixa',   size: '15%' }
 				];
-			DataGrid("Relació de Torneigs", false, true, columns, e.target);
+			fields = [
+		        { name: '_03_nomTorn', type: 'text', required: true,
+		          html: { caption: 'Nom', attr: 'size="45"', span: 5 }
+		        },
+		        { name: "_04_premiTorn", type: 'float', required: false,
+		          html: { caption: 'Premi', attr: 'size="10"', span: 5 }
+		        },
+		        { name: "_05_datIniTorn", type: 'date', required: false,
+		          html: { caption: 'Data inici', attr: 'size="40"', span: 5 }
+		        },
+		        { name: "_06_datFinTorn", type: 'date', required: false,
+		          html: { caption: 'Data final', attr: 'size="40"', span: 5 }
+		      	}
+		    ];
+		    DataGrid("Relació de Torneigs", "torneig", true, columns, fields, 3340, "_01_pk_idTorn");
 			break;				    
 		case '3350':
 			columns = [				

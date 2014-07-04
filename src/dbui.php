@@ -1,5 +1,11 @@
 <?php
 
+include ("../src/pinball.h");
+include ("../src/seguretat.php"); 
+
+isEndSessionInQuery();
+
+
 	if (!isset($_REQUEST['cmd']) ) die('<h1>No es una consulta correcte !</h1>');
 
 	$link = mysql_connect('localhost', 'root', '');
@@ -43,7 +49,7 @@
 			break;
 
 		case 'get-records' :
-			$qry = "SELECT * FROM $table";
+			$qry = getQueryForGetRecords($table);
 			$result = Sql_Exec($qry);
 
 			while ($row = mysql_fetch_assoc($result)) {
@@ -56,27 +62,20 @@
 			break;
 
 		case 'delete' :
-			$qry  = "DELETE FROM $table WHERE $kName=$id";
-	    	$sql  = Sql_Exec($qry);
-			$data = array( 'cmd' => 'delete', 'success' => (mysql_affected_rows() != 0) );
+			$qry = getQueryForDelete($table,$id);
+			if ($qry == "")
+				{
+				$query  = "DELETE FROM $table WHERE $kName=$id";
+	    		$sql  = Sql_Exec($qry);
+				$data = array( 'cmd' => 'delete', 'success' => (mysql_affected_rows() != 0) );
+				}	
 			break;
 
 		case 'save-record' :
-
-			$record = (object)$_REQUEST['record'];
-
-			// if($_REQUEST['pid']) :
-			//  	$data = CustomQuery($_REQUEST['pid'], $id, $record);
-
 			if($pid) :
-			 	$data = customQuery($pid, $id, $_REQUEST['record']);			 
+			 	$data = customQuerySaveRecord($pid, $id, $_REQUEST['record'], $kName);
 			else :
-				// if remote
-				// $record = json_decode($_REQUEST['record']);
-				// else
-
-				// $record = (object)$_REQUEST['record'];
-
+				$record = (object)$_REQUEST['record'];				
 				if ($id != 0) :
 					foreach( $record as $key => $value ) {
 						if ($key != 'recid') $qry .= $key .'="'. $value .'",';
@@ -84,7 +83,6 @@
 		    		// Eliminar ultima comma ","
 		    		$qry = substr( $qry, 0, -1 ); 
 					$qry = "UPDATE $table SET ". $qry ." WHERE $kName=$id";
-
 				else :
 					$sKey=""; $sVal="";
 					foreach( $record as $key => $value ) {
@@ -119,28 +117,115 @@
 		return $result;
 	}
 
-	function customQuery($pid, $id, $record)
+	function customQuerySaveRecord($pid, $id, $record, $kName)
 	{
 		switch($pid)
 			{
 			case '3230':
-				$query    = 'INSERT INTO joc 
-								VALUES (NULL,"' .
-										$record['_02_nomJoc']  . '","' .
-										$record['_03_descJoc'] . '","' .
-										$record['_04_imgJoc']  . '","
-										0,NOW(),NULL,NULL);';			
-				$sql = Sql_Exec($query);
-				// $response = dbExec($query,0);
-				// echo json_encode(controlErrorQuery($response));
-				$data['recid'] = mysql_insert_id();
-				$data['rows']  = mysql_affected_rows()+10;				
+				if ($id != 0)
+					$query    = 'UPDATE joc SET   _02_nomJoc      = "' . $record['_02_nomJoc']  . '",' .
+											  	 '_03_descJoc     = "' . $record['_03_descJoc'] . '",' .
+											     '_04_imgJoc      = "' . $record['_04_imgJoc']  . '",' .
+											     '_07_datModJoc   = NOW() ' .
+							     'WHERE _01_pk_idJoc = "' . $id . '";';
+				else
+					$query    = 'INSERT INTO joc 
+									VALUES (NULL,"' .
+											$record['_02_nomJoc']  . '","' .
+											$record['_03_descJoc'] . '","' .
+											$record['_04_imgJoc']  . '",0,NOW(),NULL,NULL);';
+				$response = dbExec($query,0);
+				$response = controlErrorQuery($response);
+				if ($response['status'] != "error")
+					{
+					$data['recid'] = ($id != 0) ? $id : mysql_insert_id();
+					$data['rows']  = mysql_affected_rows();						
+					$data[$kName] = $data['recid'];
+					}
+				else
+					$data['recid'] = $data['rows'] = "999999";
 				break;
+			case '3340':
+				if ($id != 0)
+				$query    = 'UPDATE torneig SET _03_nomTorn     = "$nomTorn",
+					    						_04_premiTorn   = "$premiTorn",
+								   	       		_05_datIniTorn  = "$dataIniTorn",
+												_06_datFinTorn  = "$dataFinTorn",
+												_07_datAltaTorn = "$dataAltaTorn",
+												_08_datModTorn  = NOW(),
+												_09_datBaixaTorn = "$dataBaixaTorn"						 
+							WHERE 
+									_01_pk_idTorn    = "' . $idTorn . '" AND
+									_02_pk_idJocTorn = "' . $idJoc  . '";';					
+				else
+				$query    = 'INSERT INTO torneig 
+								VALUES (NULL,
+										"' . $idJoc . '",
+										"$nomTorn",
+										"$premiTorn",
+										"$dataIniciTorn",
+										"$dataFinTorn",NOW(),NULL,NULL);';
+				$response = dbExec($query,0);
+				$response = controlErrorQuery($response);
+				if ($response['status'] != "error")
+					{
+					$data['recid'] = ($id != 0) ? $id : mysql_insert_id();
+					$data['rows']  = mysql_affected_rows();						
+					$data[$kName] = $data['recid'];
+					}
+				else
+					$data['recid'] = $data['rows'] = "999999";
+				break;				
 			default:
 				$data = "";
 				break;
 			}
 		return ($data);
 	}
+
+	function getQueryForGetRecords($table)
+		{
+		$query = "SELECT * FROM $table";
+		switch($table)
+			{
+			case 'joc':
+				$query  .= ' WHERE _08_datBaixaJoc IS NULL';
+				break;
+			default:
+				break;
+			}			
+		return ($query);	
+		}
+
+	function getQueryForDelete($table,$id)
+		{
+		switch($table)
+			{
+			case 'joc':
+				$query    = 'UPDATE torneig SET _09_datBaixaTorn = NOW()
+							WHERE 
+								_02_pk_idJocTorn = "' . $id . '" AND
+								_09_datBaixaTorn IS NULL;';
+				$response = dbExec($query,0);
+				$query    = 'UPDATE maqinstall SET _08_datBaixaMaqInst = NOW()
+							WHERE 
+								_02_pk_idJocInst = "' . $id . '" AND
+								_08_datBaixaMaqInst IS NULL;';
+				$response = dbExec($query,0);
+				$query    = 'UPDATE joc SET _08_datBaixaJoc = NOW()
+							WHERE 
+								_01_pk_idJoc = "' . $id . '" AND
+								_08_datBaixaJoc IS NULL;';
+				$response = dbExec($query,0);				
+				// $response = controlErrorQuery($response);
+				$data['recid'] = ($id != 0) ? $id : mysql_insert_id();
+				$data['rows']  = mysql_affected_rows();
+				break;
+			default:
+				$query = "";
+				break;
+			}			
+		return ($query);	
+		}
 
  ?>

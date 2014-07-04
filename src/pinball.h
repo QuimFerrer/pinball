@@ -14,7 +14,7 @@ function controlErrorQuery($response)
     if ( $estat->error )
         $response = array("status" => "error", "message" => "Error " . $estat->numerr . "." . $estat->msg);
     else
-        $response = array('total' => count($response[1]), 'page' => 0, 'records' => $response[1]);
+        $response = array("status" => "" , 'total' => count($response[1]), 'page' => 0, 'records' => $response[1]);
     if ($_SESSION['endTime'] === "SI")
         $response = array("status" => "error", "message" => "La sessió ha expirat. Torna a fer Login a l'aplicació.");
     return ($response);
