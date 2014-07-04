@@ -43,15 +43,7 @@ var controller = function(e) {
 	switch(e.target) {
 
 		case '5020':
-	        var fields = [
-	            { name: 'Nom',          type: 'text', required: true },
-	            { name: 'Cognoms',      type: 'text', required: true },
-	            { name: 'eMail',        type: 'email', required: true },
-	            { name: 'Foto',         type: 'text', required: true },
-	            { name: 'Facebook',     type: 'text', required: true },
-	            { name: 'Twitter',      type: 'text', required: true },	            
-	        ];
-		    DataForm(fields);
+		    DataView('../html/perfil.php');
 		    break;
 		    
 		case '5041':

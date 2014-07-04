@@ -236,8 +236,10 @@ var dbForm = function() {
     };
 
     this.Activate = function() {
-        var height = this.fields.length*29; // Cada camp x 29 px
-        height+=134; // barra de botons
+        // Alçada del camp:29px
+        var height = this.fields.length*29; 
+        // Incrementa 134px barra de botons
+        height +=134; 
 
         $().w2popup('open', {
             title   : self.title,
@@ -247,8 +249,9 @@ var dbForm = function() {
             width   : 450,
             height  : height
         });
-        $('#form').w2render('dialog'); // Formes equivalents
+        // Forma equivalent
         // w2ui['dialog'].render($('#form')[0]); 
+        $('#form').w2render('dialog'); 
     };
 };
 
@@ -257,7 +260,6 @@ var dbForm = function() {
  *  Api per construir un grid
  **********************************************************************************************
  */
-
 function DataGrid(title, table, toolbar, columns, fieldsOrId, pid, pkName) {
     
     if (w2ui.grid)  w2ui['grid'].destroy();
@@ -308,12 +310,14 @@ function DataView(url) {
  *  Api per construir un formulari
  **********************************************************************************************
  */
-function DataForm(record, actions) {
+function DataForm(action, pId, record) {
     if (w2ui.grid)  w2ui['grid'].destroy();
 
     $('#grid').w2form({ 
         name  : 'grid',
-        url   : 'query.php',
+        header     : 'Form Header',
+        msgRefresh : 'Please Wait...',
+        url   : action,
         fields: record,
         actions: {
             reset: function () {
@@ -321,12 +325,27 @@ function DataForm(record, actions) {
             },
             save: function() {
                 var self = this;
-                this.save( {pid:1000}, function(e) {
+                this.save( {pid:pId}, function(e) {
                     console.log(e);
                     w2alert('Gràcies per la teva col.laboració', 'Missatge');
                     self.clear();
                 });
             }
         }
+    });
+    // w2ui['grid'].recid = "1";
+    w2ui['grid'].request( {pid:'5020'}, function(data){
+        // console.log(data);
+
+        w2ui['grid'].fields.forEach( 
+            function(value, index) {
+
+                if (data) {
+                    console.log( data.records[0][value.name]);
+                    w2ui['grid'].record[value.name] = data.records[0][value.name];
+                }
+            }
+        );
+        w2ui['grid'].record = { 'recid' : 0 };
     });
 }

@@ -1368,16 +1368,11 @@ isEndSessionInQuery();
 ///////////////////////////////////////////////////////////////////////////////////////
 
 			case CONSULTA_USR_5020 :
-				// $query    = 'SELECT id, nom, foto FROM productes WHERE id < 3';
-				// $response = dbExec($query)[1];
-
-				// $records = array();
-				// foreach($response as $row) {
-				// 	$records[] = (object) array('recid'=>(int)$row->id, 'nom'=>$row->nom, 'foto'=>$row->foto);
-				// }
-
-				// echo json_encode( $records );
+			// case GET_DADES_PERFIL_USR_5020 :
+				$response = array("nomUsr"=>"Quim");
+				echo json_encode($response);
 				break;
+				
 			case GET_DADES_PERFIL_USR_5021 :
 				$query    = 'SELECT _01_pk_idUsuari  AS idUsr,
 									_02_nomUsuari    AS nomUsr,

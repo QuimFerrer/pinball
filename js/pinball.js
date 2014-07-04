@@ -8,6 +8,11 @@
 	//     });
 	//     });
 
+// $(document).ready(function(){
+// 	var ph = $( window ).height();
+//      // $("#gid").css("height", ph+"px");
+//      console.log($("#gid"));
+// });
 
 
 function msgAction(title, message, action, params)
