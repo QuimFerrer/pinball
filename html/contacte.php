@@ -3,6 +3,7 @@
 ob_start();
 
 include ("../src/pinball.h");
+include ("../src/email.php");
 include ("../src/seguretat.php");
 include ("../src/seguretatLogin.php");
 
@@ -34,28 +35,30 @@ comprovaSessio();
 			<img src="../resources/img/idea.png" height="300" width="220" alt="" style="float:left;margin-right:40px;">
 
 			<div id="form" style="width: 60%;">
-				<div class="w2ui-page page-0">
-					<div class="w2ui-label">Nom:</div>
-					<div class="w2ui-field">
-						<input name="nom" type="text" maxlength="100" size="60"/>
+				<form name="formContacte" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+					<div class="w2ui-page page-0">
+						<div class="w2ui-label">Nom:</div>
+						<div class="w2ui-field">
+							<input name="nom" type="text" maxlength="100" size="60"/>
+						</div>
+						<div class="w2ui-label">Cognoms:</div>
+						<div class="w2ui-field">
+							<input name="cognoms" type="text" maxlength="100" size="60"/>
+						</div>
+						<div class="w2ui-label">eMail:</div>
+						<div class="w2ui-field">
+							<input name="email" type="text" maxlength="100" size="60"/>
+						</div>
+						<div class="w2ui-label">Comentari:</div>
+						<div class="w2ui-field">
+							<textarea name="comentari" type="text" style="width: 385px; height: 80px; resize: none"></textarea>
+						</div>
 					</div>
-					<div class="w2ui-label">Cognoms:</div>
-					<div class="w2ui-field">
-						<input name="cognoms" type="text" maxlength="100" size="60"/>
+					<div class="w2ui-buttons">
+						<input type="reset"  value="Esborrar" name="reset">
+						<input type="submit" value="Enviar"   name="save">
 					</div>
-					<div class="w2ui-label">eMail:</div>
-					<div class="w2ui-field">
-						<input name="email" type="text" maxlength="100" size="60"/>
-					</div>
-					<div class="w2ui-label">Comentari:</div>
-					<div class="w2ui-field">
-						<textarea name="comentari" type="text" style="width: 385px; height: 80px; resize: none"></textarea>
-					</div>
-				</div>
-				<div class="w2ui-buttons">
-					<input type="button" value="Esborrar" name="reset">
-					<input type="button" value="Enviar" name="save">
-				</div>
+				</form>
 			</div>
 			<div>
 				<br>
@@ -71,35 +74,48 @@ comprovaSessio();
 <script type="text/javascript" src="../js/lib/w2ui-1.3.2.min.js"></script>
 <script type="text/javascript" src="../js/lib/dbui.js"></script>
 <script>
-$(function () {
-	$('#form').w2form({ 
-		name  : 'form',
-		url   : 'query.php',
-		fields: [
-			{ name: 'nom', 			type: 'text', required: true },
-			{ name: 'cognoms',  	type: 'text', required: true },
-			{ name: 'email',  		type: 'email', required: true },
-			{ name: 'comentari',  	type: 'text', required: true}
-		],
-		actions: {
-			reset: function () {
-				this.clear();
-			},
-			save: function() {
-				var self = this;
-				this.save( {pid:1000}, function(e) {
-					console.log(e);
-					w2alert('Gràcies per la teva col.laboració', 'Missatge');
-					self.clear();
-				});
-			}
-		}
-	});
-});
+// $(function () {
+// 	$('#form').w2form({ 
+// 		name  : 'form',
+// 		url   : 'query.php',
+// 		fields: [
+// 			{ name: 'nom', 			type: 'text', required: true },
+// 			{ name: 'cognoms',  	type: 'text', required: true },
+// 			{ name: 'email',  		type: 'email', required: true },
+// 			{ name: 'comentari',  	type: 'text', required: true}
+// 		],
+// 		actions: {
+// 			reset: function () {
+// 				this.clear();
+// 			},
+// 			save: function() {
+// 				var self = this;
+// 				this.save( {pid:1000}, function(e) {
+// 					console.log(e);
+// 					w2alert('Gràcies per la teva col.laboració', 'Missatge');
+// 					self.clear();
+// 				});
+// 			}
+// 		}
+// 	});
+// });
 </script>
 </html>
 
 
 <?php
+
 if (isset($_POST['entrar'])) controlAcces($_POST["usr"],$_POST["pwd"]);
+
+if (isset($_POST['save']))
+	{
+	$dades = (object)array("nom"       => $_POST['nom'],
+						   "cognoms"   => $_POST['cognoms'],
+						   "email"     => $_POST['email'],
+						   "comentari" => nl2br($_POST['comentari']));
+	if ( enviaEmailContacto($dades) )
+		echo "<script>alert('Enviament corecte. Gràcies per la teva col.laboració');</script>";
+	else
+		echo "<script>alert('S'ha produit una incidència en l'enviament. Torna a intentar-ho. Gràcies.');</script>";
+	}
 ?>

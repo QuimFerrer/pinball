@@ -118,8 +118,8 @@ _01_pk_idUbic AS idUbic, _02_empUbic AS empUbic, _03_dirUbic AS dirUbic,
 _07_latUbic AS latitut, _08_longUbic AS longitut, _09_altUbic AS altitut,
 _10_contUbic AS contactUbic, _11_emailUbic AS emailContacte, _12_telUbic AS telefonContacte,
 _13_mobUbic AS mobilContacte,
-DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y")  AS datAltaUbic,
-DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y") AS datBaixaUbic
+DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y %H:%i:%s")  AS datAltaUbic,
+DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y %H:%i:%s") AS datBaixaUbic
 
 
 FROM ubicacio
@@ -138,8 +138,8 @@ _01_pk_idUbic AS idUbic, _02_empUbic AS empUbic, _03_dirUbic AS dirUbic,
 _06_provUbic AS provincia,_05_cpUbic AS cPostal,_04_pobUbic AS poblacio,
 _10_contUbic AS contactUbic, _11_emailUbic AS emailContacte, _12_telUbic AS telefonContacte,
 _13_mobUbic AS mobilContacte,
-DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y")  AS datAltaUbic,
-DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y") AS datBaixaUbic
+DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y %H:%i:%s")  AS datAltaUbic,
+DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y %H:%i:%s") AS datBaixaUbic
 
 FROM ubicacio
 
@@ -155,8 +155,8 @@ SELECT _01_pk_idUbic AS idUbic, _02_empUbic AS empUbic, _03_dirUbic AS dirUbic,
 _06_provUbic AS provincia,_05_cpUbic AS cPostal,_04_pobUbic AS poblacio,
 _10_contUbic AS contactUbic, _11_emailUbic AS emailContacte, _12_telUbic AS telefonContacte,
 _13_mobUbic AS mobilContacte,
-DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y")  AS datAltaUbic,
-DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y") AS datBaixaUbic
+DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y %H:%i:%s")  AS datAltaUbic,
+DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y %H:%i:%s") AS datBaixaUbic
 
 FROM ubicacio
 
@@ -171,8 +171,8 @@ SELECT _06_provUbic AS provincia,_04_pobUbic AS poblacio,_05_cpUbic AS cPostal,
 _01_pk_idUbic AS idUbic,_02_empUbic AS empUbic, _03_dirUbic AS dirUbic,
 _10_contUbic AS contactUbic, _11_emailUbic AS emailContacte, _12_telUbic AS telefonContacte,
 _13_mobUbic AS mobilContacte,
-DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y")  AS datAltaUbic,
-DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y") AS datBaixaUbic
+DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y %H:%i:%s")  AS datAltaUbic,
+DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y %H:%i:%s") AS datBaixaUbic
 
 FROM ubicacio
 
@@ -194,20 +194,43 @@ VALUES (NULL,"3","51",NOW(),NULL,NULL);
 select * from ubicacioTeMaquina;
 */
 
+
 /************************************************************************************/
-/*  3.f.ii.2 - 3890 - Baixa de l'associació d'una màquina a una ubicació   */
+/*  3.f.ii.1 - 3890 - Llistat de màquines per ubicació   */
 /************************************************************************************/
 
-UPDATE ubicacioTeMaquina SET _05_datBaixaUTM = NOW()
+SELECT _00_pk_idUTM_auto   AS recid,_06_provUbic AS provincia, _04_pobUbic AS poblacio, _05_cpUbic AS cPostal,
+_01_pk_idUbicUTM AS idUbic, _02_empUbic AS empUbic, 
+_02_pk_idMaqUTM AS idMaq,_02_macMaq AS macMaq, _03_propMaq AS propMaq,
+SUM(_05_totCredMaq) AS totalCredits,
+DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
+DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
+DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
+DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
+DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+
+FROM ubicacio
+INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
+INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
+
+GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
+ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;
+
+
+/************************************************************************************/
+/*  3.f.ii.2 - 3900 - Bloquejar associació d'una màquina a una ubicació   */
+/************************************************************************************/
+
+UPDATE ubicacioTeMaquina SET _04_datModUTM   = NOW(),
+									  _05_datBaixaUTM = NOW()
+									  
 
 WHERE 
 
 /* canviar les variables */
 
-	_01_pk_idUbicUTM = "$idUbic" AND
-	_02_pk_idMaqUTM  = "$idMaq" AND
+	_00_pk_idUTM_auto = "$idUTM" AND
 	_05_datBaixaUTM  IS NULL;
-	
 	
 
 /*
@@ -231,21 +254,18 @@ select * from ubicacioTeMaquina;
 */
 
 /************************************************************************************/
-/*  3.f.ii.3 - 3900 -Modificació de les dades de l'associació d'una màquina a una ubicació   */
+/*  3.f.ii.3 - 3905 - Desbloquejar associació d'una màquina a una ubicació   */
 /************************************************************************************/
 
 /* canviar les variables */
 
-UPDATE ubicacioTeMaquina SET 
-										_03_datAltaUTM  = "$dataAltaUTM",
-										_04_datModUTM   = NOW(),
-										_05_datBaixaUTM = "$dataBaixaUTM"
+UPDATE ubicacioTeMaquina SET  _04_datModUTM   = NOW(),
+										_05_datBaixaUTM = NULL
 
 WHERE 
 
-	_01_pk_idUbicUTM = "$idUbic" AND
-	_02_pk_idMaqUTM  = "$idMaq";
-	
+	_00_pk_idUTM_auto = "$idUTM" AND
+	_05_datBaixaUTM  IS NOT NULL;	
  
 /*
 select * from ubicacioTeMaquina;

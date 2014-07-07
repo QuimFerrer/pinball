@@ -20,9 +20,16 @@ isEndSessionInQuery();
 
 	const PARTIDES_X_MAQUINA_3110              = 3110; //
 	const PARTIDES_X_JUGADOR_3120              = 3120; //
+	const BLOQUEJAR_PARTIDA_3130               = 3130;
+	const DESBLOQUEJAR_PARTIDA_3140            = 3140;
+	const ALTA_RONDA_DE_PARTIDA_3145 	 	   = 3145;
+	const MODIFICACIO_RONDA_DE_PARTIDA_3150    = 3150;
+	const BLOQUEJAR_RONDA_DE_PARTIDA_3155	   = 3155;
+	const DESBLOQUEJAR_RONDA_DE_PARTIDA_3157   = 3157;
 
-	const BLOQUEJAR_PARTIDES_3130              = 3130;
-	const DESBLOQUEJAR_PARTIDES_3140           = 3140; 
+
+	const LLIS_PARTIDES_I_RONDES_3160          = 3160; //
+	const LLIS_PARTIDES_I_RONDES_HISTORIC_3170 = 3170; //	
 
 	const ALTA_JOC_3210						   = 3210;
 	const BAIXA_JOC_3220					   = 3220;
@@ -37,16 +44,21 @@ isEndSessionInQuery();
 	const BAIXA_TORNEIG_3320 				   = 3320;
 	const MODIFICACIO_TORNEIG_3330 			   = 3330;	
 	const RELACIO_TORNEIGS_3340 	           = 3340; //
+	const RELACIO_TORNEIGS_I_MAQS_HISTORIC_3342= 3342;	
 	const TORNEIGS_AMB_JUGADORS_ACTUAL_3350    = 3350; //
 	const TORNEIGS_AMB_JUGADORS_HISTORIC_3360  = 3360; //
+	const TORNEIGS_I_MAQS_AMB_PARTIDES_3375    = 3375;		
+
 	const TORNEIGS_AMB_MAQUINES_ACTUAL_3380    = 3380; //
 	const TORNEIGS_AMB_MAQUINES_HISTORIC_3390  = 3390; //
 
 	const ALTA_MAQUINA_3410					   = 3410;
-	const BAIXA_MAQUINA_3420 				   = 3420;
-	const MODIFICACIO_MAQUINA_3425 			   = 3425;	
+	const BAIXA_MAQUINA_3415 				   = 3415;
+	const MODIFICACIO_MAQUINA_3417 			   = 3417;	
+	const LLISTAT_MAQUINES_3420 		       = 3420;	
+	const LLISTAT_MAQUINES_HISTORIC_3425 	   = 3425;	
 	const ACTUALITZA_RACAUDACIO_MAQ_3430       = 3430;		
-	const LLISTAT_MAQUINES_3440 	           = 3440; //
+	const LLISTAT_MAQUINES_AMB_JOCS_3440       = 3440; //
 	const LLISTAT_MAQUINES_HISTORIC_3450 	   = 3450; //
 	const LLISTAT_MAQS_X_TORNEIG_I_JUG_3455    = 3455;		
 	const LLISTAT_MAQS_X_TORNEIG_3456    	   = 3456;
@@ -54,7 +66,9 @@ isEndSessionInQuery();
 	const ALTA_ASSIGNACIO_JOC_MAQUINA_3460	   = 3460;
 	const BAIXA_ASSIGNACIO_JOC_MAQUINA_3470    = 3470;
 	const MODIF_ASSIGNACIO_JOC_MAQUINA_3480    = 3480;	
-	const LLISTAT_ASSIGNACIO_JOC_MAQUINA_3490  = 3490; //
+	const LLISTAT_ASSIG_JOC_MAQ_3485		   = 3485;
+
+	const LLISTAT_ASSIG_JOC_MAQ_HISTORIC_3490  = 3490; //
 
 	const RECAUDACIO_X_MAQ_AMB_RANKING_3510    = 3510; //
 	const RECAUDACIO_X_JOC_AMB_RANKING_3520    = 3520; //
@@ -71,16 +85,18 @@ isEndSessionInQuery();
 
 	const ALTA_UBICACIO_3810				   = 3810;
 	const BAIXA_UBICACIO_3820 				   = 3820;
-	const MODIFICACIO_UBICACIO_3830 		   = 3830;	
-	const LLISTAT_UBICS_X_PROV_POB_3840        = 3840; //
-	const LLISTAT_UBICS_X_COORDENADES_3850     = 3850; //
-	const LLISTAT_UBICS_X_EMPRESA_3860         = 3860; //	
+	const MODIFICACIO_UBICACIO_3830 		   = 3830;
+	const LLISTAT_UBICS_X_EMPRESA_3835 		   = 3835;	
+	const LLISTAT_UBICS_X_EMPRESA_HISTORIC_3840= 3840; //
+	const LLISTAT_UBICS_X_PROV_POB_3850        = 3850; //
+	const LLISTAT_UBICS_X_COORDENADES_3860     = 3860; //
 	const LLISTAT_UBICS_X_EMPRESA_PROV_POB_3870= 3870; //		
 
 	const ALTA_MAQ_X_UBICACIO_3880			   = 3880;
-	const BAIXA_MAQ_X_UBICACIO_3890	 	       = 3890;	
-	const MODIFICACIO_MAQ_X_UBICACIO_3900	   = 3900;
-	const CANVI_MAQ_D_UBICACIO_3910 		   = 3910;
+	const LLISTAT_MAQS_X_UBIC_3890 		       = 3890; //
+	const BLOQUEJAR_MAQ_X_UBICACIO_3900	       = 3900;
+	const DESBLOQUEJAR_MAQ_X_UBICACIO_3905	   = 3905;
+	const CANVI_MAQ_D_UBICACIO_3910 		   = 3910; // no es fa servir
 	const LLISTAT_MAQS_X_UBIC_PROV_POB_3930    = 3930; //
 	const LLISTAT_MAQS_X_UBIC_COORDENADES_3940 = 3940; //
 	const LLISTAT_MAQS_X_EMPRESA_3950          = 3950; //	
@@ -98,7 +114,8 @@ isEndSessionInQuery();
 	const MODIF_PERFIL_USR_5022           	   = 5022;
 	const BAIXA_PERFIL_USR_5023           	   = 5023;
 	const CONSULTA_USR_TORNEIGS_5041           = 5041; //
-	const BAIXA_USR_TORN_5043                  = 5043; //
+	const BLOQUEJA_USR_TORN_5043               = 5043; //
+	const DESBLOQUEJA_USR_TORN_5044            = 5044; //	
 	const CONSULTA_USR_RANKING_ACTUAL_5050     = 5050; //
 	const CONSULTA_USR_RANKING_HISTORIC_5051   = 5051; //
 	const CONSULTA_USR_TOTS_TORNEIGS_5061      = 5061; //
@@ -118,17 +135,20 @@ isEndSessionInQuery();
 
 
 	
-	$pid      = isset($_REQUEST['pid'])        ? (int) $_REQUEST['pid'] : 0;
+	$pid      = isset($_REQUEST['pid'])        ? (int) $_REQUEST['pid']  : 0;
 	$usrLogin = isset($_REQUEST['idUserPart']) ? $_REQUEST['idUserPart'] : $_SESSION["login"];	
-	$idTorn   = isset($_REQUEST['idTorn'])     ? $_REQUEST['idTorn'] : "";
-	$idPart   = isset($_REQUEST['idPart'])     ? $_REQUEST['idPart'] : "";
-	$idMaq    = isset($_REQUEST['idMaq'])      ? $_REQUEST['idMaq'] : "";
-	$idJoc    = isset($_REQUEST['idJoc'])      ? $_REQUEST['idJoc'] : "";	
-	$idUsr    = isset($_REQUEST['idUsr'])      ? $_REQUEST['idUsr'] : "";		
-	$idUbic   = isset($_REQUEST['idUbic'])     ? $_REQUEST['idUbic'] : "";
-	$idUbicNOU= isset($_REQUEST['idUbicNOU'])  ? $_REQUEST['idUbicNOU'] : "";
+	$idTorn   = isset($_REQUEST['idTorn'])     ? $_REQUEST['idTorn']     : "";
+	$idPart   = isset($_REQUEST['idPart'])     ? $_REQUEST['idPart']     : "";
+	$idMaq    = isset($_REQUEST['idMaq'])      ? $_REQUEST['idMaq']      : "";
+	$idMaqInst= isset($_REQUEST['idMaqInst'])  ? $_REQUEST['idMaqInst']  : "";	
+	$idJoc    = isset($_REQUEST['idJoc'])      ? $_REQUEST['idJoc']      : "";	
+	$idUsr    = isset($_REQUEST['idUsr'])      ? $_REQUEST['idUsr']      : "";		
+	$idUbic   = isset($_REQUEST['idUbic'])     ? $_REQUEST['idUbic']     : "";
+	$idUTM    = isset($_REQUEST['idUTM'])      ? $_REQUEST['idUTM']      : "";	
+	$idRonda  = isset($_REQUEST['idRonda'])    ? $_REQUEST['idRonda']    : "";		
+	$idUbicNOU= isset($_REQUEST['idUbicNOU'])  ? $_REQUEST['idUbicNOU']  : "";
 
-	$opcio 	  = isset($_REQUEST['novaopcio'])  ? $_REQUEST['novaopcio'] : "";
+	$opcio 	  = isset($_REQUEST['novaopcio'])  ? $_REQUEST['novaopcio']  : "";
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -226,9 +246,10 @@ isEndSessionInQuery();
 									 _02_nomJoc         AS nomJoc,
 									 DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
 									 _00_pk_idPart_auto AS idPart, 
-									 DATE_FORMAT(_05_datIniTorn, "%d-%m-%Y") AS datIniTorn,
-									 DATE_FORMAT(_06_datFinTorn, "%d-%m-%Y") AS datFinTorn, 
-									 DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y %H:%i:%s") AS datBaixaPart
+									 DATE_FORMAT(_05_datIniTorn,   "%d-%m-%Y") AS datIniTorn,
+									 DATE_FORMAT(_06_datFinTorn,   "%d-%m-%Y") AS datFinTorn, 
+									 DATE_FORMAT(_05_datModPart,   "%d-%m-%Y %H:%i:%s") AS datModPart,
+									 DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y %H:%i:%s") AS datBaixaPart									 									 
 							FROM
 							partida
 								LEFT JOIN torneigTePartida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
@@ -257,8 +278,9 @@ isEndSessionInQuery();
 									_01_pk_idMaqPart   AS idMaq,
 									 DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
 									 _00_pk_idPart_auto AS idPart, 
-									 DATE_FORMAT(_05_datIniTorn, "%d-%m-%Y") AS datIniTorn,
-									 DATE_FORMAT(_06_datFinTorn, "%d-%m-%Y") AS datFinTorn, 
+									 DATE_FORMAT(_05_datIniTorn,   "%d-%m-%Y") AS datIniTorn,
+									 DATE_FORMAT(_06_datFinTorn,   "%d-%m-%Y") AS datFinTorn, 
+									 DATE_FORMAT(_05_datModPart,   "%d-%m-%Y %H:%i:%s") AS datModPart,
 									 DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y %H:%i:%s") AS datBaixaPart
 							FROM
 							partida
@@ -276,22 +298,197 @@ isEndSessionInQuery();
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));
 				break;
-			case BLOQUEJAR_PARTIDES_3130 :
-				$query    = 'UPDATE partida SET _06_datBaixaPart  = NOW()
-							 WHERE 
+			case BLOQUEJAR_PARTIDA_3130 :
+				$query    = sprintf("UPDATE partida SET _05_datModPart   = NOW(),
+														_06_datBaixaPart = NOW()
+							 		WHERE 	_06_datBaixaPart IS NULL AND
+								   _		00_pk_idPart_auto = '%d';",$idPart);
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));
+				break;
+			case DESBLOQUEJAR_PARTIDA_3140 : 
+				$query    = sprintf("UPDATE partida SET _05_datModPart   = NOW(),
+														_06_datBaixaPart  = NULL
+		 							 WHERE _06_datBaixaPart IS NOT NULL AND
+										   _00_pk_idPart_auto = '%d';",$idPart);
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));
+				break;
+			case ALTA_RONDA_DE_PARTIDA_3145 :
+				$query    = 'INSERT INTO ronda
+								VALUES (NULL,
+										"$idRonda",
+										"$fotoJug",0,NOW(),NULL,NULL);';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
+				break;				
+			case MODIFICACIO_RONDA_DE_PARTIDA_3150 :
+				$query    = 'UPDATE ronda SET _06_fotoJugRonda = "$fotoJug",
+		   		  							  _07_puntsRonda   = "$puntsRonda",
+					  						  _08_datModRonda  = NOW()
+							WHERE
+									_09_datBaixaRonda IS NULL AND
+									_00_pk_idRonda_auto = "$idRonda";';
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
+				break;
+
+			case BLOQUEJAR_RONDA_DE_PARTIDA_3155 :
+				$query    = sprintf("UPDATE ronda1 SET _08_datModRonda   = NOW(),
+													   _09_datBaixaRonda = NOW()
+							 		WHERE _09_datBaixaRonda IS NULL AND
+								   		  _00_pk_idRonda_auto = '%d';",$idRonda);
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));
+				break;
+			case DESBLOQUEJAR_RONDA_DE_PARTIDA_3157 : 
+				$query    = sprintf("UPDATE ronda1 SET  _08_datModRonda   = NOW(),
+														_09_datBaixaRonda = NULL
+		 							 WHERE _09_datBaixaRonda IS NOT NULL AND
+										   _00_pk_idRonda_auto = '%d';",$idRonda);
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));
+				break;				
+			case LLIS_PARTIDES_I_RONDES_3160 :
+				$query    = 'SELECT _01_pk_idTorn      AS idTorn,
+									_03_nomTorn        AS nomTorn,
+									_04_premiTorn      AS premiTorn,
+									_02_pk_idJocTorn   AS idJoc,
+									JJ.nomJoc          AS nomJoc,
+									_02_pk_idMaqTTP    AS idMaq,
+									BB.idUsuari        AS idUser,
+									BB.loginUsuari     AS loginUser,									
+									BB.nomUsuari       AS nomUser,
+									_00_pk_idPArt_auto AS idPart,
+									DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
+									_05_pk_idRonda     AS idRonda,
+									_06_fotoJugRonda,
+									_07_puntsRonda,
+									DATE_FORMAT(_08_datModRonda, "%d-%m-%Y %H:%i:%s") AS datModRonda
+							FROM
+							torneig
+								LEFT JOIN torneigTePartida ON (_01_pk_idTorn    = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
+								INNER JOIN partida         ON (_02_pk_idMaqTTP  = _01_pk_idMaqPart AND
+															   _03_pk_idJocTTP  = _02_pk_idJocPart AND
+															   _04_pk_idJugTTP  = _03_pk_idJugPart )
+								INNER JOIN ronda1           ON (_00_pk_idPart_auto = _01_pk_idPartRonda),
+							(SELECT _01_pk_idUsuari AS idUsuari, _02_nomUsuari AS nomUsuari, _04_loginUsuari AS loginUsuari FROM usuari) AS BB,
+							(SELECT _01_pk_idJoc, _02_nomJoc AS nomJoc FROM joc) AS JJ
+							WHERE
+								BB.idUsuari     = _03_pk_idJugPart AND
+								JJ._01_pk_idJoc = _02_pk_idJocPart AND
+								_09_datBaixaTorn IS NULL AND
 								_06_datBaixaPart IS NULL AND
-								_00_pk_idPart_auto = "' . $idPart . '";';			
-				$response = dbExec($query,0);
-				echo json_encode(controlErrorQuery($response));
+								_09_datBaixaRonda IS NULL
+							GROUP BY idTorn, idUsuari, idMaq, datHoraPartida, idPart, idRonda
+							ORDER BY idTorn, idUsuari, idMaq, datHoraPartida, idPart, idRonda;';
+// query amb taula RONDA
+				// $query    = 'SELECT _01_pk_idTorn      AS idTorn,
+				// 					_03_nomTorn        AS nomTorn,
+				// 					_04_premiTorn      AS premiTorn,
+				// 					_02_pk_idJocTorn   AS idJoc,
+				// 					JJ.nomJoc          AS nomJoc,
+				// 					_02_pk_idMaqTTP    AS idMaq,
+				// 					BB.idUsuari        AS idUser,
+				// 					BB.loginUsuari     AS loginUser,									
+				// 					BB.nomUsuari       AS nomUser,
+				// 					_00_pk_idPArt_auto AS idPart,
+				// 					DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
+				// 					_05_pk_idRonda     AS idRonda,
+				// 					_06_fotoJugRonda,
+				// 					_07_puntsRonda,
+				// 					DATE_FORMAT(_05_datModPart, "%d-%m-%Y %H:%i:%s") AS datModPart
+				// 			FROM
+				// 			torneig
+				// 				LEFT JOIN torneigTePartida ON (_01_pk_idTorn    = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
+				// 				INNER JOIN partida         ON (_02_pk_idMaqTTP  = _01_pk_idMaqPart AND
+				// 											   _03_pk_idJocTTP  = _02_pk_idJocPart AND
+				// 											   _04_pk_idJugTTP  = _03_pk_idJugPart )
+				// 				INNER JOIN ronda           ON (_01_pk_idMaqPart = _01_pk_idMaqRonda AND
+				// 											   _02_pk_idJocPart = _02_pk_idJocRonda AND
+				// 											   _03_pk_idJugPart = _03_pk_idJugRonda AND
+				// 											   _04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda ),
+				// 			(SELECT _01_pk_idUsuari AS idUsuari, _02_nomUsuari AS nomUsuari, _04_loginUsuari AS loginUsuari FROM usuari) AS BB,
+				// 			(SELECT _01_pk_idJoc, _02_nomJoc AS nomJoc FROM joc) AS JJ
+				// 			WHERE
+				// 				BB.idUsuari     = _03_pk_idJugPart AND
+				// 				JJ._01_pk_idJoc = _02_pk_idJocPart AND
+				// 				_09_datBaixaTorn IS NULL AND
+				// 				_06_datBaixaPart IS NULL																
+				// 			GROUP BY idTorn, idUsuari, idMaq, datHoraPartida, idPart, idRonda
+				// 			ORDER BY idTorn, idUsuari, idMaq, datHoraPartida, idPart, idRonda;';							
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));			
 				break;
-			case DESBLOQUEJAR_PARTIDES_3140 : 
-				$query    = 'UPDATE partida SET _06_datBaixaPart  = NULL
- 							 WHERE 
-									_06_datBaixaPart IS NOT NULL AND
-									_00_pk_idPart_auto = "' . $idPart . '";';			
-				$response = dbExec($query,0);
-				echo json_encode(controlErrorQuery($response));
+			case LLIS_PARTIDES_I_RONDES_HISTORIC_3170 :
+				$query    = 'SELECT _01_pk_idTorn      AS idTorn,
+									_03_nomTorn        AS nomTorn,
+									_04_premiTorn      AS premiTorn,
+									_02_pk_idJocTorn   AS idJoc,
+									JJ.nomJoc          AS nomJoc,
+									_02_pk_idMaqTTP    AS idMaq,
+									BB.idUsuari        AS idUser,
+									BB.loginUsuari     AS loginUser,									
+									BB.nomUsuari       AS nomUser,
+									_00_pk_idPArt_auto AS idPart,
+									DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
+									_05_pk_idRonda     AS idRonda,
+									_06_fotoJugRonda   AS fotoJugRonda,																		
+									_07_puntsRonda     AS puntsRonda,
+									DATE_FORMAT(_08_datModRonda,   "%d-%m-%Y %H:%i:%s") AS datModRonda,
+									DATE_FORMAT(_09_datBaixaRonda, "%d-%m-%Y %H:%i:%s") AS datBaixaRonda
+							FROM
+							torneig
+								LEFT JOIN torneigTePartida ON (_01_pk_idTorn    = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
+								INNER JOIN partida         ON (_02_pk_idMaqTTP  = _01_pk_idMaqPart AND
+															   _03_pk_idJocTTP  = _02_pk_idJocPart AND
+															   _04_pk_idJugTTP  = _03_pk_idJugPart )
+								INNER JOIN ronda1           ON (_00_pk_idPart_auto = _01_pk_idPartRonda),
+							(SELECT _01_pk_idUsuari AS idUsuari, _02_nomUsuari AS nomUsuari, _04_loginUsuari AS loginUsuari FROM usuari) AS BB,
+							(SELECT _01_pk_idJoc, _02_nomJoc AS nomJoc FROM joc) AS JJ
+							WHERE
+								BB.idUsuari     = _03_pk_idJugPart AND
+								JJ._01_pk_idJoc = _02_pk_idJocPart
+							GROUP BY idTorn, idUsuari, idMaq, datHoraPartida, idPart, idRonda
+							ORDER BY idTorn, idUsuari, idMaq, datHoraPartida, idPart, idRonda;';
+// query amb taula RONDA						
+				// $query    = 'SELECT _01_pk_idTorn      AS idTorn,
+				// 					_03_nomTorn        AS nomTorn,
+				// 					_04_premiTorn      AS premiTorn,
+				// 					_02_pk_idJocTorn   AS idJoc,
+				// 					JJ.nomJoc          AS nomJoc,
+				// 					_02_pk_idMaqTTP    AS idMaq,
+				// 					BB.idUsuari        AS idUser,
+				// 					BB.loginUsuari     AS loginUser,									
+				// 					BB.nomUsuari       AS nomUser,
+				// 					_00_pk_idPArt_auto AS idPart,
+				// 					DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
+				// 					_05_pk_idRonda     AS idRonda,
+				// 					_06_fotoJugRonda   AS fotoJugRonda,																		
+				// 					_07_puntsRonda     AS puntsRonda,
+				// 					DATE_FORMAT(_05_datModPart, "%d-%m-%Y %H:%i:%s") AS datModPart,
+				// 					DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y %H:%i:%s") AS datBaixaPart
+				// 			FROM
+				// 			torneig
+				// 				LEFT JOIN torneigTePartida ON (_01_pk_idTorn    = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
+				// 				INNER JOIN partida         ON (_02_pk_idMaqTTP  = _01_pk_idMaqPart AND
+				// 											   _03_pk_idJocTTP  = _02_pk_idJocPart AND
+				// 											   _04_pk_idJugTTP  = _03_pk_idJugPart )
+				// 				INNER JOIN ronda           ON (_01_pk_idMaqPart = _01_pk_idMaqRonda AND
+				// 											   _02_pk_idJocPart = _02_pk_idJocRonda AND
+				// 											   _03_pk_idJugPart = _03_pk_idJugRonda AND
+				// 											   _04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda ),
+				// 			(SELECT _01_pk_idUsuari AS idUsuari, _02_nomUsuari AS nomUsuari, _04_loginUsuari AS loginUsuari FROM usuari) AS BB,
+				// 			(SELECT _01_pk_idJoc, _02_nomJoc AS nomJoc FROM joc) AS JJ
+				// 			WHERE
+				// 				BB.idUsuari     = _03_pk_idJugPart AND
+				// 				JJ._01_pk_idJoc = _02_pk_idJocPart
+				// 			GROUP BY idTorn, idUsuari, idMaq, datHoraPartida, idPart, idRonda
+				// 			ORDER BY idTorn, idUsuari, idMaq, datHoraPartida, idPart, idRonda;';							
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));			
 				break;
+
 			case ALTA_JOC_3210 :
 				$query    = 'INSERT INTO joc 
 								VALUES (NULL,
@@ -302,20 +499,20 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));
 				break;
 			case BAIXA_JOC_3220 :
-				$query    = 'UPDATE joc SET _08_datBaixaJoc = NOW()
-							WHERE 
-								_01_pk_idJoc = "' . $idJoc . '" AND
-								_08_datBaixaJoc IS NULL;';
+				$query    = sprintf("UPDATE joc SET _07_datModJoc   = NOW(),
+													_08_datBaixaJoc = NOW()
+									 WHERE _01_pk_idJoc = '%d' AND
+										   _08_datBaixaJoc IS NULL;",$idJoc);
 				$response = dbExec($query,0);
-				$query    = 'UPDATE torneig SET _09_datBaixaTorn = NOW()
-							WHERE 
-								_02_pk_idJocTorn = "' . $idJoc . '" AND
-								_09_datBaixaTorn IS NULL;';
+				$query    = sprintf("UPDATE torneig SET _08_daModTorn    = NOW(),
+														_09_datBaixaTorn = NOW()
+									 WHERE _02_pk_idJocTorn = '%d' AND
+										   _09_datBaixaTorn IS NULL;",$idJoc);
 				$response = dbExec($query,0);
-				$query    = 'UPDATE maqinstall SET _08_datBaixaMaqInst = NOW()
-							WHERE 
-								_02_pk_idJocInst = "' . $idJoc . '" AND
-								_08_datBaixaMaqInst IS NULL;';
+				$query    = sprintf("UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
+												  		   _08_datBaixaMaqInst = NOW()
+								 	WHERE _02_pk_idJocInst = '%d' AND
+										  _08_datBaixaMaqInst IS NULL;",$idJoc);
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;				
@@ -334,8 +531,8 @@ isEndSessionInQuery();
 				$query    = 'SELECT _01_pk_idjoc AS idJoc, 
 									_02_nomJoc AS nomJoc, 
 									_05_numPartidesJugadesJoc AS numPartides,
-									DATE_FORMAT(_06_datAltaJoc,  "%d-%m-%Y %H:%i:%s") AS datAltaJoc,
-									DATE_FORMAT(_07_datModJoc, "%d-%m-%Y %H:%i:%s")   AS datModJoc
+									DATE_FORMAT(_06_datAltaJoc,"%d-%m-%Y %H:%i:%s") AS datAltaJoc,
+									DATE_FORMAT(_07_datModJoc, "%d-%m-%Y %H:%i:%s") AS datModJoc
 							FROM joc
 							WHERE _08_datBaixaJoc IS NULL;';
 				$response = dbExec($query);
@@ -346,9 +543,9 @@ isEndSessionInQuery();
 									_02_nomJoc AS nomJoc, 
 									_04_imgJoc AS imgJoc, 
 									_05_numPartidesJugadesJoc AS numPartides,
-									DATE_FORMAT(_06_datAltaJoc,  "%d-%m-%Y %H:%i:%s") AS datAltaJoc,
-									DATE_FORMAT(_07_datModJoc, "%d-%m-%Y %H:%i:%s")   AS datModJoc,
-									DATE_FORMAT(_08_datBaixaJoc, "%d-%m-%Y %H:%i:%s") AS datBaixaJoc
+									DATE_FORMAT(_06_datAltaJoc, "%d-%m-%Y %H:%i:%s") AS datAltaJoc,
+									DATE_FORMAT(_07_datModJoc,  "%d-%m-%Y %H:%i:%s") AS datModJoc,
+									DATE_FORMAT(_08_datBaixaJoc,"%d-%m-%Y %H:%i:%s") AS datBaixaJoc
 							FROM joc;';
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
@@ -359,7 +556,9 @@ isEndSessionInQuery();
 									_01_pk_idMaq AS idMaq,
 									_02_macMaq   AS macMaq,
 									_03_numPartidesJugadesMaqInst AS numPartides,
-									_05_totCredJocMaqInst AS totalCredit
+									_05_totCredJocMaqInst AS totalCredit,
+									DATE_FORMAT(_06_datAltaJoc,"%d-%m-%Y %H:%i:%s") AS datAltaJoc,
+									DATE_FORMAT(_07_datModJoc, "%d-%m-%Y %H:%i:%s") AS datModJoc
 							FROM joc
 								LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
 								INNER JOIN maquina   ON _01_pk_idMaqInst = _01_pk_idMaq
@@ -379,9 +578,9 @@ isEndSessionInQuery();
 									_02_macMaq   AS macMaq,
 									_03_numPartidesJugadesMaqInst AS numPartides,
 									_05_totCredJocMaqInst AS totalCredits,
-									DATE_FORMAT(_06_datAltaJoc,  "%d-%m-%Y %H:%i:%s") AS datAltaJoc,
-									DATE_FORMAT(_07_datModJoc, "%d-%m-%Y %H:%i:%s")   AS datModJoc,
-									DATE_FORMAT(_08_datBaixaJoc, "%d-%m-%Y %H:%i:%s") AS datBaixaJoc									
+									DATE_FORMAT(_06_datAltaJoc, "%d-%m-%Y %H:%i:%s") AS datAltaJoc,
+									DATE_FORMAT(_07_datModJoc,  "%d-%m-%Y %H:%i:%s") AS datModJoc,
+									DATE_FORMAT(_08_datBaixaJoc,"%d-%m-%Y %H:%i:%s") AS datBaixaJoc									
 							FROM joc
 								LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
 								INNER JOIN maquina   ON _01_pk_idMaqInst = _01_pk_idMaq
@@ -412,11 +611,10 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));				
 				break;
 			case BAIXA_TORNEIG_3320 :
-				$query    = 'UPDATE torneig SET _09_datBaixaTorn = NOW()
-								WHERE 
-									_01_pk_idTorn    = "' . $idTorn . '" AND
-									_02_pk_idJocTorn = "' . $idJoc  . '" AND
-									_09_datBaixaTorn IS NULL;';
+				$query    = sprintf("UPDATE torneig SET _08_datModTorn   = NOW(),
+													    _09_datBaixaTorn = NOW()
+									 WHERE _01_pk_idTorn    = '%d' AND
+										   _09_datBaixaTorn IS NULL;",$idTorn);
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;
@@ -434,7 +632,93 @@ isEndSessionInQuery();
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;
-			case RELACIO_TORNEIGS_3340 :		
+			case RELACIO_TORNEIGS_3340 :
+				$query    = 'SELECT _01_pk_idTorn AS idTorn,
+									_03_nomTorn   AS nomTorn,
+									_04_premiTorn AS premiTorn,
+									_01_pk_idJoc  AS idJoc,
+									_02_nomJoc    AS nomJoc,
+									DATE_FORMAT(_05_datIniTorn, "%d-%m-%Y") AS datIniTorn,
+									DATE_FORMAT(_06_datFinTorn, "%d-%m-%Y") AS datFinTorn
+									DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+									DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn									
+							FROM torneig
+								LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+							WHERE _09_datBaixaTorn IS NULL
+							GROUP BY idTorn, idJoc;';
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));				
+				break;
+			case RELACIO_TORNEIGS_I_MAQS_HISTORIC_3342 :
+				$query    = 'SELECT _01_pk_idTorn AS idTorn,
+									_03_nomTorn   AS nomTorn,
+									_04_premiTorn AS premiTorn,
+									_01_pk_idJoc  AS idJoc,
+									-- _02_nomJoc    AS nomJoc,
+									DATE_FORMAT(_05_datIniTorn, "%d-%m-%Y") AS datIniTorn,
+									DATE_FORMAT(_06_datFinTorn, "%d-%m-%Y") AS datFinTorn,
+									DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+									DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn,
+									DATE_FORMAT(_09_datBaixaTorn,"%d-%m-%Y %H:%i:%s") AS datBaixaTorn
+							FROM torneig
+								LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+							GROUP BY idTorn, idJoc;';
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));				
+				break;								
+			case TORNEIGS_AMB_JUGADORS_ACTUAL_3350 :
+				$query    = 'SELECT _01_pk_idTorn    AS idTorn,
+									_03_nomTorn      AS nomTorn,
+									_04_premiTorn    AS premiTorn,
+									_02_pk_idJocTorn AS idJoc,
+									BB.nomJoc        AS nomJoc,
+									_01_pk_idJug     AS idUser,
+									_04_loginUsuari  AS loginUser,
+									_02_nomUsuari    AS nomUser,
+									DATE_FORMAT(_05_datIniTorn,  "%d-%m-%Y") AS datIniTorn,
+									DATE_FORMAT(_06_datFinTorn,  "%d-%m-%Y") AS datFinTorn,
+									DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+									DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn
+							FROM
+							torneig
+								LEFT JOIN inscrit  ON (_01_pk_idTorn = _01_pk_idTornInsc  AND _02_pk_idJocTorn = _02_pk_idJocInsc )
+								INNER JOIN jugador ON _01_pk_idJug  = _03_pk_idJugInsc
+								INNER JOIN usuari  ON _01_pk_idJug  = _01_pk_idUsuari,
+								(SELECT _01_pk_idJoc, _02_nomJoc AS nomJoc FROM joc) AS BB
+							WHERE
+								_02_pk_idJocTorn = BB._01_pk_idJoc AND
+								_09_datBaixaTorn   IS NULL AND
+								_10_datBaixaUsuari IS NULL	
+							ORDER BY idTorn, idUser;';
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));
+				break;
+			case TORNEIGS_AMB_JUGADORS_HISTORIC_3360 :
+				$query    = 'SELECT _01_pk_idTorn    AS idTorn,
+									_03_nomTorn      AS nomTorn,
+									_04_premiTorn    AS premiTorn,
+									_02_pk_idJocTorn AS idJoc,
+									BB.nomJoc        AS nomJoc,
+									_01_pk_idJug     AS idUser,
+									_04_loginUsuari  AS loginUser,
+									_02_nomUsuari    AS nomUser,
+									DATE_FORMAT(_05_datIniTorn,    "%d-%m-%Y") AS datIniTorn,
+									DATE_FORMAT(_06_datFinTorn,    "%d-%m-%Y") AS datFinTorn,
+									DATE_FORMAT(_09_datBaixaTorn,  "%d-%m-%Y %H:%i:%s")  AS datBaixaTorn,
+									DATE_FORMAT(_10_datBaixaUsuari,"%d-%m-%Y %H:%i:%s")  AS datBaixaUser
+							FROM
+							torneig
+								LEFT JOIN inscrit  ON (_01_pk_idTorn = _01_pk_idTornInsc  AND _02_pk_idJocTorn = _02_pk_idJocInsc )
+								INNER JOIN jugador ON _01_pk_idJug   = _03_pk_idJugInsc
+								INNER JOIN usuari  ON _01_pk_idJug   = _01_pk_idUsuari,
+								(SELECT _01_pk_idJoc, _02_nomJoc AS nomJoc FROM joc) AS BB
+							WHERE
+								_02_pk_idJocTorn = BB._01_pk_idJoc
+							ORDER BY idTorn, idUser;';				
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));				
+				break;
+			case TORNEIGS_I_MAQS_AMB_PARTIDES_3375 :	
 				$query    = 'SELECT _01_pk_idTorn AS idTorn,
 									_03_nomTorn   AS nomTorn,
 									_04_premiTorn AS premiTorn,
@@ -451,55 +735,7 @@ isEndSessionInQuery();
 							GROUP BY idTorn,idMaq;';
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
-				break;
-			case TORNEIGS_AMB_JUGADORS_ACTUAL_3350 :
-				$query    = 'SELECT _01_pk_idTorn    AS idTorn,
-									_03_nomTorn      AS nomTorn,
-									_04_premiTorn    AS premiTorn,
-									_02_pk_idJocTorn AS idJoc,
-									BB.nomJoc        AS nomJoc, 
-									_01_pk_idJug     AS idUser,
-									_04_loginUsuari  AS loginUser,
-									_02_nomUsuari    AS nomUser,
-									DATE_FORMAT(_05_datIniTorn, "%d-%m-%Y") AS datIniTorn,
-									DATE_FORMAT(_06_datFinTorn, "%d-%m-%Y") AS datFinTorn
-							FROM
-								(SELECT _02_nomJoc AS nomJoc FROM joc) AS BB,
-								torneig
-									LEFT JOIN inscrit  ON (_01_pk_idTorn    = _01_pk_idTornInsc  AND 
-														   _02_pk_idJocTorn = _02_pk_idJocInsc )
-									INNER JOIN jugador ON _01_pk_idJug  = _03_pk_idJugInsc
-									INNER JOIN usuari  ON _01_pk_idJug  = _01_pk_idUsuari
-							WHERE 
-								_09_datBaixaTorn   IS NULL AND
-								_10_datBaixaUsuari IS NULL
-							ORDER BY idTorn, idUser;';
-				$response = dbExec($query);
-				echo json_encode(controlErrorQuery($response));
-				break;
-			case TORNEIGS_AMB_JUGADORS_HISTORIC_3360 :
-				$query    = 'SELECT _01_pk_idTorn    AS idTorn,
-									_03_nomTorn      AS nomTorn,
-									_04_premiTorn    AS premiTorn,
-									_02_pk_idJocTorn AS idJoc,
-									BB.nomJoc        AS nomJoc, 									
-									_01_pk_idJug     AS idUser,
-									_04_loginUsuari  AS loginUser,
-									_02_nomUsuari    AS nomUser,
-									DATE_FORMAT(_05_datIniTorn, "%d-%m-%Y") AS datIniTorn,
-									DATE_FORMAT(_06_datFinTorn, "%d-%m-%Y") AS datFinTorn,
-									DATE_FORMAT(_09_datBaixaTorn, "%d-%m-%Y") AS datBaixaTorn,
-									DATE_FORMAT(_10_datBaixaUsuari, "%d-%m-%Y") AS datBaixaUser
-							FROM
-								(SELECT _02_nomJoc AS nomJoc FROM joc) AS BB,							
-								torneig
-									LEFT JOIN inscrit  ON (_01_pk_idTorn = _01_pk_idTornInsc  AND _02_pk_idJocTorn = _02_pk_idJocInsc )
-									INNER JOIN jugador ON _01_pk_idJug  = _03_pk_idJugInsc
-									INNER JOIN usuari  ON _01_pk_idJug  = _01_pk_idUsuari
-							ORDER BY idTorn, idUSer;';				
-				$response = dbExec($query);
-				echo json_encode(controlErrorQuery($response));				
-				break;	
+				break;								
 			case TORNEIGS_AMB_MAQUINES_ACTUAL_3380 :
 				$query    = 'SELECT _01_pk_idTorn    AS idTorn,
 									_03_nomTorn      AS nomTorn,
@@ -514,21 +750,52 @@ isEndSessionInQuery();
 									DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida
 							FROM
 								(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug FROM usuari) AS BB,
-								(SELECT _02_nomJoc AS nomJoc FROM joc) AS CC,
+								(SELECT _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc FROM joc) AS CC,
 								torneig
 									LEFT JOIN torneigTePartida ON (_01_pk_idTorn = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
 									INNER JOIN partida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
 							  							   _03_pk_idJocTTP = _02_pk_idJocPart AND
 							  							   _04_pk_idJugTTP = _03_pk_idJugPart )
-									INNER JOIN ronda ON (_01_pk_idMaqPart = _01_pk_idMaqRonda AND
-							 							 _02_pk_idJocPart = _02_pk_idJocRonda AND
-							 							 _03_pk_idJugPart = _03_pk_idJugRonda AND
-							 							 _04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )						  
+									INNER JOIN ronda1  ON (_00_pk_idPart_auto = _01_pk_idPartRonda)
 							WHERE 
 								_09_datBaixaTorn IS NULL AND
-								_06_datBaixaPart IS NULL	
+								_06_datBaixaPart IS NULL AND
+								_09_datBaixaRonda IS NULL AND
+								BB.idUsuari = _03_pk_idJugPart AND
+								CC.idJoc    = _02_pk_idJocPart
 							GROUP BY idTorn,idMaq,idUsuari,datHoraPartida,rondaPart
 							ORDER BY idTorn,idMaq,idUsuari,datHoraPartida,rondaPart;';
+// query amb taula RONDA													
+				// $query    = 'SELECT _01_pk_idTorn    AS idTorn,
+				// 					_03_nomTorn      AS nomTorn,
+				// 					_04_premiTorn    AS premiTorn,
+				// 					_02_pk_idJocTorn AS idJoc,
+				// 					CC.nomJoc        AS nomJoc,
+				// 					_02_pk_idMaqTTP  AS idMaq,
+				// 					BB.idUsuari      AS idUser,
+				// 					BB.nomJug        AS nomUser,
+				// 					_05_pk_idRonda   AS rondaPart,
+				// 					_07_puntsRonda   AS punts,
+				// 					DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida
+				// 			FROM
+				// 				(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug FROM usuari) AS BB,
+				// 				(SELECT _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc FROM joc) AS CC,
+				// 				torneig
+				// 					LEFT JOIN torneigTePartida ON (_01_pk_idTorn = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
+				// 					INNER JOIN partida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
+				// 			  							   _03_pk_idJocTTP = _02_pk_idJocPart AND
+				// 			  							   _04_pk_idJugTTP = _03_pk_idJugPart )
+				// 					INNER JOIN ronda ON (_01_pk_idMaqPart = _01_pk_idMaqRonda AND
+				// 			 							 _02_pk_idJocPart = _02_pk_idJocRonda AND
+				// 			 							 _03_pk_idJugPart = _03_pk_idJugRonda AND
+				// 			 							 _04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )						  
+				// 			WHERE 
+				// 				_09_datBaixaTorn IS NULL AND
+				// 				_06_datBaixaPart IS NULL AND
+				// 				BB.idUsuari = _03_pk_idJugPart AND
+				// 				CC.idJoc    = _02_pk_idJocPart	
+				// 			GROUP BY idTorn,idMaq,idUsuari,datHoraPartida,rondaPart
+				// 			ORDER BY idTorn,idMaq,idUsuari,datHoraPartida,rondaPart;';							
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
 				break;	
@@ -544,22 +811,50 @@ isEndSessionInQuery();
 									_05_pk_idRonda   AS rondaPart,
 									_07_puntsRonda   AS punts,
 									DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
-									DATE_FORMAT(_09_datBaixaTorn, "%d-%m-%Y") AS datBaixaTorn,
-									DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y") AS datBaixaPart									
+									DATE_FORMAT(_09_datBaixaTorn, "%d-%m-%Y %H:%i:%s") AS datBaixaTorn,
+									DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y %H:%i:%s") AS datBaixaPart									
 							FROM
 								(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug FROM usuari) AS BB,
-								(SELECT _02_nomJoc AS nomJoc FROM joc) AS CC,
+								(SELECT _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc FROM joc) AS CC,
 								torneig
 									LEFT JOIN torneigTePartida ON (_01_pk_idTorn = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
 									INNER JOIN partida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
 							  							   _03_pk_idJocTTP = _02_pk_idJocPart AND
 							  							   _04_pk_idJugTTP = _03_pk_idJugPart )
-									INNER JOIN ronda ON (_01_pk_idMaqPart = _01_pk_idMaqRonda AND
-							 							 _02_pk_idJocPart = _02_pk_idJocRonda AND
-							 							 _03_pk_idJugPart = _03_pk_idJugRonda AND
-							 							 _04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )						  
+									INNER JOIN ronda1  ON (_00_pk_idPart_auto = _01_pk_idPartRonda)
+							WHERE 
+								BB.idUsuari = _03_pk_idJugPart AND
+								CC.idJoc    = _02_pk_idJocPart									
 							GROUP BY idTorn,idMaq,idUsuari,datHoraPartida,rondaPart
 							ORDER BY idTorn,idMaq,idUsuari,datHoraPartida,rondaPart;';
+// query amb taula RONDA							
+				// $query    = 'SELECT _01_pk_idTorn    AS idTorn,
+				// 					_03_nomTorn      AS nomTorn,
+				// 					_04_premiTorn    AS premiTorn,
+				// 					_02_pk_idJocTorn AS idJoc,
+				// 					CC.nomJoc        AS nomJoc,
+				// 					_02_pk_idMaqTTP  AS idMaq,
+				// 					BB.idUsuari      AS idUser,
+				// 					BB.nomJug        AS nomUser,
+				// 					_05_pk_idRonda   AS rondaPart,
+				// 					_07_puntsRonda   AS punts,
+				// 					DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
+				// 					DATE_FORMAT(_09_datBaixaTorn, "%d-%m-%Y %H:%i:%s") AS datBaixaTorn,
+				// 					DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y %H:%i:%s") AS datBaixaPart									
+				// 			FROM
+				// 				(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug FROM usuari) AS BB,
+				// 				(SELECT _02_nomJoc AS nomJoc FROM joc) AS CC,
+				// 				torneig
+				// 					LEFT JOIN torneigTePartida ON (_01_pk_idTorn = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
+				// 					INNER JOIN partida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
+				// 			  							   _03_pk_idJocTTP = _02_pk_idJocPart AND
+				// 			  							   _04_pk_idJugTTP = _03_pk_idJugPart )
+				// 					INNER JOIN ronda ON (_01_pk_idMaqPart = _01_pk_idMaqRonda AND
+				// 			 							 _02_pk_idJocPart = _02_pk_idJocRonda AND
+				// 			 							 _03_pk_idJugPart = _03_pk_idJugRonda AND
+				// 			 							 _04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )						  
+				// 			GROUP BY idTorn,idMaq,idUsuari,datHoraPartida,rondaPart
+				// 			ORDER BY idTorn,idMaq,idUsuari,datHoraPartida,rondaPart;';							
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));
 				break;	
@@ -572,20 +867,20 @@ isEndSessionInQuery();
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));				
 				break;			
-			case BAIXA_MAQUINA_3420 :
-				$query    = 'UPDATE maquina SET _08_datBaixaMaq = NOW()
-								WHERE 
-									_01_pk_idMaq = "' . $idMaq . '" AND
-									_08_datBaixaMaq IS NULL;';
+			case BAIXA_MAQUINA_3415 :
+				$query    = sprintf("UPDATE maquina SET _07_datModMaq   = NOW(),
+														_08_datBaixaMaq = NOW()
+									 WHERE  _01_pk_idMaq = '%d' AND
+											_08_datBaixaMaq IS NULL;",$idMaq);
 				$response = dbExec($query,0);
-				$query    = 'UPDATE maqinstall SET _08_datBaixaMaqInst = NOW()
-								WHERE 
-									_01_pk_idMaqInst = "' . $idMaq . '" AND
-									_08_datBaixaMaqInst IS NULL;';
+				$query    = sprintf("UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
+														   _08_datBaixaMaqInst = NOW()
+									 WHERE _01_pk_idMaqInst = '%d' AND
+									_		08_datBaixaMaqInst IS NULL;",$idMaq);
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;
-			case MODIFICACIO_MAQUINA_3425 :
+			case MODIFICACIO_MAQUINA_3417 :
 				$query    = 'UPDATE maquina SET _02_macMaq      = "$macMaq",
 										        _03_propMaq     = "$propMaq",
 										        _04_credMaq     = "$credMaq",
@@ -598,6 +893,35 @@ isEndSessionInQuery();
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;
+			case LLISTAT_MAQUINES_3420 :
+				$query    = 'SELECT _01_pk_idMaq AS idMaq,
+									_02_macMaq   AS macMaq,
+									_03_propMaq  AS propMaq,
+									_04_credMaq  AS credParcialMaq,
+									_05_totCredMaq AS totalCredMaq,
+									DATE_FORMAT(_06_datAltaMaq, "%d-%m-%Y %H:%i:%s") AS datAltaMaq,
+									DATE_FORMAT(_07_datModMaq,   "%d-%m-%Y %H:%i:%s") AS datModMaq									
+							FROM
+								maquina AS MAQ
+							WHERE 
+								_08_datBaixaMaq   IS NULL;';
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));				
+				break;
+			case LLISTAT_MAQUINES_HISTORIC_3425 :
+				$query    = 'SELECT _01_pk_idMaq AS idMaq,
+									_02_macMaq   AS macMaq,
+									_03_propMaq  AS propMaq,
+									_04_credMaq  AS credMaq,
+									_05_totCredMaq AS totCredMaq,
+									DATE_FORMAT(_06_datAltaMaq, "%d-%m-%Y %H:%i:%s")  AS datAltaMaq,
+									DATE_FORMAT(_07_datModMaq,   "%d-%m-%Y %H:%i:%s") AS datModMaq,
+									DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq
+							FROM
+								maquina AS MAQ';
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));				
+				break;
 			case ACTUALITZA_RACAUDACIO_MAQ_3430 :
 				$query    = 'UPDATE maquina SET _04_credMaq     = "$credMaq",
  										        _05_totCredMaq  = _05_totCredMaq + "$credMaq",
@@ -606,8 +930,8 @@ isEndSessionInQuery();
 									_01_pk_idMaq    = "' . $idMaq . '" AND
 									_08_datBaixaMaq IS NULL;';
 				$response = dbExec($query,0);
-				echo json_encode(controlErrorQuery($response));			
-			case LLISTAT_MAQUINES_3440 :
+				echo json_encode(controlErrorQuery($response));
+			case LLISTAT_MAQUINES_AMB_JOCS_3440 :
 				$query    = 'SELECT MAQ._01_pk_idMaq AS idMaq,
 									MAQ._02_macMaq   AS macMaq,
 									MAQ._03_propMaq  AS propMaq,
@@ -618,7 +942,8 @@ isEndSessionInQuery();
 									AA._02_empUbic   AS empUbic,
 									AA._04_pobUbic   AS pobUbic,
 									AA._06_provUbic  AS provUbic,
-									DATE_FORMAT(MAQ._06_datAltaMaq, "%d-%m-%Y") AS datAltaMaq
+									DATE_FORMAT(MAQ._06_datAltaMaq, "%d-%m-%Y %H:%i:%s") AS datAltaMaq,
+									DATE_FORMAT(MAQ._07_datModMaq,  "%d-%m-%Y %H:%i:%s") AS datModMaq
 							FROM
 								(SELECT * FROM ubicacio
 									INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic = _01_pk_idUbicUTM
@@ -636,7 +961,7 @@ isEndSessionInQuery();
 							GROUP BY idMaq, idUbic, idJoc;';
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
-				break;
+				break;				
 			case LLISTAT_MAQUINES_HISTORIC_3450 :
 				$query    = 'SELECT MAQ._01_pk_idMaq AS idMaq,
 									MAQ._02_macMaq   AS macMaq,
@@ -648,7 +973,9 @@ isEndSessionInQuery();
 									AA._02_empUbic   AS empUbic,
 									AA._04_pobUbic   AS pobUbic,
 									AA._06_provUbic  AS provUbic,
-									DATE_FORMAT(MAQ._08_datBaixaMaq, "%d-%m-%Y") AS datBaixaMaq
+									DATE_FORMAT(MAQ._06_datAltaMaq, "%d-%m-%Y %H:%i:%s") AS datAltaMaq,
+									DATE_FORMAT(MAQ._07_datModMaq,  "%d-%m-%Y %H:%i:%s") AS datModMaq,
+									DATE_FORMAT(MAQ._08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq																		
 							FROM
 								(SELECT * FROM ubicacio
 									INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic = _01_pk_idUbicUTM
@@ -663,31 +990,31 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));				
 				break;
 			case LLISTAT_MAQS_X_TORNEIG_I_JUG_3455 :
-				$query    = 'SELECT _01_pk_idMaq    AS idMaq,
-									_02_macMaq      AS macMaq,
-									_01_pk_idJoc    AS idJoc,
-									_02_nomJoc      AS nomJoc,
-									_01_pk_idUsuari AS idJug,
-									_04_loginUsuari AS loginUsuari,
-									_01_pk_idTorn   AS idTorn,
-									_03_nomTorn     AS nomTorn
-							FROM usuari
-								LEFT JOIN jugador    ON _01_pk_idUsuari = _01_pk_idJug
-								LEFT JOIN inscrit    ON _01_pk_idJug    = _03_pk_idJugInsc
-								INNER JOIN torneig   ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
-								INNER JOIN joc       ON _02_pk_idJocTorn = _01_pk_idJoc
-								LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
-								INNER JOIN maquina   ON _01_pk_idMaqInst = _01_pk_idMaq
-							WHERE 
-									_10_datBaixaUsuari   IS NULL AND
-									_09_datBaixaTorn     IS NULL AND
-									_08_datBaixaJoc      IS NULL AND
-									_06_datBaixaInsc     IS NULL AND	
-									_08_datBaixaMaqInst  IS NULL AND
-									_08_datBaixaMaq      IS NULL AND
-									_04_datAltaInsc      IS NOT NULL AND
-									_04_loginUsuari = "' . $loginUsr . '"
-							ORDER BY idMaq,idJoc,idJug;';
+				$query    = sprintf("SELECT _01_pk_idMaq    AS idMaq,
+											_02_macMaq      AS macMaq,
+											_01_pk_idJoc    AS idJoc,
+											_02_nomJoc      AS nomJoc,
+											_01_pk_idUsuari AS idJug,
+											_04_loginUsuari AS loginUsuari,
+											_01_pk_idTorn   AS idTorn,
+											_03_nomTorn     AS nomTorn
+									FROM usuari
+										LEFT JOIN jugador    ON _01_pk_idUsuari = _01_pk_idJug
+										LEFT JOIN inscrit    ON _01_pk_idJug    = _03_pk_idJugInsc
+										INNER JOIN torneig   ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
+										INNER JOIN joc       ON _02_pk_idJocTorn = _01_pk_idJoc
+										LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
+										INNER JOIN maquina   ON _01_pk_idMaqInst = _01_pk_idMaq
+									WHERE 
+											_10_datBaixaUsuari   IS NULL AND
+											_09_datBaixaTorn     IS NULL AND
+											_08_datBaixaJoc      IS NULL AND
+											_06_datBaixaInsc     IS NULL AND	
+											_08_datBaixaMaqInst  IS NULL AND
+											_08_datBaixaMaq      IS NULL AND
+											_04_datAltaInsc      IS NOT NULL AND
+											_04_loginUsuari = '%d'
+									ORDER BY idMaq,idJoc,idJug;",$loginUsr);
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));	
 				break;
@@ -696,8 +1023,8 @@ isEndSessionInQuery();
 									_02_macMaq      AS macMaq,
 									_01_pk_idJoc    AS idJoc,
 									_02_nomJoc      AS nomJoc,
-									_01_pk_idUsuari AS idJug,
-									_04_loginUsuari AS loginUsuari,
+									_01_pk_idUsuari AS idUser,
+									_04_loginUsuari AS loginUser,
 									_01_pk_idTorn   AS idTorn,
 									_03_nomTorn     AS nomTorn
 							FROM usuari
@@ -715,7 +1042,7 @@ isEndSessionInQuery();
 									_08_datBaixaMaqInst  IS NULL AND
 									_08_datBaixaMaq      IS NULL AND
 									_04_datAltaInsc      IS NOT NULL
-							ORDER BY idMaq,idJoc,idJug;';
+							ORDER BY idMaq,idJoc,idUser;';
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));	
 				break;						
@@ -728,11 +1055,10 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));			
 				break;			
 			case BAIXA_ASSIGNACIO_JOC_MAQUINA_3470 :
-				$query    = 'UPDATE maqInstall SET _08_datBaixaMaqInst = NOW()
-								WHERE 
-									_01_pk_idMaqInst  = "' . $idMaq . '" AND
-									_02_pk_idJocInst  = "' . $idJoc . '" AND
-									_08_datBaixaMaqInst  IS NULL;';
+				$query = sprintf("UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
+														_08_datBaixaMaqInst = NOW()					
+							  	  WHERE _00_pk_idMaqInst_auto = '%d' AND
+							  	  		_08_datBaixaMaqInst IS NULL;",$idMaqInst);
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;
@@ -745,18 +1071,19 @@ isEndSessionInQuery();
 											_07_datModMaqInst     = NOW(),
 											_08_datBaixaMaqInst   = "$dataBaixaMaqInst"
 								WHERE 
-									_01_pk_idMaqInst = "' . $idMaq . '" AND
-									_02_pk_idJocInst = "' . $idJoc . '";';
+										_00_pk_idMaqInst_auto = "' . $idMaqInst . '";';
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
-				break;				
-			case LLISTAT_ASSIGNACIO_JOC_MAQUINA_3490 :
+				break;	
+			case LLISTAT_ASSIG_JOC_MAQ_3485 :
 				$query    = 'SELECT _01_pk_idMaq AS idMaq,
 									_02_macMaq   AS macMaq,
 									_01_pk_idJoc AS idJoc,
 									_02_nomJoc   AS nomJoc,
 									_03_numPartidesJugadesMaqInst AS numPartides,
-									_05_totCredJocMaqInst AS totalCredits
+									_05_totCredJocMaqInst AS totalCredits,
+									DATE_FORMAT(_06_datAltaMaqInst, "%d-%m-%Y %H:%i:%s") AS datAltaMaqInst,
+									DATE_FORMAT(_07_datModMaqInst,  "%d-%m-%Y %H:%i:%s") AS datModMaqInst									
 							FROM joc
 								LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
 								INNER JOIN maquina   ON _01_pk_idMaqInst = _01_pk_idMaq
@@ -769,6 +1096,27 @@ isEndSessionInQuery();
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
 				break;
+			case LLISTAT_ASSIG_JOC_MAQ_HISTORIC_3490 :
+				$query    = 'SELECT _01_pk_idMaq AS idMaq,
+									_02_macMaq   AS macMaq,
+									_01_pk_idJoc AS idJoc,
+									_02_nomJoc   AS nomJoc,
+									_03_numPartidesJugadesMaqInst AS numPartides,
+									_05_totCredJocMaqInst AS totalCredits,
+									DATE_FORMAT(_06_datAltaMaqInst, "%d-%m-%Y %H:%i:%s") AS datAltaMaqInst,
+									DATE_FORMAT(_07_datModMaqInst,  "%d-%m-%Y %H:%i:%s") AS datModMaqInst,
+									DATE_FORMAT(_08_datBaixaMaqInst,"%d-%m-%Y %H:%i:%s") AS datBaixaMaqInst									
+							FROM joc
+								LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
+								INNER JOIN maquina   ON _01_pk_idMaqInst = _01_pk_idMaq
+							WHERE 	
+								_08_datBaixaJoc      IS NULL AND
+								_08_datBaixaMaq      IS NULL	
+							GROUP BY idMaq,idJoc
+							ORDER BY idMaq,idJoc;';
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));				
+				break;				
 			case RECAUDACIO_X_MAQ_AMB_RANKING_3510 :
 				$query    = 'DROP TABLE CC;';
 				$response  = dbExec($query,0);
@@ -1035,10 +1383,10 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));
 				break;
 			case BAIXA_UBICACIO_3820 :
-				$query    = 'UPDATE ubicacio SET _16_datBaixaUbic = NOW()
-								WHERE 
-									_01_pk_idUbic = "' . $idUbic . '" AND
-									_16_datBaixaUbic IS NULL;';
+				$query = sprintf("UPDATE ubicacio SET _15_datModUbic   = NOW(),
+													  _16_datBaixaUbic = NOW()
+								  WHERE _01_pk_idUbic = '%d' AND
+								  		_16_datBaixaUbic IS NULL;",$idUbic);
 				$response = dbExec($query,0);				
 				echo json_encode(controlErrorQuery($response));			
 				break;			
@@ -1064,7 +1412,46 @@ isEndSessionInQuery();
 				$response = dbExec($query,0);				
 				echo json_encode(controlErrorQuery($response));			
 				break;
-			case LLISTAT_UBICS_X_PROV_POB_3840 :
+			case LLISTAT_UBICS_X_EMPRESA_3835 :
+				$query    = 'SELECT _01_pk_idUbic AS idUbic,
+									_02_empUbic   AS empUbic,
+									_03_dirUbic   AS dirUbic,
+									_06_provUbic  AS provincia,
+									_05_cpUbic    AS cPostal,
+									_04_pobUbic   AS poblacio,
+									_10_contUbic  AS contactUbic,
+									_11_emailUbic AS emailContacte,
+									_12_telUbic   AS telefonContacte,
+									_13_mobUbic   AS mobilContacte,
+									DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y %H:%i:%s") AS datAltaUbic,
+									DATE_FORMAT(_15_datModUbic,  "%d-%m-%Y %H:%i:%s") AS datModUbic,
+									DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+							FROM ubicacio
+							WHERE _16_datBaixaUbic IS NULL
+							ORDER BY empUbic;';
+				$response = dbExec($query);				
+				echo json_encode(controlErrorQuery($response));				
+				break;								
+			case LLISTAT_UBICS_X_EMPRESA_HISTORIC_3840 :
+				$query    = 'SELECT _01_pk_idUbic AS idUbic,
+									_02_empUbic   AS empUbic,
+									_03_dirUbic   AS dirUbic,
+									_06_provUbic  AS provincia,
+									_05_cpUbic    AS cPostal,
+									_04_pobUbic   AS poblacio,
+									_10_contUbic  AS contactUbic,
+									_11_emailUbic AS emailContacte,
+									_12_telUbic   AS telefonContacte,
+									_13_mobUbic   AS mobilContacte,
+									DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y %H:%i:%s") AS datAltaUbic,
+									DATE_FORMAT(_15_datModUbic,  "%d-%m-%Y %H:%i:%s") AS datModUbic,
+									DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+							FROM ubicacio
+							ORDER BY empUbic;';
+				$response = dbExec($query);				
+				echo json_encode(controlErrorQuery($response));				
+				break;				
+			case LLISTAT_UBICS_X_PROV_POB_3850 :
 				$query    = 'SELECT _06_provUbic     AS provincia,
 									_04_pobUbic      AS poblacio,
 									_05_cpUbic       AS cPostal,
@@ -1078,15 +1465,16 @@ isEndSessionInQuery();
 									_11_emailUbic    AS emailContacte,
 									_12_telUbic      AS telefonContacte,
 									_13_mobUbic      AS mobilContacte,
-									DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y")  AS datAltaUbic, 
-									DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y") AS datBaixaUbic
+									DATE_FORMAT(_14_datAltaUbic,  "%d-%m-%Y %H:%i:%s") AS datAltaUbic, 
+									DATE_FORMAT(_15_datModUbic,   "%d-%m-%Y %H:%i:%s") AS datModUbic,
+									DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y %H:%i:%s") AS datBaixaUbic
 							FROM ubicacio
 							GROUP BY provincia, poblacio, cPostal, idUbic
 							ORDER BY provincia, poblacio, cPostal;';
 				$response = dbExec($query);				
 				echo json_encode(controlErrorQuery($response));				
 				break;			
-			case LLISTAT_UBICS_X_COORDENADES_3850 :
+			case LLISTAT_UBICS_X_COORDENADES_3860 :
 				$query    = 'SELECT _07_latUbic   AS latitut,
 									_08_longUbic  AS longitut,
 									_09_altUbic   AS altitut,
@@ -1100,32 +1488,15 @@ isEndSessionInQuery();
 									_11_emailUbic AS emailContacte,
 									_12_telUbic   AS telefonContacte,
 									_13_mobUbic   AS mobilContacte,
-									DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y")  AS datAltaUbic,
-									DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y") AS datBaixaUbic
+									DATE_FORMAT(_14_datAltaUbic,  "%d-%m-%Y %H:%i:%s")  AS datAltaUbic,
+									DATE_FORMAT(_15_datModUbic,   "%d-%m-%Y %H:%i:%s") AS datModUbic,
+									DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y %H:%i:%s") AS datBaixaUbic
 							FROM ubicacio
 							GROUP BY latitut, longitut, altitut, idUbic
 							ORDER BY latitut, longitut, altitut;';
 				$response = dbExec($query);				
 				echo json_encode(controlErrorQuery($response));				
-				break;			
-			case LLISTAT_UBICS_X_EMPRESA_3860 :
-				$query    = 'SELECT _01_pk_idUbic AS idUbic,
-									_02_empUbic   AS empUbic,
-									_03_dirUbic   AS dirUbic,
-									_06_provUbic  AS provincia,
-									_05_cpUbic    AS cPostal,
-									_04_pobUbic   AS poblacio,
-									_10_contUbic  AS contactUbic,
-									_11_emailUbic AS emailContacte,
-									_12_telUbic   AS telefonContacte,
-									_13_mobUbic   AS mobilContacte,
-									DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y")  AS datAltaUbic,
-									DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y") AS datBaixaUbic
-							FROM ubicacio
-							ORDER BY empUbic;';
-				$response = dbExec($query);				
-				echo json_encode(controlErrorQuery($response));				
-				break;			
+				break;						
 			case LLISTAT_UBICS_X_EMPRESA_PROV_POB_3870 :
 				$query    = 'SELECT _06_provUbic  AS provincia,
 									_04_pobUbic   AS poblacio,
@@ -1137,13 +1508,15 @@ isEndSessionInQuery();
 									_11_emailUbic AS emailContacte,
 									_12_telUbic AS telefonContacte,
 									_13_mobUbic AS mobilContacte,
-									DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y")  AS datAltaUbic,
-									DATE_FORMAT(_16_datBaixaUbic, "%d-%m-%Y") AS datBaixaUbic
+									DATE_FORMAT(_14_datAltaUbic, "%d-%m-%Y %H:%i:%s")  AS datAltaUbic,
+									DATE_FORMAT(_15_datModUbic,  "%d-%m-%Y %H:%i:%s")  AS datModUbic,									
+									DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
 							FROM ubicacio
 							ORDER BY provincia, poblacio, cPostal;';
 				$response = dbExec($query);				
 				echo json_encode(controlErrorQuery($response));				
 				break;
+
 			case ALTA_MAQ_X_UBICACIO_3880 :
 				$query    = 'INSERT INTO ubicacioTeMaquina
 								VALUES (NULL,
@@ -1153,23 +1526,43 @@ isEndSessionInQuery();
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;			
-			case BAIXA_MAQ_X_UBICACIO_3890 :
-				$query    = 'UPDATE ubicacioTeMaquina SET _05_datBaixaUTM = NOW()
-								WHERE 
-									_01_pk_idUbicUTM = "' . $idUbic . '" AND
-									_02_pk_idMaqUTM  = "' . $idMaq . '" AND
-									_05_datBaixaUTM  IS NULL;';
+			case LLISTAT_MAQS_X_UBIC_3890 :
+				$query    = 'SELECT _00_pk_idUTM_auto   AS recid,
+									_06_provUbic        AS provincia,
+									_04_pobUbic         AS poblacio,
+									_05_cpUbic          AS cPostal,
+									_01_pk_idUbicUTM    AS idUbic,
+									_02_empUbic         AS empUbic, 
+									_02_pk_idMaqUTM     AS idMaq,
+									_02_macMaq          AS macMaq,
+									_03_propMaq         AS propMaq,
+									SUM(_05_totCredMaq) AS totalCredits,
+									DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
+									DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
+									DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
+									DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
+									DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+							FROM ubicacio
+								INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
+								INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
+							GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
+							ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;';
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));			
+				break;				
+			case BLOQUEJAR_MAQ_X_UBICACIO_3900 :
+				$query    = sprintf("UPDATE ubicacioTeMaquina SET _04_datModUTM   = NOW(),
+														  		  _05_datBaixaUTM = NOW()
+									 WHERE _00_pk_idUTM_auto = '%d' AND
+										   _05_datBaixaUTM  IS NULL;",$idUTM);
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;			
-			case MODIFICACIO_MAQ_X_UBICACIO_3900 :
-				$query    = 'UPDATE ubicacioTeMaquina SET 
-														_03_datAltaUTM  = "$dataAltaUTM",
-														_04_datModUTM   = NOW(),
-														_05_datBaixaUTM = "$dataBaixaUTM"
-								WHERE 
-									_01_pk_idUbicUTM = "' . $idUbic . '" AND
-									_02_pk_idMaqUTM  = "' . $idMaq . '";';
+			case DESBLOQUEJAR_MAQ_X_UBICACIO_3905 :
+				$query    = sprintf("UPDATE ubicacioTeMaquina SET _04_datModUTM   = NOW(),
+																  _05_datBaixaUTM = NULL
+										WHERE _00_pk_idUTM_auto = '%d' AND
+											  _05_datBaixaUTM IS NOT NULL;",$idUTM);
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;				
@@ -1265,7 +1658,7 @@ isEndSessionInQuery();
 									_02_faceJug      AS facebookUsr,
 									_03_twitterJug   AS twitterUsr,
 									DATE_FORMAT(_08_datAltaUsuari,  "%d-%m-%Y %H:%i:%s") AS datAltaUsr,
-									DATE_FORMAT(_09_datModUsuari, "%d-%m-%Y %H:%i:%s") AS datModUsr,
+									DATE_FORMAT(_09_datModUsuari,   "%d-%m-%Y %H:%i:%s") AS datModUsr,
 									DATE_FORMAT(_10_datBaixaUsuari, "%d-%m-%Y %H:%i:%s") AS datBaixaUsr
 							FROM usuari
 								LEFT JOIN jugador ON _01_pk_idUsuari = _01_pk_idJug;';
@@ -1273,30 +1666,28 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));
 				break;			
 			case BLOQUEJAR_JUGADOR_4020 :
-				$query    = 'UPDATE usuari SET _10_datBaixaUsuari = NOW()
-								WHERE 
-									_10_datBaixaUsuari IS NULL AND
-									_01_pk_idUsuari = "' . $idUsr . '";';
+				$query    = sprintf("UPDATE usuari SET _09_datModUsuari   = NOW(),
+													   _10_datBaixaUsuari = NOW()
+									 WHERE _10_datBaixaUsuari IS NULL AND
+								  	 	   _01_pk_idUsuari = '%d';",$idUsr);
 				$response  = dbExec($query,0);
-				$query    = 'UPDATE jugador SET _06_datBaixaJug  = NOW()
-								WHERE
-									 _06_datBaixaJug IS NULL AND
-									 _01_pk_idJug = "' . $idUsr . '";';
+				$query    = sprintf("UPDATE jugador SET _05_datModJug   = NOW(),
+													    _06_datBaixaJug = NOW()
+									WHERE _06_datBaixaJug IS NULL AND
+									  	  _01_pk_idJug = '%d';",$idUsr);
 				$response  = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));				
 				break;			
 			case DESBLOQUEJAR_JUGADOR_4030 :
-				$query    = 'UPDATE usuari SET _09_datModUsuari   = NOW(),
-											   _10_datBaixaUsuari = NULL
-								WHERE 
-									_10_datBaixaUsuari IS NOT NULL AND
-									_01_pk_idUsuari = "' . $idUsr . '";';	
+				$query    = sprintf("UPDATE usuari SET _09_datModUsuari   = NOW(),
+													   _10_datBaixaUsuari = NULL
+									WHERE _10_datBaixaUsuari IS NOT NULL AND
+										  _01_pk_idUsuari = '%d';",$idUsr);
 				$response  = dbExec($query,0);
-				$query    = 'UPDATE jugador SET _05_datModJug    = NOW(),
-						 						_06_datBaixaJug  = NULL
-								WHERE
-									 _06_datBaixaJug IS NOT NULL AND
-									 _01_pk_idJug = "' . $idUsr . '";';									 
+				$query    = sprintf("UPDATE jugador SET _05_datModJug    = NOW(),
+						 								_06_datBaixaJug  = NULL
+									WHERE _06_datBaixaJug IS NOT NULL AND
+										  _01_pk_idJug = '%d';",$idUsr);
 				$response  = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;		
@@ -1304,7 +1695,7 @@ isEndSessionInQuery();
 				$query    = 'DROP TABLE CC;';
 				$response  = dbExec($query,0);
 				$query    = 'CREATE TABLE CC  ENGINE=MEMORY
-							SELECT 	_03_pk_idJugRonda AS idJug,
+							SELECT 	_03_pk_idJugPart AS idJug,
 						 			BB.nomJug,
 						 			BB.loginJug,
 									_01_pk_idTorn AS idTorn,
@@ -1321,19 +1712,49 @@ isEndSessionInQuery();
 									INNER JOIN partida ON ( _02_pk_idMaqTTP = _01_pk_idMaqPart AND
 							  								_03_pk_idJocTTP = _02_pk_idJocPart AND
 							  								_04_pk_idJugTTP = _03_pk_idJugPart )
-									INNER JOIN ronda   ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
-							 								_02_pk_idJocPart = _02_pk_idJocRonda AND
-							 								_03_pk_idJugPart = _03_pk_idJugRonda AND
-							 								_04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )
+									INNER JOIN ronda1  ON (_00_pk_idPart_auto = _01_pk_idPartRonda)
 							WHERE 
 								loginJug <> "admin" AND
 								_02_pk_idJocTorn  = AA.idJoc AND
-								_03_pk_idJugRonda = BB.idUsuari AND
+								_03_pk_idJugPart  = BB.idUsuari AND
 								_06_datBaixaPart IS NULL AND
+								_09_datBaixaRonda IS NULL AND
 								_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart) AND
 								_06_datFinTorn   >= CURDATE()		
-							GROUP BY _01_pk_idTorn,_03_pk_idJugRonda
+							GROUP BY _01_pk_idTorn,_03_pk_idJugPart
 							ORDER BY _01_pk_idTorn, punts DESC;';
+// query amb taula RONDA														
+				// $query    = 'CREATE TABLE CC  ENGINE=MEMORY
+				// 			SELECT 	_03_pk_idJugPart AS idJug,
+				// 		 			BB.nomJug,
+				// 		 			BB.loginJug,
+				// 					_01_pk_idTorn AS idTorn,
+				// 			 		_03_nomTorn   AS nomTorn,
+				// 		 			idJoc,
+				// 		 			AA.nomJoc,
+				// 		 			SUM(_07_puntsRonda) AS punts
+				// 			FROM 
+				// 				(SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
+				// 				(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug, _04_loginUsuari AS loginJug FROM usuari) AS BB,
+				// 				torneig
+				// 					LEFT JOIN torneigTePartida ON (	_01_pk_idTorn = _01_pk_idTornTTP AND
+				// 													_02_pk_idJocTorn = _03_pk_idJocTTP)
+				// 					INNER JOIN partida ON ( _02_pk_idMaqTTP = _01_pk_idMaqPart AND
+				// 			  								_03_pk_idJocTTP = _02_pk_idJocPart AND
+				// 			  								_04_pk_idJugTTP = _03_pk_idJugPart )
+				// 					INNER JOIN ronda   ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
+				// 			 								_02_pk_idJocPart = _02_pk_idJocRonda AND
+				// 			 								_03_pk_idJugPart = _03_pk_idJugRonda AND
+				// 			 								_04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )
+				// 			WHERE 
+				// 				loginJug <> "admin" AND
+				// 				_02_pk_idJocTorn  = AA.idJoc AND
+				// 				_03_pk_idJugPart  = BB.idUsuari AND
+				// 				_06_datBaixaPart IS NULL AND
+				// 				_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart) AND
+				// 				_06_datFinTorn   >= CURDATE()		
+				// 			GROUP BY _01_pk_idTorn,_03_pk_idJugPart
+				// 			ORDER BY _01_pk_idTorn, punts DESC;';							
 				$response = dbExec($query,0);
 				$response1 = controlErrorQuery($response);				
 				if ( !($response[0]->error) )
@@ -1356,8 +1777,9 @@ isEndSessionInQuery();
 									CC.idTorn = XX.idTorn AND
 									_06_datFinTorn   >= CURDATE() ) AS ZZ
 								WHERE ranking BETWEEN 1 AND 10
-								GROUP BY idJug, idTorn
-								ORDER BY idJug, idTorn, ranking;';
+
+								GROUP BY idTorn, idJug
+								ORDER BY idTorn, punts DESC;';
 					$response  = dbExec($query);	
 					$response1 = controlErrorQuery($response);
 					$query     = 'DROP TABLE CC;';
@@ -1380,21 +1802,21 @@ isEndSessionInQuery();
 ///////////////////////////////////////////////////////////////////////////////////////
 
 			case GET_DADES_PERFIL_USR_5020 :
-				$query    = 'SELECT _01_pk_idUsuari  AS idUsr,
-									_02_nomUsuari    AS nomUsr,
-									_03_cognomUsuari AS cogUsr,
-									_04_loginUsuari  AS loginUsr,
-									_05_pwdUsuari    AS passwordUsr,
-									_06_emailUsuari  AS emailUsr,
-									_07_fotoUsuari   AS fotoUsr,
-									_02_faceJug      AS facebookUsr,
-									_03_twitterJug   AS twitterUsr
-							FROM usuari
-								LEFT JOIN jugador ON _01_pk_idUsuari = _01_pk_idJug
-							WHERE
-								_10_datBaixaUsuari IS NULL AND
-								_06_datBaixaJug    IS NULL AND
-								_04_loginUsuari = "' . $usrLogin . '";';
+				$query    = sprintf("SELECT _01_pk_idUsuari  AS idUsr,
+											_02_nomUsuari    AS nomUsr,
+											_03_cognomUsuari AS cogUsr,
+											_04_loginUsuari  AS loginUsr,
+											_05_pwdUsuari    AS passwordUsr,
+											_06_emailUsuari  AS emailUsr,
+											_07_fotoUsuari   AS fotoUsr,
+											_02_faceJug      AS facebookUsr,
+											_03_twitterJug   AS twitterUsr
+									FROM usuari
+										LEFT JOIN jugador ON _01_pk_idUsuari = _01_pk_idJug
+									WHERE
+										_10_datBaixaUsuari IS NULL AND
+										_06_datBaixaJug    IS NULL AND
+										_04_loginUsuari = '%s';",$usrLogin);
 				$response = dbExec($query,1);
 				echo json_encode($response);	
 				break;
@@ -1423,57 +1845,77 @@ isEndSessionInQuery();
 				break;
 
 			case BAIXA_PERFIL_USR_5023 :
-				$query    = 'UPDATE usuari SET _10_datBaixaUsuari = NOW()
-							 WHERE 
-								_10_datBaixaUsuari IS NULL AND
-								_04_loginUsuari = "' . $usrLogin . '";';		
+				$query    = sprintf("UPDATE usuari SET _09_datModUsuari   = NOW(),
+													   _10_datBaixaUsuari = NOW()
+							 		WHERE _10_datBaixaUsuari IS NULL AND
+										  _04_loginUsuari = '%s';",$usrLogin);	
 				$response = dbExec($query,0);
-				$query    = 'UPDATE jugador SET _06_datBaixaJug  = NOW()
-							 WHERE
-								 _06_datBaixaJug IS NULL AND
-								 (_01_pk_idJug IN ( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
-							       WHERE _04_loginUsuari = "' . $usrLogin . '"));';
+				$query    = sprintf("UPDATE jugador SET _05_datModJug    = NOW(),
+														_06_datBaixaJug  = NOW()
+							 		WHERE _06_datBaixaJug IS NULL AND
+								 			(_01_pk_idJug IN ( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
+							       			WHERE _04_loginUsuari = '%s'));",$usrLogin);	
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));				
 				break;
 
 			case CONSULTA_USR_TORNEIGS_5041 :
-				$query    = 'SELECT _01_pk_idTorn AS recid,
-									_01_pk_idTorn AS idTorn,
-									_03_nomTorn AS nomTorn,
-									_01_pk_idJoc AS idJoc,
-									_02_nomJoc AS nomJoc 
-							FROM usuari
-							LEFT JOIN jugador  ON _01_pk_idUsuari = _01_pk_idJug
-							LEFT JOIN inscrit  ON _01_pk_idJug    = _03_pk_idJugInsc
-							INNER JOIN torneig ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
-							INNER JOIN joc     ON _02_pk_idJocTorn = _01_pk_idJoc
-							WHERE 
-								_10_datBaixaUsuari IS NULL AND
-								_09_datBaixaTorn   IS NULL AND
-								_08_datBaixaJoc    IS NULL AND
-								_06_datBaixaInsc   IS NULL AND	
-								_04_datAltaInsc    IS NOT NULL AND
-								_04_loginUsuari = "' . $usrLogin . '" ' . ' ORDER BY nomTorn;';
+				$query    = sprintf("SELECT _01_pk_idTorn AS recid,
+											_01_pk_idTorn AS idTorn,
+											_03_nomTorn   AS nomTorn,
+											_01_pk_idJoc  AS idJoc,
+											_02_nomJoc   AS nomJoc,
+											DATE_FORMAT(_04_datAltaInsc, '%s') AS datAltaInsc,
+											DATE_FORMAT(_05_datModInsc,  '%s') AS datModInsc,
+											DATE_FORMAT(_06_datBaixaInsc,'%s') AS datBaixaInsc											
+									FROM usuari
+										LEFT JOIN jugador  ON _01_pk_idUsuari    = _01_pk_idJug
+										LEFT JOIN inscrit  ON _01_pk_idJug       = _03_pk_idJugInsc
+										INNER JOIN torneig ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
+										INNER JOIN joc     ON _02_pk_idJocTorn   = _01_pk_idJoc
+									WHERE 
+										_10_datBaixaUsuari IS NULL AND
+										_09_datBaixaTorn   IS NULL AND
+										_08_datBaixaJoc    IS NULL AND
+										_04_datAltaInsc    IS NOT NULL AND
+										_04_loginUsuari = '%s' ORDER BY nomTorn;","%d-%m-%Y %H:%i:%s",
+																				  "%d-%m-%Y %H:%i:%s",
+																				  "%d-%m-%Y %H:%i:%s",
+																				  $usrLogin);	
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
 				break;	
 
-			case BAIXA_USR_TORN_5043 :
-				$query    = 'UPDATE inscrit SET _06_datBaixaInsc  = NOW()
-							 WHERE 
-								_06_datBaixaInsc IS NULL AND
-								(_02_pk_idJocInsc IN 
-									( SELECT _02_pk_idJocTorn AS _02_pk_idJocInsc FROM torneig 
-										WHERE _01_pk_idTornInsc = "' . $idTorn . '" )) AND
-		
-								_01_pk_idTornInsc = "' . $idTorn . '" AND
-								(_03_pk_idJugInsc IN 
-									( SELECT _01_pk_idUsuari AS _03_pk_idJugInsc FROM usuari
-										WHERE _04_loginUsuari = "' . $usrLogin . '"));';			
+			case BLOQUEJA_USR_TORN_5043 :
+				$query    = sprintf("UPDATE inscrit SET _05_datModInsc   = NOW(),
+														_06_datBaixaInsc = NOW()
+							 		WHERE 
+										_06_datBaixaInsc IS NULL AND
+										(_02_pk_idJocInsc IN 
+											( SELECT _02_pk_idJocTorn AS _02_pk_idJocInsc FROM torneig 
+												WHERE _01_pk_idTornInsc = '%d' )) AND
+										_01_pk_idTornInsc = '%d' AND
+										(_03_pk_idJugInsc IN 
+											( SELECT _01_pk_idUsuari AS _03_pk_idJugInsc FROM usuari
+												WHERE _04_loginUsuari = '%s'));",$idTorn,$idTorn,$usrLogin);
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));				
 				break;
+			case DESBLOQUEJA_USR_TORN_5044 :
+				$query    = sprintf("UPDATE inscrit SET _05_datModInsc   = NOW(),
+														_06_datBaixaInsc = NULL
+							 		WHERE 
+										_06_datBaixaInsc IS NOT NULL AND
+										(_02_pk_idJocInsc IN 
+											( SELECT _02_pk_idJocTorn AS _02_pk_idJocInsc FROM torneig 
+												WHERE _01_pk_idTornInsc = '%d' )) AND
+										_01_pk_idTornInsc = '%d' AND
+										(_03_pk_idJugInsc IN 
+											( SELECT _01_pk_idUsuari AS _03_pk_idJugInsc FROM usuari
+												WHERE _04_loginUsuari = '%s'));",$idTorn,$idTorn,$usrLogin);
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));				
+				break;				
 			case CONSULTA_USR_RANKING_ACTUAL_5050 :
 				$query    = 'DROP TABLE CC;';
 				$response  = dbExec($query,0);
@@ -1482,7 +1924,7 @@ isEndSessionInQuery();
 							 		_03_nomTorn AS nomTorn,
 						 			idJoc,
 						 			AA.nomJoc,
-						 			_03_pk_idJugRonda AS idJug,
+						 			_03_pk_idJugPart AS idJug,
 						 			BB.nomJug,
 						 			BB.loginJug,
 						 			sum(_07_puntsRonda) AS punts
@@ -1496,25 +1938,56 @@ isEndSessionInQuery();
 									INNER JOIN partida ON ( _02_pk_idMaqTTP = _01_pk_idMaqPart AND
 							  								_03_pk_idJocTTP = _02_pk_idJocPart AND
 							  								_04_pk_idJugTTP = _03_pk_idJugPart )
-									INNER JOIN ronda   ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
-							 								_02_pk_idJocPart = _02_pk_idJocRonda AND
-							 								_03_pk_idJugPart = _03_pk_idJugRonda AND
-							 								_04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )
+									INNER JOIN ronda1  ON (_00_pk_idPart_auto = _01_pk_idPartRonda)
 							WHERE 
 								loginJug <> "admin" AND
 								_02_pk_idJocTorn  = AA.idJoc AND
-								_03_pk_idJugRonda = BB.idUsuari AND
+								_03_pk_idJugPart  = BB.idUsuari AND
 								_06_datBaixaPart IS NULL AND
+								_09_datBaixaRonda IS NULL AND
 								_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart) AND
 								_06_datFinTorn   >= CURDATE()
-		
-							GROUP BY _01_pk_idTorn,_03_pk_idJugRonda
-							ORDER BY _01_pk_idTorn, punts DESC;';
+							GROUP BY idTorn, idJug
+							ORDER BY idTorn, punts DESC;';
+// query amb taula RONDA																					
+				// $query    = 'CREATE TABLE CC  ENGINE=MEMORY
+				// 			SELECT 	_01_pk_idTorn AS idTorn,
+				// 			 		_03_nomTorn AS nomTorn,
+				// 		 			idJoc,
+				// 		 			AA.nomJoc,
+				// 		 			_03_pk_idJugPart AS idJug,
+				// 		 			BB.nomJug,
+				// 		 			BB.loginJug,
+				// 		 			sum(_07_puntsRonda) AS punts
+				// 			FROM 
+				// 				(SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
+				// 				(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug, _04_loginUsuari AS loginJug FROM usuari) AS BB,
+
+				// 				torneig
+				// 					LEFT JOIN torneigTePartida ON (	_01_pk_idTorn = _01_pk_idTornTTP AND
+				// 													_02_pk_idJocTorn = _03_pk_idJocTTP)
+				// 					INNER JOIN partida ON ( _02_pk_idMaqTTP = _01_pk_idMaqPart AND
+				// 			  								_03_pk_idJocTTP = _02_pk_idJocPart AND
+				// 			  								_04_pk_idJugTTP = _03_pk_idJugPart )
+				// 					INNER JOIN ronda   ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
+				// 			 								_02_pk_idJocPart = _02_pk_idJocRonda AND
+				// 			 								_03_pk_idJugPart = _03_pk_idJugRonda AND
+				// 			 								_04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )
+				// 			WHERE 
+				// 				loginJug <> "admin" AND
+				// 				_02_pk_idJocTorn  = AA.idJoc AND
+				// 				_03_pk_idJugPart  = BB.idUsuari AND
+				// 				_06_datBaixaPart IS NULL AND
+				// 				_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart) AND
+				// 				_06_datFinTorn   >= CURDATE()
+				// 			GROUP BY idTorn, idJug
+				// 			ORDER BY idTorn, punts DESC;';
+
 				$response = dbExec($query,0);
 				$response1 = controlErrorQuery($response);				
 				if ( !($response[0]->error) )
 					{					
-					$query    = 'SELECT * FROM
+					$query    = sprintf("SELECT * FROM
 								( 
 								SELECT CC.*, find_in_set(CC.punts,XX.LLISTA_PUNTS) AS ranking, XX.numRK AS totalRanking
 								FROM 
@@ -1526,15 +1999,15 @@ isEndSessionInQuery();
 								WHERE 
 									_06_datBaixaJug  IS NULL AND
 									_09_datBaixaTorn IS NULL AND
-									_06_datBaixaInsc IS NULL AND	
+									_06_datBaixaInsc IS NULL AND
 									_04_datAltaInsc  IS NOT NULL AND		
 									CC.idJug  = _01_pk_idJug AND
 									CC.idTorn = XX.idTorn AND
 									_06_datFinTorn   >= CURDATE() AND
-									CC.loginJug = "' . $usrLogin . '" ) AS ZZ
+									CC.loginJug = '%s' ) AS ZZ
 								WHERE ranking BETWEEN 1 AND 10
 								GROUP BY idTorn, idJug
-								ORDER BY idTorn, ranking;';
+								ORDER BY idTorn, ranking;",$usrLogin);
 					$response  = dbExec($query);	
 					$response1 = controlErrorQuery($response);
 					$query     = 'DROP TABLE CC;';
@@ -1544,13 +2017,13 @@ isEndSessionInQuery();
 				break;	
 			case CONSULTA_USR_RANKING_HISTORIC_5051 :
 				$query    = 'DROP TABLE CC;';
-				$response  = dbExec($query,0);			
+				$response  = dbExec($query,0);
 				$query =	'CREATE TABLE CC  ENGINE=MEMORY
 						 	SELECT 	_01_pk_idTorn AS idTorn,
 							 		_03_nomTorn AS nomTorn,
 						 			idJoc,
 						 			AA.nomJoc,
-						 			_03_pk_idJugRonda AS idJug,
+						 			_03_pk_idJugPart AS idJug,
 						 			BB.nomJug,
 						 			BB.loginJug,
 						 			sum(_07_puntsRonda) AS punts
@@ -1564,24 +2037,53 @@ isEndSessionInQuery();
 									INNER JOIN partida ON ( _02_pk_idMaqTTP = _01_pk_idMaqPart AND
 							  								_03_pk_idJocTTP = _02_pk_idJocPart AND
 							  								_04_pk_idJugTTP = _03_pk_idJugPart )
-									INNER JOIN ronda   ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
-							 								_02_pk_idJocPart = _02_pk_idJocRonda AND
-							 								_03_pk_idJugPart = _03_pk_idJugRonda AND
-							 								_04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )
+									INNER JOIN ronda1  ON (_00_pk_idPart_auto = _01_pk_idPartRonda)
 							WHERE 
 								loginJug <> "admin" AND
 								_02_pk_idJocTorn  = AA.idJoc AND
-								_03_pk_idJugRonda = BB.idUsuari AND
-								_06_datBaixaPart IS NULL AND
+								_03_pk_idJugPart  = BB.idUsuari AND
 								_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart)
+							GROUP BY idTorn, idJug
+							ORDER BY idTorn, punts DESC;';
+// query amb taula RONDA																												
+				// $query =	'CREATE TABLE CC  ENGINE=MEMORY
+				// 		 	SELECT 	_01_pk_idTorn AS idTorn,
+				// 			 		_03_nomTorn AS nomTorn,
+				// 		 			idJoc,
+				// 		 			AA.nomJoc,
+				// 		 			_03_pk_idJugPart AS idJug,
+				// 		 			BB.nomJug,
+				// 		 			BB.loginJug,
+				// 		 			sum(_07_puntsRonda) AS punts
+				// 			FROM 
+				// 				(SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
+				// 				(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug, _04_loginUsuari AS loginJug FROM usuari) AS BB,
+
+				// 				torneig
+				// 					LEFT JOIN torneigTePartida ON (	_01_pk_idTorn = _01_pk_idTornTTP AND
+				// 													_02_pk_idJocTorn = _03_pk_idJocTTP)
+				// 					INNER JOIN partida ON ( _02_pk_idMaqTTP = _01_pk_idMaqPart AND
+				// 			  								_03_pk_idJocTTP = _02_pk_idJocPart AND
+				// 			  								_04_pk_idJugTTP = _03_pk_idJugPart )
+				// 					INNER JOIN ronda   ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
+				// 			 								_02_pk_idJocPart = _02_pk_idJocRonda AND
+				// 			 								_03_pk_idJugPart = _03_pk_idJugRonda AND
+				// 			 								_04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )
+				// 			WHERE 
+				// 				loginJug <> "admin" AND
+				// 				_02_pk_idJocTorn  = AA.idJoc AND
+				// 				_03_pk_idJugPart  = BB.idUsuari AND
+				// 				_06_datBaixaPart IS NULL AND
+				// 				_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart)
 		
-							GROUP BY _01_pk_idTorn,_03_pk_idJugRonda
-							ORDER BY _01_pk_idTorn, punts DESC;';
+				// 			GROUP BY idTorn, idJug
+				// 			ORDER BY idTorn, punts DESC;';
+
 				$response = dbExec($query,0);
 				$response1 = controlErrorQuery($response);				
 				if ( !($response[0]->error) )
 					{				
-					$query = 	'SELECT * FROM
+					$query = sprintf("SELECT * FROM
 								( 
 								SELECT CC.*, find_in_set(CC.punts,XX.LLISTA_PUNTS) AS ranking, XX.numRK AS totalRanking
 								FROM 
@@ -1595,10 +2097,10 @@ isEndSessionInQuery();
 									_09_datBaixaTorn IS NULL AND
 									CC.idJug  = _01_pk_idJug AND
 									CC.idTorn = XX.idTorn AND
-									CC.loginJug = "' . $usrLogin . '" ) AS ZZ
+									CC.loginJug = '%s' ) AS ZZ
 								WHERE ranking BETWEEN 1 AND 10
 								GROUP BY idTorn, idJug
-								ORDER BY idTorn, ranking;';
+								ORDER BY idTorn, ranking;",$usrLogin);
 					$response  = dbExec($query);
 					$response1 = controlErrorQuery($response);
 					$query     = 'DROP TABLE CC;';
@@ -1608,50 +2110,60 @@ isEndSessionInQuery();
 				break;				
 
 			case BAIXA_USR_TORN_5043 :
-				$ret = array("test"=>"val");
-				echo json_encode($ret);
-				// echo "({val:'test'})";
-				break;				
+				$query = sprintf("UPDATE inscrit SET _06_datBaixaInsc  = NOW()
+							   	  WHERE 
+										_06_datBaixaInsc IS NULL AND
+										(_02_pk_idJocInsc IN ( SELECT _02_pk_idJocTorn AS _02_pk_idJocInsc FROM torneig 
+											WHERE _01_pk_idTornInsc = '%d' )) AND
+										_01_pk_idTornInsc = '%d' AND
+										(_03_pk_idJugInsc IN ( SELECT _01_pk_idUsuari AS _03_pk_idJugInsc FROM usuari
+										WHERE _04_loginUsuari = '%s'));",$idTorn, $idTorn, $usrLogin);
+					$response  = dbExec($query);
+					$response1 = controlErrorQuery($response);
+				// $ret = array("test"=>"val");
+				// echo json_encode($ret);
+				// // echo "({val:'test'})";
+				break;
 
 			case CONSULTA_USR_TOTS_TORNEIGS_5061 :
-				$query    = 'SELECT _01_pk_idTorn  AS idTorn,
-									_03_nomTorn    AS nomTorn,
-									_01_pk_idJoc   AS idJoc,
-									_02_nomJoc     AS nomJoc,
-									_04_premiTorn  AS premiTorn,
-									DATE_FORMAT(_05_datIniTorn, "%d-%m-%Y") AS datIniTorn,
-									DATE_FORMAT(_06_datFinTorn, "%d-%m-%Y") AS datFinTorn
-							FROM torneig INNER JOIN joc ON _02_pk_idJocTorn = _01_pk_idJoc
-							WHERE 
-								_09_datBaixaTorn IS NULL AND
-								_06_datFinTorn >= CURDATE() AND
-								_01_pk_idTorn NOT IN
-									(SELECT _01_pk_idTorn
-									FROM usuari
-										LEFT JOIN jugador  ON _01_pk_idUsuari = _01_pk_idJug
-										LEFT JOIN inscrit  ON _01_pk_idJug    = _03_pk_idJugInsc
-										INNER JOIN torneig ON (_01_pk_idTornInsc = _01_pk_idTorn AND
-															   _02_pk_idJocInsc = _02_pk_idJocTorn )
-									WHERE _04_loginUsuari = "' . $usrLogin . '"
-									GROUP BY _01_pk_idTorn)
-							ORDER BY datIniTorn;';
+				$query    = sprintf("SELECT _01_pk_idTorn  AS idTorn,
+											_03_nomTorn    AS nomTorn,
+											_01_pk_idJoc   AS idJoc,
+											_02_nomJoc     AS nomJoc,
+											_04_premiTorn  AS premiTorn,
+											DATE_FORMAT(_05_datIniTorn, '%s') AS datIniTorn,
+											DATE_FORMAT(_06_datFinTorn, '%s') AS datFinTorn
+									FROM torneig
+										INNER JOIN joc ON (_02_pk_idJocTorn = _01_pk_idJoc)
+									WHERE 
+										_09_datBaixaTorn IS NULL AND
+										_06_datFinTorn >= CURDATE() AND
+										_01_pk_idTorn NOT IN
+											(SELECT _01_pk_idTorn
+											FROM usuari
+												LEFT JOIN jugador  ON _01_pk_idUsuari = _01_pk_idJug
+												LEFT JOIN inscrit  ON _01_pk_idJug    = _03_pk_idJugInsc
+												INNER JOIN torneig ON (_01_pk_idTornInsc = _01_pk_idTorn AND
+																	   _02_pk_idJocInsc = _02_pk_idJocTorn )
+											WHERE _04_loginUsuari = '%s' GROUP BY _01_pk_idTorn)
+									ORDER BY datIniTorn;","%d-%m-%Y","%d-%m-%Y",$usrLogin);
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
 				break;				
 
 			case CONSULTA_RANKING_ACTUAL_5070 :
 				$query    = 'DROP TABLE CC;';
-				$response  = dbExec($query,0);			
-				$query    = 'CREATE TABLE CC  ENGINE=MEMORY
+				$response  = dbExec($query,0);
+				$query    = sprintf("CREATE TABLE CC  ENGINE=MEMORY
 							SELECT 	_01_pk_idTorn AS idTorn,
 							 		_03_nomTorn AS nomTorn,
 						 			idJoc,
 						 			AA.nomJoc,
-						 			_03_pk_idJugRonda AS idJug,
+						 			_03_pk_idJugPart AS idJug,
 						 			BB.nomJug,
 						 			BB.loginJug,
 						 			sum(_07_puntsRonda) AS punts,
-						 			IF(BB.nomJug = "' . $usrLogin . '",_01_pk_idTorn,"0") AS idTornInscrit
+						 			IF(BB.nomJug = '%s',_01_pk_idTorn,'0') AS idTornInscrit
 							FROM 
 								(SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
 								(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug, _04_loginUsuari AS loginJug FROM usuari) AS BB,
@@ -1662,20 +2174,51 @@ isEndSessionInQuery();
 									INNER JOIN partida ON ( _02_pk_idMaqTTP = _01_pk_idMaqPart AND
 							  								_03_pk_idJocTTP = _02_pk_idJocPart AND
 							  								_04_pk_idJugTTP = _03_pk_idJugPart )
-									INNER JOIN ronda   ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
-							 								_02_pk_idJocPart = _02_pk_idJocRonda AND
-							 								_03_pk_idJugPart = _03_pk_idJugRonda AND
-							 								_04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )
+									INNER JOIN ronda1  ON (_00_pk_idPart_auto = _01_pk_idPartRonda)
 							WHERE 
-								loginJug <> "admin" AND
+								loginJug <> 'admin' AND
 								_02_pk_idJocTorn  = AA.idJoc AND
-								_03_pk_idJugRonda = BB.idUsuari AND
+								_03_pk_idJugPart  = BB.idUsuari AND
 								_06_datBaixaPart IS NULL AND
+								_09_datBaixaRonda IS NULL AND								
 								_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart) AND
 								_06_datFinTorn   >= CURDATE()
-		
-							GROUP BY _01_pk_idTorn,_03_pk_idJugRonda
-							ORDER BY _01_pk_idTorn, punts DESC;';
+							GROUP BY idTorn, idJug
+							ORDER BY idTorn, punts DESC;",$usrLogin);
+// query amb taula RONDA
+				// $query    = 'CREATE TABLE CC  ENGINE=MEMORY
+				// 			SELECT 	_01_pk_idTorn AS idTorn,
+				// 			 		_03_nomTorn AS nomTorn,
+				// 		 			idJoc,
+				// 		 			AA.nomJoc,
+				// 		 			_03_pk_idJugPart AS idJug,
+				// 		 			BB.nomJug,
+				// 		 			BB.loginJug,
+				// 		 			sum(_07_puntsRonda) AS punts,
+				// 		 			IF(BB.nomJug = "' . $usrLogin . '",_01_pk_idTorn,"0") AS idTornInscrit
+				// 			FROM 
+				// 				(SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
+				// 				(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug, _04_loginUsuari AS loginJug FROM usuari) AS BB,
+
+				// 				torneig
+				// 					LEFT JOIN torneigTePartida ON (	_01_pk_idTorn = _01_pk_idTornTTP AND
+				// 													_02_pk_idJocTorn = _03_pk_idJocTTP)
+				// 					INNER JOIN partida ON ( _02_pk_idMaqTTP = _01_pk_idMaqPart AND
+				// 			  								_03_pk_idJocTTP = _02_pk_idJocPart AND
+				// 			  								_04_pk_idJugTTP = _03_pk_idJugPart )
+				// 					INNER JOIN ronda   ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
+				// 			 								_02_pk_idJocPart = _02_pk_idJocRonda AND
+				// 			 								_03_pk_idJugPart = _03_pk_idJugRonda AND
+				// 			 								_04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )
+				// 			WHERE 
+				// 				loginJug <> "admin" AND
+				// 				_02_pk_idJocTorn  = AA.idJoc AND
+				// 				_03_pk_idJugPart  = BB.idUsuari AND
+				// 				_06_datBaixaPart IS NULL AND
+				// 				_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart) AND
+				// 				_06_datFinTorn   >= CURDATE()
+				// 			GROUP BY idTorn, idJug
+				// 			ORDER BY idTorn, punts DESC;';
 				$response = dbExec($query,0);
 				$response1 = controlErrorQuery($response);				
 				if ( !($response[0]->error) )
@@ -1717,16 +2260,16 @@ isEndSessionInQuery();
 			case CONSULTA_RANKING_HISTORIC_5071 :
 				$query    = 'DROP TABLE CC;';
 				$response  = dbExec($query,0);			
-				$query    = 'CREATE TABLE CC  ENGINE=MEMORY
+				$query    = sprintf("CREATE TABLE CC  ENGINE=MEMORY
 							SELECT 	_01_pk_idTorn AS idTorn,
 							 		_03_nomTorn AS nomTorn,
 						 			idJoc,
 						 			AA.nomJoc,
-						 			_03_pk_idJugRonda AS idJug,
+						 			_03_pk_idJugPart AS idJug,
 						 			BB.nomJug,
 						 			BB.loginJug,
 						 			sum(_07_puntsRonda) AS punts,
-						 			IF(BB.nomJug = "' . $usrLogin . '",_01_pk_idTorn,"0") AS idTornInscrit						 			
+						 			IF(BB.nomJug = '%s',_01_pk_idTorn,'0') AS idTornInscrit						 			
 							FROM 
 								(SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
 								(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug, _04_loginUsuari AS loginJug FROM usuari) AS BB,
@@ -1737,19 +2280,49 @@ isEndSessionInQuery();
 									INNER JOIN partida ON ( _02_pk_idMaqTTP = _01_pk_idMaqPart AND
 							  								_03_pk_idJocTTP = _02_pk_idJocPart AND
 							  								_04_pk_idJugTTP = _03_pk_idJugPart )
-									INNER JOIN ronda   ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
-							 								_02_pk_idJocPart = _02_pk_idJocRonda AND
-							 								_03_pk_idJugPart = _03_pk_idJugRonda AND
-							 								_04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )
+									INNER JOIN ronda1  ON (_00_pk_idPart_auto = _01_pk_idPartRonda)
 							WHERE 
-								loginJug <> "admin" AND
+								loginJug <> 'admin' AND
 								_02_pk_idJocTorn  = AA.idJoc AND
-								_03_pk_idJugRonda = BB.idUsuari AND
-								_06_datBaixaPart IS NULL AND
+								_03_pk_idJugPart  = BB.idUsuari AND
 								_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart)
 		
-							GROUP BY _01_pk_idTorn,_03_pk_idJugRonda
-							ORDER BY _01_pk_idTorn, punts DESC;';
+							GROUP BY idTorn, idJug
+							ORDER BY idTorn, punts DESC;",$usrLogin);
+// query amb taula RONDA							
+				// $query    = 'CREATE TABLE CC  ENGINE=MEMORY
+				// 			SELECT 	_01_pk_idTorn AS idTorn,
+				// 			 		_03_nomTorn AS nomTorn,
+				// 		 			idJoc,
+				// 		 			AA.nomJoc,
+				// 		 			_03_pk_idJugPart AS idJug,
+				// 		 			BB.nomJug,
+				// 		 			BB.loginJug,
+				// 		 			sum(_07_puntsRonda) AS punts,
+				// 		 			IF(BB.nomJug = "' . $usrLogin . '",_01_pk_idTorn,"0") AS idTornInscrit						 			
+				// 			FROM 
+				// 				(SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
+				// 				(SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug, _04_loginUsuari AS loginJug FROM usuari) AS BB,
+
+				// 				torneig
+				// 					LEFT JOIN torneigTePartida ON (	_01_pk_idTorn = _01_pk_idTornTTP AND
+				// 													_02_pk_idJocTorn = _03_pk_idJocTTP)
+				// 					INNER JOIN partida ON ( _02_pk_idMaqTTP = _01_pk_idMaqPart AND
+				// 			  								_03_pk_idJocTTP = _02_pk_idJocPart AND
+				// 			  								_04_pk_idJugTTP = _03_pk_idJugPart )
+				// 					INNER JOIN ronda   ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
+				// 			 								_02_pk_idJocPart = _02_pk_idJocRonda AND
+				// 			 								_03_pk_idJugPart = _03_pk_idJugRonda AND
+				// 			 								_04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )
+				// 			WHERE 
+				// 				loginJug <> "admin" AND
+				// 				_02_pk_idJocTorn  = AA.idJoc AND
+				// 				_03_pk_idJugPart = BB.idUsuari AND
+				// 				_06_datBaixaPart IS NULL AND
+				// 				_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart)
+		
+				// 			GROUP BY idTorn, idJug
+				// 			ORDER BY idTorn, punts DESC;';							
 				$response = dbExec($query,0);
 				$response1 = controlErrorQuery($response);				
 				if ( !($response[0]->error) )
@@ -1786,54 +2359,43 @@ isEndSessionInQuery();
 				break;				
 
 			case INSCRIPCIO_USR_TORNEIG_5063 :
-					$query = 'SELECT _01_pk_idUsuari INTO @IDJUG 
-							  FROM usuari 
-							  WHERE _04_loginUsuari = "' . $usrLogin . '";';
+					$query = sprintf("SELECT _01_pk_idUsuari INTO @IDJUG 
+							  			FROM usuari 
+							  			WHERE _04_loginUsuari = '%s';",$usrLogin);
 					$response  = dbExec($query,0);
-					$query = 'INSERT INTO inscrit 
-										(_00_pk_idInsc_auto,
-										 _01_pk_idTornInsc,
-										 _02_pk_idJocInsc,
-										 _03_pk_idJugInsc,
-										 _04_datAltaInsc)
-							  VALUES (NULL,
-							  		  "$idTorn",
-							  		  "$idJoc",
-							  		  @IDJUG,
-							  		  NOW());';
+					$query = sprintf("INSERT INTO inscrit 
+											VALUES (NULL,'%d','%d',@IDJUG,NOW(),NULL,NULL);",$idTorn,$idJoc);
 				$response  = dbExec($query,0);
 				echo json_encode( $response );		
 				break;				
 
 			case PARTIDES_RELACIO_TORNEIGS_6000 :
-				$query    = 'SELECT _01_pk_idMaq    AS idMaq,
-									_02_macMaq      AS macMaq,
-									_01_pk_idJoc    AS idJoc,
-									_02_nomJoc      AS nomJoc,
-									_01_pk_idUsuari AS idJug,
-									_04_loginUsuari AS loginUsuari,
-									_01_pk_idTorn   AS idTorn,
-									_03_nomTorn     AS nomTorn
-							FROM usuari
-								LEFT JOIN jugador    ON _01_pk_idUsuari = _01_pk_idJug
-								LEFT JOIN inscrit    ON _01_pk_idJug    = _03_pk_idJugInsc
-								INNER JOIN torneig   ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
-								INNER JOIN joc       ON _02_pk_idJocTorn = _01_pk_idJoc
-								LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
-								INNER JOIN maquina   ON _01_pk_idMaqInst = _01_pk_idMaq
-							WHERE 
-									_10_datBaixaUsuari   IS NULL AND
-									_09_datBaixaTorn     IS NULL AND
-									_08_datBaixaJoc      IS NULL AND
-									_06_datBaixaInsc     IS NULL AND	
-									_08_datBaixaMaqInst  IS NULL AND
-									_08_datBaixaMaq      IS NULL AND
-									_04_datAltaInsc      IS NOT NULL AND
-									(_04_loginUsuari =  "' . $usrLogin .'") and 
-									(_03_nomTorn = "' .$opcio .'")
-
-							ORDER BY nomTorn,idJoc,idMaq,idJug;';
-			 
+				$query    = sprintf("SELECT _01_pk_idMaq    AS idMaq,
+											_02_macMaq      AS macMaq,
+											_01_pk_idJoc    AS idJoc,
+											_02_nomJoc      AS nomJoc,
+											_01_pk_idUsuari AS idJug,
+											_04_loginUsuari AS loginUsuari,
+											_01_pk_idTorn   AS idTorn,
+											_03_nomTorn     AS nomTorn
+									FROM usuari
+										LEFT JOIN jugador    ON _01_pk_idUsuari    = _01_pk_idJug
+										LEFT JOIN inscrit    ON _01_pk_idJug       = _03_pk_idJugInsc
+										INNER JOIN torneig   ON (_01_pk_idTornInsc = _01_pk_idTorn AND _02_pk_idJocInsc = _02_pk_idJocTorn )
+										INNER JOIN joc       ON _02_pk_idJocTorn   = _01_pk_idJoc
+										LEFT JOIN maqInstall ON _01_pk_idJoc       = _02_pk_idJocInst
+										INNER JOIN maquina   ON _01_pk_idMaqInst   = _01_pk_idMaq
+									WHERE 
+											_10_datBaixaUsuari   IS NULL AND
+											_09_datBaixaTorn     IS NULL AND
+											_08_datBaixaJoc      IS NULL AND
+											_06_datBaixaInsc     IS NULL AND	
+											_08_datBaixaMaqInst  IS NULL AND
+											_08_datBaixaMaq      IS NULL AND
+											_04_datAltaInsc      IS NOT NULL AND
+											_04_loginUsuari = '%s' AND
+											_03_nomTorn     = '%d'
+									ORDER BY nomTorn,idJoc,idMaq,idJug;",$usrLogin,$opcio);
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
 				break;							

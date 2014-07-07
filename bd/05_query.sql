@@ -44,7 +44,8 @@ WHERE
 /* 3.g.i.3 - 4020 - anul.lar / bloquejar jugador / usuari */
 /***********************************************************************************************/
 
-UPDATE usuari SET _10_datBaixaUsuari = NOW()
+UPDATE usuari SET  _09_datModUsuari   = NOW(),
+					 	 _10_datBaixaUsuari = NOW()
 WHERE 
 		_10_datBaixaUsuari IS NULL AND
 		
@@ -52,7 +53,8 @@ WHERE
 	
 		_04_loginUsuari = "$login";		
 
-UPDATE jugador SET _06_datBaixaJug  = NOW()
+UPDATE jugador SET _05_datModJug   = NOW(),
+						 _06_datBaixaJug = NOW()
 WHERE
 		 _06_datBaixaJug IS NULL AND
 		 
@@ -184,9 +186,8 @@ WHERE
 		_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart) AND
 		_06_datFinTorn   >= CURDATE()
 		
-GROUP BY _01_pk_idTorn,_03_pk_idJugRonda
+GROUP BY _01_pk_idTorn,_03_pk_idJugPart
 ORDER BY _01_pk_idTorn, punts DESC;
-
 
 SELECT * FROM
 ( 
@@ -207,8 +208,9 @@ WHERE
 		
 ) AS ZZ
 WHERE ranking BETWEEN 1 AND 10
-GROUP BY idJug, idTorn 
-ORDER BY idJug, idTorn, ranking;
+
+GROUP BY idTorn, idJug
+ORDER BY idTorn, punts DESC;
 
 DROP TABLE CC;
 

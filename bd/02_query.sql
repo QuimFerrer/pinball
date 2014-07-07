@@ -71,7 +71,6 @@ COMMIT;
 
 */
 
-
 /************************************************************************************/
 /* 3.b.1 - 3110 - llistar partides per màquina  */
 /************************************************************************************/
@@ -141,7 +140,8 @@ ORDER BY idUser, idJoc, idMaq,  datHoraPartida
 /************************************************************************************/
 
 
-UPDATE partida SET _06_datBaixaPart  = NOW()
+UPDATE partida SET _05_datModPart  = NOW(),
+						 _06_datBaixaPart  = NOW()
 WHERE 
 		_06_datBaixaPart IS NULL AND
 		
@@ -163,7 +163,8 @@ SELECT * FROM PARTIDA;
 /* 3.b.4 - 3140 - desanul.lar / desbloquejar  partides   */
 /************************************************************************************/
 
-UPDATE partida SET _06_datBaixaPart  = NULL
+UPDATE partida SET _05_datModPart  = NOW(),
+						_06_datBaixaPart  = NULL
 WHERE 
 		_06_datBaixaPart IS NOT NULL AND
 		
@@ -179,6 +180,121 @@ WHERE
 		_00_pk_idPart_auto = "1";
 
 */
+
+
+/************************************************************************************/
+/* 3.b.5 - 3150 - Modificació de rondes de partides*/
+/************************************************************************************/
+
+
+UPDATE ronda SET _06_fotoJugRonda = "$fotoJug",
+		   		  _07_puntsRonda   = "$puntsRonda",
+					  _08_datModRonda  = NOW()
+WHERE
+		_09_datBaixaRonda IS NULL AND
+		_00_pk_idRonda_auto = "$idRonda";
+
+
+/************************************************************************************/
+/* 3.b.6 - 3160 - llistar rondes de partides per manteniment*/
+/************************************************************************************/
+
+SELECT _01_pk_idTorn AS idTorn, _03_nomTorn AS nomTorn, _04_premiTorn AS premiTorn,
+_02_pk_idJocTorn AS idJoc, JJ.nomJoc AS nomJoc,_02_pk_idMaqTTP AS idMaq,
+BB.idUsuari AS idUser, BB.loginUsuari AS loginUser, BB.nomUsuari AS nomUser,
+_00_pk_idPArt_auto AS idPart,
+DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
+_05_pk_idRonda AS rondaPart, _06_fotoJugRonda   AS fotoJugRonda,_07_puntsRonda AS punts
+
+FROM
+torneig
+LEFT JOIN torneigTePartida ON (_01_pk_idTorn = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
+INNER JOIN partida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
+							  _03_pk_idJocTTP = _02_pk_idJocPart AND
+							  _04_pk_idJugTTP = _03_pk_idJugPart )
+INNER JOIN ronda ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
+							 _02_pk_idJocPart = _02_pk_idJocRonda AND
+							 _03_pk_idJugPart = _03_pk_idJugRonda AND
+							 _04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda ),
+
+(SELECT _01_pk_idUsuari AS idUsuari, _02_nomUsuari AS nomUsuari, _04_loginUsuari AS loginUsuari FROM usuari) AS BB,
+
+(SELECT _01_pk_idJoc, _02_nomJoc AS nomJoc FROM joc) AS JJ
+
+WHERE
+	BB.idUsuari     = _03_pk_idJugPart AND
+	JJ._01_pk_idJoc = _02_pk_idJocPart AND
+		_09_datBaixaTorn IS NULL AND
+	_06_datBaixaPart IS NULL
+		
+GROUP BY idTorn, idUsuari, idMaq, datHoraPartida, idPart, rondaPart
+ORDER BY idTorn, idUsuari, idMaq, datHoraPartida, idPart, rondaPart;
+
+/******************************/
+
+SELECT _01_pk_idTorn AS idTorn, _03_nomTorn AS nomTorn, _04_premiTorn AS premiTorn,
+_02_pk_idJocTorn AS idJoc, JJ.nomJoc AS nomJoc,_02_pk_idMaqTTP AS idMaq,
+BB.idUsuari AS idUser, BB.loginUsuari AS loginUser, BB.nomUsuari AS nomUser,
+_00_pk_idPArt_auto AS idPart,
+DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
+_05_pk_idRonda AS rondaPart, _06_fotoJugRonda   AS fotoJugRonda,_07_puntsRonda AS punts
+
+FROM
+torneig
+LEFT JOIN torneigTePartida ON (_01_pk_idTorn = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
+INNER JOIN partida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
+							  _03_pk_idJocTTP = _02_pk_idJocPart AND
+							  _04_pk_idJugTTP = _03_pk_idJugPart )
+INNER JOIN ronda1 ON ( _00_pk_idPart_auto = _01_pk_idPartRonda ),
+
+(SELECT _01_pk_idUsuari AS idUsuari, _02_nomUsuari AS nomUsuari, _04_loginUsuari AS loginUsuari FROM usuari) AS BB,
+
+(SELECT _01_pk_idJoc, _02_nomJoc AS nomJoc FROM joc) AS JJ
+
+WHERE
+	BB.idUsuari     = _03_pk_idJugPart AND
+	JJ._01_pk_idJoc = _02_pk_idJocPart AND
+		_09_datBaixaTorn IS NULL AND
+	_06_datBaixaPart IS NULL
+		
+GROUP BY idTorn, idUsuari, idMaq, datHoraPartida, idPart, rondaPart
+ORDER BY idTorn, idUsuari, idMaq, datHoraPartida, idPart, rondaPart;
+
+
+/************************************************************************************/
+/* 3.b.7 - 3170 - llistar partides rondes de partides HISTÒRIC  */
+/************************************************************************************/
+
+SELECT _01_pk_idTorn AS idTorn, _03_nomTorn AS nomTorn, _04_premiTorn AS premiTorn,
+_02_pk_idJocTorn AS idJoc, JJ.nomJoc AS nomJoc,_02_pk_idMaqTTP AS idMaq,
+BB.idUsuari AS idUser, BB.loginUsuari AS loginUser, BB.nomUsuari AS nomUser,
+_00_pk_idPArt_auto AS idPart,
+DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
+_05_pk_idRonda AS rondaPart, _06_fotoJugRonda AS fotoJugRonda, _07_puntsRonda AS punts,
+DATE_FORMAT(_05_datModPart, "%d-%m-%Y %H:%i:%s") AS datModPart,
+DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y %H:%i:%s") AS datBaixaPart
+
+FROM
+torneig
+LEFT JOIN torneigTePartida ON (_01_pk_idTorn = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
+INNER JOIN partida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
+							  _03_pk_idJocTTP = _02_pk_idJocPart AND
+							  _04_pk_idJugTTP = _03_pk_idJugPart )
+INNER JOIN ronda ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
+							 _02_pk_idJocPart = _02_pk_idJocRonda AND
+							 _03_pk_idJugPart = _03_pk_idJugRonda AND
+							 _04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda ),
+
+(SELECT _01_pk_idUsuari AS idUsuari, _02_nomUsuari AS nomUsuari, _04_loginUsuari AS loginUsuari FROM usuari) AS BB,
+
+(SELECT _01_pk_idJoc, _02_nomJoc AS nomJoc FROM joc) AS JJ
+
+WHERE
+	BB.idUsuari     = _03_pk_idJugRonda AND
+	JJ._01_pk_idJoc = _02_pk_idJocRonda
+		
+GROUP BY idTorn, idUsuari, idMaq, datHoraPartida, idPart, rondaPart
+ORDER BY idTorn, idUsuari, idMaq, datHoraPartida, idPart, rondaPart;
 
 
 /************************************************************************************/
@@ -340,7 +456,7 @@ ORDER BY idJoc,idMaq;
 SELECT _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc, _01_pk_idMaq AS idMaq, _02_macMaq AS macMaq,
 _03_numPartidesJugadesMaqInst AS numPartides, _05_totCredJocMaqInst AS totalCredit,
 DATE_FORMAT(_06_datAltaJoc,  "%d-%m-%Y %H:%i:%s") AS datAltaJoc,
-DATE_FORMAT(_07_datModJoc, "%d-%m-%Y %H:%i:%s")   AS datModJoc,
+DATE_FORMAT(_07_datModJoc,   "%d-%m-%Y %H:%i:%s") AS datModJoc,
 DATE_FORMAT(_08_datBaixaJoc, "%d-%m-%Y %H:%i:%s") AS datBaixaJoc
 
 FROM joc
@@ -451,25 +567,31 @@ GROUP BY idTorn,idMaq;
 /* incloent els torneigs amb cap jugador registrat
 /***********************************************************************************************/
 
-SELECT _01_pk_idTorn AS idTorn, _03_nomTorn AS nomTorn, _04_premiTorn AS premiTorn, _02_pk_idJocTorn AS idJoc,
-BB.nomJoc AS nomJoc, _01_pk_idJug AS idUser, _04_loginUsuari AS loginUser, _02_nomUsuari AS nomUser,
-DATE_FORMAT(_05_datIniTorn, "%d-%m-%Y") AS datIniTorn,
-DATE_FORMAT(_06_datFinTorn, "%d-%m-%Y") AS datFinTorn
+SELECT _01_pk_idTorn AS idTorn, _03_nomTorn AS nomTorn, _04_premiTorn AS premiTorn,
+_02_pk_idJocTorn AS idJoc, BB.nomJoc AS nomJoc,
+_01_pk_idJug AS idUser, _04_loginUsuari AS loginUser, _02_nomUsuari AS nomUser,
+DATE_FORMAT(_05_datIniTorn,  "%d-%m-%Y") AS datIniTorn,
+DATE_FORMAT(_06_datFinTorn,  "%d-%m-%Y") AS datFinTorn,
+DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn
 
 FROM
-
-(SELECT _02_nomJoc AS nomJoc FROM joc) AS BB,
 
 torneig
 LEFT JOIN inscrit  ON (_01_pk_idTorn = _01_pk_idTornInsc  AND _02_pk_idJocTorn = _02_pk_idJocInsc )
 INNER JOIN jugador ON _01_pk_idJug  = _03_pk_idJugInsc
-INNER JOIN usuari  ON _01_pk_idJug  = _01_pk_idUsuari
+INNER JOIN usuari  ON _01_pk_idJug  = _01_pk_idUsuari,
 
-WHERE 
+(SELECT _01_pk_idJoc, _02_nomJoc AS nomJoc FROM joc) AS BB
+
+WHERE
+	_02_pk_idJocTorn = BB._01_pk_idJoc AND
 	_09_datBaixaTorn   IS NULL AND
 	_10_datBaixaUsuari IS NULL
 	
 ORDER BY idTorn, idUser;
+
+
 
 
 /***********************************************************************************************/
@@ -477,22 +599,26 @@ ORDER BY idTorn, idUser;
 /* incloent els torneigs amb cap jugador registrat. Històric
 /***********************************************************************************************/
 
-SELECT _01_pk_idTorn AS idTorn, _03_nomTorn AS nomTorn, _04_premiTorn AS premiTorn, _02_pk_idJocTorn AS idJoc,
-BB.nomJoc AS nomJoc, _01_pk_idJug AS idUser, _04_loginUsuari AS loginUser, _02_nomUsuari AS nomUser,
-DATE_FORMAT(_05_datIniTorn, "%d-%m-%Y") AS datIniTorn,
-DATE_FORMAT(_06_datFinTorn, "%d-%m-%Y") AS datFinTorn,
-DATE_FORMAT(_09_datBaixaTorn, "%d-%m-%Y") AS datBaixaTorn,
-DATE_FORMAT(_10_datBaixaUsuari, "%d-%m-%Y") AS datBaixaUser
+SELECT _01_pk_idTorn AS idTorn, _03_nomTorn AS nomTorn, _04_premiTorn AS premiTorn,
+_02_pk_idJocTorn AS idJoc, BB.nomJoc AS nomJoc,
+_01_pk_idJug AS idUser, _04_loginUsuari AS loginUser, _02_nomUsuari AS nomUser,
+DATE_FORMAT(_05_datIniTorn,  "%d-%m-%Y") AS datIniTorn,
+DATE_FORMAT(_06_datFinTorn,  "%d-%m-%Y") AS datFinTorn,
+DATE_FORMAT(_09_datBaixaTorn, "%d-%m-%Y %H:%i:%s") AS datBaixaTorn,
+DATE_FORMAT(_10_datBaixaUsuari, "%d-%m-%Y %H:%i:%s") AS datBaixaUser
 
 FROM
-
-(SELECT _02_nomJoc AS nomJoc FROM joc) AS BB,
 
 torneig
 LEFT JOIN inscrit  ON (_01_pk_idTorn = _01_pk_idTornInsc  AND _02_pk_idJocTorn = _02_pk_idJocInsc )
 INNER JOIN jugador ON _01_pk_idJug  = _03_pk_idJugInsc
-INNER JOIN usuari  ON _01_pk_idJug  = _01_pk_idUsuari
+INNER JOIN usuari  ON _01_pk_idJug  = _01_pk_idUsuari,
 
+(SELECT _01_pk_idJoc, _02_nomJoc AS nomJoc FROM joc) AS BB
+
+WHERE
+	_02_pk_idJocTorn = BB._01_pk_idJoc
+	
 ORDER BY idTorn, idUser;
 
 
@@ -508,7 +634,7 @@ DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida
 
 FROM
 (SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug FROM usuari) AS BB,
-(SELECT _02_nomJoc AS nomJoc FROM joc) AS CC,
+(SELECT _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc FROM joc) AS CC,
 torneig
 LEFT JOIN torneigTePartida ON (_01_pk_idTorn = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
 INNER JOIN partida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
@@ -520,6 +646,8 @@ INNER JOIN ronda ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
 							 _04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )						  
 
 WHERE 
+	BB.idUsuari = _03_pk_idJugPart AND
+	CC.idJoc    = _02_pk_idJocPart AND
 	_09_datBaixaTorn IS NULL AND
 	_06_datBaixaPart IS NULL
 	
@@ -537,12 +665,12 @@ SELECT _01_pk_idTorn AS idTorn, _03_nomTorn AS nomTorn, _04_premiTorn AS premiTo
 _02_pk_idJocTorn AS idJoc, CC.nomJoc AS nomJoc, _02_pk_idMaqTTP AS idMaq, BB.idUsuari AS idUser, BB.nomJug AS nomUser,
 _05_pk_idRonda AS rondaPart, _07_puntsRonda AS punts,
 DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
-DATE_FORMAT(_09_datBaixaTorn, "%d-%m-%Y") AS datBaixaTorn,
-DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y") AS datBaixaPart
+DATE_FORMAT(_09_datBaixaTorn, "%d-%m-%Y %H:%i:%s") AS datBaixaTorn,
+DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y %H:%i:%s") AS datBaixaPart
 
 FROM
 (SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug FROM usuari) AS BB,
-(SELECT _02_nomJoc AS nomJoc FROM joc) AS CC,
+(SELECT _01_pk_idJoc AS idJoc, _02_nomJoc AS nomJoc FROM joc) AS CC,
 torneig
 LEFT JOIN torneigTePartida ON (_01_pk_idTorn = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
 INNER JOIN partida ON (_02_pk_idMaqTTP = _01_pk_idMaqPart AND
@@ -552,7 +680,11 @@ INNER JOIN ronda ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
 							 _02_pk_idJocPart = _02_pk_idJocRonda AND
 							 _03_pk_idJugPart = _03_pk_idJugRonda AND
 							 _04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda )						  
-	
+WHERE
+
+	BB.idUsuari = _03_pk_idJugPart AND
+	CC.idJoc    = _02_pk_idJocPart
+
 GROUP BY idTorn,idMaq,idUsuari,datHoraPartida,rondaPart
 ORDER BY idTorn,idMaq,idUsuari,datHoraPartida,rondaPart;
 

@@ -100,7 +100,7 @@ var dbGrid = function() {
             fnOnLoad = function(target, eventData) {
                 console.log(eventData.xhr.responseText);
                 var result = JSON.parse(eventData.xhr.responseText);
-
+                
                 if (typeof result  != 'undefined') {
                     if (result.cmd == 'delete' && result.success)  {
                         grid.remove.apply(grid, grid.getSelection());
@@ -220,14 +220,18 @@ var dbForm = function() {
                 //     }
 
                 if (eventData.status == "success") {
-                    console.log(eventData.xhr.responseText);
+                    // console.log(eventData.xhr.responseText);
                     var result = JSON.parse(eventData.xhr.responseText);
                     
                     console.log(result, this.record, recno);
                     
                     if (result.rows == 1) {
                         if (recno > 0) {
-                            grid.set(result.recid, this.record, true);
+                            // canviat el 5-7-14 per jjft per que no actualitza
+                            // correctament les dates en taula torneig (datIniTorn, datFinTorn) un
+                            // cop fet INSERT
+                            grid.reload();  
+                            // grid.set(result.recid, this.record, true);
                         } else  {
                             this.record.recid = result.recid;
                             this.record[pkName] = result.recid;                            

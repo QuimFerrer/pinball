@@ -77,7 +77,7 @@ $(function () {
 			},
 			save: function() {
 				var self = this;
-				this.save( {pid:1000}, function(e) {
+				this.save( {pid:1010}, function(e) {
 					console.log(e);
 					w2alert('Gràcies per la teva col.laboració', 'Missatge');
 					self.clear();

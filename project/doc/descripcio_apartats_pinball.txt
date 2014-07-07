@@ -18,8 +18,10 @@ Varis
 16. gestió de reset password
 --> ok. <-- 17. revisar query 3110
 18. incloure errors d'apertura de base de dades del pinball.h en la gestió d'errors
-
-
+19. possibilitat d'ordenar per columnes al grid clicant a la columna.
+20. incloure altes de partides
+21. REVISAR. he incorporat el codi de joc al manteniment de torneigs al fer alta i modificació
+22. REVISAR. he incorporat el codi de màquina i joc al manteniment de macInst (està comentat)
 
 Recreatius
 
@@ -92,6 +94,10 @@ Zona d'usuari
 		2. ( 02_query.sql ) 3120 - llistar partides per jugador
 		3. ( 02_query.sql ) 3130 - anul.lar / bloquejar
 		4. ( 02_query.sql ) 3140 - desanul.lar / desbloquejar)
+		5. ( 02_query.sql ) 3150 - modificar rondes de cada partida
+		6. ( 02_query.sql ) 3160 - llistar rondes de cada partida per manteniment		
+		7. ( 02_query.sql ) 3170 - llistar rondes de cada partida. Històric				
+
 
 	c. JOCS. gestió de jocs:
 		1. ( 02_query.sql ) 3230 - Llistat de jocs
@@ -154,9 +160,9 @@ Zona d'usuari
 			7. ( 04_query.sql ) 3870 - Llistat d'empreses d'ubicacions per provincia, població, cp amb les seves dades de contacte
 		ii. Gestió de màquines a les ubicacions
 			1. ( 04_query.sql ) 3880 - Alta de l'associació d'una màquina a una ubicació
-			2. ( 04_query.sql ) 3890 - Baixa de l'associació d'una màquina a una ubicació
-			3. ( 04_query.sql ) 3900 - Modificació de les dades de l'associació d'una màquina a una ubicació
-			4. ( 04_query.sql ) 3910 - Canvi d'ubicació d'una màquina
+			2. ( 04_query.sql ) 3900 - Bloqueig de l'associació d'una màquina a una ubicació
+			3. ( 04_query.sql ) 3905 - Desbloqueig de les dades de l'associació d'una màquina a una ubicació
+			4. ( 04_query.sql ) 3910 - (SENSE US) Canvi d'ubicació d'una màquina
 			5. ( 04_query.sql ) 3930 - Llistat de màquines de cada ubicació (provincia, població, cp)
 			6. ( 04_query.sql ) 3940 - Llistat de màquines de cada ubicació (lat, long, alt)
 			7. ( 04_query.sql ) 3950 - Llistat de màquines de cada empresa on estan ubicades les màquines 

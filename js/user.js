@@ -49,39 +49,69 @@ var controller = function(e) {
 		case '5041':
             toolbar = { 
                 items: [
-	                { type: 'button', id: 'del',  caption: 'baixa', img: 'icon-delete' }
+	                { type: 'button', id: 'lock',    caption: 'desactivar',  img: 'icon-delete' },
+	                { type: 'button', id: 'unlock',  caption: 'activar',     img: 'icon-edit' }	                
 	            ],
                 onClick: function(target, data) {
 			        var row = w2ui['grid'].getSelection();
+				    if (row.length != 0)
+				    	{
+				    	// console.log(row);
+				    	switch(target)
+				    		{
+				    		case 'lock':
+					        	var params ={pid: "5043", idTorn: row[0]};
+						     	msgAction("Anul.lar l'inscripció a un Torneig", 'Estàs segur ?', "query.php", params);
+					        	break;
+					        case 'unlock':
+					        	var params ={pid: "5044", idTorn: row[0]};					        
+						     	msgAction("Recuperar l'inscripció d'un Torneig", 'Estàs segur ?', "query.php", params);
+					        	break;
+					        default:
+					        	console.log(target , " No definit");
+					        	break;
+					        }
+				    	}
+				    }
+      			};		
+        //     toolbar = { 
+        //         items: [
+	       //          { type: 'button', id: 'del',  caption: 'baixa', img: 'icon-delete' }
+	       //      ],
+        //         onClick: function(target, data) {
+			     //    var row = w2ui['grid'].getSelection();
 
-			        if (row.length != 0) {
-			            w2confirm('Estas segur ?', "Donar-te de baixa del torneig", 
-			            function (msg) { 
+			     //    if (row.length != 0) {
+			     //        w2confirm('Estas segur ?', "Donar-te de baixa del torneig", 
+			     //        function (msg) { 
 
-			                if (msg=='Yes') {
-								w2ui['grid'].lock('Actualitzant dades ...', true);
+			     //            if (msg=='Yes') {
+								// w2ui['grid'].lock('Actualitzant dades ...', true);
 
-								$.ajax({url: "query.php", data: {pid: "5043", idTorn: row[0]}})
-								.done(function(e) {
-									// console.log(e);
-				                    w2ui['grid'].reload();
-								})
-								.fail(function(error) { 
-									// console.log(error);	
-								})
-								.always(function() { 
-									w2ui['grid'].unlock();
-								});
-			                }
-			            })
-			        }  
-                }
-            };
+								// $.ajax({url: "query.php", data: {pid: "5043", idTorn: row[0]}})
+								// .done(function(e) {
+								// 	// console.log(e);
+				    //                 w2ui['grid'].reload();
+								// })
+								// .fail(function(error) { 
+								// 	// console.log(error);	
+								// })
+								// .always(function() { 
+								// 	w2ui['grid'].unlock();
+								// });
+			     //            }
+			     //        })
+			     //    }  
+        //         }
+        //     };            
 			columns = [
-				{ field: 'idTorn',  caption: 'Torneig', size: '25%' },
-				{ field: 'nomTorn', caption: 'Nom',     size: '25%' },
-				{ field: 'idJoc',   caption: 'Joc',     size: '25%' },
-				{ field: 'nomJoc',  caption: 'Nom joc', size: '25%' }
+				{ field: 'idTorn',       caption: 'Torneig',     size: '25%' },
+				{ field: 'nomTorn',      caption: 'Nom',         size: '25%' },
+				{ field: 'idJoc',        caption: 'Joc',         size: '25%' },
+				{ field: 'nomJoc',       caption: 'Nom joc',     size: '25%' },
+				{ field: 'datAltaInsc',  caption: 'Data Alta',  size: '16%' },
+				{ field: 'datModInsc',   caption: 'Data Modif.',  size: '16%' },
+				{ field: 'datBaixaInsc', caption: 'Data Baixa',  size: '16%' }				
 			];
 	    	DataGrid("Torneigs als que estic inscrit", false, toolbar, columns, e.target);
 		    break;

@@ -226,7 +226,7 @@ WHERE
 
 
 CREATE TABLE CC  ENGINE=MEMORY
-SELECT _01_pk_idTorn as idTorn,_03_nomTorn as nomTorn, idJoc, aa.nomJoc,_03_pk_idJugRonda as idJug ,
+SELECT _01_pk_idTorn as idTorn,_03_nomTorn as nomTorn, idJoc, aa.nomJoc,_03_pk_idJugPart as idJug ,
 BB.nomJug, BB.loginJug, sum(_07_puntsRonda) AS punts FROM 
 (SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
 (SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug, _04_loginUsuari AS loginJug FROM usuari) AS BB,
@@ -242,13 +242,13 @@ INNER JOIN ronda ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
 WHERE 
 		loginJug <> "admin" AND
 		_02_pk_idJocTorn  = AA.idJoc AND
-		_03_pk_idJugRonda = BB.idUsuari AND
+		_03_pk_idJugPart  = BB.idUsuari AND
 		_06_datBaixaPart IS NULL AND
 		_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart) AND
 		_06_datFinTorn   >= CURDATE()
 		
-GROUP BY _01_pk_idTorn,_03_pk_idJugRonda
-ORDER BY _01_pk_idTorn, punts DESC;
+GROUP BY idTorn, idJug
+ORDER BY idTorn, punts DESC;
 
 
 SELECT * FROM
@@ -270,7 +270,7 @@ WHERE
 		/* canviar el login del jugador */
 		
 		_06_datFinTorn   >= CURDATE() AND
-		CC.loginJug = "$login"
+		CC.loginJug = "joan"
 		
 ) AS ZZ
 WHERE ranking BETWEEN 1 AND 10
@@ -289,7 +289,7 @@ DROP TABLE CC;
 
 
 CREATE TABLE CC  ENGINE=MEMORY
-SELECT _01_pk_idTorn as idTorn,_03_nomTorn as nomTorn, idJoc, aa.nomJoc,_03_pk_idJugRonda as idJug ,
+SELECT _01_pk_idTorn as idTorn,_03_nomTorn as nomTorn, idJoc, aa.nomJoc,_03_pk_idJugPart as idJug ,
 BB.nomJug, BB.loginJug, sum(_07_puntsRonda) AS punts FROM 
 (SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
 (SELECT _01_pk_idUsuari AS idUsuari ,_02_nomUsuari AS nomJug, _04_loginUsuari AS loginJug FROM usuari) AS BB,
@@ -305,12 +305,12 @@ INNER JOIN ronda ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
 WHERE 
 		loginJug <> "admin" AND
 		_02_pk_idJocTorn  = AA.idJoc AND
-		_03_pk_idJugRonda = BB.idUsuari AND
+		_03_pk_idJugPart  = BB.idUsuari AND
 		_06_datBaixaPart IS NULL AND
 		_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart)
 
-GROUP BY _01_pk_idTorn,_03_pk_idJugRonda
-ORDER BY _01_pk_idTorn, punts DESC;
+GROUP BY idTorn, idJug
+ORDER BY idTorn, punts DESC;
 
 
 SELECT * FROM
@@ -329,7 +329,7 @@ WHERE
 		
 	/* canviar el login del jugador */
 	
-		CC.loginJug = "$login"
+		CC.loginJug = "joan"
 		
 ) AS ZZ
 WHERE ranking BETWEEN 1 AND 10
@@ -428,7 +428,7 @@ ORDER BY _05_datIniTorn;
 
 
 CREATE TABLE CC  ENGINE=MEMORY
-SELECT _01_pk_idTorn AS idTorn,_03_nomTorn AS nomTorn, idJoc, aa.nomJoc,_03_pk_idJugRonda AS idJug ,
+SELECT _01_pk_idTorn AS idTorn,_03_nomTorn AS nomTorn, idJoc, aa.nomJoc,_03_pk_idJugPart AS idJug ,
 BB.nomJug, BB.loginJug, SUM(_07_puntsRonda) AS punts, IF(BB.nomJug = "rob",_01_pk_idTorn,"0") AS idTornInscrit
 
 FROM 
@@ -449,13 +449,13 @@ INNER JOIN ronda ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
 WHERE 
 		loginJug <> "admin" AND
 		_02_pk_idJocTorn  = AA.idJoc AND
-		_03_pk_idJugRonda = BB.idUsuari AND
+		_03_pk_idJugPart  = BB.idUsuari AND
 		_06_datBaixaPart IS NULL AND
 		_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart) AND
 		_06_datFinTorn   >= CURDATE()
 		
-GROUP BY _01_pk_idTorn,_03_pk_idJugRonda
-ORDER BY _01_pk_idTorn, punts DESC;
+GROUP BY idTorn, idJug
+ORDER BY idTorn, punts DESC;
 
 SELECT * 
 
@@ -505,7 +505,7 @@ DROP TABLE CC;
 
 
 CREATE TABLE CC  ENGINE=MEMORY
-SELECT _01_pk_idTorn AS idTorn,_03_nomTorn AS nomTorn, idJoc, aa.nomJoc,_03_pk_idJugRonda AS idJug ,
+SELECT _01_pk_idTorn AS idTorn,_03_nomTorn AS nomTorn, idJoc, aa.nomJoc,_03_pk_idJugPart AS idJug ,
 BB.nomJug, BB.loginJug, SUM(_07_puntsRonda) AS punts, IF(BB.nomJug = "rob",_01_pk_idTorn,"0") AS idTornInscrit
 FROM 
 (SELECT _01_pk_idJoc AS idJoc ,_02_nomJoc AS nomJoc FROM joc) AS AA,
@@ -522,12 +522,12 @@ INNER JOIN ronda ON ( _01_pk_idMaqPart = _01_pk_idMaqRonda AND
 WHERE 
 		loginJug <> "admin" AND
 		_02_pk_idJocTorn  = AA.idJoc AND
-		_03_pk_idJugRonda = BB.idUsuari AND
+		_03_pk_idJugPart  = BB.idUsuari AND
 		_06_datBaixaPart IS NULL AND
 		_06_datFinTorn   >= DATE(_04_pk_idDatHoraPart)
 
-GROUP BY _01_pk_idTorn,_03_pk_idJugRonda
-ORDER BY _01_pk_idTorn, punts DESC;
+GROUP BY idTorn, idJug
+ORDER BY idTorn, punts DESC;
 
 
 SELECT * FROM
