@@ -1,13 +1,11 @@
 <?php 
+ob_start();
 
-// ob_start();
+include ("../src/pinball.h");
+include ("../src/seguretat.php");
+include ("../src/seguretatLogin.php");
 
-// include ("../src/pinball.h");
-// include ("../src/seguretat.php");
-// include ("../src/seguretatLogin.php");
-
-// comprovaSessio();
-
+comprovaSessio();
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,9 +24,9 @@
 			<div class="w2ui-label">Cognom:</div>
 			<div class="w2ui-field"><input name="cogUsr" type="text" maxlength="100" size="60"/></div>
 			<div class="w2ui-label">Login:</div>
-			<div class="w2ui-field"><input name="loginUsr" type="text" maxlength="100" size="60"/></div>
+			<div class="w2ui-field"><input name="loginUsr" type="text" maxlength="100" size="60" readonly /></div>
 			<div class="w2ui-label">Password:</div>
-			<div class="w2ui-field"><input name="passwordUsr" type="text" maxlength="100" size="60"/></div>
+			<div class="w2ui-field"><input name="passwordUsr" type="password" maxlength="100" size="60" readonly /></div>
 			<br>
 			<div class="w2ui-label">Email:</div>
 			<div class="w2ui-field"><input name="emailUsr" type="text" maxlength="100" size="60"/></div>
@@ -51,52 +49,60 @@
 <script type="text/javascript" src="../js/lib/w2ui-1.3.2.min.js"></script>
 <script type="text/javascript" src="../js/pinball.js"></script>
 <script>
-// http://localhost/pinball/src/dbui.php?cmd=get-record&param=usuari&recid=2&keyname=_01_pk_idUsuari
 
-	if(w2ui['form']) w2ui['form'].destroy();
+	if(w2ui['dialog']) w2ui['dialog'].destroy();
 
 	$("#form").w2form({ 
 		name     : 'dialog',
-		recid    : "1",
+		recid    : true,
 		header   : 'El meu perfil',
 		url      : 'query.php',
 		postData : {pid:5020},
 		fields: [
-			{ name: 'nomUsr', type: 'text', required: false },
-			{ name: 'cogUsr', type: 'text', required: false },
-			{ name: 'loginUsr', type: 'text', required: false },
-			{ name: 'passwordUsr', type: 'text', required: false },
-			{ name: 'emailUsr', type: 'text', required: false },
+			{ name: 'nomUsr', type: 'text', required: true },
+			{ name: 'cogUsr', type: 'text', required: true },
+			{ name: 'loginUsr', type: 'text', required: true },
+			{ name: 'passwordUsr', type: 'text', required: true },
+			{ name: 'emailUsr', type: 'email', required: true },
 			{ name: 'fotoUsr', type: 'text', required: false },
 			{ name: 'facebookUsr', type: 'text', required: false },
 			{ name: 'twitterUsr', type: 'text', required: false }
 		],
 		actions: {
 			reset: function () {
-				this.clear();
+				var self = this;
+	            w2confirm('Estas segur que vols la baixa?', "Donar-se de baixa d'usuari", 
+	            function (msg) { 
+	                if (msg=='Yes')
+	                	console.log("aki");
+	                	w2ui['dialog'].submit({'pid':5023}, function(e) {
+	                		if (e.total) {
+	                			w2ui['dialog'].destroy();
+			                    document.getElementsByTagName("META")[0].content = "1;URL= ../html/logout.php";
+	                		}
+	                	});
+	            });
 			},
 			save: function () {
-				var obj = this;
-				this.save({}, function (data) { 
-					console.log(data);
+
+				this.save({'pid':5022}, function (data) { 
 					if (data.status == 'error') {
 						console.log('ERROR: '+ data.message);
 						return;
+					} else {
+						$("#form").hide();
+						w2alert("Les dades s'han guardat correctament", "El meu perfil");
 					}
-					obj.clear();
 				});
 			}
 		},
 		onLoad: function(eventData) {
-            var result = JSON.parse(eventData.xhr.responseText);
-            var row = result[1];
-            result = row[0];
+			console.log("load", eventData.xhr.responseText);
+            var result = JSON.parse(eventData.xhr.responseText)[1][0];
 			eventData.preventDefault();
-			console.log(result);
 
 			for (var i in result) {
 				w2ui['dialog'].record[i] = result[i];
-				console.log(i, result[i]);
 			}
 			w2ui['dialog'].refresh();
 		} 

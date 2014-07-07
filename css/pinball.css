@@ -72,7 +72,7 @@ header {
 .menu #dialog {
 	display: inline-block;
 }
-.menu ul {
+.menu .login ul {
 	width: 57%;
 }
 .menu a

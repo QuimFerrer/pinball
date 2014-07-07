@@ -119,7 +119,7 @@ function dbExecLocal($query,$tipusResultat) {
             </ul>
         </div>
 <?php else : ?>
-        <div class="menu">
+        <div class="menu login">
             <ul>
                 <li><a id="inici"       href="../html/inici.php">Inici</a></li>
                 <li><a id="recrea"      href="../html/recrea.php">Recreatius</a></li>

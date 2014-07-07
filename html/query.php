@@ -136,6 +136,8 @@ isEndSessionInQuery();
 
 	
 	$pid      = isset($_REQUEST['pid'])        ? (int) $_REQUEST['pid']  : 0;
+	$record   = isset($_REQUEST['record']) 	   ? $_REQUEST['record'] : NULL;
+
 	$usrLogin = isset($_REQUEST['idUserPart']) ? $_REQUEST['idUserPart'] : $_SESSION["login"];	
 	$idTorn   = isset($_REQUEST['idTorn'])     ? $_REQUEST['idTorn']     : "";
 	$idPart   = isset($_REQUEST['idPart'])     ? $_REQUEST['idPart']     : "";
@@ -1822,39 +1824,56 @@ isEndSessionInQuery();
 				break;
 
 			case MODIF_PERFIL_USR_5022 :
-				$query    = 'UPDATE usuari SET _02_nomUsuari    = "$nom",
-								               _03_cognomUsuari = "$cognom",
-								  			   _05_pwdUsuari    = "$passwor",
-										   	   _06_emailUsuari  = "$email",						
-											   _07_fotoUsuari   = "$nomFoto",
-											   _09_datModUsuari = NOW()
+				$query    = sprintf( 
+							"UPDATE usuari 
+							 SET 
+								_02_nomUsuari    = '%s',
+								_03_cognomUsuari = '%s',
+								_04_loginUsuari  = '%s',
+								_05_pwdUsuari    = '%s',
+								_06_emailUsuari  = '%s',				
+								_07_fotoUsuari   = '%s',
+								_09_datModUsuari = NOW() 
 							WHERE
 								_10_datBaixaUsuari IS NULL AND
-								_04_loginUsuari = "' . $usrLogin . '";';
+								_04_loginUsuari = '%s';",
+							$record["nomUsr"], $record["cogUsr"], $record["loginUsr"], 
+							$record["passwordUsr"], $record["emailUsr"], $record["fotoUsr"], 
+							$usrLogin);
+
 				$response = dbExec($query,0);
-				$query    = 'UPDATE jugador SET _02_faceJug    = "$facebook",
-						 						_03_twitterJug = "$twitter",
-						 						_05_datModJug  = NOW()
+
+				$query    = sprintf(
+							"UPDATE jugador 
+							SET 
+								_02_faceJug    = '%s',
+		 						_03_twitterJug = '%s',
+		 						_05_datModJug  = NOW()
 							WHERE 
 								_06_datBaixaJug IS NULL AND
 								(_01_pk_idJug 
 									IN ( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
-										WHERE _04_loginUsuari = "' . $usrLogin . '"));';
+										WHERE _04_loginUsuari = '%s'));",
+							$record["facebookUsr"], $record["twitterUsr"], $usrLogin);
+
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));				
 				break;
 
 			case BAIXA_PERFIL_USR_5023 :
+
 				$query    = sprintf("UPDATE usuari SET _09_datModUsuari   = NOW(),
 													   _10_datBaixaUsuari = NOW()
 							 		WHERE _10_datBaixaUsuari IS NULL AND
 										  _04_loginUsuari = '%s';",$usrLogin);	
+
 				$response = dbExec($query,0);
 				$query    = sprintf("UPDATE jugador SET _05_datModJug    = NOW(),
 														_06_datBaixaJug  = NOW()
-							 		WHERE _06_datBaixaJug IS NULL AND
+						 		WHERE _06_datBaixaJug IS NULL AND
 								 			(_01_pk_idJug IN ( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
-							       			WHERE _04_loginUsuari = '%s'));",$usrLogin);	
+							       			WHERE _04_loginUsuari = '%s'));",$usrLogin);
+
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));				
 				break;
@@ -2393,9 +2412,8 @@ isEndSessionInQuery();
 											_08_datBaixaMaqInst  IS NULL AND
 											_08_datBaixaMaq      IS NULL AND
 											_04_datAltaInsc      IS NOT NULL AND
-											_04_loginUsuari = '%s' AND
-											_03_nomTorn     = '%d'
-									ORDER BY nomTorn,idJoc,idMaq,idJug;",$usrLogin,$opcio);
+											_04_loginUsuari = '%s' 
+									ORDER BY nomTorn,idJoc,idMaq,idJug;",$usrLogin);
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
 				break;							
