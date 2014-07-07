@@ -26,31 +26,35 @@ include ("../src/seguretatLogin.php");
 			<hgroup>
 				<h2>Formulari de registre</h2><br>
 			</hgroup>
-	<br>
-			<div id="form" style="width: 100%;">
+			<br>
+			<div id="form">
 				<div class="w2ui-page page-0">
+					<br>
 					<div class="w2ui-label">Nom:</div>
-					<div class="w2ui-field">
-						<input name="nom" type="text" maxlength="100" size="60"/>
-					</div>
-					<div class="w2ui-label">Cognoms:</div>
-					<div class="w2ui-field">
-						<input name="cognoms" type="text" maxlength="100" size="60"/>
-					</div>
-					<div class="w2ui-label">eMail:</div>
-					<div class="w2ui-field">
-						<input name="email" type="text" maxlength="100" size="60"/>
-					</div>
-					<div class="w2ui-label">Comentari:</div>
-					<div class="w2ui-field">
-						<textarea name="comentari" type="text" style="width: 385px; height: 80px; resize: none"></textarea>
-					</div>
+					<div class="w2ui-field"><input name="nomUsr" type="text" maxlength="100" size="60"/></div>
+					<div class="w2ui-label">Cognom:</div>
+					<div class="w2ui-field"><input name="cogUsr" type="text" maxlength="100" size="60"/></div>
+					<div class="w2ui-label">Login:</div>
+					<div class="w2ui-field"><input name="loginUsr" type="text" maxlength="100" size="60"/></div>
+					<div class="w2ui-label">Password:</div>
+					<div class="w2ui-field"><input name="passwordUsr" type="text" maxlength="100" size="60"/></div>
+					<br>
+					<div class="w2ui-label">Email:</div>
+					<div class="w2ui-field"><input name="emailUsr" type="text" maxlength="100" size="60"/></div>
+					<div class="w2ui-label">Foto:</div>
+					<div class="w2ui-field"><input name="fotoUsr" type="text" maxlength="100" size="60"/></div>
+					<br>
+					<div class="w2ui-label">Facebook:</div>
+					<div class="w2ui-field"><input name="facebookUsr" type="text" maxlength="100" size="60"/></div>
+					<div class="w2ui-label">Twitter:</div>
+					<div class="w2ui-field"><input name="twitterUsr" type="text" maxlength="100" size="60"/></div>
 				</div>
 				<div class="w2ui-buttons">
-					<input type="button" value="Esborrar" name="reset">
-					<input type="button" value="Enviar" name="save">
+					<input type="reset"  value="Esborrar" name="reset">
+					<input type="submit" value="Enviar"   name="save">					
 				</div>
-			</div><br>
+				<img src="../resources/img/avatar.jpg" alt="" class="perfil">
+			</div>
 		</section>
 		<footer>
 			<?php footer(); ?>
@@ -91,4 +95,21 @@ $(function () {
 
 <?php
 if (isset($_POST['entrar'])) controlAcces($_POST["usr"],$_POST["pwd"]);
+
+if (isset($_POST['save']))
+	{
+	$dades = (object)array("nom"      => $_POST['nomUsr'],
+						   "cognoms"  => $_POST['cogUsr'],
+						   "login"    => $_POST['loginUsr'],
+						   "password" => $_POST['passwordUsr'],
+						   "email"    => $_POST['emailUsr'],
+						   "foto"     => $_POST['fotoUsr'],
+						   "facebook" => $_POST['facebookUsr'],
+						   "twitter"  => $_POST['twitterUsr']);
+	if ( enviaEmail("registre", $dades) )
+		echo "<script>alert('Enviament corecte. Gràcies per la teva col.laboració');</script>";
+	else
+		echo "<script>alert('S'ha produit una incidència en l'enviament. Torna a intentar-ho. Gràcies.');</script>";
+	}
+
 ?>

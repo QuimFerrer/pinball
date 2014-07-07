@@ -1,9 +1,14 @@
 <?php
 
-//Script per usar gmail amb la llibreria PHP Mailer, desde un localhost (XAMPP).
- 
+include ("../src/pinball.h");
+include ("../src/seguretat.php");
+//Script per usar gmail amb la llibreria PHP Mailer, desde un localhost (XAMPP). 
 //Utilitzacio d'una clase de la llibreria.
 include('../src/PHPMailer/class.phpmailer.php');
+
+
+comprovaSessio();
+
 
 define("DEBUG",0);
 define("HOST","smtp.gmail.com");
@@ -21,23 +26,22 @@ define("PATH_MAIL_SUSCRIPCION","http://localhost/curso/pinball/registro/");
 define("SIZE_UPLOAD",2000000);
 
 
-// $dades->nom
-// $dades->cognom
-// $dades->email
-// $dades->comentari
+$pid      = isset($_REQUEST['pid'])        ? (int) $_REQUEST['pid']  : 0;
 
 
-function enviaEmailContacto($dades)
+function buildEmail($tipusMail, $dades)
 {
     $res = true;
     if (CANAL_ENVIO === "PHPMAILER")
         {
-        $resMail = montaMailContacto($dades);
+        if ($tipusMail == "contacte") $resMail = montaMailContacte($dades);
+        if ($tipusMail == "registre") $resMail = montaMailRegistre($dades);        
         if ($resMail != "") $res = false;
         }
     if (CANAL_ENVIO === "SENDMAIL_PHP")
         {
-        $resMail = montaMailContacto_php($dades);
+        if ($tipusMail == "contacte") $resMail = montaMailContacte_php($dades);
+        if ($tipusMail == "registre") $resMail = montaMailRegistre_php($dades);        
         if (!$resMail) $res = false;
         }
     return($res);
@@ -45,7 +49,23 @@ function enviaEmailContacto($dades)
 
 // monta mail con librería phpmailer
 
-function montaMailContacto($dades)
+function montaMailContacte($dades)
+{
+    $isHtml  = true;
+    $altBody = "";
+    $to      = FROM;
+    $nomTo   = NOM_FROM_CONTACTE;
+    $subject = "Contacte des de Pinball";
+    $body  = "S'ha rebut un missatge de contacte des de la web de Pinball amb les següents dades: <br><br><br>";
+    $body .= "<b>Nom       : " . "</b>  ". $dades['nom'] .       "<br><br>";
+    $body .= "<b>Cognoms   : " . "</b>  ". $dades['cognoms'] .   "<br><br>";
+    $body .= "<b>eMail     : " . "</b>  ". $dades['email'] .     "<br><br>";
+    $body .= "<b>Comentari : " . "</b><br>". nl2br($dades['comentari']) . "<br><br>";
+
+    return( prepMail($isHtml, $subject, $body, $altBody, $to, $nomTo) );
+}
+
+function montaMailRegistre($dades)
 {
     $isHtml  = true;
     $altBody = "";
@@ -58,13 +78,12 @@ function montaMailContacto($dades)
     $body .= "<b>eMail     : " . "</b><br>". $dades->email .     "<br><br>";
     $body .= "<b>Comentari : " . "</b><br>". $dades->comentari . "<br><br>";
 
-
     return( prepMail($isHtml, $subject, $body, $altBody, $to, $nomTo) );
 }
 
 // prepara y envía mail con phpmailer
 
-function prepMail($isHtml, $asunto, $body, $altBody, $to, $nomTo)
+function prepMail($isHtml, $subject, $body, $altBody, $to, $nomTo)
 {
     $params = (object) array(   "isHtml"      => $isHtml,
                                 "debug"       => DEBUG,
@@ -76,7 +95,7 @@ function prepMail($isHtml, $asunto, $body, $altBody, $to, $nomTo)
                                 "nomFrom"     => NOM_FROM,
                                 "replayTo"    => FROM,
                                 "nomReplayTo" => NOM_FROM,
-                                "asunto"      => $asunto,
+                                "subject"     => $subject,
                                 "altBody"     => $altBody,
                                 "body"        => $body,
                                 "to"          => $to,
@@ -108,7 +127,7 @@ function enviarMail($params)
     // Parametres de Remitents
     $mail->SetFrom($params->from, $params->nomFrom);
     $mail->AddReplyTo($params->replayTo,$params->nomReplayTo);
-    $mail->Subject  = $params->asunto;
+    $mail->Subject  = $params->subject;
     //Messatge d'advertencia pels usuaris que no utilitzan un client HTML.
     $mail->AltBody  = $params->altBody;
      
@@ -128,7 +147,7 @@ function enviarMail($params)
 
 // monta mail con sendmail de php
 
-function montaMailContacto_php($dades)
+function montaMailContacte_php($dades)
 {
     $isHtml  = true;
     $to      = FROM;
@@ -163,5 +182,56 @@ function montaMailContacto_php($dades)
     return ( mail( $to, $subject, $message, $headers) );
 }
 
+function montaMailRegistre_php($dades)
+{
+    $isHtml  = true;
+    $to      = FROM;
+    $nomTo   = NOM_FROM_CONTACTE;
+
+    $body  = "S'ha rebut un missatge de contacte des de la web de Pinball amb les següents dades: <br><br><br>";
+    $body .= "Nom       : " . $dades->nom .       "<br>";
+    $body .= "Cognoms   : " . $dades->cognoms .   "<br>";
+    $body .= "eMail     : " . $dades->email .     "<br>";
+    $body .= "Comentari : " . $dades->comentari . "<br>";
+
+    $subject = "Contacte des de Pinball";    
+
+    $headers  = "MIME-Version: 1.0\r\n";
+    $headers .= "X-Mailer: PHP/" . phpversion() . " \r\n";
+    if($isHtml)
+        $headers .= "Content-Type: text/html; charset=iso-8859-1\r\n";
+    else
+        $headers .= "Content-Type: text/plain; charset=iso-8859-1\r\n";
+    $headers .= "From: " . NOM_FROM . " " . FROM . " \r\n";
+    $headers .= "Reply-To: " . FROM . " \r\n";;
+    $headers .= "Return-path: " . FROM . " \r\n";;
+
+    $subject = mb_encode_mimeheader($subject);
+
+    $message  = $body;
+    $message .= "E-mail   : " . FROM . " \r\n";
+    $message .= "Enviat   : " . date('d/m/Y', time());
+    // $message = htmlspecialchars($message);     // Emmascarar caracters especials d' HTML
+    $message = stripslashes($message);         // Eliminar barres invertides
+
+    return ( mail( $to, $subject, $message, $headers) );
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+
+switch($pid)
+    {
+    case 1000:
+        $response = buildEmail("contacte", $_REQUEST['record']);
+        break;
+    default:
+        $response = "";
+        break;
+    }
+    
+echo json_encode( $response );
 
 ?> 
