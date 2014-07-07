@@ -4,6 +4,7 @@ $('#sidebar').w2sidebar({
 	nodes: [ 
 		{ id: '2000', text: 'Opcions', expanded: true, group: true,
 		  nodes: [  { id: '3000', text: 'Perfil', img: 'icon-edit' },
+		  			{ id: '1200', text: 'Generador partides', img:'icon-add'},			
 					{ id: '3100', text: 'Partides', img: 'icon-folder',
 					nodes: [{ id: '3110', text: 'per màquina',  img: 'icon-page' },
 							{ id: '3120', text: 'per jugador',  img: 'icon-page' },
@@ -80,8 +81,7 @@ $('#sidebar').w2sidebar({
 					// { id: '1060', text: 'Torneigs', img: 'icon-page' },
 					// { id: '1080', text: 'Usuaris', img: 'icon-edit' },
 					// { id: '1090', text: 'Test', img: 'icon-edit' },
-			  		{ id: '1120', text: 'Partides',	img:'icon-edit'},
-			  		{ id: '1200', text: 'Partides Victor',	img:'icon-edit'},							
+			  		{ id: '1120', text: 'Partides',	img:'icon-edit'}
 					]
 				}
 			],
@@ -213,7 +213,8 @@ var controller = function(e) {
 		    DataGrid("Manteniment de partides", "partides", false, false, columns, e.target);
 		    break;
 
-		case '1200': location.href="partides.php";  
+		case '1200': 
+			DataView('../html/partides.php');
 			break;
 
 

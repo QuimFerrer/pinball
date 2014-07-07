@@ -2128,21 +2128,21 @@ isEndSessionInQuery();
 				echo json_encode( $response1 );				
 				break;				
 
-			case BAIXA_USR_TORN_5043 :
-				$query = sprintf("UPDATE inscrit SET _06_datBaixaInsc  = NOW()
-							   	  WHERE 
-										_06_datBaixaInsc IS NULL AND
-										(_02_pk_idJocInsc IN ( SELECT _02_pk_idJocTorn AS _02_pk_idJocInsc FROM torneig 
-											WHERE _01_pk_idTornInsc = '%d' )) AND
-										_01_pk_idTornInsc = '%d' AND
-										(_03_pk_idJugInsc IN ( SELECT _01_pk_idUsuari AS _03_pk_idJugInsc FROM usuari
-										WHERE _04_loginUsuari = '%s'));",$idTorn, $idTorn, $usrLogin);
-					$response  = dbExec($query);
-					$response1 = controlErrorQuery($response);
+			// case BAIXA_USR_TORN_5043 :
+			// 	$query = sprintf("UPDATE inscrit SET _06_datBaixaInsc  = NOW()
+			// 				   	  WHERE 
+			// 							_06_datBaixaInsc IS NULL AND
+			// 							(_02_pk_idJocInsc IN ( SELECT _02_pk_idJocTorn AS _02_pk_idJocInsc FROM torneig 
+			// 								WHERE _01_pk_idTornInsc = '%d' )) AND
+			// 							_01_pk_idTornInsc = '%d' AND
+			// 							(_03_pk_idJugInsc IN ( SELECT _01_pk_idUsuari AS _03_pk_idJugInsc FROM usuari
+			// 							WHERE _04_loginUsuari = '%s'));",$idTorn, $idTorn, $usrLogin);
+			// 		$response  = dbExec($query);
+			// 		$response1 = controlErrorQuery($response);
 				// $ret = array("test"=>"val");
 				// echo json_encode($ret);
 				// // echo "({val:'test'})";
-				break;
+				// break;
 
 			case CONSULTA_USR_TOTS_TORNEIGS_5061 :
 				$query    = sprintf("SELECT _01_pk_idTorn  AS idTorn,
