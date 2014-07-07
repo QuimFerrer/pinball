@@ -71,9 +71,6 @@
 			{ name: 'facebookUsr', type: 'text', required: false },
 			{ name: 'twitterUsr', type: 'text', required: false }
 		],
-		record : {
-			nomUser : "Quim"
-		},
 		actions: {
 			reset: function () {
 				this.clear();

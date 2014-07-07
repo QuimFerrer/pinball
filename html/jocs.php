@@ -26,7 +26,7 @@ comprovaSessio();
 			<?php menu(); ?>
 		</menu>
 		<section class="staticPage">
-			<h1>Llista de jocs</h1>
+			<h2>Llista de jocs</h2>
 			<?php 
 				$query    = 'SELECT * FROM joc';
 				$response = dbExec($query)[1];
@@ -36,7 +36,7 @@ comprovaSessio();
 				foreach($response as $joc) {
 					echo '<li>';
 					echo '<img src="../resources/img/jocs/'. $joc->_04_imgJoc .'" alt="'. $joc->_02_nomJoc .'">';
-					echo '<h2>'. 				$joc->_02_nomJoc .'</h3>';
+					echo '<h3>'. 				$joc->_02_nomJoc .'</h3>';
 					echo '<p>Codi: '. 			$joc->_01_pk_idJoc .'</p>';
 					echo '<p>Data d\'alta: '. 	date('j-m-Y',strtotime($joc->_06_datAltaJoc)) .'</p>';
 					echo '<p>Detall: '. 		$joc->_03_descJoc .'</p>';

@@ -22,7 +22,7 @@ include ("../src/seguretatLogin.php");
 			<?php menu(); ?>
 		</menu>
 		<section>
-			<h1>Llista de Torneigs</h1>
+			<h2>Llista de Torneigs</h2>
 			<?php 
 				$data = date("Y-n-j");
 				// $dataHora = date("Y-n-j H:i:s");
@@ -39,9 +39,9 @@ include ("../src/seguretatLogin.php");
 				foreach($response as $torn) {
 					echo '<li>';
 					echo '<img src="../resources/img/jocs/'. $torn->_04_imgJoc .'" alt="'. $torn->_02_nomJoc .'">';
-					echo '<h2>Id: '. 			$torn->_01_pk_idTorn .'</h2>';
-					echo '<p><h1>'. 			$torn->_03_nomTorn .'</h1></p>';
-					echo '<p><h2>Joc: '. 		$torn->_02_nomJoc .'</h2></p>';
+					echo '<h3>Id: '. 			$torn->_01_pk_idTorn .'</h3>';
+					echo '<p><h3>'. 			$torn->_03_nomTorn .'</h3></p>';
+					echo '<p><h3>Joc: '. 		$torn->_02_nomJoc .'</h3></p>';
 					echo '<p><h4>Premi: '. 		$torn->_04_premiTorn .' €</h4></p>';
 					echo '<p>Data d\'inici: '. 	date('j-m-Y',strtotime($torn->_05_datIniTorn)) .'</p>';
 					echo '<p>Data final: '. 	date('j-m-Y',strtotime($torn->_06_datFinTorn)) .'</p>';

@@ -25,7 +25,7 @@ comprovaSessio();
 			<?php menu(); ?>
 		</menu>
 		<section class="staticPage">
-			<h1>Llista de productes</h1>
+			<h2>Llista de productes</h2>
 			<?php 
 				$query    = 'SELECT * FROM productes';
 				$response = dbExec($query)[1];
@@ -35,7 +35,7 @@ comprovaSessio();
 				foreach($response as $producte) {
 					echo '<li>';
 					echo '<img src="../resources/img/recreatius/'. $producte->foto .'" alt="'. $producte->nom .'">';
-					echo '<h2>'. 				$producte->nom .'</h3>';
+					echo '<h3>'. 				$producte->nom .'</h3>';
 					echo '<p>Codi: '. 			$producte->id .'</p>';
 					echo '<h3>Preu: '. 			$producte->preu .'€</h3>';
 					echo '<p>Data d\'alta: '. 	date('j-m-Y',strtotime($producte->datAltaPro)) .'</p>';
