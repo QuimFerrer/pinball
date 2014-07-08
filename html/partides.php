@@ -32,6 +32,7 @@ $(document).ready(function(){
 	var sonPunts1;
 	var sonPunts2;
 	var sonPunts3;
+	var seraMaquina;
 
     $("#I_User").change(function(){
 		iuserlogin = document.getElementById("I_User").value;
@@ -83,12 +84,9 @@ $(document).ready(function(){
 		}
 	  
 	  $('#seleccionador').on('change',function(){
-	    var combinat = $(this).val();
-	    console.log("combinat!" , combinat, "///", "combinat.length" ,   combinat.length); // per veure el contingut amb el separador * 
-	//    console.log(combinat.length);
-	    var seraTorneig = combinat.substring(0,1); 
-	    var seraMaquina = combinat.substring(0,1);
-	    
+	    seraMaquina = $(this).val();
+	    console.log("combinat!" , seraMaquina, "///", "seraMaquina.length" ,   seraMaquina.length); // per veure el contingut amb el separador * 
+	  
 	    sonPunts1 = "";
 	    sonPunts2 = "";
 	    sonPunts3 = "";
@@ -108,7 +106,7 @@ $(document).ready(function(){
 	    
 	    $.ajax({
 	      url: "partides.php",
-	      data: {carregar:'SI', MAQ:esMaquina, JOC:esJoc, JUG:esJug, FOTO:'NO', PUNTUA1:sonPunts1, PUNTUA2:sonPunts2, PUNTUA3:sonPunts3}, //date("Y-n-j H:i:s")
+	      data: {carregar:'SI', MAQ:seraMaquina, JOC:esJoc, JUG:esJug, FOTO:'NO', PUNTUA1:sonPunts1, PUNTUA2:sonPunts2, PUNTUA3:sonPunts3}, //date("Y-n-j H:i:s")
 	      success: function(Resultat1){console.log('carregar SI : he carregat els valors que s han d enviar');}});
 	    
 	  }); // end jQuery onchange combinacio
@@ -118,7 +116,7 @@ $(document).ready(function(){
 		e.preventDefault();
 	    $.ajax({
 	      url: "partides.php",
-	      data: {carregar:'NO', MAQ:esMaquina, JOC:esJoc, JUG:esJug, FOTO:'NO', PUNTUA1:sonPunts1, PUNTUA2:sonPunts2, PUNTUA3:sonPunts3}, //date("Y-n-j H:i:s")
+	      data: {carregar:'NO', MAQ:seraMaquina, JOC:esJoc, JUG:esJug, FOTO:'NO', PUNTUA1:sonPunts1, PUNTUA2:sonPunts2, PUNTUA3:sonPunts3}, //date("Y-n-j H:i:s")
 	      success: function(Resultat2){processar(Resultat2);}});
 	      
 	        function processar(dadesretornades2){
@@ -193,10 +191,43 @@ $(document).ready(function(){
 			    echo "<p>S'ha fet l'insert!</p>"; 
 			    //<p>S'ha fet l'insert!</p><br />
 			
-			    $query   = 'INSERT INTO joc VALUES (NULL, "'.$IDMAQ.'", "'.$PUNTUA_2.'", NULL, "'.$IDJUG.'", NOW(), NULL, NULL);'; // "' .$IDMAQ .'","' .$IDJOC .'","' .$IDJUG .'"
-			    $response = dbExec($query)[1];
-			    
-			    
+				$now = date("Y-n-j H:i:s"); 
+				$query    = sprintf("INSERT INTO partida
+									 VALUES ('%d','%d','%d','%s',NULL,NULL);",$IDMAQ,
+														  $IDJOC,
+														  $IDJUG,
+														  $now);
+				$response = dbExec($query)[1];	
+				$query    = sprintf("INSERT INTO ronda
+									 VALUES (NULL,'%d','%d','%d','%s','%d','%s','%d',
+									 	     NULL,NULL);",$IDMAQ,
+						 				    			  $IDJOC,
+										    		   	  $IDJUG,
+										    			  $now,
+										    			  "foto.jpg",
+										    			  1,$PUNTUA_1);
+				$response = dbExec($query)[1];									 											    			  
+				$query    = sprintf("INSERT INTO ronda
+									VALUES (NULL,'%d','%d','%d','%s','%d','%s','%d',
+									      NULL,NULL);",$IDMAQ,
+											    $IDJOC,
+											    $IDJUG,
+											    $now,
+											    "foto.jpg",
+											    2,$PUNTUA_2);
+				$response = dbExec($query)[1];								
+				$query    = sprintf("INSERT INTO ronda
+									VALUES (NULL,'%d','%d','%d','%s','%d','%s','%d',
+									      NULL,NULL);",$IDMAQ,
+											$IDJOC,
+											$IDJUG,
+											$now,
+											"foto.jpg",
+											3,
+											$PUNTUA_3);									 											    			  				
+			   	$response = dbExec($query)[1];
+
+			     
 			   return $response;
 			    //<b>Warning</b>:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in <b>/opt/lampp/htdocs/Projectes/pinball/src/pinball.h</b> on line <b>74</b><br />
 
