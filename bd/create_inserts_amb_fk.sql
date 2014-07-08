@@ -13,17 +13,17 @@ DROP TABLE IF EXISTS `u555588791_pinba`.`usuari` ;
 
 CREATE  TABLE IF NOT EXISTS `u555588791_pinba`.`usuari` (
   `_01_pk_idUsuari` INT NOT NULL AUTO_INCREMENT ,
-  `_02_nomUsuari` VARCHAR(45) NULL ,
-  `_03_cognomUsuari` VARCHAR(45) NULL ,
-  `_04_loginUsuari` VARCHAR(45) NULL ,
-  `_05_pwdUsuari` VARCHAR(45) NULL ,
-  `_06_emailUsuari` VARCHAR(45) NULL ,
+  `_02_nomUsuari` VARCHAR(45) NOT NULL ,
+  `_03_cognomUsuari` VARCHAR(45) NOT NULL ,
+  `_04_loginUsuari` VARCHAR(45) NOT NULL ,
+  `_05_pwdUsuari` VARCHAR(45) NOT NULL ,
+  `_06_emailUsuari` VARCHAR(45) NOT NULL ,
   `_07_fotoUsuari` VARCHAR(45) NULL ,
   `_08_datAltaUsuari` DATETIME NULL ,
   `_09_datModUsuari` DATETIME NULL ,
   `_10_datBaixaUsuari` DATETIME NULL ,
-  `_11_activacioUsuari` VARCHAR(32) NULL ,
-  `_12_estatUsuari` TINYINT(1)  NULL ,
+  `_11_activacioUsuari` VARCHAR(32) NOT NULL ,
+  `_12_estatUsuari` TINYINT(1)  NOT NULL ,
   PRIMARY KEY (`_01_pk_idUsuari`) )
 ENGINE = InnoDB;
 
@@ -382,11 +382,11 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 SET AUTOCOMMIT=0;
 USE `u555588791_pinba`;
-INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`, `_11_activacioUsuari`, `_12_estatUsuari`) VALUES ('2', 'joan', 'salas', 'joan', 'joan', 'jsalas@gmail.com', NULL, '2014-05-13', NULL, NULL, NULL, NULL);
-INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`, `_11_activacioUsuari`, `_12_estatUsuari`) VALUES ('3', 'josep', 'puig', 'josep', 'josep', 'jpuig@gmail.com', NULL, '2014-05-13', NULL, NULL, NULL, NULL);
-INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`, `_11_activacioUsuari`, `_12_estatUsuari`) VALUES ('4', 'miquel', 'roca', 'miquel', 'miquel', 'mroca@gmail.com', NULL, '2014-05-13', NULL, NULL, NULL, NULL);
-INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`, `_11_activacioUsuari`, `_12_estatUsuari`) VALUES ('5', 'rob', 'lopez', 'rob', 'rob', 'rob@gmail.com', NULL, '2014-05-13', NULL, NULL, NULL, NULL);
-INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`, `_11_activacioUsuari`, `_12_estatUsuari`) VALUES ('1', 'admin', 'admin', 'admin', 'admin', 'admadm@gmail.com', NULL, '2014-06-15', NULL, NULL, NULL, NULL);
+INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`, `_11_activacioUsuari`, `_12_estatUsuari`) VALUES ('2', 'joan', 'salas', 'joan', 'joan', 'jsalas@gmail.com', NULL, '2014-05-13', NULL, NULL, '1', 0);
+INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`, `_11_activacioUsuari`, `_12_estatUsuari`) VALUES ('3', 'josep', 'puig', 'josep', 'josep', 'jpuig@gmail.com', NULL, '2014-05-13', NULL, NULL, '1', 0);
+INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`, `_11_activacioUsuari`, `_12_estatUsuari`) VALUES ('4', 'miquel', 'roca', 'miquel', 'miquel', 'mroca@gmail.com', NULL, '2014-05-13', NULL, NULL, '1', 0);
+INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`, `_11_activacioUsuari`, `_12_estatUsuari`) VALUES ('5', 'rob', 'lopez', 'rob', 'rob', 'rob@gmail.com', NULL, '2014-05-13', NULL, NULL, '1', 0);
+INSERT INTO `u555588791_pinba`.`usuari` (`_01_pk_idUsuari`, `_02_nomUsuari`, `_03_cognomUsuari`, `_04_loginUsuari`, `_05_pwdUsuari`, `_06_emailUsuari`, `_07_fotoUsuari`, `_08_datAltaUsuari`, `_09_datModUsuari`, `_10_datBaixaUsuari`, `_11_activacioUsuari`, `_12_estatUsuari`) VALUES ('1', 'admin', 'admin', 'admin', 'admin', 'admadm@gmail.com', NULL, '2014-06-15', NULL, NULL, '1', 0);
 
 COMMIT;
 

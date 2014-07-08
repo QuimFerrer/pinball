@@ -43,6 +43,7 @@ function mostraUsuariLogat()
 				<!-- <div id="toolbar"></div> -->
 				<div id="sidebar"></div>
 				<div id="grid"></div>
+				<div id="form"></div>
 			</article>
 				
 			

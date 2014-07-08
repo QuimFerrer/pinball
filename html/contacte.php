@@ -74,7 +74,7 @@ comprovaSessio();
 $(function () {
 	$('#form').w2form({ 
 		name  : 'form',
-		url   : '../src/email.php',
+		url   : 'query.php',
 		fields: [
 			{ name: 'nom', 			type: 'text', required: true },
 			{ name: 'cognoms',  	type: 'text', required: true },
@@ -87,11 +87,11 @@ $(function () {
 			},
 			save: function() {
 				var self = this;
-				this.save( {pid:1000}, function(e) {
+				this.save( { idUserPart:"", pid:1000}, function(e) {
 					// console.log(e.xhr.responseText);
 					console.log(e);
 					if (e)
-						w2alert('Enviament corecte. Gràcies per la teva col.laboració', 'Missatge');
+						w2alert('Enviament correcte. Gràcies per la teva col.laboració', 'Missatge');
 					else 
 						w2alert("S'ha produit una incidència en l'enviament. Torna a intentar-ho. Gràcies.", 'Missatge');
 					self.clear();
@@ -102,9 +102,6 @@ $(function () {
 });
 </script>
 </html>
-
-
 <?php
-
 if (isset($_POST['entrar'])) controlAcces($_POST["usr"],$_POST["pwd"]);
 ?>

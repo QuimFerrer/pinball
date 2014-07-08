@@ -1,14 +1,8 @@
 <?php
 
-include ("../src/pinball.h");
-include ("../src/seguretat.php");
 //Script per usar gmail amb la llibreria PHP Mailer, desde un localhost (XAMPP). 
 //Utilitzacio d'una clase de la llibreria.
 include('../src/PHPMailer/class.phpmailer.php');
-
-
-comprovaSessio();
-
 
 define("DEBUG",0);
 define("HOST","smtp.gmail.com");
@@ -20,13 +14,9 @@ define("NOM_FROM","Pinball");
 define("NOM_FROM_CONTACTE","Contacte Pinball");
 define("DESTINACION_UPLOADS", "./uploads/");
 define("CANAL_ENVIO","PHPMAILER");
-define("PATH_MAIL_SUSCRIPCION","http://localhost/curso/pinball/registro/");
-// define("PATH_MAIL_SUSCRIPCION","http://localhost/pinball/registro/");
 // define("CANAL_ENVIO","SENDMAIL_PHP");
+define("PATH_MAIL_SUSCRIPCION","http://localhost/pinball/registre/");
 define("SIZE_UPLOAD",2000000);
-
-
-$pid      = isset($_REQUEST['pid'])        ? (int) $_REQUEST['pid']  : 0;
 
 
 function buildEmail($tipusMail, $dades)
@@ -56,12 +46,7 @@ function montaMailContacte($dades)
     $to      = FROM;
     $nomTo   = NOM_FROM_CONTACTE;
     $subject = "Contacte des de Pinball";
-    $body  = "S'ha rebut un missatge de contacte des de la web de Pinball amb les següents dades: <br><br><br>";
-    $body .= "<b>Nom       : " . "</b>  ". $dades['nom'] .       "<br><br>";
-    $body .= "<b>Cognoms   : " . "</b>  ". $dades['cognoms'] .   "<br><br>";
-    $body .= "<b>eMail     : " . "</b>  ". $dades['email'] .     "<br><br>";
-    $body .= "<b>Comentari : " . "</b><br>". nl2br($dades['comentari']) . "<br><br>";
-
+    $body = montaBodyContacte($dades);
     return( prepMail($isHtml, $subject, $body, $altBody, $to, $nomTo) );
 }
 
@@ -69,19 +54,58 @@ function montaMailRegistre($dades)
 {
     $isHtml  = true;
     $altBody = "";
-    $to      = FROM;
-    $nomTo   = NOM_FROM_CONTACTE;
-    $subject = "Contacte des de Pinball";
-    $body  = "S'ha rebut un missatge de contacte des de la web de Pinball amb les següents dades: <br><br><br>";
-    $body .= "<b>Nom       : " . "</b><br>". $dades->nom .       "<br><br>";
-    $body .= "<b>Cognoms   : " . "</b><br>". $dades->cognoms .   "<br><br>";
-    $body .= "<b>eMail     : " . "</b><br>". $dades->email .     "<br><br>";
-    $body .= "<b>Comentari : " . "</b><br>". $dades->comentari . "<br><br>";
-
+    $to      = $dades['emailUsr'];
+    $nomTo   = $dades['nomUsr'] . " " . $dades['cogUsr'];
+    $subject = $dades['loginUsr'] . " Dades de registre al Pinball, guardi aquest email.";
+    $body = montaBodyRegistre($dades);
     return( prepMail($isHtml, $subject, $body, $altBody, $to, $nomTo) );
 }
 
-// prepara y envía mail con phpmailer
+function montaBodyContacte($dades)
+{
+    $body  = "S'ha rebut un missatge de contacte des de la web de Pinball amb les següents dades: <br><br><br>";
+    $body .= "<b>Nom       : " . "</b>  ". $dades['nom'] .       "<br><br>";
+    $body .= "<b>Cognoms   : " . "</b>  ". $dades['cognoms'] .   "<br><br>";
+    $body .= "<b>eMail     : " . "</b>  ". $dades['email'] .     "<br><br>";
+    $body .= "<b>Comentari : " . "</b><br>". nl2br($dades['comentari']) . "<br><br>";
+    return ($body);
+}
+
+function montaBodyRegistre($dades)
+{
+    // creem el nostre link per enviar per mail la variable $activateLink
+    $path = PATH_MAIL_SUSCRIPCION; 
+    $activateLink = $path . sprintf('activarRegistre.php?id="%d"&"activateKey="%s"',$dades['idUsr'],
+                                                                                    $dades['activateUsr']);
+    $body = '<table width="629" border="0" cellspacing="1" cellpadding="2">
+      <tr>
+        <td width="623" align="left"></td>
+      </tr>
+      <tr>
+        <td bgcolor="#FF8951"><div style="color:#FFFFFF; font-size:1.8em; font-family: Arial, Helvetica, sans-serif; text-transform: capitalize; font-weight: bold;">
+        <strong>' . $dades['nomUsr'] .' '. $dades['cogUsr'] . ', aquestes son les teves dades de registre: </strong></div>
+        </td>
+      </tr>
+      <tr>
+        <td height="95" align="left" valign="top"><div style=" color:#000000; font-family:Arial, Helvetica, sans-serif; font-size:1.4em; margin-bottom:3px;"><br>
+              <strong>Login             : </strong>'.$dades["loginUsr"].'<br><br>
+              <strong>Clau d\'accés     : </strong>'.$dades["passwordUsr"].'<br><br>
+              <strong>Email             : </strong>'.$dades["emailUsr"].'<br><br>
+              <strong>Link d\'activació :<br><a href="'.$activateLink.'">'.$activateLink.' </strong></a><br><br>
+              <strong>Per activar el teu compte de Pinball i accedir a la web sense cap restricció,<br>
+                      fes click al link superior o copia\'l a la barra del teu explorador d\'internet.</strong><br><br>
+              <strong>Si el link no funciona a la primera, torna a intentar-ho, el servidor a vegades triga en processar l\'ordre.</strong><br><br>
+              <strong>Gràcies per registrar-te.</strong><br><br>
+              <strong>Equip de Pinball.</strong><br><br>              
+        </div>
+        </td>
+      </tr>
+    </table>';
+
+    return ($body);
+}
+
+// prepara i envia mail amb la classe de PHPMailer
 
 function prepMail($isHtml, $subject, $body, $altBody, $to, $nomTo)
 {
@@ -151,28 +175,14 @@ function montaMailContacte_php($dades)
 {
     $isHtml  = true;
     $to      = FROM;
-    $nomTo   = NOM_FROM_CONTACTE;
+    // $nomTo   = NOM_FROM_CONTACTE;
+    $body    = montaBodyContacte($dades);
+    $subject = "Contacte des de Pinball";
 
-    $body  = "S'ha rebut un missatge de contacte des de la web de Pinball amb les següents dades: <br><br><br>";
-    $body .= "Nom       : " . $dades->nom .       "<br>";
-    $body .= "Cognoms   : " . $dades->cognoms .   "<br>";
-    $body .= "eMail     : " . $dades->email .     "<br>";
-    $body .= "Comentari : " . $dades->comentari . "<br>";
+/// monta el email
 
-    $subject = "Contacte des de Pinball";    
-
-    $headers  = "MIME-Version: 1.0\r\n";
-    $headers .= "X-Mailer: PHP/" . phpversion() . " \r\n";
-    if($isHtml)
-        $headers .= "Content-Type: text/html; charset=iso-8859-1\r\n";
-    else
-        $headers .= "Content-Type: text/plain; charset=iso-8859-1\r\n";
-    $headers .= "From: " . NOM_FROM . " " . FROM . " \r\n";
-    $headers .= "Reply-To: " . FROM . " \r\n";;
-    $headers .= "Return-path: " . FROM . " \r\n";;
-
-    $subject = mb_encode_mimeheader($subject);
-
+    $headers  = montaCapsaleresEmail($isHtml);
+    $subject  = mb_encode_mimeheader($subject);
     $message  = $body;
     $message .= "E-mail   : " . FROM . " \r\n";
     $message .= "Enviat   : " . date('d/m/Y', time());
@@ -185,29 +195,15 @@ function montaMailContacte_php($dades)
 function montaMailRegistre_php($dades)
 {
     $isHtml  = true;
-    $to      = FROM;
-    $nomTo   = NOM_FROM_CONTACTE;
+    $to      = $dades['emailUsr'];
+    // $nomTo   = $dades['nomUsr'] . " " . $dades['cogUsr'];
+    $body    = montaBodyRegistre($dades);
+    $subject = $dades['loginUsr'] . " Dades de registre al Pinball, guardi aquest email.";
 
-    $body  = "S'ha rebut un missatge de contacte des de la web de Pinball amb les següents dades: <br><br><br>";
-    $body .= "Nom       : " . $dades->nom .       "<br>";
-    $body .= "Cognoms   : " . $dades->cognoms .   "<br>";
-    $body .= "eMail     : " . $dades->email .     "<br>";
-    $body .= "Comentari : " . $dades->comentari . "<br>";
+/// monta el email
 
-    $subject = "Contacte des de Pinball";    
-
-    $headers  = "MIME-Version: 1.0\r\n";
-    $headers .= "X-Mailer: PHP/" . phpversion() . " \r\n";
-    if($isHtml)
-        $headers .= "Content-Type: text/html; charset=iso-8859-1\r\n";
-    else
-        $headers .= "Content-Type: text/plain; charset=iso-8859-1\r\n";
-    $headers .= "From: " . NOM_FROM . " " . FROM . " \r\n";
-    $headers .= "Reply-To: " . FROM . " \r\n";;
-    $headers .= "Return-path: " . FROM . " \r\n";;
-
+    $headers = montaCapsaleresEmail($isHtml);
     $subject = mb_encode_mimeheader($subject);
-
     $message  = $body;
     $message .= "E-mail   : " . FROM . " \r\n";
     $message .= "Enviat   : " . date('d/m/Y', time());
@@ -217,21 +213,18 @@ function montaMailRegistre_php($dades)
     return ( mail( $to, $subject, $message, $headers) );
 }
 
-
-/////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
-
-switch($pid)
-    {
-    case 1000:
-        $response = buildEmail("contacte", $_REQUEST['record']);
-        break;
-    default:
-        $response = "";
-        break;
-    }
-    
-echo json_encode( $response );
+function montaCapsaleresEmail($isHtml)
+{
+    $headers  = "MIME-Version: 1.0\r\n";
+    $headers .= "X-Mailer: PHP/" . phpversion() . " \r\n";
+    if($isHtml)
+        $headers .= "Content-Type: text/html; charset=iso-8859-1\r\n";
+    else
+        $headers .= "Content-Type: text/plain; charset=iso-8859-1\r\n";
+    $headers .= "From: " . NOM_FROM . " " . FROM . " \r\n";
+    $headers .= "Reply-To: " . FROM . " \r\n";;
+    $headers .= "Return-path: " . FROM . " \r\n";;
+    return ($header);
+}
 
 ?> 

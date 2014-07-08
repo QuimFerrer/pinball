@@ -17,8 +17,7 @@ $('#sidebar').w2sidebar({
 							nodes: [{ id: '3250', text: 'Actual',  img: 'icon-page' },
 									{ id: '3260', text: 'Històric',  img: 'icon-page' }]}]},
 					{ id: '3300', text: 'Torneigs', img: 'icon-folder',
-					nodes: [{ id: '3310', text: 'Alta',  img: 'icon-edit' },
-							{ id: '3340', text: 'Manteniment',  img: 'icon-edit' },
+					nodes: [{ id: '3340', text: 'Manteniment',  img: 'icon-edit' },
 							{ id: '3342', text: 'Històric',  img: 'icon-page' },
 							{ id: '3345', text: 'Llistats',  img: 'icon-folder',
 							nodes: [{ id: '3348', text: 'Jugadors',  img: 'icon-folder',
@@ -223,15 +222,6 @@ var controller = function(e) {
 
 
 		case '3000':
-	        var fields = [
-	            { name: 'Nom',          type: 'text', required: true },
-	            { name: 'Cognoms',      type: 'text', required: true },
-	            { name: 'eMail',        type: 'email', required: true },
-	            { name: 'Foto',         type: 'text', required: true },
-	            { name: 'Facebook',     type: 'text', required: true },
-	            { name: 'Twitter',      type: 'text', required: true },	            
-	        ];
-		    DataForm(fields);
 		    break;
 
 		case '3110':
@@ -479,12 +469,13 @@ var controller = function(e) {
 				];
 			DataGrid("Històric de jocs amb màquines instal.lades", false, true, columns, e.target);
 			break;				    
-		case '3310':
-			break;
+
 		case '3320':
 			break;
+
 		case '3330':
 			break;
+
 		case '3340':
 			columns = [
 				{ field: '_01_pk_idTorn',    caption: 'idTorn',      size: '6%' },
@@ -496,26 +487,46 @@ var controller = function(e) {
 				{ field: 'datFinTorn',       caption: 'Final Torn.', size: '9%' },
 				{ field: 'datAltaTorn',      caption: 'Data Alta',   size: '16%' },
 				{ field: 'datModTorn',       caption: 'Data Modif.', size: '16%' }				
-				];
+			];
+
 			fields = [
-		        // { name: '_02_pk_idJocTorn', type: 'float', required: true,
-		        //   html: { caption: 'idJoc', attr: 'size="6"', span: 5 }
-		        // },
-		        { name: '_03_nomTorn', type: 'text', required: true,
-		          html: { caption: 'Nom', attr: 'size="45"', span: 5 }
-		        },
-		        { name: "_04_premiTorn", type: 'float', required: true,
-		          html: { caption: 'Premi', attr: 'size="10"', span: 5 }
-		        },
-		        { name: "datIniTorn", type: 'date', required: true,
-		          html: { caption: 'Data inici', attr: 'size="40"', span: 5 }
-		        },
-		        { name: "datFinTorn", type: 'date', required: true,
-		          html: { caption: 'Data final', attr: 'size="40"', span: 5 }
-		      	}
-		    ];
-		    DataGrid("Relació de Torneigs", "torneig", false, columns, fields, 3340, "_01_pk_idTorn");
+				{ name: '_03_nomTorn', type: 'text', required: true },
+				{ name: '_04_premiTorn', type: 'text', required: false },
+				{ name: '_02_nomJoc', type: 'text', required: false },
+				{ name: 'datIniTorn', type: 'date', required: false },
+				{ name: 'datFinTorn', type: 'date', required: false }
+			];
+
+            toolbar = { 
+	            items: [
+	                { type: 'button', id: 'new',  caption: 'Afegir',    img: 'icon-add' },
+	                { type: 'button', id: 'edit', caption: 'Modificar', img: 'icon-edit' },
+	                { type: 'button', id: 'del',  caption: 'Eliminar',  img: 'icon-delete' }
+	            ],
+	            onClick: function(target, data) {
+			        var row  = w2ui['grid'].getSelection();
+			        var form = "../html/torneig.html";
+// queries: 3310 new | 3320 del  | 3330 edit
+			    	switch(target) {
+			    		case 'new':
+			    			DataForm("Alta torneig", 0, fields, form, "query.php");
+			    			// DataForm(title, 0, fields, "../html/torneig.html", action, params);
+				        	break;
+
+				        case 'edit':
+				        	if (row.length != 0) DataForm("Modificar torneig", row[0], fields, form);
+				        	break;
+
+				        default:
+				        	console.log(target , " No definit");
+				        	break;
+				    }
+			    }
+  			};	
+
+		    DataGrid("Relació de Torneigs", "torneig", toolbar, columns, fields, 3340, "_01_pk_idTorn");
 			break;
+
 		case '3342':
 			columns = [
 				{ field: 'idTorn',      caption: 'idTorn',      size: '6%' },

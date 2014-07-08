@@ -10,11 +10,10 @@ Varis
 --> ok. <-- 8. treure el login.js
 --> ok. <-- 9. posar al titol dels grids llistat o relació
 10. registre amb enviament de mail
-11. guardar password encriptat
-12. enviament de mail de contacte
+--> ok. <-- 11. guardar password encriptat
+--> ok. <-- 12. enviament de mail de contacte
 --> ok. <-- 13. pregunta al Quim per posar columnes per filtrar/buscar els resultats 
 14. que el TOTAL d'alguns llistat pugui sortir amb una linia de totals del grid
-15. posar un opció de menú per llistar les dades de cada taula
 16. gestió de reset password
 --> ok. <-- 17. revisar query 3110
 18. incloure errors d'apertura de base de dades del pinball.h en la gestió d'errors
@@ -22,6 +21,7 @@ Varis
 20. incloure altes de partides
 21. REVISAR. he incorporat el codi de joc al manteniment de torneigs al fer alta i modificació
 22. REVISAR. he incorporat el codi de màquina i joc al manteniment de macInst (està comentat)
+23. crear usuari admin amb password md5
 
 Recreatius
 

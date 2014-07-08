@@ -1,6 +1,7 @@
 <?php 
 
 include ("../src/pinball.h");
+include ("../src/email.php");
 include ("../src/seguretat.php"); 
 
 isEndSessionInQuery();
@@ -9,14 +10,15 @@ isEndSessionInQuery();
 //   OPCIONS D'ADMINISTRADOR
 ////////////////////////////////////////////////////////////////////////////////////
 
-	const FORM_CONTACTE_1000 = 1000;
-	const FORM_REGISTRE_1010 = 1010;
-	const CONSULTA_ADM_1020  = 1020;
-	const TORNEIGS_1060 	 = 1060;
-	const USUARIS_1080  	 = 1080;
-	const PARTIDA_1120	     = 1120;
+	const FORM_CONTACTE_1000 				   = 1000;
+	const FORM_REGISTRE_1010 				   = 1010;
+	const CONSULTA_ADM_1020  				   = 1020;
+	const TORNEIGS_1060 					   = 1060;
+	const USUARIS_1080  					   = 1080;
+	const PARTIDA_1120	    				   = 1120;
 
 	const MODIFICA_PERFIL_ADM_3000             = 3000;
+	const BAIXA_PERFIL_ADM_3010  	           = 3010;	
 
 	const PARTIDES_X_MAQUINA_3110              = 3110; //
 	const PARTIDES_X_JUGADOR_3120              = 3120; //
@@ -26,7 +28,6 @@ isEndSessionInQuery();
 	const MODIFICACIO_RONDA_DE_PARTIDA_3150    = 3150;
 	const BLOQUEJAR_RONDA_DE_PARTIDA_3155	   = 3155;
 	const DESBLOQUEJAR_RONDA_DE_PARTIDA_3157   = 3157;
-
 
 	const LLIS_PARTIDES_I_RONDES_3160          = 3160; //
 	const LLIS_PARTIDES_I_RONDES_HISTORIC_3170 = 3170; //	
@@ -124,17 +125,17 @@ isEndSessionInQuery();
 	const INSCRIPCIO_USR_TORNEIG_5063          = 5063;	
 
 ///////////////////////////////////////////////////////////////////////////////////
-//
 //		QUERIES DE GENERACIÓ DE PARTIDES
-//
 ///////////////////////////////////////////////////////////////////////////////////
 
 	const PARTIDES_RELACIO_TORNEIGS_6000	   = 6000; //
-
-
-
-
 	
+
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+
+
 	$pid      = isset($_REQUEST['pid'])        ? (int) $_REQUEST['pid']  : 0;
 	$record   = isset($_REQUEST['record']) 	   ? $_REQUEST['record'] : NULL;
 
@@ -159,7 +160,7 @@ isEndSessionInQuery();
 ///////////////////////////////////////////////////////////////////////////////////////
 //
 //
-//								QUERYS D'ADMINISTRADOR
+//								QUERIES D'ADMINISTRADOR
 //
 //
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -173,11 +174,57 @@ isEndSessionInQuery();
 		switch ($pid) {
 
 			case FORM_CONTACTE_1000:
-				echo json_encode($_REQUEST['record']);
+		        $response = buildEmail("contacte", $record );			
+				echo json_encode($response);
 				break;
 
 			case FORM_REGISTRE_1010:
-				echo json_encode($_REQUEST['record']);
+				$query    = sprintf("SELECT _04_loginUsuari
+									 FROM usuari
+								     WHERE _04_loginUsuari = '%s';",$record["loginUsr"]);
+				$response = dbExec($query);
+				$response = (object)controlErrorQuery($response);
+				if ($response->total > 0)
+					$response = array("status" => "error", "message" => "Ja existeix un usuari amb aquest LOGIN.");
+				else
+					{
+					$record["activateUsr"] = generaCodiActivacioAleatori(20);
+					$record["estatUsr"]    = 1;
+					$query = sprintf("INSERT INTO usuari
+									  VALUES (NULL,
+									  		  '%s','%s','%s','%s','%s','%s',
+									  		  NOW(),NULL,NULL,'%s','%d');",$record["nomUsr"],
+																 $record["cogUsr"],
+																 $record["loginUsr"],
+																 md5($record["passwordUsr"]),
+																 $record["emailUsr"],
+																 $record["fotoUsr"],
+																 $record["activateUsr"],
+																 $record["estatUsr"]);
+					$response = dbExec($query,2);
+					$response = (object)controlErrorQuery($response);
+					if ($response->status != "error")
+						{
+						$record["idUsr"] = $response->records;
+						$query = sprintf("INSERT INTO jugador 
+									      VALUES (NULL,
+										  	  	 	'%d','%s','%s',
+										  		  	NOW(),NULL,NULL);",$record["idUsr"],
+																	   $record["facebookUsr"],
+																	   $record["twitterUsr"]);
+						$response = dbExec($query,3);
+						$response = (object)controlErrorQuery($response);
+						if ($response->status != "error")
+								{
+					        	$response = buildEmail("registre", $record );
+					        	if ($response)
+					        		$response = array("status" => "");
+					        	else
+									$response = array("status" => "error", "message" => "Error en l'enviament del correu d'activació.");
+					        	}
+						}
+					}
+				echo json_encode($response);
 				break;
 
 			case CONSULTA_ADM_1020 :
@@ -217,27 +264,52 @@ isEndSessionInQuery();
 ///////////////////////////////////////////////////////////////////////////////////////
 
 			case MODIFICA_PERFIL_ADM_3000 :
-				$query    = 'UPDATE usuari SET _02_nomUsuari     = "$nom",
-											   _03_cognomUsuari  = "$cognom",
-						                       _06_emailUsuari   = "$email",
-						                       _07_fotoUsuari    = "$nomFoto",
-						                       _08_datAltaUsuari = "$dataAltaUsuari",						
-						                       _09_datModUsuari  = NOW()
+				$query    = sprintf( 
+							"UPDATE usuari 
+							 SET 
+								_02_nomUsuari    = '%s',
+								_03_cognomUsuari = '%s',
+								_06_emailUsuari  = '%s',				
+								_07_fotoUsuari   = '%s',
+								_09_datModUsuari = NOW() 
 							WHERE
 								_10_datBaixaUsuari IS NULL AND
-								_04_loginUsuari = "admin";';
+								_04_loginUsuari = '%s';",
+							$record["nomUsr"], $record["cogUsr"],
+							$record["emailUsr"], $record["fotoUsr"], 
+							$usrLogin);
 				$response = dbExec($query,0);
-				$query    = 'UPDATE admin SET  _02_faceAdm    = "$facebook",
-						 					   _03_twitterAdm = "$twitter",
-						 					   _04_datAltaAdm = "$dataAltaAdm",	
-						 					   _05_datModAdm  = NOW()
+				$query    = sprintf(
+							"UPDATE admin 
+							SET 
+								_02_faceAdm    = '%s',
+		 						_03_twitterAdm = '%s',
+		 						_05_datModAdm  = NOW()
 							WHERE 
-									_06_datBaixaAdm IS NULL AND
-									(_01_pk_idAdm IN
-										( SELECT _01_pk_idUsuari AS _01_pk_idAdm FROM usuari
-											WHERE _04_loginUsuari = "admin"));';
+								_06_datBaixaAdm IS NULL AND
+								(_01_pk_idAdm 
+									IN ( SELECT _01_pk_idUsuari AS _01_pk_idAdm FROM usuari
+										WHERE _04_loginUsuari = '%s'));",
+							$record["facebookUsr"], $record["twitterUsr"], $usrLogin);
 				$response = dbExec($query,0);
-				echo json_encode(controlErrorQuery($response));							
+				echo json_encode(controlErrorQuery($response));				
+				break;
+
+			case BAIXA_PERFIL_ADM_3010 :
+				$query    = sprintf("UPDATE usuari SET _09_datModUsuari   = NOW(),
+													   _10_datBaixaUsuari = NOW()
+							 		WHERE _10_datBaixaUsuari IS NULL AND
+										  _04_loginUsuari = '%s';",$usrLogin);	
+
+				$response = dbExec($query,0);
+				$query    = sprintf("UPDATE admin SET   _05_datModAdm    = NOW(),
+														_06_datBaixaAdm  = NOW()
+						 		WHERE _06_datBaixaAdm IS NULL AND
+								 			(_01_pk_idAdm IN ( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
+							       			WHERE _04_loginUsuari = '%s'));",$usrLogin);
+
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));				
 				break;
 			case PARTIDES_X_MAQUINA_3110 :
 				$query    = 'SELECT  _00_pk_idPart_auto AS recid,
@@ -1829,16 +1901,14 @@ isEndSessionInQuery();
 							 SET 
 								_02_nomUsuari    = '%s',
 								_03_cognomUsuari = '%s',
-								_04_loginUsuari  = '%s',
-								_05_pwdUsuari    = '%s',
 								_06_emailUsuari  = '%s',				
 								_07_fotoUsuari   = '%s',
 								_09_datModUsuari = NOW() 
 							WHERE
 								_10_datBaixaUsuari IS NULL AND
 								_04_loginUsuari = '%s';",
-							$record["nomUsr"], $record["cogUsr"], $record["loginUsr"], 
-							$record["passwordUsr"], $record["emailUsr"], $record["fotoUsr"], 
+							$record["nomUsr"], $record["cogUsr"],
+							$record["emailUsr"], $record["fotoUsr"], 
 							$usrLogin);
 
 				$response = dbExec($query,0);

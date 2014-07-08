@@ -17,7 +17,7 @@ include ("../src/seguretatLogin.php");
 <body>
 	<div id="main">
 		<header>
-			<h1>Contacte</h1>
+			<h1>Registre</h1>
 		</header>
 		<menu>
 			<?php menu(); ?>
@@ -50,8 +50,8 @@ include ("../src/seguretatLogin.php");
 					<div class="w2ui-field"><input name="twitterUsr" type="text" maxlength="100" size="60"/></div>
 				</div>
 				<div class="w2ui-buttons">
-					<input type="reset"  value="Esborrar" name="reset">
-					<input type="submit" value="Enviar"   name="save">					
+					<input type="button"  value="Esborrar" name="reset">
+					<input type="button"  value="Enviar"   name="save">					
 				</div>
 				<img src="../resources/img/avatar.jpg" alt="" class="perfil">
 			</div>
@@ -70,10 +70,14 @@ $(function () {
 		name  : 'form',
 		url   : 'query.php',
 		fields: [
-			{ name: 'nom', 			type: 'text', required: true },
-			{ name: 'cognoms',  	type: 'text', required: true },
-			{ name: 'email',  		type: 'email', required: true },
-			{ name: 'comentari',  	type: 'text', required: true}
+			{ name: 'nomUsr',      type: 'text',  required: true },
+			{ name: 'cogUsr',      type: 'text',  required: true },
+			{ name: 'loginUsr',    type: 'text',  required: true },
+			{ name: 'passwordUsr', type: 'text',  required: true },
+			{ name: 'emailUsr',    type: 'email', required: true },
+			{ name: 'fotoUsr',     type: 'text',  required: false },
+			{ name: 'facebookUsr', type: 'text',  required: false },
+			{ name: 'twitterUsr',  type: 'text',  required: false }
 		],
 		actions: {
 			reset: function () {
@@ -81,11 +85,16 @@ $(function () {
 			},
 			save: function() {
 				var self = this;
-				this.save( {pid:1010}, function(e) {
-					console.log(e);
-					w2alert('Gràcies per la teva col.laboració', 'Missatge');
-					self.clear();
-				});
+				this.save( { idUserPart:"", pid:1010 }, 
+					function (data)
+						{
+						console.log(data); 
+						if (data.status != 'error')
+							w2alert("Registre correcte. Revisa la teva safata d'entrada del teu correu electrònic per activar el teu compte. Gràcies", 'Missatge');
+						else
+							w2alert(data.message + ". Torna a intentar-ho. Gràcies.", 'Missatge');
+						self.clear();
+						});
 			}
 		}
 	});
@@ -95,21 +104,4 @@ $(function () {
 
 <?php
 if (isset($_POST['entrar'])) controlAcces($_POST["usr"],$_POST["pwd"]);
-
-if (isset($_POST['save']))
-	{
-	$dades = (object)array("nom"      => $_POST['nomUsr'],
-						   "cognoms"  => $_POST['cogUsr'],
-						   "login"    => $_POST['loginUsr'],
-						   "password" => $_POST['passwordUsr'],
-						   "email"    => $_POST['emailUsr'],
-						   "foto"     => $_POST['fotoUsr'],
-						   "facebook" => $_POST['facebookUsr'],
-						   "twitter"  => $_POST['twitterUsr']);
-	if ( enviaEmail("registre", $dades) )
-		echo "<script>alert('Enviament corecte. Gràcies per la teva col.laboració');</script>";
-	else
-		echo "<script>alert('S'ha produit una incidència en l'enviament. Torna a intentar-ho. Gràcies.');</script>";
-	}
-
 ?>

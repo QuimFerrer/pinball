@@ -24,7 +24,7 @@ include ("../src/seguretatLogin.php");
 
 		foreach($response as $joc) {
 			echo '<li>';
-			echo '<img src="../resources/img/jocs/'. $joc->_04_imgJoc .'" alt="'. $joc->_02_nomJoc .'">';
+			// echo '<img src="../resources/img/jocs/'. $joc->_04_imgJoc .'" alt="'. $joc->_02_nomJoc .'">';
 			echo '<h2>'. 				$joc->_02_nomJoc .'</h3>';
 			echo '<p>Codi: '. 			$joc->_01_pk_idJoc .'</p>';
 			echo '<p>Data d\'alta: '. 	date('j-m-Y',strtotime($joc->_06_datAltaJoc)) .'</p>';
