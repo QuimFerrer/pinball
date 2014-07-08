@@ -15,8 +15,9 @@ function controlErrorQuery($response)
         $response = array("status" => "error", "message" => "Error " . $estat->numerr . "." . $estat->msg);
     else
         $response = array("status" => "" , 'total' => count($response[1]), 'page' => 0, 'records' => $response[1]);
-    if ($_SESSION['endTime'] === "SI")
-        $response = array("status" => "error", "message" => "La sessió ha expirat. Torna a fer Login a l'aplicació.");
+    if (isset($_SESSION['endTime']))
+        if ($_SESSION['endTime'] === "SI")
+            $response = array("status" => "error", "message" => "La sessió ha expirat. Torna a fer Login a l'aplicació.");
     return ($response);
 }
 
@@ -76,11 +77,12 @@ function dbExecLocal($query,$tipusResultat) {
                 break;
             // insert
             case 2:
+                $dades = mysql_insert_id();
                 break;
             // update
             case 3:
+                $dades = mysql_affected_rows();
                 break;
-
             default:
                 $dades = true;
                 break;
