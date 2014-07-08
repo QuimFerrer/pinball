@@ -222,50 +222,23 @@ var controller = function(e) {
 
 
 		case '3000':
+		    DataView('../html/perfilAdm.php');		
 		    break;
 
 		case '3110':
-            toolbar = { 
-                items: [
-	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
-	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' }	                
-	            ],
-                onClick: function(target, data) {
-			        var row = w2ui['grid'].getSelection();
-				    if (row.length != 0)
-				    	{
-				    	console.log(row);
-				    	switch(target)
-				    		{
-				    		case 'lock':
-					        	var params ={pid: "3130", idPart: row[0]};
-						     	msgAction("Bloquejar una partida", 'Estàs segur ?', "query.php", params);
-					        	break;
-					        case 'unlock':
-					        	var params ={pid: "3140", idPart: row[0]};					        
-						     	msgAction("Desbloquejar una partida", 'Estàs segur ?', "query.php", params);
-					        	break;
-					        default:
-					        	console.log(target , " No definit");
-					        	break;
-					        }
-				    	}
-				    }
-      			};
-			columns = [			   	
+			columns = [
 				{ field: 'idMaq',          caption: 'Maq',         size: '6%' },
 				{ field: 'idTorn',         caption: 'idTorn',      size: '6%' },
 				{ field: 'nomTorn',        caption: 'Torneig',     size: '10%' },
 				{ field: 'idJoc',          caption: 'Joc',         size: '6%' },
 				{ field: 'nomJoc',         caption: 'Nom Joc',     size: '12%' },
 				{ field: 'datHoraPartida', caption: 'Data Hora Partida',   size: '20%' },
-				{ field: 'recid',          caption: 'Part',        size: '6%' },				
 				{ field: 'datIniTorn',     caption: 'Inici Torn.', size: '11%' },
 				{ field: 'datFinTorn',     caption: 'Final Torn.', size: '11%' },
 				{ field: 'datModPart',     caption: 'Data Modif.', size: '16%'},				
 				{ field: 'datBaixaPart',   caption: 'Data Baixa',  size: '16%'}
 				];
-			DataGrid("Partides per màquina", false, toolbar, columns, e.target);				
+			DataGrid("Partides per màquina", false, true, columns, e.target);				
 			break;
 		case '3120':
             toolbar = { 
@@ -275,17 +248,18 @@ var controller = function(e) {
 	            ],
                 onClick: function(target, data) {
 			        var row = w2ui['grid'].getSelection();
+			        var row = w2ui['grid'].get(row);			        
 				    if (row.length != 0)
 				    	{
 				    	// console.log(row);
 				    	switch(target)
 				    		{
 				    		case 'lock':
-					        	var params ={pid: "3130", idPart: row[0]};
+					        	var params ={pid: "3130", idMaq: row['idMaq'], idJoc: row['idJoc'], idUsr: row['idUser'], idDatHorPart: row['datHoraPartida']};
 						     	msgAction("Bloquejar una partida", 'Estàs segur ?', "query.php", params);
 					        	break;
 					        case 'unlock':
-					        	var params ={pid: "3140", idPart: row[0]};					        
+					        	var params ={pid: "3140", idMaq: row['idMaq'], idJoc: row['idJoc'], idUsr: row['idUser'], idDatHorPart: row['datHoraPartida']};
 						     	msgAction("Desbloquejar una partida", 'Estàs segur ?', "query.php", params);
 					        	break;
 					        default:
@@ -304,8 +278,7 @@ var controller = function(e) {
 				{ field: 'idJoc',          caption: 'Joc',         size: '4%' },
 				{ field: 'nomJoc',         caption: 'Nom Joc',     size: '12%' },
 				{ field: 'idMaq',          caption: 'Maq',         size: '4%' },
-				{ field: 'datHoraPartida', caption: 'Data Hora Partida',   size: '16%' },
-				{ field: 'recid',          caption: 'Part',        size: '4%' },								
+				{ field: 'datHoraPartida', caption: 'Data Hora Partida',   size: '16%' },							
 				{ field: 'datIniTorn',     caption: 'Inici Torn.', size: '9%' },
 				{ field: 'datFinTorn',     caption: 'Final Torn.', size: '9%' },
 				{ field: 'datModPart',     caption: 'Data Modif.', size: '16%'},				
@@ -329,8 +302,7 @@ var controller = function(e) {
 				{ field: 'idMaq',          caption: 'Maq',         size: '4%' },
 				{ field: 'idUser',         caption: 'Jug',         size: '4%' },
 				{ field: 'loginUser',      caption: 'login',       size: '7%' },
-				{ field: 'nomUser',        caption: 'Nom',         size: '8%' },								
-				{ field: 'idPart',         caption: 'idPart',      size: '7%' },				
+				{ field: 'nomUser',        caption: 'Nom',         size: '8%' },
 				{ field: 'datHoraPartida', caption: 'Data Hora Partida',   size: '16%' },
 				{ field: 'idRonda',        caption: 'Ronda No',    size: '7%' },
 				{ field: '_06_fotoJugRonda',caption: 'Foto',       size: '8%' },
@@ -347,8 +319,7 @@ var controller = function(e) {
 		          html: { caption: 'Punts ronda', attr: 'size="10"', span: 5 }
 		        }
 		    ];
-		    // DataGrid("Rondes de cada partida", "ronda", false, columns, fields, 3160, "_00_pk_idRonda_auto");
-		    DataGrid("Rondes de cada partida", "ronda1", false, columns, fields, 3160, "_00_pk_idRonda_auto");			
+		    DataGrid("Rondes de cada partida", "ronda", false, columns, fields, 3160, "_00_pk_idRonda_auto");
 			break;
 		case '3170':
             toolbar = { 
@@ -390,7 +361,7 @@ var controller = function(e) {
 				{ field: 'nomUser',        caption: 'Nom',         size: '8%' },								
 				{ field: 'idPart',         caption: 'idPart',      size: '7%' },				
 				{ field: 'datHoraPartida', caption: 'Data Hora Partida',   size: '16%' },
-				{ field: 'idRonda',        caption: 'Ronda',       size: '7%' },
+				{ field: 'recid',          caption: 'Ronda',       size: '7%' },
 				{ field: 'fotoJugRonda',   caption: 'Foto',        size: '8%' },				
 				{ field: 'puntsRonda',     caption: 'Punts',       size: '8%' },
 				{ field: 'datIniTorn',     caption: 'Inici Torn.', size: '11%' },
@@ -492,9 +463,9 @@ var controller = function(e) {
 			fields = [
 				{ name: '_03_nomTorn', type: 'text', required: true },
 				{ name: '_04_premiTorn', type: 'text', required: false },
-				{ name: '_02_nomJoc', type: 'text', required: false },
-				{ name: 'datIniTorn', type: 'date', required: false },
-				{ name: 'datFinTorn', type: 'date', required: false }
+				{ name: '_02_pk_idJocTorn', type: 'text', required: true },
+				{ name: 'datIniTorn', type: 'date', required: true },
+				{ name: 'datFinTorn', type: 'date', required: true }
 			];
 
             toolbar = { 
@@ -504,28 +475,36 @@ var controller = function(e) {
 	                { type: 'button', id: 'del',  caption: 'Eliminar',  img: 'icon-delete' }
 	            ],
 	            onClick: function(target, data) {
-			        var row  = w2ui['grid'].getSelection();
-			        var form = "../html/torneig.html";
-// queries: 3310 new | 3320 del  | 3330 edit
+			        var action = "../html/torneig.php";
+			        var row    = w2ui['grid'].getSelection();
+
 			    	switch(target) {
 			    		case 'new':
-			    			DataForm("Alta torneig", 0, fields, form, "query.php");
-			    			// DataForm(title, 0, fields, "../html/torneig.html", action, params);
+			        		DataForm("Crear torneig", 0, fields, action, 
+			        				{param:'torneig', keyname:'_01_pk_idTorn'});	
 				        	break;
 
 				        case 'edit':
-				        	if (row.length != 0) DataForm("Modificar torneig", row[0], fields, form);
+				        	if (row.length != 0) 
+				        		DataForm("Modificar torneig", row[0], fields, action, 
+				        				{param:'torneig', keyname:'_01_pk_idTorn'});
+				        	break;
+
+				        case 'del':
+				        	w2ui['grid'].request('delete', {recid:row[0]}, action, function() {
+				        		w2ui['grid'].reload();
+				        	});
 				        	break;
 
 				        default:
-				        	console.log(target , " No definit");
+				        	console.log(target, " No definit");
 				        	break;
 				    }
 			    }
   			};	
 
 		    DataGrid("Relació de Torneigs", "torneig", toolbar, columns, fields, 3340, "_01_pk_idTorn");
-			break;
+			break;			        
 
 		case '3342':
 			columns = [

@@ -4,21 +4,24 @@ function customQuerySaveRecord($pid, $id, $record, $kName)
 {
 	switch($pid)
 		{
-		case '3160': // ronda1
+		case '3160': // ronda
 			if ($id != 0)
-				$query = sprintf("UPDATE ronda1 SET _06_fotoJugRonda = '%s',
-		   		  							   	    _07_puntsRonda   = '%d',
-					  						  	    _08_datModRonda  = NOW()
+				$query = sprintf("UPDATE ronda SET _06_fotoJugRonda = '%s',
+		   		  							 	   _07_puntsRonda   = '%d',
+					  						  	   _08_datModRonda  = NOW()
 								  WHERE _09_datBaixaRonda IS NULL AND
-									    _00_pk_idRonda_auto = '%d;';", 
-									    						$record['_06_fotoJugRonda'],
-									    						$record['_07_puntsRonda'],
-															    $id);
+									    _00_pk_idRonda_auto = '%d;';", $record['_06_fotoJugRonda'],
+									    							   $record['_07_puntsRonda'],
+															    	   $id);
 			else
-				$query = sprintf("INSERT INTO ronda1
-								VALUES (NULL,'%d','%s',0,NOW(),NULL,NULL);",
-																$record['_05_pk_idRonda'],
-																$record['_06_fotoJugRonda']);
+				$query = sprintf("INSERT INTO ronda
+								VALUES (NULL,'%d','%d','%d','%s','%d','%s',0,NOW(),NULL,NULL);",
+																		$record['_01_pk_idMaqRonda'],
+																	    $record['_02_pk_idJocRonda'],
+																	    $record['_03_pk_idJugRonda'],
+																	    $record['_04_pk_idDatHoraPartRonda'],
+																		$record['_05_pk_idRonda'],
+																		$record['_06_fotoJugRonda']);
 			$response = controlErrorQuery( dbExec($query,0) );
 			$data = controlErrorQueryFromDbui( $response, $id, $kName);
 			break;			
@@ -160,7 +163,7 @@ function customGetQueryForGetRecords($table)
 	{
 	switch($table)
 		{
-		case 'ronda1':
+		case 'ronda':
 			$query  = 'SELECT 	_00_pk_idRonda_auto AS recid,
 								_01_pk_idTorn      AS idTorn,
 								_03_nomTorn        AS nomTorn,
@@ -171,8 +174,11 @@ function customGetQueryForGetRecords($table)
 								BB.idUsuari        AS idUser,
 								BB.loginUsuari     AS loginUser,									
 								BB.nomUsuari       AS nomUser,
-								_00_pk_idPArt_auto AS idPart,
 								DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
+								_01_pk_idMaqRonda,
+								_02_pk_idJocRonda,
+								_03_pk_idJugRonda,
+								_04_pk_idDatHoraPartRonda,
 								_05_pk_idRonda     AS idRonda,
 								_06_fotoJugRonda,
 								_07_puntsRonda,
@@ -183,7 +189,10 @@ function customGetQueryForGetRecords($table)
 							INNER JOIN partida         ON (_02_pk_idMaqTTP  = _01_pk_idMaqPart AND
 														   _03_pk_idJocTTP  = _02_pk_idJocPart AND
 														   _04_pk_idJugTTP  = _03_pk_idJugPart )
-							INNER JOIN ronda1  ON (_00_pk_idPart_auto = _01_pk_idPartRonda),
+				 			INNER JOIN ronda           ON (_01_pk_idMaqPart = _01_pk_idMaqRonda AND
+				 										   _02_pk_idJocPart = _02_pk_idJocRonda AND
+				 										   _03_pk_idJugPart = _03_pk_idJugRonda AND
+				 										   _04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda ),
 						(SELECT _01_pk_idUsuari AS idUsuari, _02_nomUsuari AS nomUsuari, _04_loginUsuari AS loginUsuari FROM usuari) AS BB,
 						(SELECT _01_pk_idJoc, _02_nomJoc AS nomJoc FROM joc) AS JJ
 						WHERE
@@ -192,8 +201,8 @@ function customGetQueryForGetRecords($table)
 							_09_datBaixaTorn IS NULL AND
 							_06_datBaixaPart IS NULL AND
 							_09_datBaixaRonda IS NULL
-						GROUP BY idTorn, idUsuari, idMaq, datHoraPartida, idPart, idRonda
-						ORDER BY idTorn, idUsuari, idMaq, datHoraPartida, idPart, idRonda;';
+						GROUP BY idTorn, idUsuari, idMaq, datHoraPartida, idRonda
+						ORDER BY idTorn, idUsuari, idMaq, datHoraPartida, idRonda;';
 			break;			
 		case 'joc':
 			$query  = "SELECT J.*,
@@ -206,6 +215,7 @@ function customGetQueryForGetRecords($table)
 			$query    = 'SELECT T.*,
 								_01_pk_idJoc,
 								_02_nomJoc,
+								_02_pk_idJocTorn,
 								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
 								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
 								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
@@ -251,9 +261,9 @@ function customGetQueryForDelete($table, $id, $kName)
 	{
 	switch($table)
 		{
-		case 'ronda1':
-			$query = sprintf("UPDATE ronda1 SET _08_datModRonda   = NOW(),
-											    _09_datBaixaRonda = NOW()
+		case 'ronda':
+			$query = sprintf("UPDATE ronda SET _08_datModRonda   = NOW(),
+									   	       _09_datBaixaRonda = NOW()
 							 WHERE _09_datBaixaRonda IS NULL AND _00_pk_idRonda_auto = '%d';",$id);
 			$response = dbExec($query,0);	
 			$data = controlErrorQueryFromDbui( $response, $id, $kName);

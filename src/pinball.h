@@ -127,7 +127,7 @@ function dbExecLocal($query,$tipusResultat) {
                 <li><a id="recrea"      href="../html/recrea.php">Recreatius</a></li>
                 <li><a id="empresa"     href="../html/empresa.php">Empresa</a></li>
                 <li><a id="jocs"        href="../html/jocs.php">Pinball kit</a></li>
-                <li><a id="torneig"     href="../html/torneig.php">Torneigs</a></li>
+                <li><a id="torneig"     href="../html/torneigs.php">Torneigs</a></li>
                 <li><a id="registre"    href="../html/registre.php">Registre</a></li>
                 <li><a id="contacte"    href="../html/contacte.php">Contactar</a></li>
             </ul>

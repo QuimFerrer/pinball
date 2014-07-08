@@ -324,43 +324,59 @@ function DataView(url) {
 
 /*
  **********************************************************************************************
- *  Api per construir un formulari
+ *  Api per a formulari de manteniment de grid
  **********************************************************************************************
  */
-function DataForm(title, id, fields, resource, action, params) {
+function DataForm(title, id, fields, action, params) {
+
     $("#grid").hide();
+    if (w2ui['dialog']) w2ui['dialog'].destroy();
 
-    if (w2ui['dialog']) {
-        $("#form").show();
+    $("#form").w2form({ 
+        name     : 'dialog',
+        recid    : id,
+        header   : title,
+        url      : action,
+        postData : params,
+        formURL  : action,
+        fields   : fields,
+        msgRefresh : 'Carregant dades...',
+        msgSaving  : 'Guardant dades...',
+        actions: {
+            save: function () {
+                this.save({}, function (data) { 
+                    console.log(data);
 
-    } else {
-        $("#form").w2form({ 
-            name     : 'dialog',
-            recid    : "1",
-            header   : title,
-            url      : action,
-            postData : params,
-            formURL  : resource,
-            fields: fields,
-            actions: {
-                save: function () {
-                    this.save({}, function (data) { 
-                        console.log(data);
-                        if (data.status == 'error') {
-                            console.log('ERROR: '+ data.message);
-                            return;
-                        }
-                    });
-                },
-                exit: function() {
-                    $("#form").hide();
+                    // Això funcionaria en consultes normals
+                    // if (data.rows==0) w2ui['grid'].add(data.record);
+                    // else w2ui['grid'].set(data.recid, data.record);
+                    w2ui['grid'].reload();
+                    // Forço carregar de nou el grid
+                    // De moment funciona, si hi ha temps, optimitzar
+
+                    w2ui['dialog'].destroy();
                     $("#grid").show();
-                }
-            }, 
-            onLoad: function(e) {
-                console.log(e);
-                e.preventDefault();
+                });
+            },
+            exit: function() {
+                w2ui['dialog'].destroy();
+                $("#grid").show();
             }
-        });
-    }
+        }, 
+        onLoad: function(eventData) {
+            eventData.preventDefault();
+            console.log(eventData.xhr.responseText);
+            var result = JSON.parse(eventData.xhr.responseText);
+
+            for (var i in result) {
+                w2ui['dialog'].record[i] = result[i];
+            }
+            w2ui['dialog'].refresh();
+        } 
+    });
+
+    // Per controlar tots els events
+    // w2ui['dialog'].on('*', function (event) {
+    //     console.log('Event: '+ event.type, 'Target: '+ event.target, event);
+    // });
 }

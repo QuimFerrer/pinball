@@ -31,16 +31,6 @@ isEndSessionInQuery();
 
 	switch ($action)
 	{
-		case 'ld' :
-			$qry  	= "SELECT * FROM $table";
-			$result = Sql_Exec($qry);
-
-			while ($row = mysql_fetch_object($result)) {
-			       $data[] = $row->_01_pk_idJoc; //. "-". $row->_02_nomJoc;
-			}
-			$data = array("items"=>$data);
-			break;
-
 		case 'get-record' :
 			$qry = customGetQueryForGetRecord($table, $id, $kName);		
 			$result = Sql_Exec($qry);
