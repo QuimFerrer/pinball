@@ -98,7 +98,7 @@ var dbGrid = function() {
             fnOnError    = function(target, error) { console.log( error.xhr.responseText, error ); };
 
             fnOnLoad = function(target, eventData) {
-                console.log(eventData.xhr.responseText);
+                // console.log(eventData.xhr.responseText);
                 var result = JSON.parse(eventData.xhr.responseText);
                 
                 if (typeof result  != 'undefined') {
@@ -223,7 +223,7 @@ var dbForm = function() {
                     // console.log(eventData.xhr.responseText);
                     var result = JSON.parse(eventData.xhr.responseText);
                     
-                    console.log(result, this.record, recno);
+                    // console.log(result, this.record, recno);
                     
                     if (result.rows == 1) {
                         if (recno > 0) {
@@ -327,42 +327,40 @@ function DataView(url) {
  *  Api per construir un formulari
  **********************************************************************************************
  */
-function DataForm(action, pId, record) {
-    if (w2ui.grid)  w2ui['grid'].destroy();
+function DataForm(title, id, fields, resource, action, params) {
+    $("#grid").hide();
 
-    $('#grid').w2form({ 
-        name  : 'grid',
-        header     : 'Form Header',
-        msgRefresh : 'Please Wait...',
-        url   : action,
-        fields: record,
-        actions: {
-            reset: function () {
-                this.clear();
-            },
-            save: function() {
-                var self = this;
-                this.save( {pid:pId}, function(e) {
-                    console.log(e);
-                    w2alert('Gràcies per la teva col.laboració', 'Missatge');
-                    self.clear();
-                });
-            }
-        }
-    });
-    // w2ui['grid'].recid = "1";
-    w2ui['grid'].request( {pid:'5020'}, function(data){
-        // console.log(data);
+    if (w2ui['dialog']) {
+        $("#form").show();
 
-        w2ui['grid'].fields.forEach( 
-            function(value, index) {
-
-                if (data) {
-                    console.log( data.records[0][value.name]);
-                    w2ui['grid'].record[value.name] = data.records[0][value.name];
+    } else {
+        $("#form").w2form({ 
+            name     : 'dialog',
+            recid    : "1",
+            header   : title,
+            url      : action,
+            postData : params,
+            formURL  : resource,
+            fields: fields,
+            actions: {
+                save: function () {
+                    this.save({}, function (data) { 
+                        console.log(data);
+                        if (data.status == 'error') {
+                            console.log('ERROR: '+ data.message);
+                            return;
+                        }
+                    });
+                },
+                exit: function() {
+                    $("#form").hide();
+                    $("#grid").show();
                 }
+            }, 
+            onLoad: function(e) {
+                console.log(e);
+                e.preventDefault();
             }
-        );
-        w2ui['grid'].record = { 'recid' : 0 };
-    });
+        });
+    }
 }
