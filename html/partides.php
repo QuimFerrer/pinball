@@ -54,7 +54,7 @@ $(document).ready(function(){
 	 
 		if (dadesconvert.total>0) {
 		
-			$("#llistat").html('Tria una combinacio torneig/maquina <select id="seleccionador"  name="Combinacio"> </select>'); // label="Combinacio"
+			$("#llistat").html('Tria una combinacio: </br> <select id="seleccionador"  name="Combinacio"> </select>'); // label="Combinacio"
 			
 		  	var contingut = "";
 		
@@ -94,28 +94,15 @@ $(document).ready(function(){
 	    sonPunts3 = "";
 	    
 	    function aleatoris(){
-			var incorrecte=true;
-			while (incorrecte){
-			var a = Math.round(Math.random()*10);   // MAJUSCULES LA M !! .. multiplica el random x10 i arrodoneix (ROUND) el Random a l'enter superior 
-			if (a<10) incorrecte=false;		// comprova si és mejor que 10 i en cas que sigui igual a 10 recalcula el numero
-			} // end while
-			
-			var incorrecte=true;
-			while (incorrecte){
-			var b = Math.round(Math.random()*10);   // MAJUSCULES LA M !! .. multiplica el random x10 i arrodoneix (ROUND) el Random a l'enter superior 
-			if (b<10) incorrecte=false;		// comprova si és mejor que 10 i en cas que sigui igual a 10 recalcula el numero
-			} // end while
-			
-			var incorrecte=true;
-			while (incorrecte){
-			var c = Math.round(Math.random()*10);   // MAJUSCULES LA M !! .. multiplica el random x10 i arrodoneix (ROUND) el Random a l'enter superior 
-			if (c<10) incorrecte=false;		// comprova si és mejor que 10 i en cas que sigui igual a 10 recalcula el numero
-			} // end while
-			
-		     sonPunts1 = document.getElementById('punt1').value=a*b;
-		     sonPunts2 = document.getElementById('punt2').value=b*c;
-		     sonPunts3 = document.getElementById('punt3').value=a*c;
-		};
+      
+		  var a = Math.round(Math.random()*10);
+		  var b = Math.round(Math.random()*10);   
+		  var c = Math.round(Math.random()*10); 
+		  
+		  sonPunts1 = document.getElementById('punt1').value=a*b;
+		  sonPunts2 = document.getElementById('punt2').value=b*c;
+		  sonPunts3 = document.getElementById('punt3').value=a*c;
+	    };
 
 	    aleatoris();    
 	    
@@ -132,8 +119,15 @@ $(document).ready(function(){
 	    $.ajax({
 	      url: "partides.php",
 	      data: {carregar:'NO', MAQ:esMaquina, JOC:esJoc, JUG:esJug, FOTO:'NO', PUNTUA1:sonPunts1, PUNTUA2:sonPunts2, PUNTUA3:sonPunts3}, //date("Y-n-j H:i:s")
-	      success: function(Resultat1){console.log('carregar NO : he enviat i rebo aquest return: ' , Resultat1);}});
+	      success: function(Resultat2){processar(Resultat2);}});
+	      
+	        function processar(dadesretornades2){
+		//var dadesconvert2= JSON.parse(dadesretornades2); 
+		
+		//var dadesfiltrades = dadesconvert2.records;  
+		document.getElementById('informacions').innerHTML = dadesretornades2;  
 		// return false;
+		}
 	}
 });
 </script>
@@ -156,7 +150,7 @@ $(document).ready(function(){
 			$response = dbExec($query)[1];
 			$_SESSION['resultat']=$response;
 			echo '<form id="dialog" method="POST">';
-			echo 'Tria jugador :<select align="right" id="I_User" name="User">';
+			echo 'Tria el jugador: <select align="right" id="I_User" name="User">';
 
 			foreach($response as $jugador) {
 			echo '<option value="'.$jugador->_04_loginUsuari .'">' .$jugador->_04_loginUsuari .'</option>';
@@ -171,16 +165,15 @@ $(document).ready(function(){
 			echo '</form"></br>'; 
 
 			$_SESSION['emplenat']="SI";
-		} 
+		}
 		elseif ($_SESSION['emplenat'] =="SI") 
 		{
-
+ 
+			// $IDMAQ2 = $_REQUEST['Combinacio'];
+			//  print_r($IDMAQ2);
+			//<b>Notice</b>:  Undefined index: Combinacio in <b>/opt/lampp/htdocs/Projectes/pinball/html/partides.php</b> on line <b>178</b><br />
+			
 			$IDMAQ = $_REQUEST['MAQ'];
-			
-	  $IDMAQ2 = $_REQUEST['Combinacio'];
-	  print_r($IDMAQ2);
-	  //<b>Notice</b>:  Undefined index: Combinacio in <b>/opt/lampp/htdocs/Projectes/pinball/html/partides.php</b> on line <b>178</b><br />
-			
 			$IDJOC = $_REQUEST['JOC'];
 			$IDJUG = $_REQUEST['JUG'];
 			//$IDDATA = $_REQUEST['DATA'];
@@ -193,26 +186,29 @@ $(document).ready(function(){
 				echo "<p>carregant dades a les variables</p>"; 
 			}	      
 			
-			if (($_REQUEST['carregar'])=="NO")
-			{
-			  
-		      echo "<p>S'ha fet l'insert!</p>"; 
-		      //<p>S'ha fet l'insert!</p><br />
-		      
-			    $query   = 'INSERT INTO joc VALUES (NULL, "'.$IDMAQ.'", "'.$PUNTUA_2.'", "'.$IDJUG.'", "'.$PUNTUA_3.'", NOW(), NULL, NULL);'; // "' .$IDMAQ .'","' .$IDJOC .'","' .$IDJUG .'"
-			    $response = dbExec($query)[1];
+			if (($_REQUEST['carregar'])=="NO"){
 			    
 			    $_SESSION['emplenat']="NO";
-			    return $response;
+			  
+			    echo "<p>S'ha fet l'insert!</p>"; 
+			    //<p>S'ha fet l'insert!</p><br />
+			
+			    $query   = 'INSERT INTO joc VALUES (NULL, "'.$IDMAQ.'", "'.$PUNTUA_2.'", NULL, "'.$IDJUG.'", NOW(), NULL, NULL);'; // "' .$IDMAQ .'","' .$IDJOC .'","' .$IDJUG .'"
+			    $response = dbExec($query)[1];
+			    
+			    
+			   return $response;
 			    //<b>Warning</b>:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in <b>/opt/lampp/htdocs/Projectes/pinball/src/pinball.h</b> on line <b>74</b><br />
 
-			    header('location:partides.php');
-		    } 
-		} 
-	} 
+			   // header('location:partides.php');
+		      }
+		}
+	}
     else 
     {
 		$_SESSION['emplenat']="NO";
+		var_dump($_SESSION['emplenat']);
+		echo "<p>no esta emplenat</p>";
 		header('location:partides.php');
 	}
 ?>
@@ -227,5 +223,5 @@ $(document).ready(function(){
 </html>
 
 <?php
-// if (isset($_POST['entrar'])) controlAcces($_POST["usr"],$_POST["pwd"]);
+ 
 ?>
