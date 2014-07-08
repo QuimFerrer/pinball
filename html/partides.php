@@ -66,14 +66,14 @@ $(document).ready(function(){
 				esJoc = dadesfiltrades[i].idJoc;
 				esJug = dadesfiltrades[i].idJug;
 
-				contingut += '<option id="'+esMaquina+'" value="'+esTorneig+'*'+esMaquina+'">Torneig: '+esTorneig+' // Maquina: '+esMaquina+'</option>';
+				contingut += '<option id="'+esMaquina+'" name="'+esMaquina+'" value="'+esMaquina+'"> Torneig: '+esTorneig+' // Maquina: '+esMaquina+'</option>';
 				//  console.log("esTorneig: " , esTorneig);  // !!!!!!!!!!!!!!!!!!!! COMA ,,,, i NO + ,,,,, !!!!!!!!!!!!!!!!!!!! 
 			}
 		
 			$("#seleccionador").html(contingut);
 			document.getElementById('informacions').innerHTML = "";
 
-			console.log(document.getElementsByName('Combinacio').value);
+			console.log(document.getElementById('seleccionador').value);
 	  
 		} // end if 
 	
@@ -122,7 +122,7 @@ $(document).ready(function(){
 	    $.ajax({
 	      url: "partides.php",
 	      data: {carregar:'SI', MAQ:esMaquina, JOC:esJoc, JUG:esJug, FOTO:'NO', PUNTUA1:sonPunts1, PUNTUA2:sonPunts2, PUNTUA3:sonPunts3}, //date("Y-n-j H:i:s")
-	      success: function(Resultat1){console.log('he carregat els valors que s han d enviar');}});
+	      success: function(Resultat1){console.log('carregar SI : he carregat els valors que s han d enviar');}});
 	    
 	  }); // end jQuery onchange combinacio
     } // end crearmenu
@@ -132,8 +132,8 @@ $(document).ready(function(){
 	    $.ajax({
 	      url: "partides.php",
 	      data: {carregar:'NO', MAQ:esMaquina, JOC:esJoc, JUG:esJug, FOTO:'NO', PUNTUA1:sonPunts1, PUNTUA2:sonPunts2, PUNTUA3:sonPunts3}, //date("Y-n-j H:i:s")
-	      success: function(Resultat1){console.log('he carregat els valors que s han d enviar');}});
-		return false;
+	      success: function(Resultat1){console.log('carregar NO : he enviat i rebo aquest return: ' , Resultat1);}});
+		// return false;
 	}
 });
 </script>
@@ -164,7 +164,8 @@ $(document).ready(function(){
 
 			echo '</select></br>'; 
 			echo '<div id="llistat"></div>';
-			echo 'PUNTUACIONS <div id="puntuacions"> Ronda 1 <input id="punt1" type="number" value="" readonly /> Ronda 2 <input id="punt2" type="number" value="" readonly /> Ronda 3 <input id="punt3" type="number" value="" readonly /> </div>';
+			echo '</br></br></br>';
+			echo 'PUNTUACIONS <div id="puntuacions"> Ronda 1 <input id="punt1" type="number" value="" /></br> Ronda 2 <input id="punt2" type="number" value="" /></br> Ronda 3 <input id="punt3" type="number" value="" /> </div>';
 			echo '</br></br></br>';
 			echo '<input type="submit" name="submit" value="Generar partida"';
 			echo '</form"></br>'; 
@@ -175,7 +176,10 @@ $(document).ready(function(){
 		{
 
 			$IDMAQ = $_REQUEST['MAQ'];
-			print_r($_REQUEST);
+			
+	  $IDMAQ2 = $_REQUEST['Combinacio'];
+	  print_r($IDMAQ2);
+	  //<b>Notice</b>:  Undefined index: Combinacio in <b>/opt/lampp/htdocs/Projectes/pinball/html/partides.php</b> on line <b>178</b><br />
 			
 			$IDJOC = $_REQUEST['JOC'];
 			$IDJUG = $_REQUEST['JUG'];
@@ -192,13 +196,17 @@ $(document).ready(function(){
 			if (($_REQUEST['carregar'])=="NO")
 			{
 			  
-		   // echo "<p>S'ha fet l'insert!</p>"; 
-		    
-			    $query   = 'INSERT INTO joc VALUES (NULL, "'.$PUNTUA_1.'", "'.$PUNTUA_2.'", "'.$IDJUG.'", "'.$PUNTUA_3.'", NOW(), NULL, NULL);'; // "' .$IDMAQ .'","' .$IDJOC .'","' .$IDJUG .'"
+		      echo "<p>S'ha fet l'insert!</p>"; 
+		      //<p>S'ha fet l'insert!</p><br />
+		      
+			    $query   = 'INSERT INTO joc VALUES (NULL, "'.$IDMAQ.'", "'.$PUNTUA_2.'", "'.$IDJUG.'", "'.$PUNTUA_3.'", NOW(), NULL, NULL);'; // "' .$IDMAQ .'","' .$IDJOC .'","' .$IDJUG .'"
 			    $response = dbExec($query)[1];
-			    return $response;
-			      
+			    
 			    $_SESSION['emplenat']="NO";
+			    return $response;
+			    //<b>Warning</b>:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in <b>/opt/lampp/htdocs/Projectes/pinball/src/pinball.h</b> on line <b>74</b><br />
+
+			    header('location:partides.php');
 		    } 
 		} 
 	} 
