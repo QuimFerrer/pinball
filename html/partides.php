@@ -85,7 +85,7 @@ $(document).ready(function(){
 	  
 	  $('#seleccionador').on('change',function(){
 	    seraMaquina = $(this).val();
-	    console.log("combinat!" , seraMaquina, "///", "seraMaquina.length" ,   seraMaquina.length); // per veure el contingut amb el separador * 
+	    console.log("seraMaquina!" , seraMaquina, "///", "seraMaquina.length" ,   seraMaquina.length); // per veure el contingut amb el separador * 
 	  
 	    sonPunts1 = "";
 	    sonPunts2 = "";
