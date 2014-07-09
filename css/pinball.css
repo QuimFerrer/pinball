@@ -183,3 +183,14 @@ img.perfil {
 td.w2ui-node-data {
 	padding: 0 !important;
 }
+h3.text-dialog {
+	font-size: 2.3em;
+	font-weight: normal;
+	padding: 10px;
+}
+p.text-dialog {
+	font-size: 1.4em;
+	width: 60%;
+	padding: 10px;
+	line-height: 22px;
+}
