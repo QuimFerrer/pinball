@@ -8,7 +8,7 @@ $('#sidebar').w2sidebar({
 					{ id: '3100', text: 'Partides', img: 'icon-folder',
 					nodes: [{ id: '3110', text: 'per màquina',  img: 'icon-page' },
 							{ id: '3120', text: 'per jugador',  img: 'icon-page' },
-							{ id: '3160', text: 'Manteniment Rondes',  img: 'icon-page' },
+							{ id: '3160', text: 'Manteniment Rondes',  img: 'icon-edit' },
 							{ id: '3170', text: 'Històric de Rondes',  img: 'icon-page' }]},
 					{ id: '3200', text: 'Jocs', img: 'icon-folder',
 					nodes: [{ id: '3230', text: 'Manteniment',  img: 'icon-edit' },
