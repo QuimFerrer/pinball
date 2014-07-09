@@ -261,14 +261,14 @@ var dbForm = function() {
         $().w2popup('open', {
             title   : self.title,
             modal   : true,
-            body    : '<div id="form"></div>',
+            body    : '<div id="popform"></div>',
             style   : 'padding: 0px',
             width   : 450,
             height  : height
         });
         // Forma equivalent
         // w2ui['dialog'].render($('#form')[0]); 
-        $('#form').w2render('dialog'); 
+        $('#popform').w2render('dialog'); 
     };
 };
 
@@ -329,18 +329,20 @@ function DataView(url) {
  */
 function DataForm(title, id, fields, action, params) {
 
-    $("#grid").hide();
     if (w2ui['dialog']) w2ui['dialog'].destroy();
+    
+    w2ui['grid'].lock('Consultant dades...', true);
 
     $("#form").w2form({ 
         name     : 'dialog',
         recid    : id,
+        body     : '<div id="form"></div>',
         header   : title,
         url      : action,
         postData : params,
         formURL  : action,
         fields   : fields,
-        msgRefresh : 'Carregant dades...',
+        msgRefresh : 'Consultant dades...',
         msgSaving  : 'Guardant dades...',
         actions: {
             save: function () {
@@ -365,14 +367,19 @@ function DataForm(title, id, fields, action, params) {
         }, 
         onLoad: function(eventData) {
             eventData.preventDefault();
-            console.log(eventData.xhr.responseText);
+            w2ui['grid'].unlock();
+
+            // console.log(eventData.xhr.responseText);
             var result = JSON.parse(eventData.xhr.responseText);
 
             for (var i in result) {
                 w2ui['dialog'].record[i] = result[i];
             }
             w2ui['dialog'].refresh();
-        } 
+        },
+        onRender: function(eventData) {
+            $("#grid").hide();
+        }
     });
 
     // Per controlar tots els events
