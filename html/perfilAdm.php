@@ -11,7 +11,7 @@ comprovaSessio();
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Perfil usuari</title>
+	<title>Perfil Administrador</title>
 	<link rel="stylesheet" href="../css/lib/w2ui-1.3.2.css" />
 	<link rel="stylesheet" href="../css/pinball.css">
 </head>
@@ -34,13 +34,13 @@ comprovaSessio();
 			<div class="w2ui-field"><input name="fotoUsr" type="text" maxlength="100" size="60"/></div>
 			<br>
 			<div class="w2ui-label">Facebook:</div>
-			<div class="w2ui-field"><input name="facebookUsr" type="text" maxlength="100" size="60"/></div>
+			<div class="w2ui-field"><input name="facebookAdm" type="text" maxlength="100" size="60"/></div>
 			<div class="w2ui-label">Twitter:</div>
-			<div class="w2ui-field"><input name="twitterUsr" type="text" maxlength="100" size="60"/></div>
+			<div class="w2ui-field"><input name="twitterAdm" type="text" maxlength="100" size="60"/></div>
 		</div>
 		<div class="w2ui-buttons">
 			<input type="button" value="Guardar" name="save">
-			<input type="button" value="Baixa" name="reset">
+			<!-- <input type="button" value="Baixa" name="reset"> -->
 		</div>
 		<img src="../resources/img/avatar.jpg" alt="" class="perfil">
 	</div>
@@ -57,7 +57,7 @@ comprovaSessio();
 		recid    : true,
 		header   : 'El meu perfil',
 		url      : 'query.php',
-		postData : {pid:5020},
+		postData : {pid:3000},
 		fields: [
 			{ name: 'nomUsr', type: 'text', required: true },
 			{ name: 'cogUsr', type: 'text', required: true },
@@ -65,8 +65,8 @@ comprovaSessio();
 			{ name: 'passwordUsr', type: 'text', required: true },
 			{ name: 'emailUsr', type: 'email', required: true },
 			{ name: 'fotoUsr', type: 'text', required: false },
-			{ name: 'facebookUsr', type: 'text', required: false },
-			{ name: 'twitterUsr', type: 'text', required: false }
+			{ name: 'facebookAdm', type: 'text', required: false },
+			{ name: 'twitterAdm', type: 'text', required: false }
 		],
 		actions: {
 			reset: function () {
@@ -75,7 +75,7 @@ comprovaSessio();
 	            function (msg) { 
 	                if (msg=='Yes')
 	                	console.log("aki");
-	                	w2ui['dialog'].submit({'pid':5023}, function(e) {
+	                	w2ui['dialog'].submit({'pid':3020}, function(e) {
 	                		if (e.total) {
 	                			w2ui['dialog'].destroy();
 			                    document.getElementsByTagName("META")[0].content = "1;URL= ../html/logout.php";
@@ -85,13 +85,14 @@ comprovaSessio();
 			},
 			save: function () {
 
-				this.save({'pid':5022}, function (data) { 
+				this.save({'pid':3010}, function (data) { 
 					if (data.status == 'error') {
 						console.log('ERROR: '+ data.message);
 						return;
 					} else {
 						$("#form").hide();
-						w2alert("Les dades s'han guardat correctament", "El meu perfil");
+						w2alert("Les dades s'han guardat correctament", "Perfil Administrador");
+						document.getElementsByTagName("META")[0].content = "3;URL= ./usuaris.php";
 					}
 				});
 			}

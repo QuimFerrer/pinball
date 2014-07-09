@@ -92,6 +92,7 @@ comprovaSessio();
 					} else {
 						$("#form").hide();
 						w2alert("Les dades s'han guardat correctament", "El meu perfil");
+						document.getElementsByTagName("META")[0].content = "3;URL= ./usuaris.php";						
 					}
 				});
 			}
