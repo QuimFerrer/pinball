@@ -1,6 +1,6 @@
 <?php
 
-// tiempo máximo de sesión
+// temps màxim de sessió
 define("TIMEOUT",1000000);
 
 function comprovaSessio()
@@ -91,5 +91,29 @@ function generaCodiActivacioAleatori($length)
         }
     return ( md5($randstr) );
     } 
+
+
+function updateActivacioUsuari($id, $activateKey)
+    {
+    $msg = "";
+    $response = getUsuari($id);
+    if ( ($response['status'] != "error") and ($response['total'] == 1) )
+        if ($response['records'][0]->_12_estatUsuari == 0)
+            $msg = "Aquest compte ja està activat. Ja pots accedir a la web de Pinball. Gràcies.";
+        else
+            if ($response['records'][0]->_11_activacioUsuari === $activateKey)
+                {
+                $query  = sprintf("UPDATE usuari
+                                        SET _12_estatUsuari   = '%d'
+                                        WHERE _01_pk_idUsuari = '%d';",0,$id);
+                $response = dbExec($query,3);
+                $response = (object)controlErrorQuery($response);
+                if ($response->status != "error")
+                    $msg = "El seu compte s'ha activat correctament. Ja pot accedir a la web de Pinball. Gràcies.";
+                else
+                    $msg = "Error en l'activació del seu compte. Torni a intentar-ho o faci un nou registre des de la web. Gràcies.";
+                }
+    return( $msg );
+    }
 
 ?> 

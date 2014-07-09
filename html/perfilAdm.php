@@ -10,6 +10,7 @@ comprovaSessio();
 <!DOCTYPE html>
 <html>
 <head>
+	<meta content="" http-equiv="REFRESH"> </meta>			
 	<meta charset="UTF-8">
 	<title>Perfil Administrador</title>
 	<link rel="stylesheet" href="../css/lib/w2ui-1.3.2.css" />
@@ -31,7 +32,7 @@ comprovaSessio();
 			<div class="w2ui-label">Email:</div>
 			<div class="w2ui-field"><input name="emailUsr" type="text" maxlength="100" size="60"/></div>
 			<div class="w2ui-label">Foto:</div>
-			<div class="w2ui-field"><input name="fotoUsr" type="text" maxlength="100" size="60"/></div>
+			<div class="w2ui-field"><input id="fotoUsr" name="fotoUsr" type="text" maxlength="100" size="60"/></div>
 			<br>
 			<div class="w2ui-label">Facebook:</div>
 			<div class="w2ui-field"><input name="facebookAdm" type="text" maxlength="100" size="60"/></div>
@@ -64,7 +65,32 @@ comprovaSessio();
 			{ name: 'loginUsr', type: 'text', required: true },
 			{ name: 'passwordUsr', type: 'text', required: true },
 			{ name: 'emailUsr', type: 'email', required: true },
-			{ name: 'fotoUsr', type: 'text', required: false },
+			{ name: 'fotoUsr', type: 'upload', required: false,
+				options : {
+						url             : '',       // not yet implemented
+						base64          : true,     // only true for now, max file size is 20mb
+						hint            : w2utils.lang('Seleccionar arxiu ...'),
+						max             : 1,        // max number of files, 0 - unlim
+						maxSize         : 0,        // max size of all files, 0 - unlim
+						maxFileSize     : 0,        // max size of a single file, 0 -unlim
+						onAdd           : function (event) {
+							tipos="image/gif,image/jpg,image/jpeg,image/png";
+							if( tipos.split(",").indexOf(event.type) == -1 )
+								{
+								console.log(event.type);
+								w2alert("Arxius acceptats: .gif, .jpg, .jpeg i .png", "Avís");
+								$('#fotoUsr').data('selected', []);
+								$('#fotoUsr')[0].refresh();
+   								}
+						},     // event on item add
+						onRemove        : null,     // event on item remove
+						onItemClick     : null,     // event on item click
+						onItemDblClick  : null,     // event on item dbl click
+						onItemOver      : null,     // event on item mouse over
+						onItemOut       : null,     // event on item mouse out
+						onProgress      : null,     // not yet implemented
+						onComplete      : null      // not yet implemented
+					} },
 			{ name: 'facebookAdm', type: 'text', required: false },
 			{ name: 'twitterAdm', type: 'text', required: false }
 		],
@@ -84,16 +110,20 @@ comprovaSessio();
 	            });
 			},
 			save: function () {
-
+				console.log('save', this.record);
 				this.save({'pid':3010}, function (data) { 
-					if (data.status == 'error') {
+					console.log(data);
+					if (data.status == 'error')
+						{
 						console.log('ERROR: '+ data.message);
 						return;
-					} else {
+						}
+					else
+						{
 						$("#form").hide();
 						w2alert("Les dades s'han guardat correctament", "Perfil Administrador");
 						document.getElementsByTagName("META")[0].content = "3;URL= ./usuaris.php";
-					}
+						}
 				});
 			}
 		},
@@ -102,10 +132,19 @@ comprovaSessio();
             var result = JSON.parse(eventData.xhr.responseText)[1][0];
 			eventData.preventDefault();
 
-			for (var i in result) {
+			for (var i in result)
 				w2ui['dialog'].record[i] = result[i];
-			}
 			w2ui['dialog'].refresh();
+
+			if (result['fotoUsr'] != "")
+				{
+				$('#fotoUsr').data('selected', [{ name	: result['fotoUsr']}] );
+				$('#fotoUsr')[0].refresh();
+				var aa=Array();
+				aa[0] = new Object();
+				aa[0]['name'] =  result["fotoUsr"];
+				w2ui['dialog'].record["fotoUsr"] = aa;
+				}
 		} 
 	});
 </script>

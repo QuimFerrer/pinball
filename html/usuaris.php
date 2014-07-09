@@ -12,8 +12,10 @@ function mostraUsuariLogat()
 {
 	if (isset($_SESSION["login"]))
 		{
-		$nom = $_SESSION["nomUsr"] . ' ' . $_SESSION["cognomUsr"];
-	  	if ($_SESSION["login"] == 'admin') $nom = 'Administrador - ' . $nom;
+		$nom    = (isset($_SESSION["nomUsr"])    ? $_SESSION["nomUsr"]    : "");
+		$cognom = (isset($_SESSION["cognomUsr"]) ? $_SESSION["cognomUsr"] : "");
+	  	if ($_SESSION["login"] == 'admin') $nom = 'Administrador - ' . $nom . ' ' . $cognom;
+	  	else $nom = 'Jugador - ' . $nom . ' ' . $cognom;
 		echo '<h2>' . $nom . '</h2>';
 		}
 }

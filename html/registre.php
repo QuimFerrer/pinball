@@ -1,5 +1,4 @@
 <?php 
-
 ob_start();
 
 include ("../src/pinball.h");
@@ -9,6 +8,7 @@ include ("../src/seguretatLogin.php");
 <!doctype html>
 <html>
 <head>
+	<meta content="" http-equiv="REFRESH"> </meta>			
 	<meta charset="UTF-8">
 	<title>Pinball. Registre</title>
 	<link rel="stylesheet" href="../css/lib/w2ui-1.3.2.css" />
@@ -42,7 +42,7 @@ include ("../src/seguretatLogin.php");
 					<div class="w2ui-label">Email:</div>
 					<div class="w2ui-field"><input name="emailUsr" type="text" maxlength="100" size="60"/></div>
 					<div class="w2ui-label">Foto:</div>
-					<div class="w2ui-field"><input name="fotoUsr" type="text" maxlength="100" size="60"/></div>
+					<div class="w2ui-field"><input name="fotoUsr" type="text" maxlength="100" size="60" readonly/></div>
 					<br>
 					<div class="w2ui-label">Facebook:</div>
 					<div class="w2ui-field"><input name="facebookUsr" type="text" maxlength="100" size="60"/></div>
@@ -90,7 +90,10 @@ $(function () {
 						{
 						console.log(data); 
 						if (data.status != 'error')
+							{
 							w2alert("Registre correcte. Revisa la teva safata d'entrada del teu correu electrònic per activar el teu compte. Gràcies", 'Missatge');
+							document.getElementsByTagName("META")[0].content = "5;URL= ./inici.php";
+							}
 						else
 							w2alert(data.message + ". Torna a intentar-ho. Gràcies.", 'Missatge');
 						self.clear();

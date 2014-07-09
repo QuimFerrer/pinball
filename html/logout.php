@@ -17,8 +17,8 @@ $url = 'http://'.$host.$uri.'/'.$extra;
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
 	<?php print('<meta content="2;URL=' . $url .'" http-equiv="REFRESH"> </meta>'); ?>
+	<meta charset="UTF-8">	
 	<title>Pinball. Log out</title>
 	<link rel="stylesheet" href="../css/pinball.css">	
 </head>

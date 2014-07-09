@@ -1,6 +1,6 @@
 <?php
 
-function controlLogin($user,$pswd)
+function controlLogin($user, $pswd)
 {
     $query = 'SELECT @nl:=@nl+1 as estat, u.*
               FROM usuari as u, (SELECT @nl:=0) as nnl
@@ -11,17 +11,11 @@ function controlLogin($user,$pswd)
     if ($res != NULL)
         {
 
-////////////////////    // $estat = 0;
-////////////////////    // $query = sprintf("SELECT *
-////////////////////    //                   FROM usuari
-////////////////////    //                   WHERE _04_loginUsuari = '%s' AND
-////////////////////    //                         _05_pwdUsuari   = '%s' AND
-////////////////////    //                         _12_estatUsuari = '%d' AND
-////////////////////    //                         (_10_datBaixaUsuari IS NULL OR _10_datBaixaUsuari = '');", $user, md5($pswd), $estat);
-////////////////////    // $response = dbExec($query);
-////////////////////    // $response = controlErrorQuery($response);
-////////////////////    // if ( ($response['status'] != "error") and ($response['total'] == 1) )
-////////////////////    //     {
+
+    // $estat = 0;
+    // $response = getUsuari(0, $user, $pswd, $estat);
+    // if ( ($response['status'] != "error") and ($response['total'] == 1) )
+    //     {
 
 
 
@@ -49,6 +43,27 @@ function controlLogin($user,$pswd)
         $res="";
         }
     return ($res);
+}
+
+function getUsuari($id, $user="", $pswd="", $estat=0)
+{
+    if ($id != 0)
+            $query = sprintf("SELECT *
+                             FROM usuari
+                             WHERE _01_pk_idUsuari = '%d';",$id);        
+        else
+            $query = sprintf("SELECT *
+                             FROM usuari
+                             WHERE _04_loginUsuari = '%s' AND
+                                   _05_pwdUsuari   = '%s' AND
+                                   _12_estatUsuari = '%d' AND
+                                   (_10_datBaixaUsuari IS NULL OR
+                                    _10_datBaixaUsuari = '');",$user,
+                                                               md5($pswd),
+                                                               $estat);
+    $response = dbExec($query);
+    $response = controlErrorQuery($response);
+    return ($response);
 }
 
 ?> 

@@ -12,6 +12,7 @@ comprovaSessio();
 <!doctype html>
 <html>
 <head>
+	<meta content="" http-equiv="REFRESH"> </meta>			
 	<meta charset="UTF-8">
 	<title>Pinball. Recreatius</title>
 	<link rel="stylesheet" href="../css/pinball.css">

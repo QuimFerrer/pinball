@@ -1,50 +1,42 @@
 <?php
 
-include ("../model/sudoku.php");
-include ("../model/lib/libreria.php");
-include ("../model/lib/database.php");
+ob_start();
+
+include ("../src/pinball.h");
+include ("../src/seguretat.php");
+include ("../src/seguretatLogin.php");
 
 $msg = "";
-
 if ((isset($_GET['id'])) and (isset($_GET['activateKey'])))
-	{
-	$res = json_decode(updateActivacionJugador($_GET['id'],$_GET['activateKey']))[0];
-	if ($res->estat)
-		$msg = "Su cuenta se ha activado correctamente";
-	else
-		$msg = "Error en la activación de su cuenta.";
-	}
+	$msg = updateActivacioUsuari( $_GET['id'], $_GET['activateKey'] );
 
 ?>
-
+<!doctype html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Sudoku. Registro</title>
-    <link rel="stylesheet" href="../view/css/estilo.css" type="text/css" media="screen" />
+	<meta content="" http-equiv="REFRESH"> </meta>		
+	<meta charset="UTF-8">
+	<title>Pinball. Activació registre</title>
+	<link rel="stylesheet" href="../css/pinball.css">
 </head>
-
 <body>
 	<div id="main">
-		<header id="cabecera">
-			<nav></nav>
+		<header>
+			<h1>Activació registre Pinball</h1>
 		</header>
-		<section>
-			<article id="cap">
-				<h1>Activación de cuenta</h1>
-			</article>
-			<article id="cos">
-				<?php
-					if ($msg <> "") echo "<h2>$msg</h2>";
-				?>
-			</article>			
-			<article id="peu">
-			</article>
+		<menu>
+			<?php menu(); ?>
+		</menu>
+		<section class="staticPage">
+			<img src="../resources/img/recreatius/roulette.jpg" height="400" alt="">			
+			<?php
+				if ($msg <> "") echo "<h2>$msg</h2>";
+			?>			
 		</section>
 		<footer>
+			<?php footer(); ?>
 		</footer>
-    </div>
-
+	</div>
 </body>
 </html>
 
@@ -57,4 +49,5 @@ if ($msg != "")
 	echo $res;
 	}
 
+// if (isset($_POST['entrar'])) controlAcces($_POST["usr"],$_POST["pwd"]);
 ?>

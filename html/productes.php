@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta content="" http-equiv="REFRESH"> </meta>      
     <meta charset="UTF-8">
     <title>Gestio de productes</title>
     <link rel="stylesheet" href="../css/lib/w2ui-1.3.2.css" />

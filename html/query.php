@@ -1,8 +1,8 @@
 <?php 
 
 include ("../src/pinball.h");
-include ("../src/email.php");
 include ("../src/seguretat.php"); 
+include ("../src/email.php");
 
 isEndSessionInQuery();
 
@@ -211,7 +211,7 @@ isEndSessionInQuery();
 										  		  	NOW(),NULL,NULL);",$record["idUsr"],
 																	   $record["facebookUsr"],
 																	   $record["twitterUsr"]);
-						$response = dbExec($query,3);
+						$response = dbExec($query,2);
 						$response = (object)controlErrorQuery($response);
 						if ($response->status != "error")
 								{
@@ -281,8 +281,8 @@ isEndSessionInQuery();
 				$response = dbExec($query,1);
 				echo json_encode($response);	
 				break;
-
 			case MODIFICA_PERFIL_ADM_3010 :
+				$nomFile = (isset($record["fotoUsr"][0]['name'])) ? $record["fotoUsr"][0]['name'] : "";
 				$query    = sprintf( 
 							"UPDATE usuari 
 							 SET 
@@ -295,7 +295,8 @@ isEndSessionInQuery();
 								_10_datBaixaUsuari IS NULL AND
 								_04_loginUsuari = '%s';",
 							$record["nomUsr"], $record["cogUsr"],
-							$record["emailUsr"], $record["fotoUsr"], 
+							$record["emailUsr"], 
+							$nomFile, 
 							$usrLogin);
 				$response = dbExec($query,0);
 				$query    = sprintf(
@@ -1791,6 +1792,7 @@ isEndSessionInQuery();
 				break;
 
 			case MODIF_PERFIL_USR_5022 :
+				$nomFile = (isset($record["fotoUsr"][0]['name'])) ? $record["fotoUsr"][0]['name'] : "";			
 				$query    = sprintf( 
 							"UPDATE usuari 
 							 SET 
@@ -1803,7 +1805,8 @@ isEndSessionInQuery();
 								_10_datBaixaUsuari IS NULL AND
 								_04_loginUsuari = '%s';",
 							$record["nomUsr"], $record["cogUsr"],
-							$record["emailUsr"], $record["fotoUsr"], 
+							$record["emailUsr"],
+							$nomFile,
 							$usrLogin);
 
 				$response = dbExec($query,0);

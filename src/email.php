@@ -75,7 +75,7 @@ function montaBodyRegistre($dades)
 {
     // creem el nostre link per enviar per mail la variable $activateLink
     $path = PATH_MAIL_SUSCRIPCION; 
-    $activateLink = $path . sprintf('activarRegistre.php?id="%d"&"activateKey="%s"',$dades['idUsr'],
+    $activateLink = $path . sprintf("activarRegistre.php?id=%d&activateKey=%s",$dades['idUsr'],
                                                                                     $dades['activateUsr']);
     $body = '<table width="629" border="0" cellspacing="1" cellpadding="2">
       <tr>

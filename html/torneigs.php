@@ -9,6 +9,7 @@ include ("../src/seguretatLogin.php");
 <!doctype html>
 <html>
 <head>
+	<meta content="" http-equiv="REFRESH"> </meta>			
 	<meta charset="UTF-8">
 	<title>Pinball. Torneigs</title>
 	<link rel="stylesheet" href="../css/pinball.css">

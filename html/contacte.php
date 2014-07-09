@@ -1,5 +1,4 @@
 <?php 
-
 ob_start();
 
 include ("../src/pinball.h");
@@ -12,6 +11,7 @@ comprovaSessio();
 <!doctype html>
 <html>
 <head>
+	<meta content="" http-equiv="REFRESH"> </meta>			
 	<meta charset="UTF-8">
 	<title>Pinball. Contacte</title>
 	<link rel="stylesheet" href="../css/lib/w2ui-1.3.2.css" />
