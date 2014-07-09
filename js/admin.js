@@ -5,11 +5,11 @@ $('#sidebar').w2sidebar({
 		{ id: '2000', text: 'Opcions', expanded: true, group: true,
 		  nodes: [  { id: '3000', text: 'Perfil', img: 'icon-edit' },
 					{ id: '3100', text: 'Partides', img: 'icon-folder',
-					nodes: [{ id: '3180', text: 'Generador partides', img:'icon-add'},
-							{ id: '3110', text: 'per màquina',  img: 'icon-page' },
+					nodes: [{ id: '3110', text: 'per màquina',  img: 'icon-page' },
 							{ id: '3120', text: 'per jugador',  img: 'icon-page' },
 							{ id: '3160', text: 'Manteniment Rondes',  img: 'icon-edit' },
-							{ id: '3170', text: 'Històric de Rondes',  img: 'icon-page' }]},
+							{ id: '3170', text: 'Històric de Rondes',  img: 'icon-page' },
+							{ id: '3180', text: 'Generador partides', img:'icon-add'}]},
 					{ id: '3200', text: 'Jocs', img: 'icon-folder',
 					nodes: [{ id: '3230', text: 'Manteniment',  img: 'icon-edit' },
 							{ id: '3240', text: 'Històric', img: 'icon-page' },
@@ -62,7 +62,8 @@ $('#sidebar').w2sidebar({
 									{ id: '3860', text: 'Coordenades',  img: 'icon-page' },
 									{ id: '3870', text: 'Empresa, Provincia i Població',  img: 'icon-page' }]},
 							{ id: '3875', text: 'Assignar màquines',  img: 'icon-folder',
-							nodes: [{ id: '3890', text: 'Manteniment',  img: 'icon-edit' },
+							nodes: [{ id: '3880', text: 'Alta',  img: 'icon-edit' },
+									{ id: '3890', text: 'Manteniment',  img: 'icon-edit' },
 									{ id: '3920', text: 'Llistats',  img: 'icon-folder',
 									nodes: [{ id: '3930', text: 'Provincia i Població',  img: 'icon-page' },
 											{ id: '3940', text: 'Coordenades',  img: 'icon-page' },
@@ -485,12 +486,9 @@ var controller = function(e) {
 				        	break;
 
 				        case 'del':
-				            w2confirm('Eliminar el torneig?', "Atenció", 
-				            function (msg) { 
-				                if (msg=='Yes') w2ui['grid'].request('delete', {recid:row[0]}, action, function() {
-				                    w2ui['grid'].reload();
-				                });
-				            });
+				        	w2ui['grid'].request('delete', {recid:row[0]}, action, function() {
+				        		w2ui['grid'].reload();
+				        	});
 				        	break;
 
 				        default:
@@ -499,7 +497,8 @@ var controller = function(e) {
 				    }
 			    }
   			};	
-		    DataGrid("Relació de Torneigs", "torneig", toolbar, columns, fields, e.target, "_01_pk_idTorn");
+
+		    DataGrid("Relació de Torneigs", "torneig", toolbar, columns, fields, 3340, "_01_pk_idTorn");
 			break;			        
 
 		case '3342':
@@ -719,6 +718,7 @@ var controller = function(e) {
 		 //    DataGrid("Jocs assignats a cada màquina", "maqInstall", false, columns, fields, 3485, "_00_pk_idMaqInst_auto");
 
 			columns = [
+				{ field: 'recid',                 caption: 'Id',            size: '8%' },
 				{ field: '_01_pk_idMaqInst',      caption: 'Maq',           size: '8%' },
 				{ field: '_02_macMaq',            caption: 'Mac',           size: '13%' },
 				{ field: '_02_pk_idJocInst',      caption: 'Joc',           size: '8%' },							
@@ -729,14 +729,9 @@ var controller = function(e) {
 				{ field: 'datAltaMaqInst',        caption: 'Data Alta',     size: '16%' },
 				{ field: 'datModMaqInst',         caption: 'Data Modif.',   size: '16%' }
 			];
-			// fields = [
-		 //        { name: '_01_pk_idMaqInst', type: 'float', required: true},
-		 //        { name: '_02_pk_idJocInst', type: 'float', required: true},
-		 //        { name: '_03_numPartidesJugadesMaqInst', type: 'float', required: false},
-		 //        { name: "_04_credJocMaqInst", type: 'float', required: false},
-		 //        { name: "_05_totCredJocMaqInst", type: 'float', required: false}
-		 //    ];
 			fields = [
+		        { name: '_01_pk_idMaqInst', type: 'float', required: true},
+		        { name: '_02_pk_idJocInst', type: 'float', required: true},
 		        { name: '_03_numPartidesJugadesMaqInst', type: 'float', required: false},
 		        { name: "_04_credJocMaqInst", type: 'float', required: false},
 		        { name: "_05_totCredJocMaqInst", type: 'float', required: false}
@@ -751,8 +746,6 @@ var controller = function(e) {
 	            onClick: function(target, data) {
 			        var action = "../html/maqInstall.php";
 			        var row    = w2ui['grid'].getSelection();
-			        // var vKeyName = "_00_pk_idMaqInst_auto";
-			        // var vTable   = "maqInstall";
 
 			    	switch(target) {
 			    		case 'new':
@@ -779,6 +772,7 @@ var controller = function(e) {
 			    }
   			};	
 
+		    // DataGrid("Jocs assignats a cada màquina", false, toolbar, columns, e.target);
 		    DataGrid("Jocs assignats a cada màquina", "maqInstall", toolbar, columns, fields, 3485, "_00_pk_idMaqInst_auto");
 			break;			        
 		case '3490':
@@ -1056,7 +1050,7 @@ var controller = function(e) {
 		    break;
 
 		case '3890':
- 			columns = [			   	
+ 			columns = [
 				{ field: 'provincia',    caption: 'Provincia',   size: '10%' },				
 				{ field: 'poblacio',     caption: 'Població',    size: '15%' },			
 				{ field: 'cPostal',      caption: 'Codi postal', size: '8%' },
@@ -1081,7 +1075,7 @@ var controller = function(e) {
 	            items: [
 	                { type: 'button', id: 'new',    caption: 'Afegir',    	 img: 'icon-add' },
 	                { type: 'button', id: 'lock',   caption: 'bloquejar',    img: 'icon-delete' },
-	                { type: 'button', id: 'unlock', caption: 'desbloquejar', img: 'icon-edit' }	                
+	                { type: 'button', id: 'unlock', caption: 'desbloquejar', img: 'icon-edit' }
 	            ],
 	            onClick: function(target, data) {
 			        var action = "../html/ubicamaq.php";
@@ -1090,7 +1084,7 @@ var controller = function(e) {
 			    	switch(target) {
 			    		case 'new':
 			        		DataForm("Afegir màquina a una ubicació", 0, fields, action, 
-			        				{param:'ubicaciotemaquina', keyname:'_00_pk_idUTM_auto'});	
+			        				{param:"ubicacioTeMaquina", keyname:"_00_pk_idUTM_auto"});	
 				        	break;
 
 			    		case 'lock':
@@ -1110,8 +1104,10 @@ var controller = function(e) {
 				    }
 			    }
   			};	
-		    DataGrid("Màquines per ubicació", "ubicaciotemaquina", toolbar, columns, fields, e.target, "_00_pk_idUTM_auto");
-			// DataGrid("Màquines per ubicació", false, toolbar, columns, e.target);						
+
+		    DataGrid("Màquines per ubicació", "ubicacioTeMaquina", toolbar, columns, fields, 3890, "_00_pk_idUTM_auto");
+		    // DataGrid("Relació de Torneigs", "torneig", toolbar, columns, fields, 3340, "_01_pk_idTorn");		    
+			// DataGrid("Màquines per ubicació", false, toolbar, columns, e.target);
 		    break;		        
 
 		case '3930':

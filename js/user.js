@@ -184,6 +184,58 @@ var controller = function(e) {
 		    break;		
 
 		case '5063':
+			columns = [
+				{ field: '_01_pk_idTornInsc',caption: 'idTorn',      size: '6%' },
+				{ field: '_03_nomTorn',      caption: 'Torneig',     size: '15%' },
+				{ field: '_04_premiTorn',    caption: 'Premi (€)',   size: '9%',attr: 'align=center' },
+				{ field: '_02_pk_idJocInsc', caption: 'Joc',         size: '6%' },
+				{ field: '_02_nomJoc',       caption: 'Nom Joc',     size: '15%' },
+				{ field: 'datIniTorn',       caption: 'Inici Torn.', size: '9%' },
+				{ field: 'datFinTorn',       caption: 'Final Torn.', size: '9%' },
+				{ field: 'datAltaTorn',      caption: 'Data Alta',   size: '16%' },
+				{ field: 'datModTorn',       caption: 'Data Modif.', size: '16%' }				
+			];
+
+			fields = [
+				{ name: '_01_pk_idTornInsc', type: 'text', required: true },
+				{ name: '_02_pk_idJocInsc', type: 'text', required: true },
+			];
+
+
+            toolbar = { 
+	            items: [
+	                { type: 'button', id: 'new',    caption: 'Afegir',    	 img: 'icon-add' },
+	                { type: 'button', id: 'lock',   caption: 'bloquejar',    img: 'icon-delete' },
+	                { type: 'button', id: 'unlock', caption: 'desbloquejar', img: 'icon-edit' }
+	            ],
+	            onClick: function(target, data) {
+			        var action = "../html/ubicamaq.php";
+			        var row    = w2ui['grid'].getSelection();
+
+			    	switch(target) {
+			    		case 'new':
+			        		DataForm("Afegir màquina a una ubicació", 0, fields, action, 
+			        				{param:'inscrit', keyname:'_00_pk_idInsc_auto'});	
+				        	break;
+
+			    		case 'lock':
+				        	var params ={pid: "3900", idUTM: row[0]};
+				        	if (row.length != 0)
+					     	msgAction("Desactivar una màquina d'una ubicació", 'Estàs segur ?', "query.php", params);
+				        	break;
+				        case 'unlock':
+				        	var params ={pid: "3905", idUTM: row[0]};					        
+				        	if (row.length != 0)
+					     	msgAction("Activar una màquina d'una ubicació", 'Estàs segur ?', "query.php", params);
+				        	break;
+
+				        default:
+				        	console.log(target, " No definit");
+				        	break;
+				    }
+			    }
+  			};	
+		    DataGrid("Inscripció a un Torneig", "inscrit", toolbar, columns, fields, 5063, "_00_pk_idInsc_auto");
 		    break;
 
 		default:

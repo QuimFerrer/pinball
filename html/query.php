@@ -1047,10 +1047,8 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));	
 				break;						
 			case ALTA_ASSIGNACIO_JOC_MAQUINA_3460 :
-				$query    = 'INSERT INTO maqInstall
-								VALUES (NULL,
-										"' . $idMaq . '",
-										"' . $idJoc . '",0,0,0,NOW(),NULL,NULL);';
+				$query    = sprintf("INSERT INTO maqInstall
+										VALUES (NULL,'%d','%d',0,0,0,NOW(),NULL,NULL);",0,0);
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;			
@@ -1058,25 +1056,26 @@ isEndSessionInQuery();
 				$query = sprintf("UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
 														_08_datBaixaMaqInst = NOW()					
 							  	  WHERE _00_pk_idMaqInst_auto = '%d' AND
-							  	  		_08_datBaixaMaqInst IS NULL;",$idMaqInst);
+							  	  		_08_datBaixaMaqInst IS NULL;",0);
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;
 			case MODIF_ASSIGNACIO_JOC_MAQUINA_3480 :
-				$query    = 'UPDATE maqInstall SET 
-											_03_numPartidesJugadesMaqInst    = "$parcialCreditsJoc",
-											_04_credJocMaqInst    = "$parcialCreditsJoc",
-											_05_totCredJocMaqInst = "$totalCreditsJoc",										
-											_06_datAltaMaqInst    = "$dataAltaMaqInst",
-											_07_datModMaqInst     = NOW(),
-											_08_datBaixaMaqInst   = "$dataBaixaMaqInst"
+				$query    = sprintf("UPDATE maqInstall SET 
+											_03_numPartidesJugadesMaqInst = '%f',
+											_04_credJocMaqInst    = '%f',
+											_05_totCredJocMaqInst = '%f',										
+											_07_datModMaqInst     = NOW()
 								WHERE 
-										_00_pk_idMaqInst_auto = "' . $idMaqInst . '";';
+											_00_pk_idMaqInst_auto = '%d';",0,0,0,0,0);
+
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;	
 			case LLISTAT_ASSIG_JOC_MAQ_3485 :
-				$query    = 'SELECT _01_pk_idMaq AS idMaq,
+				$query    = 'SELECT MQ.*,
+									_00_pk_idMaqInst_auto AS recid,
+									_01_pk_idMaqInst   AS idMaq,									
 									_02_macMaq   AS macMaq,
 									_01_pk_idJoc AS idJoc,
 									_02_nomJoc   AS nomJoc,
@@ -1085,7 +1084,7 @@ isEndSessionInQuery();
 									DATE_FORMAT(_06_datAltaMaqInst, "%d-%m-%Y %H:%i:%s") AS datAltaMaqInst,
 									DATE_FORMAT(_07_datModMaqInst,  "%d-%m-%Y %H:%i:%s") AS datModMaqInst									
 							FROM joc
-								LEFT JOIN maqInstall ON _01_pk_idJoc     = _02_pk_idJocInst
+								LEFT JOIN maqInstall AS MQ ON _01_pk_idJoc     = _02_pk_idJocInst
 								INNER JOIN maquina   ON _01_pk_idMaqInst = _01_pk_idMaq
 							WHERE 	
 								_08_datBaixaJoc      IS NULL AND
