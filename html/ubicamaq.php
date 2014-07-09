@@ -31,15 +31,14 @@ if (isset($_REQUEST['cmd']) ) :
 
 			case 'save-record' :
 				$record = $_REQUEST['record'];			
-				if ($id>0) :	
-					$qry    = sprintf("INSERT INTO maqInstall
-										VALUES (NULL,'%d','%d',0,0,0,NOW(),NULL,NULL);",$idMaq, $idJoc);
-				endif;
+	
+				$qry    = sprintf("INSERT INTO ubicaciotemaquina
+									VALUES (NULL,'%d','%d',NOW(),NULL,NULL);",
+									$record['_01_pk_idUbicUTM'], $record['_02_pk_idMaqUTM']);
 
 				$sql = SqlExec($qry);
-				$data['recid']  = ($id != 0) ? $id : mysql_insert_id();
-				$data['rows']   = ($id != 0) ? mysql_affected_rows() : 0;
-				$record['recid']= $data['recid'];
+				$data['rows']   = mysql_affected_rows();
+				$record['recid']= mysql_insert_id();
 				$data['record'] = $record;
 	  			break;
 

@@ -1111,7 +1111,6 @@ var controller = function(e) {
 			    }
   			};	
 		    DataGrid("Màquines per ubicació", "ubicaciotemaquina", toolbar, columns, fields, e.target, "_00_pk_idUTM_auto");
-			// DataGrid("Màquines per ubicació", false, toolbar, columns, e.target);						
 		    break;		        
 
 		case '3930':

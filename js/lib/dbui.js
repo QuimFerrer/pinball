@@ -100,7 +100,7 @@ var dbGrid = function() {
             fnOnError    = function(target, error) { console.log( error.xhr.responseText, error ); };
 
             fnOnLoad = function(target, eventData) {
-                console.log(eventData.xhr.responseText);
+                // console.log(eventData.xhr.responseText);
                 var result = JSON.parse(eventData.xhr.responseText);
                 
                 if (typeof result  != 'undefined') {

@@ -250,6 +250,30 @@ function customGetQueryForGetRecords($table)
 						WHERE _16_datBaixaUbic   IS NULL
 						ORDER BY _02_empUbic;';
 			break;			
+
+		case 'ubicaciotemaquina': //3890
+			$query    = 'SELECT _00_pk_idUTM_auto   AS recid,
+								_06_provUbic        AS provincia,
+								_04_pobUbic         AS poblacio,
+								_05_cpUbic          AS cPostal,
+								_01_pk_idUbicUTM    AS idUbic,
+								_02_empUbic         AS empUbic, 
+								_02_pk_idMaqUTM     AS idMaq,
+								_02_macMaq          AS macMaq,
+								_03_propMaq         AS propMaq,
+								SUM(_05_totCredMaq) AS totalCredits,
+								DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
+								DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
+								DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
+								DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
+								DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+						FROM ubicacio
+							INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
+							INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
+						GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
+						ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;';
+			break;			
+
 		default:
 			$query  = "SELECT * FROM $table;";		
 			break;

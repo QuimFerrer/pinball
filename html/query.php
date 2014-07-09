@@ -95,7 +95,6 @@ isEndSessionInQuery();
 	const LLISTAT_UBICS_X_EMPRESA_PROV_POB_3870= 3870; //		
 
 	const ALTA_MAQ_X_UBICACIO_3880			   = 3880;
-	const LLISTAT_MAQS_X_UBIC_3890 		       = 3890; //
 	const BLOQUEJAR_MAQ_X_UBICACIO_3900	       = 3900;
 	const DESBLOQUEJAR_MAQ_X_UBICACIO_3905	   = 3905;
 	const CANVI_MAQ_D_UBICACIO_3910 		   = 3910; // no es fa servir
@@ -1526,30 +1525,7 @@ isEndSessionInQuery();
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;			
-			case LLISTAT_MAQS_X_UBIC_3890 :
-				$query    = 'SELECT _00_pk_idUTM_auto   AS recid,
-									_06_provUbic        AS provincia,
-									_04_pobUbic         AS poblacio,
-									_05_cpUbic          AS cPostal,
-									_01_pk_idUbicUTM    AS idUbic,
-									_02_empUbic         AS empUbic, 
-									_02_pk_idMaqUTM     AS idMaq,
-									_02_macMaq          AS macMaq,
-									_03_propMaq         AS propMaq,
-									SUM(_05_totCredMaq) AS totalCredits,
-									DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
-									DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
-									DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
-									DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
-									DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
-							FROM ubicacio
-								INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
-								INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
-							GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
-							ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;';
-				$response = dbExec($query);
-				echo json_encode(controlErrorQuery($response));			
-				break;				
+				
 			case BLOQUEJAR_MAQ_X_UBICACIO_3900 :
 				$query    = sprintf("UPDATE ubicacioTeMaquina SET _04_datModUTM   = NOW(),
 														  		  _05_datBaixaUTM = NOW()
