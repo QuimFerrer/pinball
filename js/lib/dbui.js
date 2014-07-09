@@ -342,7 +342,6 @@ function DataForm(title, id, fields, action, params) {
         postData : params,
         formURL  : action,
         fields   : fields,
-        msgRefresh : 'Consultant dades...',
         msgSaving  : 'Guardant dades...',
         actions: {
             save: function () {
@@ -367,8 +366,6 @@ function DataForm(title, id, fields, action, params) {
         }, 
         onLoad: function(eventData) {
             eventData.preventDefault();
-            w2ui['grid'].unlock();
-
             // console.log(eventData.xhr.responseText);
             var result = JSON.parse(eventData.xhr.responseText);
 
@@ -378,6 +375,7 @@ function DataForm(title, id, fields, action, params) {
             w2ui['dialog'].refresh();
         },
         onRender: function(eventData) {
+            w2ui['grid'].unlock();
             $("#grid").hide();
         }
     });

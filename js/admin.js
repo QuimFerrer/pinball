@@ -999,35 +999,9 @@ var controller = function(e) {
 
 		case '3880':
 		    break;
+
 		case '3890':
-            toolbar = { 
-                items: [
-	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
-	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' }	                
-	            ],
-                onClick: function(target, data) {
-			        var row = w2ui['grid'].getSelection();
-				    if (row.length != 0)
-				    	{
-				    	console.log(row);
-				    	switch(target)
-				    		{
-				    		case 'lock':
-					        	var params ={pid: "3900", idUTM: row[0]};
-						     	msgAction("Desactivar una màquina d'una ubicació", 'Estàs segur ?', "query.php", params);
-					        	break;
-					        case 'unlock':
-					        	var params ={pid: "3905", idUTM: row[0]};					        
-						     	msgAction("Activar una màquina d'una ubicació", 'Estàs segur ?', "query.php", params);
-					        	break;
-					        default:
-					        	console.log(target , " No definit");
-					        	break;
-					        }
-				    	}
-				    }
-      			};
-			columns = [			   	
+ 			columns = [			   	
 				{ field: 'provincia',    caption: 'Provincia',   size: '10%' },				
 				{ field: 'poblacio',     caption: 'Població',    size: '15%' },			
 				{ field: 'cPostal',      caption: 'Codi postal', size: '8%' },
@@ -1042,8 +1016,50 @@ var controller = function(e) {
 				{ field: 'datBaixaMaq',  caption: 'Data Baixa Maq',  size: '16%'},
 				{ field: 'datBaixaUbic', caption: 'Data Baixa Ubic',  size: '16%'}				
 				];
+
+			fields = [
+				{ name: '_01_pk_idUbicUTM', type: 'text', required: true },
+				{ name: '_02_pk_idMaqUTM', type: 'text', required: true }
+			];
+
+            toolbar = { 
+	            items: [
+	                { type: 'button', id: 'new',    caption: 'Afegir',    	 img: 'icon-add' },
+	                { type: 'button', id: 'lock',   caption: 'bloquejar',    img: 'icon-delete' },
+	                { type: 'button', id: 'unlock', caption: 'desbloquejar', img: 'icon-edit' }	                
+	            ],
+	            onClick: function(target, data) {
+			        var action = "../html/ubicamaq.php";
+			        var row    = w2ui['grid'].getSelection();
+
+			    	switch(target) {
+			    		case 'new':
+			        		DataForm("Afegir màquina a una ubicació", 0, fields, action, 
+			        				{param:'torneig', keyname:'_01_pk_idTorn'});	
+				        	break;
+
+			    		case 'lock':
+				        	var params ={pid: "3900", idUTM: row[0]};
+				        	if (row.length != 0)
+					     	msgAction("Desactivar una màquina d'una ubicació", 'Estàs segur ?', "query.php", params);
+				        	break;
+				        case 'unlock':
+				        	var params ={pid: "3905", idUTM: row[0]};					        
+				        	if (row.length != 0)
+					     	msgAction("Activar una màquina d'una ubicació", 'Estàs segur ?', "query.php", params);
+				        	break;
+
+				        default:
+				        	console.log(target, " No definit");
+				        	break;
+				    }
+			    }
+  			};	
+
+		    // DataGrid("Relació de Torneigs", "torneig", toolbar, columns, fields, 3340, "_01_pk_idTorn");
 			DataGrid("Màquines per ubicació", false, toolbar, columns, e.target);						
-		    break;
+		    break;		        
+
 		case '3930':
 			columns = [
 				{ field: 'provincia',    caption: 'Provincia',   size: '10%' },				
