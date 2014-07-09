@@ -52,9 +52,11 @@ var dbGrid = function() {
         if (row.length != 0) {
             w2confirm('Estas segur d\'esborrar?', "Eliminar registre :" + row[0], 
             function (msg) { 
-                if (msg=='Yes') grid.request('delete', { 'recid': row[0], 'keyname': pkName }, action);
+                if (msg=='Yes') 
+                    grid.request('delete', { 'recid': row[0], 'keyname': pkName }, action, function() {
                     grid.reload();
-            })
+                });
+            });
         }  
     };
 
@@ -98,7 +100,7 @@ var dbGrid = function() {
             fnOnError    = function(target, error) { console.log( error.xhr.responseText, error ); };
 
             fnOnLoad = function(target, eventData) {
-                // console.log(eventData.xhr.responseText);
+                console.log(eventData.xhr.responseText);
                 var result = JSON.parse(eventData.xhr.responseText);
                 
                 if (typeof result  != 'undefined') {
@@ -380,8 +382,8 @@ function DataForm(title, id, fields, action, params) {
         }
     });
 
-    // Per controlar tots els events
-    // w2ui['dialog'].on('*', function (event) {
-    //     console.log('Event: '+ event.type, 'Target: '+ event.target, event);
-    // });
+    //Per controlar tots els events
+    w2ui['dialog'].on('refresh', function (event) {
+        console.log('Event: '+ event.type, 'Target: '+ event.target, event);
+    });
 }

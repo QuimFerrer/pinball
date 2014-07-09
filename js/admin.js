@@ -5,11 +5,11 @@ $('#sidebar').w2sidebar({
 		{ id: '2000', text: 'Opcions', expanded: true, group: true,
 		  nodes: [  { id: '3000', text: 'Perfil', img: 'icon-edit' },
 					{ id: '3100', text: 'Partides', img: 'icon-folder',
-					nodes: [{ id: '3110', text: 'per màquina',  img: 'icon-page' },
+					nodes: [{ id: '3180', text: 'Generador partides', img:'icon-add'},
+							{ id: '3110', text: 'per màquina',  img: 'icon-page' },
 							{ id: '3120', text: 'per jugador',  img: 'icon-page' },
 							{ id: '3160', text: 'Manteniment Rondes',  img: 'icon-edit' },
-							{ id: '3170', text: 'Històric de Rondes',  img: 'icon-page' },
-							{ id: '3180', text: 'Generador partides', img:'icon-add'}]},
+							{ id: '3170', text: 'Històric de Rondes',  img: 'icon-page' }]},
 					{ id: '3200', text: 'Jocs', img: 'icon-folder',
 					nodes: [{ id: '3230', text: 'Manteniment',  img: 'icon-edit' },
 							{ id: '3240', text: 'Històric', img: 'icon-page' },
@@ -62,8 +62,7 @@ $('#sidebar').w2sidebar({
 									{ id: '3860', text: 'Coordenades',  img: 'icon-page' },
 									{ id: '3870', text: 'Empresa, Provincia i Població',  img: 'icon-page' }]},
 							{ id: '3875', text: 'Assignar màquines',  img: 'icon-folder',
-							nodes: [{ id: '3880', text: 'Alta',  img: 'icon-edit' },
-									{ id: '3890', text: 'Manteniment',  img: 'icon-edit' },
+							nodes: [{ id: '3890', text: 'Manteniment',  img: 'icon-edit' },
 									{ id: '3920', text: 'Llistats',  img: 'icon-folder',
 									nodes: [{ id: '3930', text: 'Provincia i Població',  img: 'icon-page' },
 											{ id: '3940', text: 'Coordenades',  img: 'icon-page' },
@@ -486,9 +485,12 @@ var controller = function(e) {
 				        	break;
 
 				        case 'del':
-				        	w2ui['grid'].request('delete', {recid:row[0]}, action, function() {
-				        		w2ui['grid'].reload();
-				        	});
+				            w2confirm('Eliminar el torneig?', "Atenció", 
+				            function (msg) { 
+				                if (msg=='Yes') w2ui['grid'].request('delete', {recid:row[0]}, action, function() {
+				                    w2ui['grid'].reload();
+				                });
+				            });
 				        	break;
 
 				        default:
@@ -497,8 +499,7 @@ var controller = function(e) {
 				    }
 			    }
   			};	
-
-		    DataGrid("Relació de Torneigs", "torneig", toolbar, columns, fields, 3340, "_01_pk_idTorn");
+		    DataGrid("Relació de Torneigs", "torneig", toolbar, columns, fields, e.target, "_01_pk_idTorn");
 			break;			        
 
 		case '3342':
@@ -1089,7 +1090,7 @@ var controller = function(e) {
 			    	switch(target) {
 			    		case 'new':
 			        		DataForm("Afegir màquina a una ubicació", 0, fields, action, 
-			        				{param:'torneig', keyname:'_01_pk_idTorn'});	
+			        				{param:'ubicaciotemaquina', keyname:'_00_pk_idUTM_auto'});	
 				        	break;
 
 			    		case 'lock':
@@ -1109,9 +1110,8 @@ var controller = function(e) {
 				    }
 			    }
   			};	
-
-		    // DataGrid("Relació de Torneigs", "torneig", toolbar, columns, fields, 3340, "_01_pk_idTorn");
-			DataGrid("Màquines per ubicació", false, toolbar, columns, e.target);						
+		    DataGrid("Màquines per ubicació", "ubicaciotemaquina", toolbar, columns, fields, e.target, "_00_pk_idUTM_auto");
+			// DataGrid("Màquines per ubicació", false, toolbar, columns, e.target);						
 		    break;		        
 
 		case '3930':

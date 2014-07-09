@@ -31,13 +31,9 @@ if (isset($_REQUEST['cmd']) ) :
 
 			case 'save-record' :
 				$record = $_REQUEST['record'];			
-
 				if ($id>0) :	
-					$qry = sprintf(
-							"INSERT INTO torneig
-							VALUES (NULL,'%d','%s','%f','%s','%s',NOW(),NULL,NULL);",
-							$record['_02_pk_idJocTorn'], $record['_03_nomTorn'], $record['_04_premiTorn'], 
-							$record['datIniTorn'], $record['datFinTorn']);
+					$qry    = sprintf("INSERT INTO maqInstall
+										VALUES (NULL,'%d','%d',0,0,0,NOW(),NULL,NULL);",$idMaq, $idJoc);
 				endif;
 
 				$sql = SqlExec($qry);
@@ -66,13 +62,13 @@ else: ?>
 	<div class="w2ui-label">Escollir l'ubicació:</div>
 	<div class="w2ui-field">
 <?php 
-	$query    = 'SELECT * FROM joc WHERE _08_datBaixaJoc IS NULL';
+	$query    = 'SELECT * FROM ubicacio WHERE _16_datBaixaUbic IS NULL';
 	$response = dbExec($query)[1];
 
 	echo '<select name="_01_pk_idUbicUTM" width="300" style="width: 300px">';
 
-	foreach($response as $joc) {
-		echo '<option value="'. $joc->_01_pk_idJoc .'">'. $joc->_02_nomJoc .'</option>';
+	foreach($response as $row) {
+		echo '<option value="'. $row->_01_pk_idUbic .'">'. $row->_02_empUbic .'</option>';
 	}
 	echo '</select>';
 ?>
@@ -81,13 +77,13 @@ else: ?>
 	<div class="w2ui-label">Escollir la màquina:</div>
 	<div class="w2ui-field">
 <?php 
-	$query    = 'SELECT * FROM joc WHERE _08_datBaixaJoc IS NULL';
+	$query    = 'SELECT * FROM maquina WHERE _08_datBaixaMaq IS NULL';
 	$response = dbExec($query)[1];
 
 	echo '<select name="_02_pk_idMaqUTM" width="300" style="width: 300px">';
 
-	foreach($response as $joc) {
-		echo '<option value="'. $joc->_01_pk_idJoc .'">'. $joc->_02_nomJoc .'</option>';
+	foreach($response as $row) {
+		echo '<option value="'. $row->_01_pk_idMaq .'">'. $row->_02_macMaq .'</option>';
 	}
 	echo '</select>';
 ?>
