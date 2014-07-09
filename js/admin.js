@@ -28,8 +28,7 @@ $('#sidebar').w2sidebar({
 											{ id: '3380', text: 'Amb partides. Actual',  img: 'icon-page' },
 											{ id: '3390', text: 'Amb partides. Històric',  img: 'icon-page' } ]}]}]},
 					{ id: '3400', text: 'Màquines', img: 'icon-folder',
-					nodes: [{ id: '3410', text: 'Alta',  img: 'icon-edit' },
-							{ id: '3420', text: 'Manteniment',  img: 'icon-edit' },
+					nodes: [{ id: '3420', text: 'Manteniment',  img: 'icon-edit' },
 							{ id: '3425', text: 'Històric',  img: 'icon-page' },							
 							{ id: '3430', text: 'Actualitzar Recaudació',  img: 'icon-edit' },														
 							{ id: '3440', text: 'Jocs',  img: 'icon-page' },
@@ -57,14 +56,13 @@ $('#sidebar').w2sidebar({
 									{ id: '3720', text: '2',  img: 'icon-page' },									
 									{ id: '3730', text: '3',  img: 'icon-page' }]}]},											
 					{ id: '3800', text: 'Ubicacions', img: 'icon-folder',
-					nodes: [{ id: '3810', text: 'Alta',  img: 'icon-edit' },
-							{ id: '3830', text: 'Manteniment',  img: 'icon-edit' },
+					nodes: [{ id: '3830', text: 'Manteniment',  img: 'icon-edit' },
 							{ id: '3840', text: 'Històric',  img: 'icon-page' },							
 							{ id: '3845', text: 'Llistats',  img: 'icon-folder',
 							nodes: [{ id: '3850', text: 'Provincia, Població i CP',  img: 'icon-page' },
 									{ id: '3860', text: 'Coordenades',  img: 'icon-page' },
 									{ id: '3870', text: 'Empresa, Provincia i Població',  img: 'icon-page' }]},
-							{ id: '3875', text: 'Màquines',  img: 'icon-folder',
+							{ id: '3875', text: 'Assignar màquines',  img: 'icon-folder',
 							nodes: [{ id: '3880', text: 'Alta',  img: 'icon-edit' },
 									{ id: '3890', text: 'Manteniment',  img: 'icon-edit' },
 									{ id: '3920', text: 'Llistats',  img: 'icon-folder',
@@ -80,7 +78,7 @@ $('#sidebar').w2sidebar({
 					// { id: '1060', text: 'Torneigs', img: 'icon-page' },
 					// { id: '1080', text: 'Usuaris', img: 'icon-edit' },
 					// { id: '1090', text: 'Test', img: 'icon-edit' },
-			  		{ id: '1120', text: 'Partides',	img:'icon-edit'}
+			  		// { id: '1120', text: 'Partides',	img:'icon-edit'}
 					]
 				}
 			],
@@ -601,11 +599,6 @@ var controller = function(e) {
 				];
 	    	DataGrid("Històric de màquines amb partides dels Torneigs", false, true, columns, e.target);				
 		    break;
-
-		case '3410':
-		    break;
-		case '3415':
-		    break;				    
 		case '3420':
 			columns = [
 				{ field: '_01_pk_idMaq',   caption: 'Maq',         size: '6%' },
@@ -867,11 +860,6 @@ var controller = function(e) {
 		case '3730':
 		    break;			
 
-
-		case '3810':
-		    break;			
-		case '3820':
-		    break;			
 		case '3830':
 			columns = [
 				// { field: '_01_pk_idUbic', caption: 'Ubic',        size: '4%' },
