@@ -1,0 +1,424 @@
+/*
+ * CSS for pinball project
+ */
+
+/* Reset */
+ * {
+ 	margin:  0;
+ 	padding: 0;
+ 	list-style: none;
+ 	color: #165489;
+ }
+
+/* General */
+body {
+	background: url(ico/bkg-dots.png) repeat #FFF;
+}
+#main {
+	max-width: 995px;
+	margin: 0 auto;
+	font-family: Calibri,Verdana,sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	background: none;
+}
+header {
+	margin: 0;
+	padding: 3px 0 3px 10px;
+	color: #C7C4E7;
+	background-color: #FFF4F4;
+/*	box-shadow: 6px 3px 5px #D8D7D7;
+*/}
+section {
+	background-color: #fff;
+	border: 1px solid #E9E9E6;
+	padding: 20px;
+	overflow: auto;
+	
+}
+section.staticPage{
+	 float: left;
+    padding: 15px 20px;
+    position: relative;
+   /* top: -62px;*/
+    width: 91%;
+    z-index: -1;}
+
+footer {
+	width:100%;
+	float: left;
+	clear: both;
+	color: #C7C4E7;
+	background-color: #EDF1F6;
+	padding: 10px;
+	text-align: center;
+}
+/* Icones */
+#inici   	{ background-image: url(ico/home.png); }
+#recrea  	{ background-image: url(ico/games.png); }
+#empresa 	{ background-image: url(ico/business.png); }
+#torneig 	{ background-image: url(ico/torneig.png); }
+#contacte 	{ background-image: url(ico/email.png); }
+#jocs 	 	{ background-image: url(ico/arcade.png); }
+#registre 	{ background-image: url(ico/kgpg_sign.png); }
+#informes 	{ background-image: url(ico/reports.png); }
+#logout 	{ background-image: url(ico/exit.png); }
+
+/* Menu */
+.menu {
+	float: left;
+	/*width: 100%;*/
+	margin:-1;
+	padding-top: 7px;
+	padding-bottom: 7px;
+/*	background-color: #165489;
+box-shadow: 6px 3px 5px #D8D7D7;*/
+}
+.menu,
+section,
+header {
+		border-top: 2px solid #E9E9E6;
+		float:left;
+		max-width:995px;
+		width:89%;
+}
+.menu ul,
+.menu #dialog {
+	background-color: #010237;
+    float: left;
+    min-width: 155px;
+    padding: 8px 23px 13px 35px;
+    width: 17%;
+     /*border: 10px solid #FFFFFF;
+     border-color:white;*/
+     border-radius:50px 12px 12px 50px;
+   
+}
+.menu ul { 
+	background-color: #165489;
+    float: left;
+   max-width: 63%;
+    min-width: 67%;
+    width: 77%;
+    border-radius: 12px 50px 50px 12px;
+}
+.menu a
+{	display:block;
+	color:#FFF;
+	text-decoration:none;
+    border:2px solid #165489;
+    padding: 39px 1px 1px;
+    margin-left: 5px;
+    width: 60px;
+	background-position:top;
+	background-repeat:no-repeat;
+	text-align: center;
+}
+.menu a:hover { color:#000;background-color:#BFDFFF;border:2px solid #FFF;}
+
+.menu li {
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:11px;
+	padding:2px;
+	display: inline-block;
+	float:left;
+}
+.menu span:first-child {
+	color: #6AE26A;
+}
+
+#dialog {
+	width: 92%;
+	padding: 10px 5px 7px 20px;
+	/*border-left: 4px solid #C0EDFE;*/
+}
+#dialog input[type=text],
+#dialog input[type=password] {
+  padding: 4px;
+  border: 1px solid #bbbbbb;
+  border-radius: 3px;
+  color: #000000;
+  background-color: #ffffff;
+}
+#dialog input[type="submit"] {
+	padding: 5px 10px;
+}
+
+#dialog input[type="text"],
+#dialog input[type="password"]
+ {
+	margin:  0;
+ 	padding: 0;
+ 	list-style: none;
+ 	border:1px solid gray;
+ 	border-radius: 0;
+ 	width: 151px;
+ 	height:29px;
+ 	  border-radius: 5px;
+
+}
+
+/*PARA EL MOVIL EL MENU*/ 
+/* For tablets & smart phones OSEA PARA NUESTRO MENU*/
+
+ @media (max-width: 400px) {
+	 .menu #dialog {
+    left: 85%;
+    min-width: 155px;
+    padding: 8px 23px 13px 35px;
+    position: fixed;
+    visibility: visible;
+    z-index:123000;
+    
+transition:All 1s ease;
+-webkit-transition:All 1s ease;
+-moz-transition:All 1s ease;
+-o-transition:All 1s ease;
+
+   transform: rotate(0deg) scale(1) skew(0deg) translate(6%);
+    -webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(6%);
+    -moz-transform: rotate(0deg) scale(1) skew(0deg) translate(6%);
+    -o-transform: rotate(0deg) scale(1) skew(0deg) translate(6%);
+    -ms-transform: rotate(0deg) scale(1) skew(0deg) translate(6%);
+	}
+	
+	.menu #dialog:hover{
+
+z-index:123000;
+   transform: rotate(0deg) scale(1) skew(0deg) translate(-65%);
+    -webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(-65%);
+    -moz-transform: rotate(0deg) scale(1) skew(0deg) translate(-65%);
+    -o-transform: rotate(0deg) scale(1) skew(0deg) translate(-65%);
+    -ms-transform: rotate(0deg) scale(1) skew(0deg) translate(-65%);
+    }
+  .menu ul{
+transition:All 1s ease;
+-webkit-transition:All 1s ease;
+-moz-transition:All 1s ease;
+-o-transition:All 1s ease;
+   transform: rotate(0deg) scale(1) skew(0deg) translate(-95%);
+    -webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(-95%);
+    -moz-transform: rotate(0deg) scale(1) skew(0deg) translate(-95%);
+    -o-transform: rotate(0deg) scale(1) skew(0deg) translate(-95%);
+    -ms-transform: rotate(0deg) scale(1) skew(0deg) translate(-95%);
+       background-color: #165489;
+    float: left;
+   max-width: 63%;
+    min-width: 67%;
+    width: 77%;
+ 
+    position: fixed;
+    visibility: visible;
+    z-index:123000;
+    }   
+.menu ul:hover{
+z-index:123000;
+transition:All 1s ease;
+-webkit-transition:All 1s ease;
+-moz-transition:All 1s ease;
+-o-transition:All 1s ease;
+
+   transform: rotate(0deg) scale(1) skew(0deg) translate(-10%);
+    -webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(-10%);
+    -moz-transform: rotate(0deg) scale(1) skew(0deg) translate(-10%);
+    -o-transform: rotate(0deg) scale(1) skew(0deg) translate(-10%);
+    -ms-transform: rotate(0deg) scale(1) skew(0deg) translate(-10%);
+  
+   background-color: #165489;
+    float: left;
+   max-width: 63%;
+    min-width: 67%;
+    width: 77%;
+ 
+    position: fixed;
+    visibility: visible;
+        }
+ 
+ }
+    
+@media (min-width:401px) and (max-width: 767px) {
+  .menu ul{
+transition:All 1s ease;
+-webkit-transition:All 1s ease;
+-moz-transition:All 1s ease;
+-o-transition:All 1s ease;
+   transform: rotate(0deg) scale(1) skew(0deg) translate(-95%);
+    -webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(-95%);
+    -moz-transform: rotate(0deg) scale(1) skew(0deg) translate(-95%);
+    -o-transform: rotate(0deg) scale(1) skew(0deg) translate(-95%);
+    -ms-transform: rotate(0deg) scale(1) skew(0deg) translate(-95%);
+       background-color: #165489;
+    float: left;
+   max-width: 63%;
+    min-width: 67%;
+    width: 77%;
+ 
+    position: fixed;
+    visibility: visible;
+    z-index:123000;
+    }   
+.menu ul:hover{
+
+transition:All 1s ease;
+-webkit-transition:All 1s ease;
+-moz-transition:All 1s ease;
+-o-transition:All 1s ease;
+
+   transform: rotate(0deg) scale(1) skew(0deg) translate(-5%);
+    -webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(-5%);
+    -moz-transform: rotate(0deg) scale(1) skew(0deg) translate(-5%);
+    -o-transform: rotate(0deg) scale(1) skew(0deg) translate(-5%);
+    -ms-transform: rotate(0deg) scale(1) skew(0deg) translate(-5%);
+  z-index:123000;
+   background-color: #165489;
+    float: left;
+   max-width: 63%;
+    min-width: 67%;
+    width: 77%;
+ 
+    position: fixed;
+    visibility: visible;
+        }
+        
+        
+    
+  #dialog {
+	width: 92%;
+	padding: 10px 5px 7px 20px;
+	left:100%;
+	/*border-left: 4px solid #C0EDFE;*/
+	}
+	
+	 .menu #dialog {
+    left: 85%;
+    min-width: 155px;
+    padding: 8px 23px 13px 35px;
+    position: fixed;
+    visibility: visible;
+    z-index:123000;
+transition:All 1s ease;
+-webkit-transition:All 1s ease;
+-moz-transition:All 1s ease;
+-o-transition:All 1s ease;
+
+   transform: rotate(0deg) scale(1) skew(0deg) translate(20%);
+    -webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(20%);
+    -moz-transform: rotate(0deg) scale(1) skew(0deg) translate(20%);
+    -o-transform: rotate(0deg) scale(1) skew(0deg) translate(20%);
+    -ms-transform: rotate(0deg) scale(1) skew(0deg) translate(20%);
+	}
+	
+	.menu #dialog:hover{
+z-index:123000;
+
+   transform: rotate(0deg) scale(1) skew(0deg) translate(-50%);
+    -webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(-50%);
+    -moz-transform: rotate(0deg) scale(1) skew(0deg) translate(-50%);
+    -o-transform: rotate(0deg) scale(1) skew(0deg) translate(-50%);
+    -ms-transform: rotate(0deg) scale(1) skew(0deg) translate(-50%);
+    }
+
+}
+
+
+
+ /* For smaller displays like laptops OSEA PARA NUESTRO ACCESS*/
+@media (min-width:768px) and (max-width: 993px) {
+    .menu #dialog {
+    left: 85%;
+    min-width: 155px;
+    padding: 8px 23px 13px 35px;
+    position: fixed;
+    visibility: visible;
+    z-index:123000;
+transition:All 1s ease;
+-webkit-transition:All 1s ease;
+-moz-transition:All 1s ease;
+-o-transition:All 1s ease;
+
+   transform: rotate(0deg) scale(1) skew(0deg) translate(41%);
+    -webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(41%);
+    -moz-transform: rotate(0deg) scale(1) skew(0deg) translate(41%);
+    -o-transform: rotate(0deg) scale(1) skew(0deg) translate(41%);
+    -ms-transform: rotate(0deg) scale(1) skew(0deg) translate(41%);
+	}
+	
+	.menu #dialog:hover{
+
+z-index:123000;
+   transform: rotate(0deg) scale(1) skew(0deg) translate(-38%);
+    -webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(-38%);
+    -moz-transform: rotate(0deg) scale(1) skew(0deg) translate(-38%);
+    -o-transform: rotate(0deg) scale(1) skew(0deg) translate(-38%);
+    -ms-transform: rotate(0deg) scale(1) skew(0deg) translate(-38%);
+    }
+
+
+    .classname {
+    transition:All 1.1701s ease-in-out;
+-webkit-transition:All 1.1701s ease-in-out;
+-moz-transition:All 1.1701s ease-in-out;
+-o-transition:All 1.1701s ease-in-out;
+    transform: rotate(0deg) scale(0.637) skew(1deg) translate(11px);
+    -webkit-transform: rotate(0deg) scale(0.637) skew(1deg) translate(11px);
+    -moz-transform: rotate(0deg) scale(0.637) skew(1deg) translate(11px);
+    -o-transform: rotate(0deg) scale(0.637) skew(1deg) translate(11px);
+    -ms-transform: rotate(0deg) scale(0.637) skew(1deg) translate(11px);
+    }
+    .classname:hover{
+    transform: rotate(0deg) scale(0.844) skew(-3deg) translate(13px);
+    -webkit-transform: rotate(0deg) scale(0.844) skew(-3deg) translate(13px);
+    -moz-transform: rotate(0deg) scale(0.844) skew(-3deg) translate(13px);
+    -o-transform: rotate(0deg) scale(0.844) skew(-3deg) translate(13px);
+    -ms-transform: rotate(0deg) scale(0.844) skew(-3deg) translate(13px);
+    }
+
+
+}
+
+/* usuaris.php */
+#users h2 {
+	background-color: #000;
+	color: #FFF;
+	padding: 5px 15px;
+}
+
+/* recrea.php */
+.promo img {
+	float: left;
+	width: 150px;
+	height: 150px;
+	margin-right: 10px;
+}
+.promo li {
+	clear: both;
+	padding: 10px 5px;
+	border-bottom: dashed 2px #F1BBFD;
+	overflow: auto;
+}
+#grid {
+	width: 100%;
+	background-color: #EDF1F6;
+}
+#sidebar {
+	width: 100%;
+	margin-right: 1px;
+}
+#grid,
+#sidebar {
+	height: 500px;
+	float: left;
+}
+#toolbar {
+	padding: 4px; 
+	border: 1px solid silver; 
+	border-radius: 3px;
+	margin-bottom: 15px !important;
+}
+.w2ui-node-caption {
+	font-size: 11px !important;
+}
+td.w2ui-node-data {
+	padding: 0 !important;
+}
+

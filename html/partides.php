@@ -39,7 +39,7 @@ $(document).ready(function(){
 	var seraTorneigId;
 	 
 	 
-    $("#I_User").change(function(){
+    $("#I_User").change(function(){ // Quan es selecciona un jugador, dinàmicament es fa una query a la DB per obtenir els torneigs apuntats.
 		iuserlogin = document.getElementById("I_User").value;
 	
 		$.ajax({
@@ -52,7 +52,7 @@ $(document).ready(function(){
 		});
 	});
      
-    function crearmenu(dadesretornades1){
+    function crearmenu(dadesretornades1){ // Els torneigs retornats, i les dades implicades, creen dinàmicament un menu desplegable select.
 		var dadesconvert= JSON.parse(dadesretornades1); 
 		
 		var dadesfiltrades = dadesconvert.records;  
@@ -73,23 +73,23 @@ $(document).ready(function(){
 				console.log("esJoc: " + esJoc);
 				esJug = dadesfiltrades[i].idJug;
 				
-				contingut += '<option id="'+esMaquina+'" name="'+esMaquina+'" value="'+esMaquina+esJoc+esIdTorneig+'"> Torneig: '+esTorneig+' // Maquina: '+esMaquina+' // JOC: '+esJoc+'</option>';
+				contingut += '<option id="'+esMaquina+'" name="'+esMaquina+'" value="'+esMaquina+esJoc+esIdTorneig+'"> Torneig: '+esTorneig+' // Maquina: '+esMaquina+' // Joc: '+esJoc+'</option>';
 				//console.log("contingut: " , contingut);  // !!!!!!!!!!!!!!!!!!!! COMA ,,,, i NO + ,,,,, !!!!!!!!!!!!!!!!!!!! 
 			}
 		
-			$("#seleccionador").html(contingut);
+			$("#seleccionador").html(contingut); // Generació del menu desplegable select dinàmic.
 			document.getElementById('informacions').innerHTML = "";
 
 			console.log(document.getElementById('seleccionador').value);
 	  
 		} // end if 
 	
-		else {
+		else { // Si no hi ha cap torneig apuntat, surt aquest missatge.
 			document.getElementById('llistat').innerHTML = "No hi ha cap torneig";
 			$("#seleccionador").html("");
 		}
 	  
-	  $('#seleccionador').on('change',function(){
+	  $('#seleccionador').on('change',function(){ // Quan es selecciona una combinacio de torneig, maquina i joc, les dades es carreguen al PHP dinàmicament via ajax
 	    var combinat = $(this).val();
 	    seraMaquina = combinat.substring(0, 2); 
 	    seraJoc = combinat.substring(2,5); 
@@ -100,7 +100,7 @@ $(document).ready(function(){
 	    sonPunts2 = "";
 	    sonPunts3 = "";
 	    
-	    function aleatoris(){
+	    function aleatoris(){ // Generació aleatoris dels resultats de les rondes.
       
 		  var a = Math.round(Math.random()*10);
 		  var b = Math.round(Math.random()*10);   
@@ -113,7 +113,7 @@ $(document).ready(function(){
 
 	    aleatoris();    
 	    
-	    $.ajax({
+	    $.ajax({ // Precarregar (=SI): els valors seleccionats al PHP (que conectarà amb la DB per fer les modificacions(.
 	      url: "partides.php",
 	      data: {carregar:'SI', MAQ:seraMaquina, JOC:seraJoc, JUG:esJug, FOTO:'NO', TORNID:seraTorneigId, PUNTUA1:sonPunts1, PUNTUA2:sonPunts2, PUNTUA3:sonPunts3}, //date("Y-n-j H:i:s")
 	      success: function(Resultat1){console.log('carregar SI : he carregat els valors que s han d enviar');}});
@@ -121,14 +121,14 @@ $(document).ready(function(){
 	  }); // end jQuery onchange combinacio
     } // end crearmenu
 
-	document.querySelector("#dialog").onsubmit = function(e) {
+	document.querySelector("#dialog").onsubmit = function(e) { // Quan es selecciona el botó Submit per enviar les dades
 		e.preventDefault();
-	    $.ajax({
+	    $.ajax({ // Precarregar (=NO): els valors precarregats al PHP s'enviaran definitivament a la DB i farà les modificacions. 
 	      url: "partides.php",
 	      data: {carregar:'NO', MAQ:seraMaquina, JOC:seraJoc, JUG:esJug, FOTO:'NO', TORNID:seraTorneigId, PUNTUA1:sonPunts1, PUNTUA2:sonPunts2, PUNTUA3:sonPunts3}, //date("Y-n-j H:i:s")
 	      success: function(Resultat2){processar(Resultat2);}});
 	      
-	        function processar(dadesretornades2){
+	        function processar(dadesretornades2){ // Retorn de les notificacions de l'operació de gestió a la DB.
 		//var dadesconvert2= JSON.parse(dadesretornades2); 
 		
 		//var dadesfiltrades = dadesconvert2.records;  
@@ -149,9 +149,9 @@ $(document).ready(function(){
 	<section>
 <?php 
       
-	if (isset($_SESSION['emplenat'])) {
+	if (isset($_SESSION['emplenat'])) { // Emplenat és la variable que controla si ja hi ha jugadors carregats al menu seleccionable.
 
-	if (($_SESSION['emplenat'])=="NO")
+	if (($_SESSION['emplenat'])=="NO") // Emplenat=NO: Encara no  hi ha jugadors carregats al menu seleccionable i s'han de cridar amb query de la DB.
 	{
 		$query   = 'SELECT _04_loginUsuari FROM usuari;';
 		$response = dbExec($query)[1];
@@ -171,14 +171,14 @@ $(document).ready(function(){
 		echo '<input type="submit" name="submit" value="Generar partida"';
 		echo '</form"></br>'; 
 
-		$_SESSION['emplenat']="SI";
+		$_SESSION['emplenat']="SI"; // Emplenat ja es pot posar a =SI..
 	}
 	
-	elseif ($_SESSION['emplenat'] =="SI") 
+	elseif ($_SESSION['emplenat'] =="SI") // Emplenat=SI: si hi ha jugadors carregats al menu seleccionable, podem seguir muntant el menu.
 	
 		{
 
-		  
+		// Aquestes variables venen del Ajax per ser precarregats en l'entorn PHP i disponibles per fer les querys necessàries. 
 		$IDMAQ = $_REQUEST['MAQ'];
 		$IDJOC = $_REQUEST['JOC'];
 		$IDJUG = $_REQUEST['JUG'];
@@ -189,20 +189,20 @@ $(document).ready(function(){
 		$PUNTUA_2 = $_REQUEST['PUNTUA2'];
 		$PUNTUA_3 = $_REQUEST['PUNTUA3'];
 	  
-		if (($_REQUEST['carregar'])=="SI"){
+		if (($_REQUEST['carregar'])=="SI"){ // No cal fer rès, en realitat el resultat ja es veu en pantalla.
 			echo "<p>carregant dades a les variables</p>"; 
 		}	      
 			
-		  if (($_REQUEST['carregar'])=="NO"){
+		  if (($_REQUEST['carregar'])=="NO"){ // Ja no cal pregarregar res, ara toca enviar les dades definitivament a la DB.
 		      
-		      $_SESSION['emplenat']="NO";
+		      $_SESSION['emplenat']="NO"; // Resetejar per tornar a muntar la pàgina amb els jugadors actuals de la DB.
 		    
 		      
 		      //<p>S'ha fet l'insert!</p><br />
 		  
-			  $now = date("Y-n-j H:i:s"); // Capturo l'hora actual per totes les querys
+			  $now = date("Y-n-j H:i:s"); // Capturar l'hora actual per totes les querys
 			  
-			  // Actualitzo Partida
+			  // Actualitzar Partida actual
 			  $query    = sprintf("INSERT INTO partida
 						    VALUES ('%d','%d','%d','%s',NULL,NULL);",$IDMAQ,
 											    $IDJOC,
@@ -210,7 +210,7 @@ $(document).ready(function(){
 											    $now);
 			  $response = dbExec($query)[1];
 			  
-			  // Actualitzo Ronda 1
+			  // Actualitzar Ronda 1
 			  $query    = sprintf("INSERT INTO ronda
 						    VALUES (NULL, '%d','%d','%d','%s','%d','%s','%d', NULL, NULL);"
 									    ,$IDMAQ,
@@ -222,7 +222,7 @@ $(document).ready(function(){
 									    $PUNTUA_1);
 			  $response = dbExec($query)[1];
 			  
-			  // Actualitzo Ronda 2
+			  // Actualitzar Ronda 2
 			  $query    = sprintf("INSERT INTO ronda
 						    VALUES (NULL, '%d','%d','%d','%s','%d','%s','%d', NULL, NULL);"
 									,$IDMAQ,
@@ -234,7 +234,7 @@ $(document).ready(function(){
 									$PUNTUA_2);
 			  $response = dbExec($query)[1];			
 			  
-			  // Actualitzo Ronda 3
+			  // Actualitzar Ronda 3
 			  $query    = sprintf("INSERT INTO ronda
 						    VALUES (NULL, '%d','%d','%d','%s','%d','%s','%d', NULL, NULL);"
 									,$IDMAQ,
@@ -246,28 +246,28 @@ $(document).ready(function(){
 									$PUNTUA_3);									 											    			  				
 			  $response = dbExec($query)[1];
 
-			  // Actualitzo Credits maquina
+			  // Actualitzar Credits maquina
 			  $query    = sprintf("UPDATE maquina 
 					      set _04_credMaq=(_04_credMaq+1), _05_totCredMaq=_05_totCredMaq+_04_credMaq 
 					      where _01_pk_idMaq = '%d';",$IDMAQ);
 					      
 			  $response = dbExec($query)[1];
 			  
-			  // Actualitzo Partides maqInstall
+			  // Actualitzar Partides maqInstall
 			  $query    = sprintf("UPDATE maqInstall
 					      set _03_numPartidesJugadesMaqInst=(_03_numPartidesJugadesMaqInst+1), _04_credJocMaqInst=(_04_credJocMaqInst+1)
 					      where (_01_pk_idMaqInst = '%d') and (_02_pk_idJocInst = '%d');",$IDMAQ,$IDJOC);	 
 					      
 			  $response = dbExec($query)[1];
 			  
-			  // Actualitzo Partides joc
+			  // Actualitzar Partides joc
 			  $query    = sprintf("UPDATE joc
 					      set _05_numPartidesJugadesJoc=(_05_numPartidesJugadesJoc+1)
 					      where (_01_pk_idJoc = '%d');",$IDJOC);
 					      
 			  $response = dbExec($query)[1];
 			  
-			  // Inserto Partides torneigTePartida
+			  // Insertar Partides torneigTePartida
 			  $query    = sprintf("INSERT INTO torneigTePartida
 						  VALUES (NULL, '%d','%d','%d','%d');",$IDTORN,$IDMAQ,$IDJOC,$IDJUG);
 					      
@@ -281,21 +281,22 @@ $(document).ready(function(){
 	  
 	  echo "<p>S'ha fet l'insert !</p>"; 
 	  
-		// header('location:partides.php');
+		// header('location:partides.php');  // Tornar a muntar la pagina ??
+		//
 		
 		}
 	}
     }
     else 
     {
-		$_SESSION['emplenat']="NO";
+		$_SESSION['emplenat']="NO"; // Emplenat=NO: Aqui és genera per primer cop la variable Session per poder fer les diferents accions.
 		var_dump($_SESSION['emplenat']);
 		echo "<p>no esta emplenat</p>";
-		header('location:partides.php');
+		header('location:partides.php'); // s'ha de tornar a muntar la pàgina amb la variable Session activa i en valor = NO.
 	}
 ?>
-	    <div id="desplegable"> </div> </br></br></br>
-	    <div id="informacions">  </div> </br></br></br>
+	    <div id="desplegable"> </div> </br></br></br> <!--Zona de mostrar desplegable-->
+	    <div id="informacions">  </div> </br></br></br> <!--Zona de mostrar desplegable-->
     </section>
     <footer>
 	    <?php footer(); ?>
