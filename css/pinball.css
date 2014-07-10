@@ -37,6 +37,10 @@ section {
 section.staticPage{
 	padding: 15px 20px;
 }
+section.mainPage ul li {
+	width:30%;
+	float: left;
+}
 footer {
 	clear: both;
 	color: #C7C4E7;

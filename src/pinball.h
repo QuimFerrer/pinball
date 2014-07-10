@@ -111,7 +111,7 @@ function dbExecLocal($query,$tipusResultat) {
 ?>
         <div class="menu">
             <ul>
-                <li><a id="inici"       href="../html/inici.php">Inici</a></li>
+                <li><a id="inici"       href="../html/index.php">Inici</a></li>
                 <li><a id="recrea"      href="../html/recrea.php">Recreatius</a></li>
                 <li><a id="empresa"     href="../html/empresa.php">Empresa</a></li>
                 <li><a id="jocs"        href="../html/jocs.php">Pinball kit</a></li>
@@ -123,7 +123,7 @@ function dbExecLocal($query,$tipusResultat) {
 <?php else : ?>
         <div class="menu login">
             <ul>
-                <li><a id="inici"       href="../html/inici.php">Inici</a></li>
+                <li><a id="inici"       href="../html/index.php">Inici</a></li>
                 <li><a id="recrea"      href="../html/recrea.php">Recreatius</a></li>
                 <li><a id="empresa"     href="../html/empresa.php">Empresa</a></li>
                 <li><a id="jocs"        href="../html/jocs.php">Pinball kit</a></li>
