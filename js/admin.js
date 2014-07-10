@@ -1,10 +1,12 @@
 // Sidebar per l'administrador
+// Exemple per incorporar un fitxer extern
+//{ id: '0000', text: 'Test', img: 'icon-edit' },
 w2ui.layout.content('left',
 	$('#sidebar').w2sidebar({
 		name: 'sidebar',
 		nodes: [ 
 			{ id: '2000', text: 'Opcions', expanded: true, group: true,
-			  nodes: [  { id: '0000', text: 'Test', img: 'icon-edit' },{ id: '3000', text: 'Perfil', img: 'icon-edit' },
+			  nodes: [  { id: '3000', text: 'Perfil', img: 'icon-edit' },
 						{ id: '3100', text: 'Partides', img: 'icon-folder',
 						nodes: [{ id: '3180', text: 'Generador partides', img:'icon-add'},
 								{ id: '3110', text: 'per màquina',  img: 'icon-page' },
@@ -481,7 +483,7 @@ var controller = function(e) {
 	            items: [
 	                { type: 'button', id: 'new',  caption: 'Afegir',    img: 'icon-add' },
 	                { type: 'button', id: 'edit', caption: 'Modificar', img: 'icon-edit' },
-	                { type: 'button', id: 'del',  caption: 'Eliminar',  img: 'icon-delete' }
+	                { type: 'button', id: 'del',  caption: 'Bloquejar', img: 'icon-delete' }
 	            ],
 	            onClick: function(target, data) {
 			        var action = "../html/torneig.php";
@@ -500,9 +502,13 @@ var controller = function(e) {
 				        	break;
 
 				        case 'del':
-				        	w2ui['grid'].request('delete', {recid:row[0]}, action, function() {
-				        		w2ui['grid'].reload();
-				        	});
+				            w2confirm('Estas segur de bloquejar el torneig?', "Bloquejar torneig", 
+				            function (msg) { 
+				                if (msg=='Yes') 
+						        	w2ui['grid'].request('delete', {recid:row[0]}, action, function() {
+						        		w2ui['grid'].reload();
+						        	});
+				            });
 				        	break;
 
 				        default:
@@ -700,37 +706,8 @@ var controller = function(e) {
 			];
 		   	DataGrid("Màquines disponibles de cada torneig per cada jugador", false, true, columns, e.target);				
 		    break;
-		case '3485':
-			// columns = [
-			// 	{ field: '_01_pk_idMaqInst',      caption: 'Maq',           size: '8%' },
-			// 	{ field: '_02_macMaq',            caption: 'Mac',           size: '13%' },
-			// 	{ field: '_02_pk_idJocInst',      caption: 'Joc',           size: '8%' },							
-			// 	{ field: '_02_nomJoc',            caption: 'Nom Joc',       size: '15%' },
-			// 	{ field: '_03_numPartidesJugadesMaqInst',  caption: 'Num. partides', size: '8%' },
-			// 	{ field: '_04_credJocMaqInst',    caption: 'Crèdits parcials (€)',   size: '10%', attr: 'align=right' },
-			// 	{ field: '_05_totCredJocMaqInst', caption: 'Crèdits totals (€)',     size: '10%', attr: 'align=right' },
-			// 	{ field: 'datAltaMaqInst',        caption: 'Data Alta',     size: '16%' },
-			// 	{ field: 'datModMaqInst',         caption: 'Data Modif.',   size: '16%' }
-			// ];
-			// fields = [
-		 //        // { name: '_01_pk_idMaqInst', type: 'float', required: true,
-		 //        //   html: { caption: 'Id màquina', attr: 'size="5"', span: 5 }
-		 //        // },
-		 //        // { name: '_02_pk_idJocInst', type: 'float', required: true,
-		 //        //   html: { caption: 'Id joc', attr: 'size="5"', span: 5 }
-		 //        // },
-		 //        { name: '_03_numPartidesJugadesMaqInst', type: 'float', required: false,
-		 //          html: { caption: 'Partides jugades', attr: 'size="10"', span: 5 }
-		 //        },
-		 //        { name: "_04_credJocMaqInst", type: 'float', required: false,
-		 //          html: { caption: 'Crèdits parcials', attr: 'size="10"', span: 5 }
-		 //        },
-		 //        { name: "_05_totCredJocMaqInst", type: 'float', required: false,
-		 //          html: { caption: 'Crèdits Totals', attr: 'size="10"', span: 5 }
-		 //        }		        
-		 //    ];
-		 //    DataGrid("Jocs assignats a cada màquina", "maqInstall", false, columns, fields, 3485, "_00_pk_idMaqInst_auto");
 
+		case '3485':
 			columns = [
 				{ field: 'recid',                 caption: 'Id',            size: '8%' },
 				{ field: '_01_pk_idMaqInst',      caption: 'Maq',           size: '8%' },
@@ -750,12 +727,11 @@ var controller = function(e) {
 		        { name: "_04_credJocMaqInst", type: 'float', required: false},
 		        { name: "_05_totCredJocMaqInst", type: 'float', required: false}
 		    ];
-
             toolbar = { 
 	            items: [
 	                { type: 'button', id: 'new',  caption: 'Afegir',    img: 'icon-add' },
 	                { type: 'button', id: 'edit', caption: 'Modificar', img: 'icon-edit' },
-	                { type: 'button', id: 'del',  caption: 'Eliminar',  img: 'icon-delete' }
+	                { type: 'button', id: 'del',  caption: 'Bloquejar',  img: 'icon-delete' }
 	            ],
 	            onClick: function(target, data) {
 			        var action = "../html/maqInstall.php";
@@ -774,9 +750,13 @@ var controller = function(e) {
 				        	break;
 
 				        case 'del':
-				        	w2ui['grid'].request('delete', {recid:row[0]}, action, function() {
-				        		w2ui['grid'].reload();
-				        	});
+				            w2confirm('Estas segur de bloquejar el joc assignat?', "Bloquejar joc", 
+				            function (msg) { 
+				                if (msg=='Yes') 
+						        	w2ui['grid'].request('delete', {recid:row[0]}, action, function() {
+						        		w2ui['grid'].reload();
+						        	});
+				            });
 				        	break;
 
 				        default:

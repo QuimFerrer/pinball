@@ -89,3 +89,15 @@
 						SET _08_datModTorn   = NOW(),
 							_09_datBaixaTorn = NOW()
 						WHERE _01_pk_idTorn = '1003' AND _09_datBaixaTorn IS NULL;                                                                                                         
+2014-07-10 20:40:57 - CONSULTA:                        - UPDATE torneig 
+						SET _08_datModTorn   = NOW(),
+							_09_datBaixaTorn = NOW()
+						WHERE _01_pk_idTorn = '1002' AND _09_datBaixaTorn IS NULL;                                                                                                         
+2014-07-10 20:42:20 - CONSULTA:                        - UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
+													  _08_datBaixaMaqInst = NOW()				
+								  WHERE _00_pk_idMaqInst_auto = '6' AND 
+								        _08_datBaixaMaqInst IS NULL;                                                              
+2014-07-10 20:47:30 - CONSULTA:                        - UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
+													  _08_datBaixaMaqInst = NOW()				
+								  WHERE _00_pk_idMaqInst_auto = '3' AND 
+								        _08_datBaixaMaqInst IS NULL;                                                              

@@ -13,12 +13,11 @@ comprovaSessio();
 <!doctype html>
 <html>
 <head>
-	<meta content="" http-equiv="REFRESH"> </meta>	
 	<meta charset="UTF-8">
 	<title>Pinball. Partides</title>
 	<link rel="stylesheet" href="../css/pinball.css"> 
-	<!-- <script src="../js/pinball.js"></script> -->
-	<script language="JavaScript" src="../js/lib/jquery-1.11.0.min.js"> </script> 
+	<script src="../js/pinball.js"></script>
+	<script language="JavaScript" src="../js/lib/jquery-1.11.0.min.js"></script> 
 	
 <script>
  
@@ -278,9 +277,6 @@ $(document).ready(function(){
 	    <div id="desplegable"> </div> </br></br></br> <!--Zona de mostrar desplegable-->
 	    <div id="informacions">  </div> </br></br></br> <!--Zona de mostrar desplegable-->
     </section>
-    <footer>
-	    <?php footer(); ?>
-    </footer>
   </div>
 </body>	
 </html>
