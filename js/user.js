@@ -19,7 +19,7 @@ w2ui.layout.content('left',
 			   		},
 					{ id: '5060', text: 'Tots els Torneigs', img: 'icon-folder',
 						nodes: [
-							{ id: '5061', text: 'Consulta', img: 'icon-page' },
+							{ id: '5061', text: 'Consulta - Inscripcions', img: 'icon-page' },
 					   		{ id: '5062', text: 'Ranking', img: 'icon-folder',
 					   			nodes: [
 					   				{ id: '5070', text: 'Actual', img: 'icon-page' },
