@@ -33,32 +33,44 @@ isEndSessionInQuery();
 	switch ($action)
 	{
 		case 'get-record' :
-			$qry = customGetQueryForGetRecord($table, $id, $kName);		
-			$result = SqlExec($qry);
-			$data 	= mysql_fetch_assoc($result);
+			$query    = customGetQueryForGetRecord($table, $id, $kName);
+			$data = dbExec($query)[1][0];
+
+			// $qry = customGetQueryForGetRecord($table, $id, $kName);		
+			// $result = SqlExec($qry);
+			// $data 	= mysql_fetch_assoc($result);
 			break;
 
 		case 'get-records' :
-			$qry = customGetQueryForGetRecords($table);
-			$result = SqlExec($qry);
+			$query    = customGetQueryForGetRecords($table);
+			$response = controlErrorQuery( dbExec($query) );
+			$data     = $response;
+			if ($response['status'] == "error")
+				$data['recid'] = $data['rows'] = "999999";
 
-			while ($row = mysql_fetch_assoc($result)) {
-				   $row["recid"] = current($row);	
-			       $data[] = $row;
-			}
-			// Preparar array per a retornar al grid tots els registres
-			$data = array( 'total' => mysql_num_rows($result), 'page' => 0, 'records' => $data );
 			$data['cmd'] = "get-records";
+
+
+			// $qry = customGetQueryForGetRecords($table);
+			// $result = SqlExec($qry);
+
+			// while ($row = mysql_fetch_assoc($result)) {
+			// 	   $row["recid"] = current($row);	
+			//        $data[] = $row;
+			// }
+			// // Preparar array per a retornar al grid tots els registres
+			// $data = array( 'total' => mysql_num_rows($result), 'page' => 0, 'records' => $data );
+			// $data['cmd'] = "get-records";
 			break;
 
 		case 'delete' :
 			$data = customGetQueryForDelete($table, $id, $kName);
 			if ($data == "")
-			{
+				{
 				$qry  = "DELETE FROM $table WHERE $kName=$id";
 	    		$sql  = SqlExec($qry);
 				$data = array( 'cmd' => 'delete', 'success' => (mysql_affected_rows() != 0) );
-			}	
+				}	
 			break;
 
 		case 'save-record' :

@@ -71,7 +71,9 @@ w2ui.layout.content('left',
 						{ id: '4000', text: 'Jugadors', img: 'icon-folder',
 						nodes: [{ id: '4010', text: 'Perfils',  img: 'icon-page' },
 								{ id: '4040', text: 'Torneigs registrats', img: 'icon-page' }]},
-								{ id: '1020', text: 'Productes', img: 'icon-edit' }
+						{ id: '1015', text: 'Productes', img: 'icon-folder',
+						nodes: [{ id: '1020', text: 'Manteniment',  img: 'icon-edit' },
+								{ id: '1021', text: 'Històric',     img: 'icon-page' }]}
 						]
 					}
 				],
@@ -99,14 +101,16 @@ var controller = function(e) {
 				{ field: 'nom',         caption: 'Nom del Producte', size: '30%',  sortable: true,   resizable: true  },
 				{ field: 'descripcio',  caption: 'Descripció',       size: '35%',  sortable: true,   resizable: true  },
 				{ field: 'preu',        caption: 'Preu',             size: '10%',  sortable: true,   resizable: true  },
-				{ field: 'foto',        caption: 'Foto',             size: '20%',  sortable: false,  resizable: false }
+				{ field: 'foto',        caption: 'Foto',             size: '20%',  sortable: false,  resizable: false },
+				{ field: 'datAltaPro',  caption: 'Data Alta',        size: '16%'},
+				{ field: 'datModPro',   caption: 'Data Modif.',      size: '16%'},				
 			];
 			fields = [
 		        { name: 'nom', type: 'text', required: true,
 		          html: { caption: 'Nom', attr: 'size="40"', span: 5 }
 		        },
-		        { name: 'descripcio', type: 'text', required: false,
-		          html: { caption: 'Descripció', attr: 'size="40"', span: 5 }
+		        { name: 'descripcio', type: 'textarea', required: false,
+		          html: { caption: 'Descripció', attr: 'size="100"', span: 5 }
 		        },
 		        { name: 'preu', type: 'text', required: false,
 		          html: { caption: 'Preu', attr: 'size="40"', span: 5 }
@@ -115,8 +119,48 @@ var controller = function(e) {
 		          html: { caption: 'Foto', attr: 'size="40"', span: 5 }
 		        }
 		    ];
-		    DataGrid("Manteniment de productes", "productes", false, columns, fields);
+		    DataGrid("Manteniment de productes", "productes", false, columns, fields, 1020, "id");
 		    break;
+		case '1021':
+            toolbar = { 
+                items: [
+	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
+	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' }	                
+	            ],
+                onClick: function(target, data) {
+			        var row = w2ui['grid'].getSelection();
+				    if (row.length != 0)
+				    	{
+				    	// console.log(row);
+				    	switch(target)
+				    		{
+				    		case 'lock':
+					        	var params ={pid: "1035", idProd: row[0]};
+						     	msgAction("Bloquejar un producte", 'Estàs segur ?', "query.php", params);
+					        	break;
+					        case 'unlock':
+					        	var params ={pid: "1040", idProd: row[0]};					        
+						     	msgAction("Desbloquejar un producte", 'Estàs segur ?', "query.php", params);
+					        	break;
+					        default:
+					        	console.log(target , " No definit");
+					        	break;
+					        }
+				    	}
+				    }
+      			};
+			columns = [              
+				{ field: 'recid',       caption: 'Id.',              size: '5%',   sortable: true,   resizable: true  },
+				{ field: 'nom',         caption: 'Nom del Producte', size: '30%',  sortable: true,   resizable: true  },
+				{ field: 'descripcio',  caption: 'Descripció',       size: '35%',  sortable: true,   resizable: true  },
+				{ field: 'preu',        caption: 'Preu',             size: '10%',  sortable: true,   resizable: true  },
+				{ field: 'foto',        caption: 'Foto',             size: '20%',  sortable: false,  resizable: false },
+				{ field: 'datAltaPro',  caption: 'Data Alta',        size: '16%'},
+				{ field: 'datModPro',   caption: 'Data Modif.',      size: '16%'},				
+				{ field: 'datBaixaPro', caption: 'Data Baixa',       size: '16%'}				
+			];
+			DataGrid("Històric de Productes recreatius", false, toolbar, columns, e.target);				
+			break;		    
 // Torneigs
 		case '1060':
             toolbar = { 
@@ -393,8 +437,35 @@ var controller = function(e) {
 		    DataGrid("Manteniment de jocs", "joc", false, columns, fields, 3230, "_01_pk_idJoc");
 			break;
 		case '3240':
+            toolbar = { 
+                items: [
+	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
+	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' }	                
+	            ],
+                onClick: function(target, data) {
+			        var row = w2ui['grid'].getSelection();
+				    if (row.length != 0)
+				    	{
+				    	// console.log(row);
+				    	switch(target)
+				    		{
+				    		case 'lock':
+					        	var params ={pid: "3220", idJoc: row[0]};
+						     	msgAction("Bloquejar un joc", 'Estàs segur ?', "query.php", params);
+					        	break;
+					        case 'unlock':
+					        	var params ={pid: "3222", idJoc: row[0]};					        
+						     	msgAction("Desbloquejar un joc", 'Estàs segur ?', "query.php", params);
+					        	break;
+					        default:
+					        	console.log(target , " No definit");
+					        	break;
+					        }
+				    	}
+				    }
+      			};		
 			columns = [			   	
-				{ field: 'idJoc',       caption: 'Joc',           size: '5%' },
+				{ field: 'recid',       caption: 'Joc',           size: '5%' },
 				{ field: 'nomJoc',      caption: 'Nom Joc',       size: '20%' },
 				{ field: 'imgJoc',      caption: 'Imatge',        size: '15%' },				
 				{ field: 'numPartides', caption: 'Num. partides', size: '10%' },
@@ -402,7 +473,7 @@ var controller = function(e) {
 				{ field: 'datModJoc',   caption: 'Data Modif.',   size: '18%' },
 				{ field: 'datBaixaJoc', caption: 'Data Baixa',    size: '18%' }
 				];
-			DataGrid("Històric de jocs", false, true, columns, e.target);
+			DataGrid("Històric de jocs", false, toolbar, columns, e.target);
 			break;
 		case '3250':
 			columns = [			   	
@@ -498,8 +569,35 @@ var controller = function(e) {
 			break;			        
 
 		case '3342':
+            toolbar = { 
+                items: [
+	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
+	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' }	                
+	            ],
+                onClick: function(target, data) {
+			        var row = w2ui['grid'].getSelection();
+				    if (row.length != 0)
+				    	{
+				    	// console.log(row);
+				    	switch(target)
+				    		{
+				    		case 'lock':
+					        	var params ={pid: "3320", idTorn: row[0]};
+						     	msgAction("Bloquejar un torneig", 'Estàs segur ?', "query.php", params);
+					        	break;
+					        case 'unlock':
+					        	var params ={pid: "3325", idTorn: row[0]};					        
+						     	msgAction("Desbloquejar un torneig", 'Estàs segur ?', "query.php", params);
+					        	break;
+					        default:
+					        	console.log(target , " No definit");
+					        	break;
+					        }
+				    	}
+				    }
+      			};				
 			columns = [
-				{ field: 'idTorn',      caption: 'idTorn',      size: '6%' },
+				{ field: 'recid',      caption: 'idTorn',      size: '6%' },
 				{ field: 'nomTorn',     caption: 'Torneig',     size: '15%' },
 				{ field: 'premiTorn',   caption: 'Premi (€)',   size: '9%',attr: 'align=center' },
 				{ field: 'idJoc',       caption: 'Joc',         size: '6%' },
@@ -510,7 +608,7 @@ var controller = function(e) {
 				{ field: 'datModTorn',  caption: 'Data Modif.', size: '16%' },
 				{ field: 'datBaixaTorn',caption: 'Data Baixa',  size: '16%' }
 				];
-		    DataGrid("Relació de Torneigs amb màquines", false, true, columns, e.target);
+		    DataGrid("Relació de Torneigs amb màquines", false, toolbar, columns, e.target);
 			break;			
 		case '3350':
 			columns = [				
@@ -619,8 +717,35 @@ var controller = function(e) {
 		    DataGrid("Relació de Màquines", "maquina", false, columns, fields, 3420, "_01_pk_idMaq");
 		    break;
 		case '3425':
+            toolbar = { 
+                items: [
+	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
+	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' }	                
+	            ],
+                onClick: function(target, data) {
+			        var row = w2ui['grid'].getSelection();
+				    if (row.length != 0)
+				    	{
+				    	// console.log(row);
+				    	switch(target)
+				    		{
+				    		case 'lock':
+					        	var params ={pid: "3415", idMaq: row[0]};
+						     	msgAction("Bloquejar una màquina", 'Estàs segur ?', "query.php", params);
+					        	break;
+					        case 'unlock':
+					        	var params ={pid: "3416", idMaq: row[0]};					        
+						     	msgAction("Desbloquejar una màquina", 'Estàs segur ?', "query.php", params);
+					        	break;
+					        default:
+					        	console.log(target , " No definit");
+					        	break;
+					        }
+				    	}
+				    }
+      			};		
 			columns = [
-				{ field: 'idMaq',       caption: 'Maq',         size: '6%' },
+				{ field: 'recid',       caption: 'Maq',         size: '6%' },
 				{ field: 'macMaq',      caption: 'Mac',         size: '15%' },
 				{ field: 'propMaq',     caption: 'Propietari',  size: '20%' },							
 				{ field: 'credMaq',     caption: 'Crèdits Parcils (€)', size: '9%',attr: 'align=center' },
@@ -629,7 +754,7 @@ var controller = function(e) {
 				{ field: 'datModMaq',   caption: 'Data Modif',  size: '16%' },
 				{ field: 'datBaixaMaq', caption: 'Data Baixa',  size: '16%' }				
 				];
-		    DataGrid("Històric de Màquines", false, true, columns, e.target);
+		    DataGrid("Històric de Màquines", false, toolbar, columns, e.target);
 		    break;		    		    
 		case '3430':
 		    break;
@@ -772,7 +897,35 @@ var controller = function(e) {
 		    DataGrid("Jocs assignats a cada màquina", "maqInstall", toolbar, columns, fields, 3485, "_00_pk_idMaqInst_auto");
 			break;			        
 		case '3490':
+            toolbar = { 
+                items: [
+	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
+	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' }	                
+	            ],
+                onClick: function(target, data) {
+			        var row = w2ui['grid'].getSelection();
+				    if (row.length != 0)
+				    	{
+				    	// console.log(row);
+				    	switch(target)
+				    		{
+				    		case 'lock':
+					        	var params ={pid: "3470", idMaqInst: row[0]};
+						     	msgAction("Bloquejar una associació Màquina-Joc", 'Estàs segur ?', "query.php", params);
+					        	break;
+					        case 'unlock':
+					        	var params ={pid: "3475", idMaqInst: row[0]};					        
+						     	msgAction("Desbloquejar una associació Màquina-Joc", 'Estàs segur ?', "query.php", params);
+					        	break;
+					        default:
+					        	console.log(target , " No definit");
+					        	break;
+					        }
+				    	}
+				    }
+      			};		
 			columns = [
+				{ field: 'recid',          caption: 'idMaqInst',     size: '10%' },			
 				{ field: 'idMaq',          caption: 'Maq',           size: '8%' },
 				{ field: 'macMaq',         caption: 'Mac',           size: '13%' },
 				{ field: 'idJoc',          caption: 'Joc',           size: '8%' },							
@@ -783,7 +936,7 @@ var controller = function(e) {
 				{ field: 'datModMaqInst',  caption: 'Data Modif.',   size: '16%' },
 				{ field: 'datBaixaMaqInst',caption: 'Data Baixa',    size: '16%' }				
 			];
-		   	DataGrid("Històric de jocs assignats a cada màquina", false, true, columns, e.target);				
+		   	DataGrid("Històric de jocs assignats a cada màquina", false, toolbar, columns, e.target);		
 		    break;				    				    				    
 		case '3510':
 			columns = [
@@ -964,8 +1117,35 @@ var controller = function(e) {
 		   	DataGrid("Empreses d'ubicacions", "ubicacio", false, columns, fields, 3830, "_01_pk_idUbic");
 		    break;	
 		case '3840':
+            toolbar = { 
+                items: [
+	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
+	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' }	                
+	            ],
+                onClick: function(target, data) {
+			        var row = w2ui['grid'].getSelection();
+				    if (row.length != 0)
+				    	{
+				    	// console.log(row);
+				    	switch(target)
+				    		{
+				    		case 'lock':
+					        	var params ={pid: "3820", idUbic: row[0]};
+						     	msgAction("Bloquejar una empresa d'ubicació", 'Estàs segur ?', "query.php", params);
+					        	break;
+					        case 'unlock':
+					        	var params ={pid: "3825", idUbic: row[0]};					        
+						     	msgAction("Desbloquejar una empresa d'ubicació", 'Estàs segur ?', "query.php", params);
+					        	break;
+					        default:
+					        	console.log(target , " No definit");
+					        	break;
+					        }
+				    	}
+				    }
+      			};		
 			columns = [
-				{ field: 'idUbic',         caption: 'Ubic',        size: '4%' },
+				{ field: 'recid',          caption: 'Ubic',        size: '4%' },
 				{ field: 'empUbic',        caption: 'Empresa',     size: '8%' },
 				{ field: 'dirUbic',        caption: 'Adreça',      size: '8%' },			
 				{ field: 'provincia',      caption: 'Provincia',   size: '8%' },												
@@ -979,7 +1159,7 @@ var controller = function(e) {
 				{ field: 'datModUbic',     caption: 'Data Modif.', size: '15%' },
 				{ field: 'datBaixaUbic',   caption: 'Data Baixa',  size: '15%' }
 			];
-		   	DataGrid("Històric d'empreses d'ubicacions", false, true, columns, e.target);
+		   	DataGrid("Històric d'empreses d'ubicacions", false, toolbar, columns, e.target);		
 		    break;		    	   
 		case '3850':
 			columns = [
