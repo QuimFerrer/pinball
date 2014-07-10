@@ -1,6 +1,6 @@
 // Sidebar per l'administrador
 w2ui.layout.content('left',
-	$().w2sidebar({
+	$('#sidebar').w2sidebar({
 		name: 'sidebar',
 		nodes: [ 
 			{ id: '2000', text: 'Opcions', expanded: true, group: true,
