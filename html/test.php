@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="//w2ui.com/src/w2ui-1.3.min.css" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-    <script type="text/javascript" src="//w2ui.com/src/w2ui-1.3.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html">
+	<meta charset="UTF-8">
+	<title>Test</title>
+	<link rel="stylesheet" href="../css/pinball.css">
 </head>
 <body>
+	<h1>Test d'exemple</h1>
     <div id="myForm" style="width: 600px">
 		<div class="w2ui-page page-0">
 			<div class="w2ui-label">First Name:</div>
@@ -35,8 +37,12 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="../js/lib/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../js/lib/w2ui-1.3.2.min.js"></script>
 <script>
 $(function () {
+	if (w2ui.dialog)  w2ui['dialog'].destroy();
+
 	$('#myForm').w2form({ 
 		name   : 'dialog',
 		url    : 'server/post',

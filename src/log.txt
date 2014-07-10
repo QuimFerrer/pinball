@@ -1,0 +1,339 @@
+2014-07-10 12:32:37 - CONSULTA:                        - SELECT * FROM productes;                                                                                                                                                                                                                                        
+2014-07-10 12:33:20 - CONSULTA:                        - SELECT * FROM productes;                                                                                                                                                                                                                                        
+2014-07-10 12:33:27 - CONSULTA:                        - SELECT * FROM productes;                                                                                                                                                                                                                                        
+2014-07-10 12:34:08 - CONSULTA:                        - SELECT J.*,
+							DATE_FORMAT(_06_datAltaJoc, '%d-%m-%Y %H:%i:%s') AS datAltaJoc,
+							DATE_FORMAT(_07_datModJoc,  '%d-%m-%Y %H:%i:%s') AS datModJoc			
+							FROM joc AS J
+							WHERE _08_datBaixaJoc IS NULL;                                       
+2014-07-10 12:36:24 - CONSULTA:                        - SELECT M.*,
+								DATE_FORMAT(_06_datAltaMaq,"%d-%m-%Y %H:%i:%s") AS datAltaMaq,
+								DATE_FORMAT(_07_datModMaq, "%d-%m-%Y %H:%i:%s") AS datModMaq									
+						FROM
+							maquina AS M
+						WHERE _08_datBaixaMaq   IS NULL;                     
+2014-07-10 12:40:31 - CONSULTA:                        - SELECT * FROM productes;                                                                                                                                                                                                                                        
+2014-07-10 12:41:43 - CONSULTA:                        - SELECT 	_00_pk_idRonda_auto AS recid,
+								_01_pk_idTorn      AS idTorn,
+								_03_nomTorn        AS nomTorn,
+								_04_premiTorn      AS premiTorn,
+								_02_pk_idJocTorn   AS idJoc,
+								JJ.nomJoc          AS nomJoc,
+								_02_pk_idMaqTTP    AS idMaq,
+								BB.idUsuari        AS idUser,
+								BB.loginUsuari     AS loginUser,									
+								BB.nomUsuari       AS nomUser,
+								DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
+								_01_pk_idMaqRonda,
+								_02_pk_idJocRonda,
+								_03_pk_idJugRonda,
+								_04_pk_idDatHoraPartRonda,
+								_05_pk_idRonda     AS idRonda,
+								_06_fotoJugRonda,
+								_07_puntsRonda,
+								DATE_FORMAT(_08_datModRonda, "%d-%m-%Y %H:%i:%s") AS datModRonda
+						FROM
+						torneig
+							LEFT JOIN torneigTePartida ON (_01_pk_idTorn    = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
+							INNER JOIN partida         ON (_02_pk_idMaqTTP  = _01_pk_idMaqPart AND
+														   _03_pk_idJocTTP  = _02_pk_idJocPart AND
+														   _04_pk_idJugTTP  = _03_pk_idJugPart )
+				 			INNER JOIN ronda           ON (_01_pk_idMaqPart = _01_pk_idMaqRonda AND
+				 										   _02_pk_idJocPart = _02_pk_idJocRonda AND
+				 										   _03_pk_idJugPart = _03_pk_idJugRonda AND
+				 										   _04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda ),
+						(SELECT _01_pk_idUsuari AS idUsuari, _02_nomUsuari AS nomUsuari, _04_loginUsuari AS loginUsuari FROM usuari) AS BB,
+						(SELECT _01_pk_idJoc, _02_nomJoc AS nomJoc FROM joc) AS JJ
+						WHERE
+							BB.idUsuari     = _03_pk_idJugPart AND
+							JJ._01_pk_idJoc = _02_pk_idJocPart AND
+							_09_datBaixaTorn IS NULL AND
+							_06_datBaixaPart IS NULL AND
+							_09_datBaixaRonda IS NULL
+						GROUP BY idTorn, idUsuari, idMaq, datHoraPartida, idRonda
+						ORDER BY idTorn, idUsuari, idMaq, datHoraPartida, idRonda;
+2014-07-10 12:41:48 - CONSULTA:                        - SELECT * FROM productes;                                                                                                                                                                                                                                        
+2014-07-10 12:41:53 - CONSULTA:                        - SELECT _00_pk_idUTM_auto   AS recid,
+								_06_provUbic        AS provincia,
+								_04_pobUbic         AS poblacio,
+								_05_cpUbic          AS cPostal,
+								_01_pk_idUbicUTM    AS idUbic,
+								_02_empUbic         AS empUbic, 
+								_02_pk_idMaqUTM     AS idMaq,
+								_02_macMaq          AS macMaq,
+								_03_propMaq         AS propMaq,
+								SUM(_05_totCredMaq) AS totalCredits,
+								DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
+								DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
+								DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
+								DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
+								DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+						FROM ubicacio
+							INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
+							INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
+						GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
+						ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;
+2014-07-10 12:46:58 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 12:51:22 - CONSULTA:                        - SELECT 	_00_pk_idRonda_auto AS recid,
+								_01_pk_idTorn      AS idTorn,
+								_03_nomTorn        AS nomTorn,
+								_04_premiTorn      AS premiTorn,
+								_02_pk_idJocTorn   AS idJoc,
+								JJ.nomJoc          AS nomJoc,
+								_02_pk_idMaqTTP    AS idMaq,
+								BB.idUsuari        AS idUser,
+								BB.loginUsuari     AS loginUser,									
+								BB.nomUsuari       AS nomUser,
+								DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
+								_01_pk_idMaqRonda,
+								_02_pk_idJocRonda,
+								_03_pk_idJugRonda,
+								_04_pk_idDatHoraPartRonda,
+								_05_pk_idRonda     AS idRonda,
+								_06_fotoJugRonda,
+								_07_puntsRonda,
+								DATE_FORMAT(_08_datModRonda, "%d-%m-%Y %H:%i:%s") AS datModRonda
+						FROM
+						torneig
+							LEFT JOIN torneigTePartida ON (_01_pk_idTorn    = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
+							INNER JOIN partida         ON (_02_pk_idMaqTTP  = _01_pk_idMaqPart AND
+														   _03_pk_idJocTTP  = _02_pk_idJocPart AND
+														   _04_pk_idJugTTP  = _03_pk_idJugPart )
+				 			INNER JOIN ronda           ON (_01_pk_idMaqPart = _01_pk_idMaqRonda AND
+				 										   _02_pk_idJocPart = _02_pk_idJocRonda AND
+				 										   _03_pk_idJugPart = _03_pk_idJugRonda AND
+				 										   _04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda ),
+						(SELECT _01_pk_idUsuari AS idUsuari, _02_nomUsuari AS nomUsuari, _04_loginUsuari AS loginUsuari FROM usuari) AS BB,
+						(SELECT _01_pk_idJoc, _02_nomJoc AS nomJoc FROM joc) AS JJ
+						WHERE
+							BB.idUsuari     = _03_pk_idJugPart AND
+							JJ._01_pk_idJoc = _02_pk_idJocPart AND
+							_09_datBaixaTorn IS NULL AND
+							_06_datBaixaPart IS NULL AND
+							_09_datBaixaRonda IS NULL
+						GROUP BY idTorn, idUsuari, idMaq, datHoraPartida, idRonda
+						ORDER BY idTorn, idUsuari, idMaq, datHoraPartida, idRonda;
+2014-07-10 12:51:30 - CONSULTA:                        - SELECT 	_00_pk_idRonda_auto AS recid,
+								_01_pk_idTorn      AS idTorn,
+								_03_nomTorn        AS nomTorn,
+								_04_premiTorn      AS premiTorn,
+								_02_pk_idJocTorn   AS idJoc,
+								JJ.nomJoc          AS nomJoc,
+								_02_pk_idMaqTTP    AS idMaq,
+								BB.idUsuari        AS idUser,
+								BB.loginUsuari     AS loginUser,									
+								BB.nomUsuari       AS nomUser,
+								DATE_FORMAT(_04_pk_idDatHoraPart, "%d-%m-%Y %H:%i:%s") AS datHoraPartida,
+								_01_pk_idMaqRonda,
+								_02_pk_idJocRonda,
+								_03_pk_idJugRonda,
+								_04_pk_idDatHoraPartRonda,
+								_05_pk_idRonda     AS idRonda,
+								_06_fotoJugRonda,
+								_07_puntsRonda,
+								DATE_FORMAT(_08_datModRonda, "%d-%m-%Y %H:%i:%s") AS datModRonda
+						FROM
+						torneig
+							LEFT JOIN torneigTePartida ON (_01_pk_idTorn    = _01_pk_idTornTTP AND _02_pk_idJocTorn = _03_pk_idJocTTP)
+							INNER JOIN partida         ON (_02_pk_idMaqTTP  = _01_pk_idMaqPart AND
+														   _03_pk_idJocTTP  = _02_pk_idJocPart AND
+														   _04_pk_idJugTTP  = _03_pk_idJugPart )
+				 			INNER JOIN ronda           ON (_01_pk_idMaqPart = _01_pk_idMaqRonda AND
+				 										   _02_pk_idJocPart = _02_pk_idJocRonda AND
+				 										   _03_pk_idJugPart = _03_pk_idJugRonda AND
+				 										   _04_pk_idDatHoraPart = _04_pk_idDatHoraPartRonda ),
+						(SELECT _01_pk_idUsuari AS idUsuari, _02_nomUsuari AS nomUsuari, _04_loginUsuari AS loginUsuari FROM usuari) AS BB,
+						(SELECT _01_pk_idJoc, _02_nomJoc AS nomJoc FROM joc) AS JJ
+						WHERE
+							BB.idUsuari     = _03_pk_idJugPart AND
+							JJ._01_pk_idJoc = _02_pk_idJocPart AND
+							_09_datBaixaTorn IS NULL AND
+							_06_datBaixaPart IS NULL AND
+							_09_datBaixaRonda IS NULL
+						GROUP BY idTorn, idUsuari, idMaq, datHoraPartida, idRonda
+						ORDER BY idTorn, idUsuari, idMaq, datHoraPartida, idRonda;
+2014-07-10 12:53:08 - CONSULTA:                        - SELECT * FROM productes;                                                                                                                                                                                                                                        
+2014-07-10 13:04:39 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 13:05:02 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 13:05:08 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 13:06:23 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 13:06:39 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 13:07:14 - CONSULTA:                        - SELECT _00_pk_idUTM_auto   AS recid,
+								_06_provUbic        AS provincia,
+								_04_pobUbic         AS poblacio,
+								_05_cpUbic          AS cPostal,
+								_01_pk_idUbicUTM    AS idUbic,
+								_02_empUbic         AS empUbic, 
+								_02_pk_idMaqUTM     AS idMaq,
+								_02_macMaq          AS macMaq,
+								_03_propMaq         AS propMaq,
+								SUM(_05_totCredMaq) AS totalCredits,
+								DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
+								DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
+								DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
+								DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
+								DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+						FROM ubicacio
+							INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
+							INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
+						GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
+						ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;
+2014-07-10 13:08:04 - CONSULTA:                        - SELECT _00_pk_idUTM_auto   AS recid,
+								_06_provUbic        AS provincia,
+								_04_pobUbic         AS poblacio,
+								_05_cpUbic          AS cPostal,
+								_01_pk_idUbicUTM    AS idUbic,
+								_02_empUbic         AS empUbic, 
+								_02_pk_idMaqUTM     AS idMaq,
+								_02_macMaq          AS macMaq,
+								_03_propMaq         AS propMaq,
+								SUM(_05_totCredMaq) AS totalCredits,
+								DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
+								DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
+								DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
+								DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
+								DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+						FROM ubicacio
+							INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
+							INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
+						GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
+						ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;
+2014-07-10 13:08:58 - CONSULTA:                        - SELECT _00_pk_idUTM_auto   AS recid,
+								_06_provUbic        AS provincia,
+								_04_pobUbic         AS poblacio,
+								_05_cpUbic          AS cPostal,
+								_01_pk_idUbicUTM    AS idUbic,
+								_02_empUbic         AS empUbic, 
+								_02_pk_idMaqUTM     AS idMaq,
+								_02_macMaq          AS macMaq,
+								_03_propMaq         AS propMaq,
+								SUM(_05_totCredMaq) AS totalCredits,
+								DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
+								DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
+								DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
+								DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
+								DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+						FROM ubicacio
+							INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
+							INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
+						GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
+						ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;
+2014-07-10 13:09:43 - CONSULTA:                        - SELECT _00_pk_idUTM_auto   AS recid,
+								_06_provUbic        AS provincia,
+								_04_pobUbic         AS poblacio,
+								_05_cpUbic          AS cPostal,
+								_01_pk_idUbicUTM    AS idUbic,
+								_02_empUbic         AS empUbic, 
+								_02_pk_idMaqUTM     AS idMaq,
+								_02_macMaq          AS macMaq,
+								_03_propMaq         AS propMaq,
+								SUM(_05_totCredMaq) AS totalCredits,
+								DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
+								DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
+								DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
+								DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
+								DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+						FROM ubicacio
+							INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
+							INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
+						GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
+						ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;
+2014-07-10 13:10:35 - CONSULTA:                        - SELECT _00_pk_idUTM_auto   AS recid,
+								_06_provUbic        AS provincia,
+								_04_pobUbic         AS poblacio,
+								_05_cpUbic          AS cPostal,
+								_01_pk_idUbicUTM    AS idUbic,
+								_02_empUbic         AS empUbic, 
+								_02_pk_idMaqUTM     AS idMaq,
+								_02_macMaq          AS macMaq,
+								_03_propMaq         AS propMaq,
+								SUM(_05_totCredMaq) AS totalCredits,
+								DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
+								DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
+								DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
+								DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
+								DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+						FROM ubicacio
+							INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
+							INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
+						GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
+						ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;
+2014-07-10 15:24:27 - CONSULTA:                        - SELECT * FROM productes;                                                                                                                                                                                                                                        
+2014-07-10 15:28:49 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;

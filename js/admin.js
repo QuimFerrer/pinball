@@ -1,87 +1,83 @@
 // Sidebar per l'administrador
-$('#sidebar').w2sidebar({
-	name: 'sidebar',
-	nodes: [ 
-		{ id: '2000', text: 'Opcions', expanded: true, group: true,
-		  nodes: [  { id: '3000', text: 'Perfil', img: 'icon-edit' },
-					{ id: '3100', text: 'Partides', img: 'icon-folder',
-					nodes: [{ id: '3180', text: 'Generador partides', img:'icon-add'},
-							{ id: '3110', text: 'per màquina',  img: 'icon-page' },
-							{ id: '3120', text: 'per jugador',  img: 'icon-page' },
-							{ id: '3160', text: 'Manteniment Rondes',  img: 'icon-edit' },
-							{ id: '3170', text: 'Històric de Rondes',  img: 'icon-page' }]},
-					{ id: '3200', text: 'Jocs', img: 'icon-folder',
-					nodes: [{ id: '3230', text: 'Manteniment',  img: 'icon-edit' },
-							{ id: '3240', text: 'Històric', img: 'icon-page' },
-							{ id: '3245', text: 'Màquines', img: 'icon-folder',									
-							nodes: [{ id: '3250', text: 'Actual',  img: 'icon-page' },
-									{ id: '3260', text: 'Històric',  img: 'icon-page' }]}]},
-					{ id: '3300', text: 'Torneigs', img: 'icon-folder',
-					nodes: [{ id: '3340', text: 'Manteniment',  img: 'icon-edit' },
-							{ id: '3342', text: 'Històric',  img: 'icon-page' },
-							{ id: '3345', text: 'Llistats',  img: 'icon-folder',
-							nodes: [{ id: '3348', text: 'Jugadors',  img: 'icon-folder',
-									nodes: [{ id: '3350', text: 'Actual',  img: 'icon-page' },
-											{ id: '3360', text: 'Històric',  img: 'icon-page' }]},
-									{ id: '3370', text: 'Màquines',  img: 'icon-folder',
-									nodes: [{ id: '3375', text: 'Relació máquines',  img: 'icon-page' },
-											{ id: '3380', text: 'Amb partides. Actual',  img: 'icon-page' },
-											{ id: '3390', text: 'Amb partides. Històric',  img: 'icon-page' } ]}]}]},
-					{ id: '3400', text: 'Màquines', img: 'icon-folder',
-					nodes: [{ id: '3420', text: 'Manteniment',  img: 'icon-edit' },
-							{ id: '3425', text: 'Històric',  img: 'icon-page' },							
-							{ id: '3430', text: 'Actualitzar Recaudació',  img: 'icon-edit' },														
-							{ id: '3440', text: 'Jocs',  img: 'icon-page' },
-							{ id: '3450', text: 'Històric de jocs',  img: 'icon-page' },
-							{ id: '3456', text: 'Disponibles',  img: 'icon-page' },							
-							{ id: '3459', text: 'Assignar Jocs',  img: 'icon-folder',
-							nodes: [{ id: '3485', text: 'Manteniment',  img: 'icon-edit' },									
-									{ id: '3490', text: 'Històric',  img: 'icon-page' }]},
-							{ id: '3500', text: 'Recaudacions',  img: 'icon-folder',
-							nodes: [{ id: '3510', text: 'Maquina i Ranking',  img: 'icon-page' },
-									{ id: '3520', text: 'Joc i Ranking',  img: 'icon-page' },
-									{ id: '3530', text: 'Joc i Màquina',  img: 'icon-page' },
-									{ id: '3540', text: 'Propietari',  img: 'icon-page' },
-									{ id: '3550', text: 'Propietari i Màquina',  img: 'icon-page' },
-									{ id: '3560', text: 'Propietari i Joc',  img: 'icon-page' },
-									{ id: '3570', text: 'Provincia i Població',  img: 'icon-page' },
-									{ id: '3580', text: 'Població',  img: 'icon-page' },
-									{ id: '3590', text: 'Provincia,Població i Màquina',  img: 'icon-page' },
-									{ id: '3600', text: 'Joc',  img: 'icon-page' },
-									{ id: '3610', text: 'Joc, Màq i Població',  img: 'icon-page' },											
-									{ id: '3620', text: 'Joc, Màq, Provincia i Població',  img: 'icon-page' }]},
-							{ id: '3700', text: 'Estadístiques',  img: 'icon-folder',
-							nodes: [{ id: '3710', text: '1',  img: 'icon-page' },
-									{ id: '3720', text: '2',  img: 'icon-page' },									
-									{ id: '3730', text: '3',  img: 'icon-page' }]}]},											
-					{ id: '3800', text: 'Ubicacions', img: 'icon-folder',
-					nodes: [{ id: '3830', text: 'Manteniment',  img: 'icon-edit' },
-							{ id: '3840', text: 'Històric',  img: 'icon-page' },							
-							{ id: '3845', text: 'Llistats',  img: 'icon-folder',
-							nodes: [{ id: '3850', text: 'Provincia, Població i CP',  img: 'icon-page' },
-									{ id: '3860', text: 'Coordenades',  img: 'icon-page' },
-									{ id: '3870', text: 'Empresa, Provincia i Població',  img: 'icon-page' }]},
-							{ id: '3875', text: 'Assignar màquines',  img: 'icon-folder',
-							nodes: [{ id: '3890', text: 'Manteniment',  img: 'icon-edit' },
-									{ id: '3920', text: 'Llistats',  img: 'icon-folder',
-									nodes: [{ id: '3930', text: 'Provincia i Població',  img: 'icon-page' },
-											{ id: '3940', text: 'Coordenades',  img: 'icon-page' },
-											{ id: '3950', text: 'Empreses',  img: 'icon-page' }]}]}]},
-					{ id: '4000', text: 'Jugadors', img: 'icon-folder',
-					nodes: [{ id: '4010', text: 'Perfils',  img: 'icon-page' },
-							{ id: '4040', text: 'Torneigs registrats', img: 'icon-page' }]},
-////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////							
-					{ id: '1020', text: 'Productes', img: 'icon-edit' },
-					// { id: '1060', text: 'Torneigs', img: 'icon-page' },
-					// { id: '1080', text: 'Usuaris', img: 'icon-edit' },
-					// { id: '1090', text: 'Test', img: 'icon-edit' },
-			  		// { id: '1120', text: 'Partides',	img:'icon-edit'}
-					]
-				}
-			],
-			onClick: function(e){ controller(e) }
-		});
+w2ui.layout.content('left',
+	$().w2sidebar({
+		name: 'sidebar',
+		nodes: [ 
+			{ id: '2000', text: 'Opcions', expanded: true, group: true,
+			  nodes: [  { id: '0000', text: 'Test', img: 'icon-edit' },{ id: '3000', text: 'Perfil', img: 'icon-edit' },
+						{ id: '3100', text: 'Partides', img: 'icon-folder',
+						nodes: [{ id: '3180', text: 'Generador partides', img:'icon-add'},
+								{ id: '3110', text: 'per màquina',  img: 'icon-page' },
+								{ id: '3120', text: 'per jugador',  img: 'icon-page' },
+								{ id: '3160', text: 'Manteniment Rondes',  img: 'icon-edit' },
+								{ id: '3170', text: 'Històric de Rondes',  img: 'icon-page' }]},
+						{ id: '3200', text: 'Jocs', img: 'icon-folder',
+						nodes: [{ id: '3230', text: 'Manteniment',  img: 'icon-edit' },
+								{ id: '3240', text: 'Històric', img: 'icon-page' },
+								{ id: '3245', text: 'Màquines', img: 'icon-folder',									
+								nodes: [{ id: '3250', text: 'Actual',  img: 'icon-page' },
+										{ id: '3260', text: 'Històric',  img: 'icon-page' }]}]},
+						{ id: '3300', text: 'Torneigs', img: 'icon-folder',
+						nodes: [{ id: '3340', text: 'Manteniment',  img: 'icon-edit' },
+								{ id: '3342', text: 'Històric',  img: 'icon-page' },
+								{ id: '3345', text: 'Llistats',  img: 'icon-folder',
+								nodes: [{ id: '3348', text: 'Jugadors',  img: 'icon-folder',
+										nodes: [{ id: '3350', text: 'Actual',  img: 'icon-page' },
+												{ id: '3360', text: 'Històric',  img: 'icon-page' }]},
+										{ id: '3370', text: 'Màquines',  img: 'icon-folder',
+										nodes: [{ id: '3375', text: 'Relació máquines',  img: 'icon-page' },
+												{ id: '3380', text: 'Amb partides. Actual',  img: 'icon-page' },
+												{ id: '3390', text: 'Amb partides. Històric',  img: 'icon-page' } ]}]}]},
+						{ id: '3400', text: 'Màquines', img: 'icon-folder',
+						nodes: [{ id: '3420', text: 'Manteniment',  img: 'icon-edit' },
+								{ id: '3425', text: 'Històric',  img: 'icon-page' },							
+								{ id: '3430', text: 'Actualitzar Recaudació',  img: 'icon-edit' },														
+								{ id: '3440', text: 'Jocs',  img: 'icon-page' },
+								{ id: '3450', text: 'Històric de jocs',  img: 'icon-page' },
+								{ id: '3456', text: 'Disponibles',  img: 'icon-page' },							
+								{ id: '3459', text: 'Assignar Jocs',  img: 'icon-folder',
+								nodes: [{ id: '3485', text: 'Manteniment',  img: 'icon-edit' },									
+										{ id: '3490', text: 'Històric',  img: 'icon-page' }]},
+								{ id: '3500', text: 'Recaudacions',  img: 'icon-folder',
+								nodes: [{ id: '3510', text: 'Maquina i Ranking',  img: 'icon-page' },
+										{ id: '3520', text: 'Joc i Ranking',  img: 'icon-page' },
+										{ id: '3530', text: 'Joc i Màquina',  img: 'icon-page' },
+										{ id: '3540', text: 'Propietari',  img: 'icon-page' },
+										{ id: '3550', text: 'Propietari i Màquina',  img: 'icon-page' },
+										{ id: '3560', text: 'Propietari i Joc',  img: 'icon-page' },
+										{ id: '3570', text: 'Provincia i Població',  img: 'icon-page' },
+										{ id: '3580', text: 'Població',  img: 'icon-page' },
+										{ id: '3590', text: 'Provincia,Població i Màquina',  img: 'icon-page' },
+										{ id: '3600', text: 'Joc',  img: 'icon-page' },
+										{ id: '3610', text: 'Joc, Màq i Població',  img: 'icon-page' },											
+										{ id: '3620', text: 'Joc, Màq, Provincia i Població',  img: 'icon-page' }]},
+								{ id: '3700', text: 'Estadístiques',  img: 'icon-folder',
+								nodes: [{ id: '3710', text: '1',  img: 'icon-page' },
+										{ id: '3720', text: '2',  img: 'icon-page' },									
+										{ id: '3730', text: '3',  img: 'icon-page' }]}]},											
+						{ id: '3800', text: 'Ubicacions', img: 'icon-folder',
+						nodes: [{ id: '3830', text: 'Manteniment',  img: 'icon-edit' },
+								{ id: '3840', text: 'Històric',  img: 'icon-page' },							
+								{ id: '3845', text: 'Llistats',  img: 'icon-folder',
+								nodes: [{ id: '3850', text: 'Provincia, Població i CP',  img: 'icon-page' },
+										{ id: '3860', text: 'Coordenades',  img: 'icon-page' },
+										{ id: '3870', text: 'Empresa, Provincia i Població',  img: 'icon-page' }]},
+								{ id: '3875', text: 'Assignar màquines',  img: 'icon-folder',
+								nodes: [{ id: '3890', text: 'Manteniment',  img: 'icon-edit' },
+										{ id: '3920', text: 'Llistats',  img: 'icon-folder',
+										nodes: [{ id: '3930', text: 'Provincia i Població',  img: 'icon-page' },
+												{ id: '3940', text: 'Coordenades',  img: 'icon-page' },
+												{ id: '3950', text: 'Empreses',  img: 'icon-page' }]}]}]},
+						{ id: '4000', text: 'Jugadors', img: 'icon-folder',
+						nodes: [{ id: '4010', text: 'Perfils',  img: 'icon-page' },
+								{ id: '4040', text: 'Torneigs registrats', img: 'icon-page' }]},
+								{ id: '1020', text: 'Productes', img: 'icon-edit' }
+						]
+					}
+				],
+				onClick: function(e){ controller(e) }
+	})
+);
 /*
  * Paràmetres DataGrid(title, table, toolbar, columns, fieldsOrId, pkName)
  */
@@ -91,6 +87,11 @@ var controller = function(e) {
 	var fields;
 
 	switch(e.target) {
+		case '0000':
+			// DataView('../html/test.php');
+			DataView('../html/external.php');
+			break;
+
 // Productes
 		case '1020':
 			columns = [              
@@ -187,10 +188,6 @@ var controller = function(e) {
 		        }
 		    ];
 		    DataGrid("Manteniment d'usuaris", "usuari", false, columns, fields, '_01_pk_idUsuari');
-		    break;
-// Test
-		case '1090':
-			DataView('../html/external.php');
 		    break;
 
 //Generar partides

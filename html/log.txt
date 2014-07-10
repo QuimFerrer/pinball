@@ -1,0 +1,5 @@
+2014-07-10 13:06:49 - CONSULTA:                        - SELECT T.*,
+							DATE_FORMAT(_05_datIniTorn, '%m/%d/%Y') AS datIniTorn,
+							DATE_FORMAT(_06_datFinTorn, '%m/%d/%Y') AS datFinTorn
+							FROM torneig AS T
+							WHERE _01_pk_idTorn=1003;                                                            
