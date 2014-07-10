@@ -146,9 +146,6 @@ Zona d'usuari
 			10. ( 03_query.sql ) 3600 - recaudació de cada joc
 			11. ( 03_query.sql ) 3610 - recaudació de cada joc per poblacio
 			12. ( 03_query.sql ) 3620 - recaudació de cada joc per provincia, poblacio,cp
-		iv. ESTADÍSTIQUES. opcions :
-			 1. promigs ????
-
 	f. UBICACIONS.
 		i. Gestió ubicacions.
 			1. ( 04_query.sql ) 3810 - Alta de l'ubicació d'una màquina
@@ -175,4 +172,17 @@ Zona d'usuari
 			4. ( 05_query.sql ) 4030 - desbloquejar jugador / usuari
 		ii. rankings
 			1. ( 05_query.sql ) 4040 - torneigs registrats amb la seva posició i punts de cada torneig
+
+	h. ESTADÍSTIQUES:
+			 1. 3711 - promig de numero de partides de cada joc amb els punts aconseguits a cada joc
+			 2. 3712 - promig de numero de partides i punts de cada joc/torneig			 
+
+			 3. 3721 - promig de numero de partides, crèdits i punts x usuari de cada màquina
+			 4. 3722 - promig de numero de partides, crèdits i punts de cada màquina
+			 
+			 5. 3731 - promig de numero de partides, crèdits i punts de cada ubicació (provin, probla, cp)
+			 6. 3732 - promig de numero de partides, crèdits i punts de cada ubicació (lat, long, alt)
+
+usuaris
+			 7. 3741 - promig de numero de partides, crèdits i punts x usuari de cada joc
 
