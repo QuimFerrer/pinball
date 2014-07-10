@@ -123,19 +123,21 @@ var dbGrid = function() {
                 };
         }
 
-        $('#grid').w2grid({
-            name        : 'grid',
-            header      : this.title,
-            url         : action,
-            show        : options,
-            msgRefresh  : 'Consultant dades',
-            toolbar     : this.toolbar,
-            columns     : columns,
-            postData    : postData,
-            onDblClick  : fnOnDblClick,
-            onError     : fnOnError, 
-            onLoad      : fnOnLoad
-        });
+        w2ui.layout.content('main',
+            $("#grid").w2grid({
+                name        : 'grid',
+                header      : this.title,
+                url         : action,
+                show        : options,
+                msgRefresh  : 'Consultant dades',
+                toolbar     : this.toolbar,
+                columns     : columns,
+                postData    : postData,
+                onDblClick  : fnOnDblClick,
+                onError     : fnOnError, 
+                onLoad      : fnOnLoad
+            })
+        );
     };
 
     this.Activate = function() {
@@ -276,6 +278,20 @@ var dbForm = function() {
 
 /*
  **********************************************************************************************
+ *  Contenidor flexible
+ **********************************************************************************************
+ */
+$('#users').w2layout({
+    name: 'layout',
+    padding: 0,
+    panels: [
+        { type: 'left', size: 230, minSize:190, resizable: true },
+        { type: 'main', minSize: 550, overflow: 'auto' }
+    ]
+});
+
+/*
+ **********************************************************************************************
  *  Api per construir un grid
  **********************************************************************************************
  */
@@ -307,21 +323,7 @@ function DataGrid(title, table, toolbar, columns, fieldsOrId, pid, pkName) {
  **********************************************************************************************
  */
 function DataView(url) {
-    if (w2ui.grid)  w2ui['grid'].destroy();
-
-    var pstyle = 'border: 1px solid #dfdfdf; padding: 5px;'
-    
-    $('#grid').w2layout({
-        name: 'grid',
-        panels: [{type: 'main', style: pstyle}]
-    });
-
-    // w2ui['layout'].lock('Carregant dades ...', true);
-    // w2utils.lock("#grid", 'Carregant dades ...', true);
-    w2ui['grid'].load('main', url);
-    // w2utils.unlock("#grid");
-
-   // w2ui['layout'].unlock();
+     w2ui.layout.load('main', url);
 }
 
 /*
@@ -331,59 +333,50 @@ function DataView(url) {
  */
 function DataForm(title, id, fields, action, params) {
 
+    w2ui.layout.content('main', "");
+    w2ui.layout.lock('main', 'Consultant dades...', true);
+
     if (w2ui['dialog']) w2ui['dialog'].destroy();
-    
-    w2ui['grid'].lock('Consultant dades...', true);
-
-    $("#form").w2form({ 
-        name     : 'dialog',
-        recid    : id,
-        body     : '<div id="form"></div>',
-        header   : title,
-        url      : action,
-        postData : params,
-        formURL  : action,
-        fields   : fields,
-        msgSaving  : 'Guardant dades...',
-        actions: {
-            save: function () {
-                this.save({}, function (data) { 
-                    console.log(data);
-
-                    // Això funcionaria en consultes normals
-                    // if (data.rows==0) w2ui['grid'].add(data.record);
-                    // else w2ui['grid'].set(data.recid, data.record);
-                    w2ui['grid'].reload();
-                    // Forço carregar de nou el grid
-                    // De moment funciona, si hi ha temps, optimitzar
-
-                    w2ui['dialog'].destroy();
-                    $("#grid").show();
-                });
+    w2ui.layout.content('main',
+        $().w2form({ 
+            name     : 'dialog',
+            recid    : id,
+            body     : '<div id="form"></div>',
+            header   : title,
+            url      : action,
+            postData : params,
+            formURL  : action,
+            fields   : fields,
+            msgSaving  : 'Guardant dades...',
+            actions: {
+                save: function () {
+                    this.save({}, function (data) {
+                        // Controlar error a data 
+                        w2ui.layout.content('main', w2ui.grid);
+                    });
+                },
+                exit: function() {
+                    w2ui.layout.content('main', w2ui.grid);
+                }
+            }, 
+            onLoad: function(eventData) {
+                eventData.preventDefault();
+                // console.log(eventData.xhr.responseText);
+                var result = JSON.parse(eventData.xhr.responseText);
+                // Injectar registre al formulari
+                for (var i in result) {
+                    w2ui['dialog'].record[i] = result[i];
+                }
+                w2ui['dialog'].refresh();
             },
-            exit: function() {
-                w2ui['dialog'].destroy();
-                $("#grid").show();
+            onRender: function(eventData) {
+                w2ui.layout.unlock('main');
             }
-        }, 
-        onLoad: function(eventData) {
-            eventData.preventDefault();
-            // console.log(eventData.xhr.responseText);
-            var result = JSON.parse(eventData.xhr.responseText);
-
-            for (var i in result) {
-                w2ui['dialog'].record[i] = result[i];
-            }
-            w2ui['dialog'].refresh();
-        },
-        onRender: function(eventData) {
-            w2ui['grid'].unlock();
-            $("#grid").hide();
-        }
-    });
+        })
+    );
 
     //Per controlar tots els events
-    w2ui['dialog'].on('refresh', function (event) {
-        console.log('Event: '+ event.type, 'Target: '+ event.target, event);
-    });
+    // w2ui['dialog'].on('*', function (event) {
+    //     console.log('Event: '+ event.type, 'Target: '+ event.target, event);
+    // });
 }

@@ -12,7 +12,12 @@ isEndSessionInQuery();
 
 	const FORM_CONTACTE_1000 				   = 1000;
 	const FORM_REGISTRE_1010 				   = 1010;
-	const CONSULTA_ADM_1020  				   = 1020;
+	const CONSULTA_PRODUCTES_1020  			   = 1020;
+	const CONSULTA_PRODUCTES_HISTORIC_1021 	   = 1021;	
+	const ALTA_PRODUCTES_1025  				   = 1025;		
+	const MODIFICACIO_PRODUCTES_1030		   = 1030;
+	const BLOQUEIG_PRODUCTES_1035		   	   = 1035;
+	const DESBLOQUEIG_PRODUCTES_1040		   = 1040;
 	const TORNEIGS_1060 					   = 1060;
 	const USUARIS_1080  					   = 1080;
 	const PARTIDA_1120	    				   = 1120;
@@ -34,7 +39,8 @@ isEndSessionInQuery();
 	const LLIS_PARTIDES_I_RONDES_HISTORIC_3170 = 3170; //	
 
 	const ALTA_JOC_3210						   = 3210;
-	const BAIXA_JOC_3220					   = 3220;
+	const BLOQUEIG_JOC_3220					   = 3220;
+	const DESBLOQUEIG_JOC_3222				   = 3222;	
 	const MODIFICACIO_JOC_3225 		           = 3225;	
 	const JOCS_ACTUAL_3230 		 	           = 3230; //
 	const JOCS_HISTORIC_3240 	 	           = 3240; //
@@ -43,7 +49,8 @@ isEndSessionInQuery();
 	const ACTUALITZA_NUM_PARTIDES_JUGADES_3270 = 3270;
 
 	const ALTA_TORNEIG_3310				       = 3310;
-	const BAIXA_TORNEIG_3320 				   = 3320;
+	const BLOQUEIG_TORNEIG_3320 			   = 3320;
+	const DESBLOQUEIG_TORNEIG_3325 			   = 3325;	
 	const MODIFICACIO_TORNEIG_3330 			   = 3330;	
 	const RELACIO_TORNEIGS_3340 	           = 3340; //
 	const RELACIO_TORNEIGS_I_MAQS_HISTORIC_3342= 3342;	
@@ -55,7 +62,8 @@ isEndSessionInQuery();
 	const TORNEIGS_AMB_MAQUINES_HISTORIC_3390  = 3390; //
 
 	const ALTA_MAQUINA_3410					   = 3410;
-	const BAIXA_MAQUINA_3415 				   = 3415;
+	const BLOQUEIG_MAQUINA_3415 			   = 3415;
+	const DESBLOQUEIG_MAQUINA_3416 			   = 3416;	
 	const MODIFICACIO_MAQUINA_3417 			   = 3417;	
 	const LLISTAT_MAQUINES_3420 		       = 3420;	
 	const LLISTAT_MAQUINES_HISTORIC_3425 	   = 3425;	
@@ -66,7 +74,8 @@ isEndSessionInQuery();
 	const LLISTAT_MAQS_X_TORNEIG_3456    	   = 3456;
 
 	const ALTA_ASSIGNACIO_JOC_MAQUINA_3460	   = 3460;
-	const BAIXA_ASSIGNACIO_JOC_MAQUINA_3470    = 3470;
+	const BLOQUEIG_ASSIGNACIO_JOC_MAQ_3470     = 3470;
+	const DESBLOQUEIG_ASSIGNACIO_JOC_MAQ_3475  = 3475;	
 	const MODIF_ASSIGNACIO_JOC_MAQUINA_3480    = 3480;	
 	const LLISTAT_ASSIG_JOC_MAQ_3485		   = 3485;
 
@@ -86,7 +95,8 @@ isEndSessionInQuery();
 	const RECAUDACIO_X_JOC_PROV_POB_CP_3620    = 3620; //	
 
 	const ALTA_UBICACIO_3810				   = 3810;
-	const BAIXA_UBICACIO_3820 				   = 3820;
+	const BLOQUEIG_UBICACIO_3820 			   = 3820;
+	const DESBLOQUEIG_UBICACIO_3825 		   = 3825;	
 	const MODIFICACIO_UBICACIO_3830 		   = 3830;
 	const LLISTAT_UBICS_X_EMPRESA_3835 		   = 3835;	
 	const LLISTAT_UBICS_X_EMPRESA_HISTORIC_3840= 3840; //
@@ -139,18 +149,19 @@ isEndSessionInQuery();
 	$pid          = isset($_REQUEST['pid'])           ? (int) $_REQUEST['pid']  : 0;
 	$record       = isset($_REQUEST['record']) 	      ? $_REQUEST['record'] : NULL;
 
-	$usrLogin     = isset($_REQUEST['idUserPart'])    ? $_REQUEST['idUserPart'] : $_SESSION["login"];	
-	$idTorn       = isset($_REQUEST['idTorn'])        ? $_REQUEST['idTorn']     : "";
-	$idPart       = isset($_REQUEST['idPart'])        ? $_REQUEST['idPart']     : "";
-	$idMaq        = isset($_REQUEST['idMaq'])         ? $_REQUEST['idMaq']      : "";
-	$idMaqInst    = isset($_REQUEST['idMaqInst'])     ? $_REQUEST['idMaqInst']  : "";	
-	$idJoc        = isset($_REQUEST['idJoc'])         ? $_REQUEST['idJoc']      : "";	
-	$idUsr        = isset($_REQUEST['idUsr'])         ? $_REQUEST['idUsr']      : "";		
-	$idUbic       = isset($_REQUEST['idUbic'])        ? $_REQUEST['idUbic']     : "";
-	$idUTM        = isset($_REQUEST['idUTM'])         ? $_REQUEST['idUTM']      : "";	
-	$idRonda      = isset($_REQUEST['idRonda'])       ? $_REQUEST['idRonda']    : "";		
-	$idUbicNOU    = isset($_REQUEST['idUbicNOU'])     ? $_REQUEST['idUbicNOU']  : "";
-	$idDatHorPart = isset($_REQUEST['idDatHorPart'])  ? $_REQUEST['idDatHorPart']  : "";
+	$usrLogin     = isset($_REQUEST['idUserPart'])    ? $_REQUEST['idUserPart']   : $_SESSION["login"];	
+	$idTorn       = isset($_REQUEST['idTorn'])        ? $_REQUEST['idTorn']       : "";
+	$idPart       = isset($_REQUEST['idPart'])        ? $_REQUEST['idPart']       : "";
+	$idMaq        = isset($_REQUEST['idMaq'])         ? $_REQUEST['idMaq']        : "";
+	$idMaqInst    = isset($_REQUEST['idMaqInst'])     ? $_REQUEST['idMaqInst']    : "";	
+	$idJoc        = isset($_REQUEST['idJoc'])         ? $_REQUEST['idJoc']        : "";	
+	$idUsr        = isset($_REQUEST['idUsr'])         ? $_REQUEST['idUsr']        : "";		
+	$idUbic       = isset($_REQUEST['idUbic'])        ? $_REQUEST['idUbic']       : "";
+	$idUTM        = isset($_REQUEST['idUTM'])         ? $_REQUEST['idUTM']        : "";	
+	$idRonda      = isset($_REQUEST['idRonda'])       ? $_REQUEST['idRonda']      : "";		
+	$idUbicNOU    = isset($_REQUEST['idUbicNOU'])     ? $_REQUEST['idUbicNOU']    : "";
+	$idDatHorPart = isset($_REQUEST['idDatHorPart'])  ? $_REQUEST['idDatHorPart'] : "";
+	$idProd       = isset($_REQUEST['idProd'])        ? $_REQUEST['idProd']       : "";	
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -225,21 +236,62 @@ isEndSessionInQuery();
 				echo json_encode($response);
 				break;
 
-			case CONSULTA_ADM_1020 :
-				$query    = 'SELECT @var:=@var+1 as recid, p.* FROM productes as p, (SELECT @var:=0) as r';
-				$response = dbExec($query)[1];
-
-				// // Respectar format que espera el grid'
-				// foreach($response as $row) {
-				// 	$records[] = (object) array('recid'=>(int)$row->id, 'nom'=>$row->nom, 'foto'=>$row->foto);
-				// }
-
-				// // $records[] = (object) array('recid'=>1, 'nom'=>"Quim", 'foto'=>"foto de Quim");
-				// // $records[] = (object) array('recid'=>2, 'nom'=>"Joan", 'foto'=>"foto de Joan");
-
-				echo json_encode( $response );
+			case CONSULTA_PRODUCTES_1020 :
+				$query    = 'SELECT P.*,
+									id AS recid,
+									DATE_FORMAT(datAltaPro, "%d-%m-%Y %H:%i:%s") AS datAltaPro,
+									DATE_FORMAT(datModPro,  "%d-%m-%Y %H:%i:%s") AS datModPro,
+									DATE_FORMAT(datBaixaPro,"%d-%m-%Y %H:%i:%s") AS datBaixaPro
+							FROM productes AS P
+							WHERE datBaixaPro IS NULL;';
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));
 				break;
+			case CONSULTA_PRODUCTES_HISTORIC_1021 :
+				$query    = 'SELECT P.*,
+									id AS recid,
+									DATE_FORMAT(datAltaPro, "%d-%m-%Y %H:%i:%s") AS datAltaPro,
+									DATE_FORMAT(datModPro,  "%d-%m-%Y %H:%i:%s") AS datModPro,
+									DATE_FORMAT(datBaixaPro,"%d-%m-%Y %H:%i:%s") AS datBaixaPro
+							FROM productes AS P;';
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));
+				break;				
+			case ALTA_PRODUCTES_1025 :
+				$query    = sprintf("INSERT INTO productes
+								VALUES (NULL,'%s','%s','%f','%s',NOW(),NULL,NULL);","","",0,"");
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));						
+				break;
+			case MODIFICACIO_PRODUCTES_1030 :
+				$query    = sprintf("UPDATE productes SET nom        = '%s',
+														  descripcio = '%s',
+														  preu       = '%f',
+														  foto       = '%s',
+					  						  			  datModPro  = NOW()
+							WHERE
+									datBaixaPro IS NULL AND
+									id = '%d';","","",0,"",$idProd);
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));						
+				break;
+			case BLOQUEIG_PRODUCTES_1035 :
+				$query    = sprintf("UPDATE productes SET datModPro   = NOW(),
+											 	          datBaixaPro = NOW()
+							 		WHERE datBaixaPro IS NULL AND
+								   		  id = '%d';",$idProd);
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
+				break;
+			case DESBLOQUEIG_PRODUCTES_1040 :
+				$query    = sprintf("UPDATE productes SET datModPro   = NOW(),
+											 	          datBaixaPro = NULL
+							 		WHERE datBaixaPro IS NOT NULL AND
+								   		  id = '%d';",$idProd);
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));
 
+				break;
 			case TORNEIGS_1060 :
 				$query    = 'SELECT * FROM torneig';
 				$response = dbExec($query);
@@ -347,7 +399,7 @@ isEndSessionInQuery();
 									 DATE_FORMAT(_05_datIniTorn,   "%d-%m-%Y") AS datIniTorn,
 									 DATE_FORMAT(_06_datFinTorn,   "%d-%m-%Y") AS datFinTorn, 
 									 DATE_FORMAT(_05_datModPart,   "%d-%m-%Y %H:%i:%s") AS datModPart,
-									 DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y %H:%i:%s") AS datBaixaPart									 									 
+									 DATE_FORMAT(_06_datBaixaPart, "%d-%m-%Y %H:%i:%s") AS datBaixaPart
 							FROM
 							(SELECT @NL:=0) AS NNL,
 							partida
@@ -550,13 +602,8 @@ isEndSessionInQuery();
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));
 				break;
-			case BAIXA_JOC_3220 :
-				$query    = sprintf("UPDATE joc SET _07_datModJoc   = NOW(),
-													_08_datBaixaJoc = NOW()
-									 WHERE _01_pk_idJoc = '%d' AND
-										   _08_datBaixaJoc IS NULL;",$idJoc);
-				$response = dbExec($query,0);
-				$query    = sprintf("UPDATE torneig SET _08_daModTorn    = NOW(),
+			case BLOQUEIG_JOC_3220 :
+				$query    = sprintf("UPDATE torneig SET _08_datModTorn    = NOW(),
 														_09_datBaixaTorn = NOW()
 									 WHERE _02_pk_idJocTorn = '%d' AND
 										   _09_datBaixaTorn IS NULL;",$idJoc);
@@ -565,6 +612,29 @@ isEndSessionInQuery();
 												  		   _08_datBaixaMaqInst = NOW()
 								 	WHERE _02_pk_idJocInst = '%d' AND
 										  _08_datBaixaMaqInst IS NULL;",$idJoc);
+				$response = dbExec($query,0);
+				$query    = sprintf("UPDATE joc SET _07_datModJoc   = NOW(),
+													_08_datBaixaJoc = NOW()
+									 WHERE _01_pk_idJoc = '%d' AND
+										   _08_datBaixaJoc IS NULL;",$idJoc);
+				$response = dbExec($query,0);				
+				echo json_encode(controlErrorQuery($response));			
+				break;				
+			case DESBLOQUEIG_JOC_3222 :
+				$query    = sprintf("UPDATE torneig SET _08_datModTorn    = NOW(),
+														_09_datBaixaTorn = NULL
+									 WHERE _02_pk_idJocTorn = '%d' AND
+										   _09_datBaixaTorn IS NOT NULL;",$idJoc);
+				$response = dbExec($query,0);
+				$query    = sprintf("UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
+												  		   _08_datBaixaMaqInst = NULL
+								 	WHERE _02_pk_idJocInst = '%d' AND
+										  _08_datBaixaMaqInst IS NOT NULL;",$idJoc);
+				$response = dbExec($query,0);								
+				$query    = sprintf("UPDATE joc SET _07_datModJoc   = NOW(),
+													_08_datBaixaJoc = NULL
+									 WHERE _01_pk_idJoc = '%d' AND
+										   _08_datBaixaJoc IS NOT NULL;",$idJoc);
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;				
@@ -591,7 +661,8 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));
 				break;
 			case JOCS_HISTORIC_3240 :
-				$query    = 'SELECT _01_pk_idjoc AS idJoc, 
+				$query    = 'SELECT _01_pk_idjoc AS recid, 
+									_01_pk_idjoc AS idJoc, 
 									_02_nomJoc AS nomJoc, 
 									_04_imgJoc AS imgJoc, 
 									_05_numPartidesJugadesJoc AS numPartides,
@@ -662,7 +733,7 @@ isEndSessionInQuery();
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));				
 				break;
-			case BAIXA_TORNEIG_3320 :
+			case BLOQUEIG_TORNEIG_3320 :
 				$query    = sprintf("UPDATE torneig SET _08_datModTorn   = NOW(),
 													    _09_datBaixaTorn = NOW()
 									 WHERE _01_pk_idTorn    = '%d' AND
@@ -670,6 +741,14 @@ isEndSessionInQuery();
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;
+			case DESBLOQUEIG_TORNEIG_3325 :
+				$query    = sprintf("UPDATE torneig SET _08_datModTorn   = NOW(),
+													    _09_datBaixaTorn = NULL
+									 WHERE _01_pk_idTorn    = '%d' AND
+										   _09_datBaixaTorn IS NOT NULL;",$idTorn);
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
+				break;				
 			case MODIFICACIO_TORNEIG_3330 :
 				$query    = 'UPDATE torneig SET _03_nomTorn     = "$nomTorn",
 					    						_04_premiTorn   = "$premiTorn",
@@ -702,7 +781,8 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));				
 				break;
 			case RELACIO_TORNEIGS_I_MAQS_HISTORIC_3342 :
-				$query    = 'SELECT _01_pk_idTorn AS idTorn,
+				$query    = 'SELECT _01_pk_idTorn AS recid,
+									_01_pk_idTorn AS idTorn,
 									_03_nomTorn   AS nomTorn,
 									_04_premiTorn AS premiTorn,
 									_01_pk_idJoc  AS idJoc,
@@ -866,7 +946,7 @@ isEndSessionInQuery();
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));				
 				break;			
-			case BAIXA_MAQUINA_3415 :
+			case BLOQUEIG_MAQUINA_3415 :
 				$query    = sprintf("UPDATE maquina SET _07_datModMaq   = NOW(),
 														_08_datBaixaMaq = NOW()
 									 WHERE  _01_pk_idMaq = '%d' AND
@@ -879,6 +959,19 @@ isEndSessionInQuery();
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
 				break;
+			case DESBLOQUEIG_MAQUINA_3416 :
+				$query    = sprintf("UPDATE maquina SET _07_datModMaq   = NOW(),
+														_08_datBaixaMaq = NULL
+									 WHERE  _01_pk_idMaq = '%d' AND
+											_08_datBaixaMaq IS NOT NULL;",$idMaq);
+				$response = dbExec($query,0);
+				$query    = sprintf("UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
+														   _08_datBaixaMaqInst = NULL
+									 WHERE _01_pk_idMaqInst = '%d' AND
+									_		08_datBaixaMaqInst IS NOT NULL;",$idMaq);
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));			
+				break;				
 			case MODIFICACIO_MAQUINA_3417 :
 				$query    = 'UPDATE maquina SET _02_macMaq      = "$macMaq",
 										        _03_propMaq     = "$propMaq",
@@ -908,7 +1001,8 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));				
 				break;
 			case LLISTAT_MAQUINES_HISTORIC_3425 :
-				$query    = 'SELECT _01_pk_idMaq AS idMaq,
+				$query    = 'SELECT _01_pk_idMaq AS recid,
+									_01_pk_idMaq AS idMaq,
 									_02_macMaq   AS macMaq,
 									_03_propMaq  AS propMaq,
 									_04_credMaq  AS credMaq,
@@ -1050,15 +1144,23 @@ isEndSessionInQuery();
 										VALUES (NULL,'%d','%d',0,0,0,NOW(),NULL,NULL);",0,0);
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));			
-				break;			
-			case BAIXA_ASSIGNACIO_JOC_MAQUINA_3470 :
+				break;
+			case BLOQUEIG_ASSIGNACIO_JOC_MAQ_3470 :
 				$query = sprintf("UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
 														_08_datBaixaMaqInst = NOW()					
 							  	  WHERE _00_pk_idMaqInst_auto = '%d' AND
-							  	  		_08_datBaixaMaqInst IS NULL;",0);
+							  	  		_08_datBaixaMaqInst IS NULL;",$idMaqInst);
 				$response = dbExec($query,0);
-				echo json_encode(controlErrorQuery($response));			
+				echo json_encode(controlErrorQuery($response));
 				break;
+			case DESBLOQUEIG_ASSIGNACIO_JOC_MAQ_3475 :
+				$query = sprintf("UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
+														_08_datBaixaMaqInst = NULL
+							  	  WHERE _00_pk_idMaqInst_auto = '%d' AND
+							  	  		_08_datBaixaMaqInst IS NOT NULL;",$idMaqInst);
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));
+				break;				
 			case MODIF_ASSIGNACIO_JOC_MAQUINA_3480 :
 				$query    = sprintf("UPDATE maqInstall SET 
 											_03_numPartidesJugadesMaqInst = '%f',
@@ -1075,9 +1177,9 @@ isEndSessionInQuery();
 				$query    = 'SELECT MQ.*,
 									_00_pk_idMaqInst_auto AS recid,
 									_01_pk_idMaqInst   AS idMaq,									
-									_02_macMaq   AS macMaq,
+									_02_macMaq,
 									_01_pk_idJoc AS idJoc,
-									_02_nomJoc   AS nomJoc,
+									_02_nomJoc,
 									_03_numPartidesJugadesMaqInst AS numPartides,
 									_05_totCredJocMaqInst AS totalCredits,
 									DATE_FORMAT(_06_datAltaMaqInst, "%d-%m-%Y %H:%i:%s") AS datAltaMaqInst,
@@ -1095,7 +1197,8 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));				
 				break;
 			case LLISTAT_ASSIG_JOC_MAQ_HISTORIC_3490 :
-				$query    = 'SELECT _01_pk_idMaq AS idMaq,
+				$query    = 'SELECT _00_pk_idMaqInst_auto AS recid,
+									_01_pk_idMaq AS idMaq,
 									_02_macMaq   AS macMaq,
 									_01_pk_idJoc AS idJoc,
 									_02_nomJoc   AS nomJoc,
@@ -1380,7 +1483,7 @@ isEndSessionInQuery();
 				$response = dbExec($query,0);				
 				echo json_encode(controlErrorQuery($response));
 				break;
-			case BAIXA_UBICACIO_3820 :
+			case BLOQUEIG_UBICACIO_3820 :
 				$query = sprintf("UPDATE ubicacio SET _15_datModUbic   = NOW(),
 													  _16_datBaixaUbic = NOW()
 								  WHERE _01_pk_idUbic = '%d' AND
@@ -1388,6 +1491,14 @@ isEndSessionInQuery();
 				$response = dbExec($query,0);				
 				echo json_encode(controlErrorQuery($response));			
 				break;			
+			case DESBLOQUEIG_UBICACIO_3825 :
+				$query = sprintf("UPDATE ubicacio SET _15_datModUbic   = NOW(),
+													  _16_datBaixaUbic = NULL
+								  WHERE _01_pk_idUbic = '%d' AND
+								  		_16_datBaixaUbic IS NOT NULL;",$idUbic);
+				$response = dbExec($query,0);				
+				echo json_encode(controlErrorQuery($response));			
+				break;		
 			case MODIFICACIO_UBICACIO_3830 :
 				$query    = 'UPDATE ubicacio SET 
 											_02_empUbic     = "$emp",
@@ -1431,7 +1542,8 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));				
 				break;								
 			case LLISTAT_UBICS_X_EMPRESA_HISTORIC_3840 :
-				$query    = 'SELECT _01_pk_idUbic AS idUbic,
+				$query    = 'SELECT _01_pk_idUbic AS recid,
+									_01_pk_idUbic AS idUbic,
 									_02_empUbic   AS empUbic,
 									_03_dirUbic   AS dirUbic,
 									_06_provUbic  AS provincia,
@@ -1636,7 +1748,8 @@ isEndSessionInQuery();
 									DATE_FORMAT(_09_datModUsuari,   "%d-%m-%Y %H:%i:%s") AS datModUsr,
 									DATE_FORMAT(_10_datBaixaUsuari, "%d-%m-%Y %H:%i:%s") AS datBaixaUsr
 							FROM usuari
-								LEFT JOIN jugador ON _01_pk_idUsuari = _01_pk_idJug;';
+								LEFT JOIN jugador ON _01_pk_idUsuari = _01_pk_idJug
+							WHERE _04_loginUsuari <> "admin";';
 				$response = dbExec($query);				
 				echo json_encode(controlErrorQuery($response));
 				break;			
@@ -2017,13 +2130,15 @@ isEndSessionInQuery();
 				echo json_encode( $response1 );				
 				break;				
 			case CONSULTA_USR_TOTS_TORNEIGS_5061 :
-				$query    = sprintf("SELECT _01_pk_idTorn  AS idTorn,
-											_03_nomTorn    AS nomTorn,
-											_01_pk_idJoc   AS idJoc,
-											_02_nomJoc     AS nomJoc,
-											_04_premiTorn  AS premiTorn,
+				$query    = sprintf("SELECT _01_pk_idTorn    AS recid,
+											_01_pk_idTorn    AS idTorn,
+											_03_nomTorn      AS nomTorn,
+											_02_pk_idJocTorn AS idJoc,
+											_02_nomJoc       AS nomJoc,
+											_04_premiTorn    AS premiJoc,
 											DATE_FORMAT(_05_datIniTorn, '%s') AS datIniTorn,
-											DATE_FORMAT(_06_datFinTorn, '%s') AS datFinTorn
+											DATE_FORMAT(_06_datFinTorn, '%s') AS datFinTorn,
+											DATE_FORMAT(_07_datAltaTorn, '%s') AS datAltaTorn
 									FROM torneig
 										INNER JOIN joc ON (_02_pk_idJocTorn = _01_pk_idJoc)
 									WHERE 
@@ -2037,7 +2152,7 @@ isEndSessionInQuery();
 												INNER JOIN torneig ON (_01_pk_idTornInsc = _01_pk_idTorn AND
 																	   _02_pk_idJocInsc = _02_pk_idJocTorn )
 											WHERE _04_loginUsuari = '%s' GROUP BY _01_pk_idTorn)
-									ORDER BY datIniTorn;","%d-%m-%Y","%d-%m-%Y",$usrLogin);
+									ORDER BY datIniTorn;","%d-%m-%Y","%d-%m-%Y","%d-%m-%Y %H:%i:%s",$usrLogin);
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
 				break;				
@@ -2188,12 +2303,12 @@ isEndSessionInQuery();
 				break;				
 
 			case INSCRIPCIO_USR_TORNEIG_5063 :
-					$query = sprintf("SELECT _01_pk_idUsuari INTO @IDJUG 
-							  			FROM usuari 
-							  			WHERE _04_loginUsuari = '%s';",$usrLogin);
-					$response  = dbExec($query,0);
-					$query = sprintf("INSERT INTO inscrit 
-											VALUES (NULL,'%d','%d',@IDJUG,NOW(),NULL,NULL);",$idTorn,$idJoc);
+				$query = sprintf("SELECT _01_pk_idUsuari INTO @IDJUG 
+						  			FROM usuari 
+						  			WHERE _04_loginUsuari = '%s';",$usrLogin);
+				$response  = dbExec($query,0);
+				$query = sprintf("INSERT INTO inscrit 
+										VALUES (NULL,'%d','%d',@IDJUG,NOW(),NULL,NULL);",$idTorn,$idJoc);
 				$response  = dbExec($query,0);
 				echo json_encode( $response );		
 				break;				

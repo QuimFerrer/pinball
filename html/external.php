@@ -9,8 +9,8 @@ include ("../src/seguretatLogin.php");
 <!doctype html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<!-- <meta charset="UTF-8"> -->
+	<meta http-equiv="Content-Type" content="text/html">
+	<meta charset="UTF-8">
 	<title>Pinball. Jocs</title>
 	<link rel="stylesheet" href="../css/pinball.css">
 </head>

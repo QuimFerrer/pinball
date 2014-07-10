@@ -16,7 +16,7 @@ function mostraUsuariLogat()
 		$cognom = (isset($_SESSION["cognomUsr"]) ? $_SESSION["cognomUsr"] : "");
 	  	if ($_SESSION["login"] == 'admin') $nom = 'Administrador - ' . $nom . ' ' . $cognom;
 	  	else $nom = 'Jugador - ' . $nom . ' ' . $cognom;
-		echo '<h2>' . $nom . '</h2>';
+		echo $nom;
 		}
 }
 ?>
@@ -38,15 +38,16 @@ function mostraUsuariLogat()
 		<menu>
 			<?php menu(); ?>
 		</menu>
-		<section id="users">
+		<h2 id="username"><?php mostraUsuariLogat();?></h2>
+		<section id="users" style="width: 100%; height: 500px;">
 
 			<article>
-				<?php mostraUsuariLogat();?>
-				<!-- <div id="toolbar"></div> -->
-				<div id="sidebar"></div>
-				<div id="grid"></div>
+<!-- 				<?php mostraUsuariLogat();?>
+ -->				
+ 				<div id="sidebar"></div>
+ 				<div id="grid"></div>
 				<div id="form"></div>
-			</article>
+			</article> 
 				
 			
 		</section>

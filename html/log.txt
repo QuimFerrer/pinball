@@ -1,0 +1,30 @@
+2014-07-10 13:06:49 - CONSULTA:                        - SELECT T.*,
+							DATE_FORMAT(_05_datIniTorn, '%m/%d/%Y') AS datIniTorn,
+							DATE_FORMAT(_06_datFinTorn, '%m/%d/%Y') AS datFinTorn
+							FROM torneig AS T
+							WHERE _01_pk_idTorn=1003;                                                            
+2014-07-10 16:20:15 - CONSULTA:                        - SELECT T.*,
+							DATE_FORMAT(_05_datIniTorn, '%m/%d/%Y') AS datIniTorn,
+							DATE_FORMAT(_06_datFinTorn, '%m/%d/%Y') AS datFinTorn
+							FROM torneig AS T
+							WHERE _01_pk_idTorn=1000;                                                            
+2014-07-10 16:20:53 - CONSULTA:                        - SELECT T.*,
+							DATE_FORMAT(_05_datIniTorn, '%m/%d/%Y') AS datIniTorn,
+							DATE_FORMAT(_06_datFinTorn, '%m/%d/%Y') AS datFinTorn
+							FROM torneig AS T
+							WHERE _01_pk_idTorn=1001;                                                            
+2014-07-10 16:41:30 - CONSULTA:                        - UPDATE torneig 
+						SET _08_datModTorn   = NOW(),
+							_09_datBaixaTorn = NOW()
+						WHERE _01_pk_idTorn = '1003' AND _09_datBaixaTorn IS NULL;                                                                                                         
+2014-07-10 16:42:21 - CONSULTA:                        - UPDATE torneig 
+						SET _08_datModTorn   = NOW(),
+							_09_datBaixaTorn = NOW()
+						WHERE _01_pk_idTorn = '1000' AND _09_datBaixaTorn IS NULL;                                                                                                         
+2014-07-10 16:49:47 - CONSULTA:                        - INSERT INTO ubicaciotemaquina
+									VALUES (NULL,'2','40',NOW(),NULL,NULL);                                                                                                                                                                                 
+2014-07-10 18:00:55 - CONSULTA:                        - SELECT T.*,
+							DATE_FORMAT(_05_datIniTorn, '%m/%d/%Y') AS datIniTorn,
+							DATE_FORMAT(_06_datFinTorn, '%m/%d/%Y') AS datFinTorn
+							FROM torneig AS T
+							WHERE _01_pk_idTorn=1001;                                                            
