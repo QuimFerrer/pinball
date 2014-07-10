@@ -337,3 +337,1288 @@
 							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
 						WHERE _09_datBaixaTorn IS NULL
 						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 15:44:49 - CONSULTA:                        - SELECT J.*,
+							DATE_FORMAT(_06_datAltaJoc, '%d-%m-%Y %H:%i:%s') AS datAltaJoc,
+							DATE_FORMAT(_07_datModJoc,  '%d-%m-%Y %H:%i:%s') AS datModJoc			
+							FROM joc AS J
+							WHERE _08_datBaixaJoc IS NULL;                                       
+2014-07-10 15:45:03 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 15:45:48 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 15:50:05 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 15:55:29 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 15:56:44 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 15:58:19 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:01:34 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:02:46 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:04:47 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:07:03 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:07:39 - CONSULTA:                        - SELECT _00_pk_idUTM_auto   AS recid,
+								_06_provUbic        AS provincia,
+								_04_pobUbic         AS poblacio,
+								_05_cpUbic          AS cPostal,
+								_01_pk_idUbicUTM    AS idUbic,
+								_02_empUbic         AS empUbic, 
+								_02_pk_idMaqUTM     AS idMaq,
+								_02_macMaq          AS macMaq,
+								_03_propMaq         AS propMaq,
+								SUM(_05_totCredMaq) AS totalCredits,
+								DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
+								DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
+								DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
+								DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
+								DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+						FROM ubicacio
+							INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
+							INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
+						GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
+						ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;
+2014-07-10 16:08:38 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:11:23 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:11:40 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:11:58 - CONSULTA:                        - SELECT M.*,
+								DATE_FORMAT(_06_datAltaMaq,"%d-%m-%Y %H:%i:%s") AS datAltaMaq,
+								DATE_FORMAT(_07_datModMaq, "%d-%m-%Y %H:%i:%s") AS datModMaq									
+						FROM
+							maquina AS M
+						WHERE _08_datBaixaMaq   IS NULL;                     
+2014-07-10 16:12:02 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:15:02 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:16:04 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:17:44 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:18:48 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:19:37 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:19:41 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:19:50 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:19:57 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:20:09 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:20:20 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:20:44 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:20:50 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:20:57 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:21:09 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:21:56 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:22:04 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:23:33 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:23:42 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:24:11 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:25:43 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:27:28 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:28:29 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:29:13 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:29:30 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:30:04 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:30:11 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:31:48 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:33:06 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:41:27 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:41:32 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:42:24 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:46:41 - CONSULTA:                        - SELECT * FROM productes;                                                                                                                                                                                                                                        
+2014-07-10 16:46:47 - CONSULTA:                        - INSERT INTO productes (nom,descripcio,preu,foto) VALUES ('eqewq','qeqeqe','','')                                                                                                                                                                                
+2014-07-10 16:46:50 - CONSULTA:                        - SELECT * FROM productes;                                                                                                                                                                                                                                        
+2014-07-10 16:46:57 - CONSULTA:                        - DELETE FROM productes WHERE id=6                                                                                                                                                                                                                                
+2014-07-10 16:46:59 - CONSULTA:                        - SELECT * FROM productes;                                                                                                                                                                                                                                        
+2014-07-10 16:47:41 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:48:56 - CONSULTA:                        - SELECT U.*,
+								DATE_FORMAT(_14_datAltaUbic,"%d-%m-%Y %H:%i:%s") AS datAltaUbic,
+								DATE_FORMAT(_15_datModUbic, "%d-%m-%Y %H:%i:%s") AS datModUbic
+						FROM
+							ubicacio AS U
+						WHERE _16_datBaixaUbic   IS NULL
+						ORDER BY _02_empUbic;
+2014-07-10 16:49:00 - CONSULTA:                        - SELECT _00_pk_idUTM_auto   AS recid,
+								_06_provUbic        AS provincia,
+								_04_pobUbic         AS poblacio,
+								_05_cpUbic          AS cPostal,
+								_01_pk_idUbicUTM    AS idUbic,
+								_02_empUbic         AS empUbic, 
+								_02_pk_idMaqUTM     AS idMaq,
+								_02_macMaq          AS macMaq,
+								_03_propMaq         AS propMaq,
+								SUM(_05_totCredMaq) AS totalCredits,
+								DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
+								DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
+								DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
+								DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
+								DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+						FROM ubicacio
+							INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
+							INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
+						GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
+						ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;
+2014-07-10 16:49:11 - CONSULTA:                        - SELECT _00_pk_idUTM_auto   AS recid,
+								_06_provUbic        AS provincia,
+								_04_pobUbic         AS poblacio,
+								_05_cpUbic          AS cPostal,
+								_01_pk_idUbicUTM    AS idUbic,
+								_02_empUbic         AS empUbic, 
+								_02_pk_idMaqUTM     AS idMaq,
+								_02_macMaq          AS macMaq,
+								_03_propMaq         AS propMaq,
+								SUM(_05_totCredMaq) AS totalCredits,
+								DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
+								DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
+								DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
+								DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
+								DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+						FROM ubicacio
+							INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
+							INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
+						GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
+						ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;
+2014-07-10 16:49:49 - CONSULTA:                        - SELECT _00_pk_idUTM_auto   AS recid,
+								_06_provUbic        AS provincia,
+								_04_pobUbic         AS poblacio,
+								_05_cpUbic          AS cPostal,
+								_01_pk_idUbicUTM    AS idUbic,
+								_02_empUbic         AS empUbic, 
+								_02_pk_idMaqUTM     AS idMaq,
+								_02_macMaq          AS macMaq,
+								_03_propMaq         AS propMaq,
+								SUM(_05_totCredMaq) AS totalCredits,
+								DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
+								DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
+								DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
+								DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
+								DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+						FROM ubicacio
+							INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
+							INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
+						GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
+						ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;
+2014-07-10 16:50:23 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:51:08 - CONSULTA:                        - SELECT M.*,
+								DATE_FORMAT(_06_datAltaMaq,"%d-%m-%Y %H:%i:%s") AS datAltaMaq,
+								DATE_FORMAT(_07_datModMaq, "%d-%m-%Y %H:%i:%s") AS datModMaq									
+						FROM
+							maquina AS M
+						WHERE _08_datBaixaMaq   IS NULL;                     
+2014-07-10 16:51:13 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:51:22 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:51:32 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:52:08 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:52:45 - CONSULTA:                        - SELECT M.*,
+								DATE_FORMAT(_06_datAltaMaq,"%d-%m-%Y %H:%i:%s") AS datAltaMaq,
+								DATE_FORMAT(_07_datModMaq, "%d-%m-%Y %H:%i:%s") AS datModMaq									
+						FROM
+							maquina AS M
+						WHERE _08_datBaixaMaq   IS NULL;                     
+2014-07-10 16:52:46 - CONSULTA:                        - SELECT M.*,
+								DATE_FORMAT(_06_datAltaMaq,"%d-%m-%Y %H:%i:%s") AS datAltaMaq,
+								DATE_FORMAT(_07_datModMaq, "%d-%m-%Y %H:%i:%s") AS datModMaq									
+						FROM
+							maquina AS M
+						WHERE _08_datBaixaMaq   IS NULL;                     
+2014-07-10 16:52:49 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:53:52 - CONSULTA:                        - SELECT M.*,
+								DATE_FORMAT(_06_datAltaMaq,"%d-%m-%Y %H:%i:%s") AS datAltaMaq,
+								DATE_FORMAT(_07_datModMaq, "%d-%m-%Y %H:%i:%s") AS datModMaq									
+						FROM
+							maquina AS M
+						WHERE _08_datBaixaMaq   IS NULL;                     
+2014-07-10 16:54:15 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:54:26 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:55:08 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:57:33 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:58:40 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 16:58:58 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:00:01 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:01:42 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:01:48 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:01:55 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:02:04 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:02:12 - CONSULTA:                        - SELECT _00_pk_idUTM_auto   AS recid,
+								_06_provUbic        AS provincia,
+								_04_pobUbic         AS poblacio,
+								_05_cpUbic          AS cPostal,
+								_01_pk_idUbicUTM    AS idUbic,
+								_02_empUbic         AS empUbic, 
+								_02_pk_idMaqUTM     AS idMaq,
+								_02_macMaq          AS macMaq,
+								_03_propMaq         AS propMaq,
+								SUM(_05_totCredMaq) AS totalCredits,
+								DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
+								DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
+								DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
+								DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
+								DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+						FROM ubicacio
+							INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
+							INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
+						GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
+						ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;
+2014-07-10 17:02:16 - CONSULTA:                        - SELECT _00_pk_idUTM_auto   AS recid,
+								_06_provUbic        AS provincia,
+								_04_pobUbic         AS poblacio,
+								_05_cpUbic          AS cPostal,
+								_01_pk_idUbicUTM    AS idUbic,
+								_02_empUbic         AS empUbic, 
+								_02_pk_idMaqUTM     AS idMaq,
+								_02_macMaq          AS macMaq,
+								_03_propMaq         AS propMaq,
+								SUM(_05_totCredMaq) AS totalCredits,
+								DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
+								DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
+								DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
+								DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
+								DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+						FROM ubicacio
+							INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
+							INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
+						GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
+						ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;
+2014-07-10 17:02:22 - CONSULTA:                        - SELECT _00_pk_idUTM_auto   AS recid,
+								_06_provUbic        AS provincia,
+								_04_pobUbic         AS poblacio,
+								_05_cpUbic          AS cPostal,
+								_01_pk_idUbicUTM    AS idUbic,
+								_02_empUbic         AS empUbic, 
+								_02_pk_idMaqUTM     AS idMaq,
+								_02_macMaq          AS macMaq,
+								_03_propMaq         AS propMaq,
+								SUM(_05_totCredMaq) AS totalCredits,
+								DATE_FORMAT(_03_datAltaUTM,  "%d-%m-%Y %H:%i:%s") AS datAltaUTM,
+								DATE_FORMAT(_04_datModUTM,   "%d-%m-%Y %H:%i:%s") AS datModUTM,
+								DATE_FORMAT(_05_datBaixaUTM, "%d-%m-%Y %H:%i:%s") AS datBaixaUTM,
+								DATE_FORMAT(_08_datBaixaMaq, "%d-%m-%Y %H:%i:%s") AS datBaixaMaq,
+								DATE_FORMAT(_16_datBaixaUbic,"%d-%m-%Y %H:%i:%s") AS datBaixaUbic
+						FROM ubicacio
+							INNER JOIN ubicacioTeMaquina ON _01_pk_idUbic   = _01_pk_idUbicUTM
+							INNER JOIN maquina           ON _02_pk_idMaqUTM = _01_pk_idMaq
+						GROUP BY provincia, poblacio, cPostal, idUbic, idMaq
+						ORDER BY provincia, poblacio, cPostal, idUbic, idMaq, totalCredits;
+2014-07-10 17:04:36 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:04:46 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:04:57 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:05:18 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:06:05 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:43:33 - CONSULTA:                        - SELECT * FROM productes;                                                                                                                                                                                                                                        
+2014-07-10 17:43:39 - CONSULTA:                        - SELECT * FROM productes;                                                                                                                                                                                                                                        
+2014-07-10 17:43:44 - CONSULTA:                        - SELECT * FROM productes;                                                                                                                                                                                                                                        
+2014-07-10 17:46:09 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:48:24 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:50:20 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:51:36 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:52:04 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:52:21 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:52:31 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:55:05 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:55:11 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:55:20 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:56:12 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:57:05 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:58:24 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:58:40 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:59:11 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:59:20 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:59:48 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:59:53 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 17:59:59 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 18:00:34 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 18:00:43 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 18:00:52 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 18:00:59 - CONSULTA:                        - SELECT T.*,
+								_01_pk_idJoc,
+								_02_nomJoc,
+								_02_pk_idJocTorn,
+								DATE_FORMAT(_05_datIniTorn, "%d/%m/%Y") AS datIniTorn,
+								DATE_FORMAT(_06_datFinTorn, "%d/%m/%Y") AS datFinTorn,
+								DATE_FORMAT(_07_datAltaTorn, "%d-%m-%Y %H:%i:%s") AS datAltaTorn,
+								DATE_FORMAT(_08_datModTorn,  "%d-%m-%Y %H:%i:%s") AS datModTorn								
+						FROM torneig AS T
+							LEFT JOIN joc         ON _02_pk_idJocTorn = _01_pk_idJoc
+						WHERE _09_datBaixaTorn IS NULL
+						GROUP BY _01_pk_idTorn, _01_pk_idJoc;
+2014-07-10 18:07:54 - CONSULTA:                        - SELECT * FROM productes;                                                                                                                                                                                                                                        
+2014-07-10 18:07:59 - CONSULTA:                        - DELETE FROM productes WHERE id=5                                                                                                                                                                                                                                
+2014-07-10 18:08:03 - CONSULTA:                        - SELECT * FROM productes;                                                                                                                                                                                                                                        

@@ -41,12 +41,13 @@ function mostraUsuariLogat()
 		<h2 id="username"><?php mostraUsuariLogat();?></h2>
 		<section id="users" style="width: 100%; height: 500px;">
 
-<!-- 			<article>
-				<?php mostraUsuariLogat();?>
-				<div id="sidebar"></div>
-				<div id="grid"></div>
+			<article>
+<!-- 				<?php mostraUsuariLogat();?>
+ -->				
+ 				<div id="sidebar"></div>
+ 				<div id="grid"></div>
 				<div id="form"></div>
-			</article> --> 
+			</article> 
 				
 			
 		</section>
