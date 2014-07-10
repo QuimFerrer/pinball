@@ -4,12 +4,12 @@ Varis
 --> ok. <-- 2. maquillar pàgina Logout
 --> ok. <-- 3. crear taula productes a la base de dades
 --> ok. <-- 4. afegir dates modificacio i baixa a taula de productes
-5. modificar dbExecLocal per adaptar-ho a insert, update, delete
+--> ok. <-- 5. modificar dbExecLocal er adaptar-ho a insert, update, delete
 --> ok. <-- 6.control.lar amb login que el usuari no està donat de baixa
 --> ok. <-- 7. alinear dreta o centre de camps al grid --> ,attr: 'align=center' 
 --> ok. <-- 8. treure el login.js
 --> ok. <-- 9. posar al titol dels grids llistat o relació
-10. registre amb enviament de mail
+--> ok. <-- 10. registre amb enviament de mail
 --> ok. <-- 11. guardar password encriptat
 --> ok. <-- 12. enviament de mail de contacte
 --> ok. <-- 13. pregunta al Quim per posar columnes per filtrar/buscar els resultats 

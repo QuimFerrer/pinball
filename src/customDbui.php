@@ -1,8 +1,31 @@
 <?php
+
 function customQuerySaveRecord($pid, $id, $record, $kName)
 {
 	switch($pid)
 		{
+		case '1020': //productes
+			if ($id != 0)
+				$query    = sprintf("UPDATE productes SET nom        = '%s',
+														  descripcio = '%s',
+														  preu       = '%f',
+														  foto       = '%s',
+					  						  			  datModPro  = NOW()
+							WHERE
+									datBaixaPro IS NULL AND id = '%d';",$record['nom'],
+																		$record['descripcio'],
+																		$record['preu'],
+																		$record['foto'],
+																		$id);
+			else
+				$query    = sprintf("INSERT INTO productes
+								     VALUES (NULL,'%s','%s','%f','%s',NOW(),NULL,NULL);",$record['nom'],
+																						 $record['descripcio'],
+																						 $record['preu'],
+																						 $record['foto']);
+			$response = controlErrorQuery( dbExec($query,0) );
+			$data = controlErrorQueryFromDbui( $response['status'], $id, $kName);
+			break;			
 		case '3160': // ronda
 			if ($id != 0)
 				$query = sprintf("UPDATE ronda SET _06_fotoJugRonda = '%s',
@@ -22,7 +45,7 @@ function customQuerySaveRecord($pid, $id, $record, $kName)
 																		$record['_05_pk_idRonda'],
 																		$record['_06_fotoJugRonda']);
 			$response = controlErrorQuery( dbExec($query,0) );
-			$data = controlErrorQueryFromDbui( $response, $id, $kName);
+			$data = controlErrorQueryFromDbui( $response['status'], $id, $kName);
 			break;			
 		case '3230': // joc
 			if ($id != 0)
@@ -41,7 +64,7 @@ function customQuerySaveRecord($pid, $id, $record, $kName)
 																$record['_03_descJoc'],
 																$record['_04_imgJoc']);
 			$response = controlErrorQuery( dbExec($query,0) );
-			$data = controlErrorQueryFromDbui( $response, $id, $kName);
+			$data = controlErrorQueryFromDbui( $response['status'], $id, $kName);
 			break;
 		case '3340':  // torneig
 			if ($id != 0)
@@ -64,7 +87,7 @@ function customQuerySaveRecord($pid, $id, $record, $kName)
 																$record['datIniTorn'],
 																$record['datFinTorn']);
 			$response = controlErrorQuery( dbExec($query,0) );
-			$data = controlErrorQueryFromDbui( $response, $id, $kName);
+			$data = controlErrorQueryFromDbui( $response['status'], $id, $kName);
 			break;				
 		case '3420':  // màquina
 			if ($id != 0)
@@ -79,12 +102,14 @@ function customQuerySaveRecord($pid, $id, $record, $kName)
 												   			   	$record['_05_totCredMaq'],
 															   	$id);
 			else
-				$query = sprintf("INSERT INTO maquina 
-								  VALUES (NULL,'%s','%s',0,0,NOW(),NULL,NULL);",
+				$query = sprintf("INSERT INTO maquina
+ 								  VALUES (NULL,'%s','%s','%f','%f',NOW(),NULL,NULL);",
 																$record['_02_macMaq'],
-																$record['_03_propMaq']);
+																$record['_03_propMaq'],
+															   	$record['_04_credMaq'],
+												   			   	$record['_05_totCredMaq']);
 			$response = controlErrorQuery( dbExec($query,0) );
-			$data = controlErrorQueryFromDbui( $response, $id, $kName);		
+			$data = controlErrorQueryFromDbui( $response['status'], $id, $kName);
 			break;
 		case '3485': // maqInstall
 			if ($id != 0)
@@ -103,7 +128,7 @@ function customQuerySaveRecord($pid, $id, $record, $kName)
 																$record['_01_pk_idMaqInst'],
 																$record['_02_pk_idJocInst']);
 			$response = controlErrorQuery( dbExec($query,0) );
-			$data = controlErrorQueryFromDbui( $response, $id, $kName);
+			$data = controlErrorQueryFromDbui( $response['status'], $id, $kName);
 			break;	
 		case '3830': // ubicacio
 			if ($id != 0)
@@ -149,7 +174,7 @@ function customQuerySaveRecord($pid, $id, $record, $kName)
 																$record['_12_telUbic'],
 																$record['_13_mobUbic']);
 			$response = controlErrorQuery( dbExec($query,0) );
-			$data = controlErrorQueryFromDbui( $response, $id, $kName);
+			$data = controlErrorQueryFromDbui( $response['status'], $id, $kName);					
 			break;
 		default:
 			$data = "";
@@ -162,6 +187,15 @@ function customGetQueryForGetRecords($table)
 	{
 	switch($table)
 		{
+		case 'productes': //1020
+			$query    = 'SELECT P.*,
+									id AS recid,
+									DATE_FORMAT(datAltaPro, "%d-%m-%Y %H:%i:%s") AS datAltaPro,
+									DATE_FORMAT(datModPro,  "%d-%m-%Y %H:%i:%s") AS datModPro,
+									DATE_FORMAT(datBaixaPro,"%d-%m-%Y %H:%i:%s") AS datBaixaPro
+							FROM  productes AS P
+							WHERE datBaixaPro IS NULL;';									
+			break;			
 		case 'ronda':
 			$query  = 'SELECT 	_00_pk_idRonda_auto AS recid,
 								_01_pk_idTorn      AS idTorn,
@@ -205,6 +239,7 @@ function customGetQueryForGetRecords($table)
 			break;			
 		case 'joc':
 			$query  = "SELECT J.*,
+							_01_pk_idJoc AS recid,
 							DATE_FORMAT(_06_datAltaJoc, '%d-%m-%Y %H:%i:%s') AS datAltaJoc,
 							DATE_FORMAT(_07_datModJoc,  '%d-%m-%Y %H:%i:%s') AS datModJoc			
 							FROM joc AS J
@@ -212,6 +247,7 @@ function customGetQueryForGetRecords($table)
 			break;
 		case 'torneig':  // 3340
 			$query    = 'SELECT T.*,
+								_01_pk_idTorn AS recid,
 								_01_pk_idJoc,
 								_02_nomJoc,
 								_02_pk_idJocTorn,
@@ -226,6 +262,7 @@ function customGetQueryForGetRecords($table)
 			break;
 		case 'maquina': //3420
 			$query    = 'SELECT M.*,
+								_01_pk_idMaq AS recid,			
 								DATE_FORMAT(_06_datAltaMaq,"%d-%m-%Y %H:%i:%s") AS datAltaMaq,
 								DATE_FORMAT(_07_datModMaq, "%d-%m-%Y %H:%i:%s") AS datModMaq									
 						FROM
@@ -233,15 +270,35 @@ function customGetQueryForGetRecords($table)
 						WHERE _08_datBaixaMaq   IS NULL;';
 			break;
 		case 'maqInstall': //3485
-			$query    = 'SELECT M.*,
-								DATE_FORMAT(_06_datAltaMaqInst,"%d-%m-%Y %H:%i:%s") AS datAltaMaqInst,
-								DATE_FORMAT(_07_datModMaqInst, "%d-%m-%Y %H:%i:%s") AS datModMaqInst									
-						FROM
-							maqInstall AS M
-						WHERE _08_datBaixaMaqInst   IS NULL;';
+			$query    = 'SELECT MQ.*,
+								_00_pk_idMaqInst_auto AS recid,
+								_01_pk_idMaqInst   AS idMaq,									
+								_02_macMaq,
+								_01_pk_idJoc AS idJoc,
+								_02_nomJoc,
+								_03_numPartidesJugadesMaqInst AS numPartides,
+								_05_totCredJocMaqInst AS totalCredits,
+								DATE_FORMAT(_06_datAltaMaqInst, "%d-%m-%Y %H:%i:%s") AS datAltaMaqInst,
+								DATE_FORMAT(_07_datModMaqInst,  "%d-%m-%Y %H:%i:%s") AS datModMaqInst									
+						FROM joc
+							LEFT JOIN maqInstall AS MQ ON _01_pk_idJoc     = _02_pk_idJocInst
+							INNER JOIN maquina   ON _01_pk_idMaqInst = _01_pk_idMaq
+						WHERE 	
+							_08_datBaixaJoc      IS NULL AND
+							_08_datBaixaMaqInst  IS NULL AND
+							_08_datBaixaMaq      IS NULL	
+						GROUP BY idMaq,idJoc
+		 				ORDER BY idMaq,idJoc;';		
+			// $query    = 'SELECT M.*,
+			// 					DATE_FORMAT(_06_datAltaMaqInst,"%d-%m-%Y %H:%i:%s") AS datAltaMaqInst,
+			// 					DATE_FORMAT(_07_datModMaqInst, "%d-%m-%Y %H:%i:%s") AS datModMaqInst									
+			// 			FROM
+			// 				maqInstall AS M
+			// 			WHERE _08_datBaixaMaqInst   IS NULL;';
 			break;			
 		case 'ubicacio': //3830
 			$query    = 'SELECT U.*,
+								_01_pk_idUbic AS recid,			
 								DATE_FORMAT(_14_datAltaUbic,"%d-%m-%Y %H:%i:%s") AS datAltaUbic,
 								DATE_FORMAT(_15_datModUbic, "%d-%m-%Y %H:%i:%s") AS datModUbic
 						FROM
@@ -282,14 +339,19 @@ function customGetQueryForGetRecords($table)
 
 function customGetQueryForDelete($table, $id, $kName)
 	{
+	$query = "";		
 	switch($table)
 		{
+		case 'productes':
+			$query    = sprintf("UPDATE productes SET datModPro   = NOW(),
+										 	          datBaixaPro = NOW()
+						 		WHERE datBaixaPro IS NULL AND id = '%d';",$id);
+			$response = dbExec($query,0);	
 		case 'ronda':
 			$query = sprintf("UPDATE ronda SET _08_datModRonda   = NOW(),
 									   	       _09_datBaixaRonda = NOW()
 							 WHERE _09_datBaixaRonda IS NULL AND _00_pk_idRonda_auto = '%d';",$id);
-			$response = dbExec($query,0);	
-			$data = controlErrorQueryFromDbui( $response, $id, $kName);
+			$response = dbExec($query,0);
 			break;
 		case 'joc':
 			$query = sprintf("UPDATE torneig SET _08_datModTorn   = NOW(),
@@ -304,14 +366,12 @@ function customGetQueryForDelete($table, $id, $kName)
 											 _08_datBaixaJoc = NOW()
 							  WHERE _01_pk_idJoc = '%d' AND _08_datBaixaJoc IS NULL;",$id);
 			$response = dbExec($query,0);	
-			$data = controlErrorQueryFromDbui( $response, $id, $kName);
 			break;
 		case 'torneig':
 			$query = sprintf("UPDATE torneig SET _08_datModTorn   = NOW(),
 												 _09_datBaixaTorn = NOW()
 							  WHERE _01_pk_idTorn = '%d' AND _09_datBaixaTorn IS NULL;",$id);
-			$response = dbExec($query,0);	
-			$data = controlErrorQueryFromDbui( $response, $id, $kName);							
+			$response = dbExec($query,0);							
 			break;
 		case 'maquina':
 			$query = sprintf("UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
@@ -321,27 +381,25 @@ function customGetQueryForDelete($table, $id, $kName)
 			$query = sprintf("UPDATE maquina SET _07_datModMaq   = NOW(),
 												 _08_datBaixaMaq = NOW()
 					  		  WHERE _01_pk_idMaq = '%d' AND _08_datBaixaMaq IS NULL;",$id);
-			$response = dbExec($query,0);
-			$data = controlErrorQueryFromDbui( $response, $id, $kName);			
+			$response = dbExec($query,0);	
 			break;
 		case 'maqInstall':
 			$query = sprintf("UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
 													_08_datBaixaMaqInst = NOW()				
 							  WHERE _00_pk_idMaqInst_auto = '%d' AND _08_datBaixaMaqInst IS NULL;",$id);
-			$response = dbExec($query,0);			
-			$data = controlErrorQueryFromDbui( $response, $id, $kName);			
+			$response = dbExec($query,0);				
 			break;			
 		case 'ubicacio':
 			$query = sprintf("UPDATE ubicacio SET _15_datModUbic   = NOW(),
 												  _16_datBaixaUbic = NOW()
 							  WHERE _01_pk_idUbic = '%d' AND _16_datBaixaUbic IS NULL;",$id);
-			$response = dbExec($query,0);			
-			$data = controlErrorQueryFromDbui( $response, $id, $kName);			
+			$response = dbExec($query,0);				
 			break;			
 		default:
 			$data = "";
 			break;
-		}			
+		}
+	if ($query != "") $data = controlErrorQueryFromDbui( $response['status'], $id, $kName);		
 	return ($data);	
 	}
 
@@ -351,6 +409,7 @@ function customGetQueryForGetRecord($table, $id, $kName)
 		{
 		case 'torneig':
 			$query  = "SELECT T.*,
+							_01_pk_idTorn AS recid,			
 							DATE_FORMAT(_05_datIniTorn, '%m/%d/%Y') AS datIniTorn,
 							DATE_FORMAT(_06_datFinTorn, '%m/%d/%Y') AS datFinTorn
 						FROM $table AS T
@@ -363,9 +422,10 @@ function customGetQueryForGetRecord($table, $id, $kName)
 	return ($query);
 	}							
 
-function controlErrorQueryFromDbui($response, $id, $kName)
+
+function controlErrorQueryFromDbui($status, $id, $kName)
 {
-	if ($response['status'] != "error")
+	if ($status != "error")
 		{
 		$data[$kName] = $data['recid'] = ($id != 0) ? $id : mysql_insert_id();
 		$data['rows'] = mysql_affected_rows();

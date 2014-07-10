@@ -54,14 +54,14 @@ if (isset($_REQUEST['cmd']) ) :
 										  							$record['_05_totCredJocMaqInst']);
 				endif;
 				$response = controlErrorQuery( dbExec($query,0) );
-				$data = controlErrorQueryFromDbui( $response, $id, $kName);
+				$data = controlErrorQueryFromDbui( $response['status'], $id, $kName);
 				$record['recid'] = $data['recid'];
 				$data['record']  = $record;
 	  			break;
 
 			case 'delete' :
 				$qry = sprintf("UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
-														_08_datBaixaMaqInst = NOW()				
+													  _08_datBaixaMaqInst = NOW()				
 								  WHERE _00_pk_idMaqInst_auto = '%d' AND 
 								        _08_datBaixaMaqInst IS NULL;",$id);
 				$sql = SqlExec($qry);

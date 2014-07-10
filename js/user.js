@@ -19,14 +19,13 @@ w2ui.layout.content('left',
 			   		},
 					{ id: '5060', text: 'Tots els Torneigs', img: 'icon-folder',
 						nodes: [
-							{ id: '5061', text: 'Consulta', img: 'icon-page' },
+							{ id: '5061', text: 'Consulta - Inscripcions', img: 'icon-page' },
 					   		{ id: '5062', text: 'Ranking', img: 'icon-folder',
 					   			nodes: [
 					   				{ id: '5070', text: 'Actual', img: 'icon-page' },
 					   				{ id: '5071', text: 'Històric', img: 'icon-page' }
 					   			]
-					   		},
-					   		{ id: '5063', text: 'Inscripció', img: 'icon-edit' } 
+					   		}
 					   	]
 					}
 				]
@@ -75,36 +74,6 @@ var controller = function(e) {
 				    	}
 				    }
       			};		
-        //     toolbar = { 
-        //         items: [
-	       //          { type: 'button', id: 'del',  caption: 'baixa', img: 'icon-delete' }
-	       //      ],
-        //         onClick: function(target, data) {
-			     //    var row = w2ui['grid'].getSelection();
-
-			     //    if (row.length != 0) {
-			     //        w2confirm('Estas segur ?', "Donar-te de baixa del torneig", 
-			     //        function (msg) { 
-
-			     //            if (msg=='Yes') {
-								// w2ui['grid'].lock('Actualitzant dades ...', true);
-
-								// $.ajax({url: "query.php", data: {pid: "5043", idTorn: row[0]}})
-								// .done(function(e) {
-								// 	// console.log(e);
-				    //                 w2ui['grid'].reload();
-								// })
-								// .fail(function(error) { 
-								// 	// console.log(error);	
-								// })
-								// .always(function() { 
-								// 	w2ui['grid'].unlock();
-								// });
-			     //            }
-			     //        })
-			     //    }  
-        //         }
-        //     };            
 			columns = [
 				{ field: 'idTorn',       caption: 'Torneig',     size: '25%' },
 				{ field: 'nomTorn',      caption: 'Nom',         size: '25%' },
@@ -145,15 +114,40 @@ var controller = function(e) {
 
 		case '5061':
 			columns = [
-				{ field: 'idTorn',  caption: 'Torneig', size: '12%' },
-				{ field: 'nomTorn', caption: 'Nom',     size: '12%' },
-				{ field: 'idJoc',   caption: 'Joc',     size: '12%' },
-				{ field: 'nomJoc',  caption: 'Nom joc', size: '12%' },
-				{ field: 'premiTorn',   caption: 'Premi (€)',  size: '12%',attr: 'align=center' },
-				{ field: 'datIniTorn',  caption: 'Data Inici', size: '12%' },
-				{ field: 'datFinTorn',  caption: 'Data Final', size: '12%' }
+				{ field: 'idTorn',           caption: 'idTorn',      size: '6%' },
+				{ field: 'nomTorn',          caption: 'Torneig',     size: '15%' },
+				{ field: 'premiTorn',        caption: 'Premi (€)',   size: '9%',attr: 'align=center' },
+				{ field: 'idJoc',            caption: 'Joc',         size: '6%' },
+				{ field: 'nomJoc',           caption: 'Nom Joc',     size: '15%' },
+				{ field: 'datIniTorn',       caption: 'Inici Torn.', size: '9%' },
+				{ field: 'datFinTorn',       caption: 'Final Torn.', size: '9%' },
+				{ field: 'datAltaTorn',      caption: 'Data Alta',   size: '16%' },
 			];
-		   	DataGrid("Torneigs actius per inscripcions", false, true, columns, e.target);
+
+            toolbar = { 
+	            items: [
+	                { type: 'button', id: 'edit',    caption: 'Inscripció',    	 img: 'icon-add' },
+	            ],
+                onClick: function(target, data) {
+			        var row = w2ui['grid'].getSelection();
+			        var row = w2ui['grid'].get(row);
+				    if (row.length != 0)
+				    	{
+				    	console.log(row);
+				    	switch(target)
+				    		{
+				    		case 'edit':
+					        	var params ={pid: "5063", idTorn: row['idTorn'], idJoc: row['idJoc']};
+						     	msgAction("Inscripció a un Torneig", 'Estàs segur ?', "query.php", params);
+					        	break;
+					        default:
+					        	console.log(target , " No definit");
+					        	break;
+					        }
+				    	}
+				    }
+      			};
+		   	DataGrid("Torneigs actius per inscripcions", false, toolbar, columns, e.target);
 		    break;	
 
 		case '5070':
@@ -183,61 +177,6 @@ var controller = function(e) {
 			];
 	    	DataGrid("Ranking històric dels torneigs", false, true, columns, e.target);				
 		    break;		
-
-		case '5063':
-			columns = [
-				{ field: '_01_pk_idTornInsc',caption: 'idTorn',      size: '6%' },
-				{ field: '_03_nomTorn',      caption: 'Torneig',     size: '15%' },
-				{ field: '_04_premiTorn',    caption: 'Premi (€)',   size: '9%',attr: 'align=center' },
-				{ field: '_02_pk_idJocInsc', caption: 'Joc',         size: '6%' },
-				{ field: '_02_nomJoc',       caption: 'Nom Joc',     size: '15%' },
-				{ field: 'datIniTorn',       caption: 'Inici Torn.', size: '9%' },
-				{ field: 'datFinTorn',       caption: 'Final Torn.', size: '9%' },
-				{ field: 'datAltaTorn',      caption: 'Data Alta',   size: '16%' },
-				{ field: 'datModTorn',       caption: 'Data Modif.', size: '16%' }				
-			];
-
-			fields = [
-				{ name: '_01_pk_idTornInsc', type: 'text', required: true },
-				{ name: '_02_pk_idJocInsc', type: 'text', required: true },
-			];
-
-
-            toolbar = { 
-	            items: [
-	                { type: 'button', id: 'new',    caption: 'Afegir',    	 img: 'icon-add' },
-	                { type: 'button', id: 'lock',   caption: 'bloquejar',    img: 'icon-delete' },
-	                { type: 'button', id: 'unlock', caption: 'desbloquejar', img: 'icon-edit' }
-	            ],
-	            onClick: function(target, data) {
-			        var action = "../html/ubicamaq.php";
-			        var row    = w2ui['grid'].getSelection();
-
-			    	switch(target) {
-			    		case 'new':
-			        		DataForm("Afegir màquina a una ubicació", 0, fields, action, 
-			        				{param:'inscrit', keyname:'_00_pk_idInsc_auto'});	
-				        	break;
-
-			    		case 'lock':
-				        	var params ={pid: "3900", idUTM: row[0]};
-				        	if (row.length != 0)
-					     	msgAction("Desactivar una màquina d'una ubicació", 'Estàs segur ?', "query.php", params);
-				        	break;
-				        case 'unlock':
-				        	var params ={pid: "3905", idUTM: row[0]};					        
-				        	if (row.length != 0)
-					     	msgAction("Activar una màquina d'una ubicació", 'Estàs segur ?', "query.php", params);
-				        	break;
-
-				        default:
-				        	console.log(target, " No definit");
-				        	break;
-				    }
-			    }
-  			};	
-		    DataGrid("Inscripció a un Torneig", "inscrit", toolbar, columns, fields, 5063, "_00_pk_idInsc_auto");
-		    break;
 
 		default:
 		    console.log("default");
