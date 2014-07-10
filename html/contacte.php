@@ -33,7 +33,7 @@ comprovaSessio();
 			<p>El nostre objectiu és la millora contínua, per això totes les opinions compten i ens ajuden a seguir avançant. Si vols expressar alguna idea o tens algun suggeriment sobre els nostres productes o la nostra marca, t’agrairem que ens contactis des del nostre correu electrònic. Les teves inquietuds seran tingudes en compte i les teves idees també.</p><br>
 			<img src="../resources/img/idea.png" height="300" width="220" alt="" style="float:left;margin-right:40px;">
 
-			<div id="form" style="width: 60%;">
+			<div id="contact" style="width: 60%;">
 				<div class="w2ui-page page-0">
 					<div class="w2ui-label">Nom:</div>
 					<div class="w2ui-field">
@@ -72,8 +72,8 @@ comprovaSessio();
 <script type="text/javascript" src="../js/lib/dbui.js"></script>
 <script>
 $(function () {
-	$('#form').w2form({ 
-		name  : 'form',
+	$('#contact').w2form({ 
+		name  : 'contact',
 		url   : 'query.php',
 		fields: [
 			{ name: 'nom', 			type: 'text', required: true },

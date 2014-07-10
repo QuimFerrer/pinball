@@ -89,9 +89,13 @@ else: ?>
 	<div class="w2ui-label">Premi:</div>
 	<div class="w2ui-field"><input name="_04_premiTorn" maxlength="50" size="30"/></div>
 	<br>
-	<div class="w2ui-label">Escollir el joc:</div>
-	<div class="w2ui-field">
+
 <?php 
+if (isset($_REQUEST['joc']) ) :
+
+	echo '<div class="w2ui-label">Escollir el joc:</div>';
+	echo '<div class="w2ui-field">';
+
 	$query    = 'SELECT * FROM joc WHERE _08_datBaixaJoc IS NULL';
 	$response = dbExec($query)[1];
 
@@ -101,8 +105,9 @@ else: ?>
 		echo '<option value="'. $joc->_01_pk_idJoc .'">'. $joc->_02_nomJoc .'</option>';
 	}
 	echo '</select>';
+    echo '</div>';
+endif;
 ?>
-    </div>
 	<div class="w2ui-label">Data d'inici:</div>
 	<div class="w2ui-field"><input name="datIniTorn" maxlength="60" size="30"/></div>
 	<div class="w2ui-label">Data Finalització:</div>

@@ -403,8 +403,8 @@ var controller = function(e) {
 		        { name: '_02_nomJoc', type: 'text', required: true,
 		          html: { caption: 'Nom', attr: 'size="40"', span: 5 }
 		        },
-		        { name: '_03_descJoc', type: 'text', required: false,
-		          html: { caption: 'Descripció', attr: 'size="1000"', span: 5 }
+		        { name: '_03_descJoc', type: 'textarea', required: false,
+		          html: { caption: 'Descripció', attr: 'size="60"', span: 5 }
 		        },
 		        { name: '_04_imgJoc', type: 'text', required: false,
 		          html: { caption: 'Imatge', attr: 'size="40"', span: 5 }
@@ -471,14 +471,6 @@ var controller = function(e) {
 				{ field: 'datModTorn',       caption: 'Data Modif.', size: '16%' }				
 			];
 
-			fields = [
-				{ name: '_03_nomTorn', type: 'text', required: true },
-				{ name: '_04_premiTorn', type: 'text', required: false },
-				{ name: '_02_pk_idJocTorn', type: 'text', required: true },
-				{ name: 'datIniTorn', type: 'date', required: true },
-				{ name: 'datFinTorn', type: 'date', required: true }
-			];
-
             toolbar = { 
 	            items: [
 	                { type: 'button', id: 'new',  caption: 'Afegir',    img: 'icon-add' },
@@ -491,12 +483,25 @@ var controller = function(e) {
 
 			    	switch(target) {
 			    		case 'new':
+							fields = [
+								{ name: '_03_nomTorn', type: 'text', required: true },
+								{ name:'_02_pk_idJocTorn', type:'text', required:true }, 
+								{ name: '_04_premiTorn', type: 'text', required: false },
+								{ name: 'datIniTorn', type: 'date', required: true },
+								{ name: 'datFinTorn', type: 'date', required: true }
+							];
 			        		DataForm("Crear torneig", 0, fields, action, 
-			        				{param:'torneig', keyname:'_01_pk_idTorn'});	
+			        				{param:'torneig', keyname:'_01_pk_idTorn'}, action+"?joc=true");	
 				        	break;
 
 				        case 'edit':
 				        	if (row.length != 0) 
+								fields = [
+									{ name: '_03_nomTorn', type: 'text', required: true },
+									{ name: '_04_premiTorn', type: 'text', required: false },
+									{ name: 'datIniTorn', type: 'date', required: true },
+									{ name: 'datFinTorn', type: 'date', required: true }
+								];
 				        		DataForm("Modificar torneig", row[0], fields, action, 
 				        				{param:'torneig', keyname:'_01_pk_idTorn'});
 				        	break;

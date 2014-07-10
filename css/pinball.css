@@ -1,13 +1,12 @@
 /*
  * CSS for pinball project
  */
-
 /* Reset */
  * {
  	margin:  0;
  	padding: 0;
  	list-style: none;
- }
+}
 
 /* General */
 body {
@@ -226,4 +225,32 @@ p.text-dialog {
 }
 #errorLogin {
 	color: red;
+}
+#partides {
+	height: 450px;
+	background-color: #FFF4F4;
+	padding: 30px;
+	margin-left: 10px;
+	font-size: 1.3em;
+	overflow: hidden;
+	background-image: url(../resources/img/generator.png);
+	background-repeat: no-repeat;
+	background-position: top right;
+}
+#partides input[type="submit"] {
+	margin-top: 15px;
+	padding: 15px 30px;
+	font-size: 0.75em;
+}
+#partides input[type="submit"]:hover {
+	color:#FFF;
+	background-color:#8C8CF3;
+}
+#partides p {
+	padding: 15px 0;
+}
+@media (max-width: 767px) {
+	img.perfil{
+	visibility:hidden;
+	position:fixed;
 }

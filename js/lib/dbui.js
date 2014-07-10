@@ -257,17 +257,25 @@ var dbForm = function() {
     };
 
     this.Activate = function() {
-        // Alçada del camp:29px
-        var height = this.fields.length*29; 
+        var i, width;
+        var maxWidth=0;
+        // Alçada del camp:30px
+        var height = this.fields.length*30; 
         // Incrementa 134px barra de botons
         height +=134; 
+        // Determinant l'amplada màxima dels camps
+        for (i in this.fields) {
+            width = parseInt(this.fields[i].html.attr.substr(6, 3));
+            if(width>maxWidth) maxWidth=width;
+        }
+        maxWidth*=11.25; //size to pixel
 
         $().w2popup('open', {
             title   : self.title,
             modal   : true,
             body    : '<div id="popform"></div>',
             style   : 'padding: 0px',
-            width   : 450,
+            width   : maxWidth,
             height  : height
         });
         // Forma equivalent
@@ -331,8 +339,9 @@ function DataView(url) {
  *  Api per a formulari de manteniment de grid
  **********************************************************************************************
  */
-function DataForm(title, id, fields, action, params) {
+function DataForm(title, id, fields, action, params, formLoad) {
 
+    var formUrl = (typeof formLoad==='undefined') ? action : formLoad;
     w2ui.layout.content('main', "");
     w2ui.layout.lock('main', 'Consultant dades...', true);
 
@@ -345,7 +354,7 @@ function DataForm(title, id, fields, action, params) {
             header   : title,
             url      : action,
             postData : params,
-            formURL  : action,
+            formURL  : formUrl,
             fields   : fields,
             msgSaving  : 'Guardant dades...',
             actions: {
