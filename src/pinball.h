@@ -132,10 +132,10 @@ function dbExecLocal($query,$tipusResultat) {
                 <li><a id="contacte"    href="../html/contacte.php">Contactar</a></li>
             </ul>
             <div id="dialog">
-                <span>Accés a usuaris registrats</span>
+                <span>Accés usuaris registrats</span>
                 <span id="errorLogin"></span>                        
                 <form name="login" action="" method="post">
-                    <input type="text" name="usr" placeholder="Nom d'usuari" required>
+                    <input type="text" name="usr" placeholder="Nom d'usuari" required autofocus>
                     <input type="password" name="pwd" placeholder="Clau d'accés">
                     <input type="submit" name="entrar" value="Entrar"/>
                 </form>
@@ -160,7 +160,7 @@ function dbExecLocal($query,$tipusResultat) {
     else
         {
 ?>
-    <script>document.querySelector("#errorLogin").innerHTML = "</br>Usuari o clau incorrecte";</script>
+    <script>document.querySelector("#errorLogin").innerHTML = "Usuari o clau incorrecte";</script>
 <?php
         echo '<meta content="2" http-equiv="REFRESH"> </meta>';     
         }

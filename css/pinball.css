@@ -34,12 +34,43 @@ section {
 	padding: 1px;
 	overflow: auto;
 }
-section.staticPage{
+section.staticPage {
 	padding: 15px 20px;
 }
+section.mainPage {
+	background-color: #F3F0F7;
+	padding: 15px;
+}
+section.mainPage h2 {
+	font-size: 2.3em;
+	font-weight: normal;
+	color: #FAABAB;
+}
+section.mainPage h3,
+section.mainPage h4 {
+	font-size: 1.8em;
+	font-weight: normal;
+	text-transform: uppercase;
+	color: #ABA9D3;
+}
+section.mainPage h4 {
+	text-align: right;
+	color:#5ACE63;
+}
 section.mainPage ul li {
-	width:30%;
-	float: left;
+	width:31%;
+	display: inline-block;
+	overflow: auto;
+	padding: 10px;
+	margin-right: 5px;
+}
+section.mainPage ul li img {
+	float:left;
+	margin-right: 20px;
+}
+section.mainPage p {
+	font-size: 0.9em;
+	text-align: justify;
 }
 footer {
 	clear: both;
@@ -65,6 +96,7 @@ footer {
 	padding-top: 7px;
 	padding-bottom: 7px;
 	background-color: #165489;
+	overflow: auto;
 /*	box-shadow: 6px 3px 5px #D8D7D7;
 */}
 .menu,
@@ -72,9 +104,9 @@ section,
 header {
 		border-top: 2px solid #E9E9E6;
 }
-.menu ul,
-.menu #dialog {
-	display: inline-block;
+.menu ul {
+	width: 58%;
+	float: left;
 }
 .menu .login ul {
 	width: 57%;
@@ -99,14 +131,16 @@ header {
 	padding:2px;
 	display: inline-block;
 }
-.menu span:first-child {
-	color: #6AE26A;
+#dialog span:first-child {
+	color: #FAE5E5;
 }
-
+/* Caixa de login */
 #dialog {
-	width: 40%;
-	padding: 10px 0 10px 20px;
-	border-left: 4px solid #C0EDFE;
+	width: 39%;
+	float: right;
+	padding: 10px;
+	margin-right: 10px;
+	border-left: 1px solid #FAE5E5;
 }
 #dialog input[type=text],
 #dialog input[type=password] {
@@ -117,23 +151,19 @@ header {
   background-color: #ffffff;
 }
 #dialog input[type="submit"] {
-	padding: 5px 10px;
+	padding: 6px 30px;
 }
-
 #dialog input[type="text"],
-#dialog input[type="password"]
- {
+#dialog input[type="password"] {
 	margin:  0;
  	padding: 0;
- 	list-style: none;
- 	border:1px solid gray;
- 	border-radius: 0;
- 	width: 151px;
- 	height:18px;
+ 	width: 150px;
+ 	height:30px;
+ 	font-size: 16px;
 }
 
 /* usuaris.php */
-h2 {
+h2.users {
 	background-color: #000;
 	color: #FFF;
 	padding: 5px 15px;
@@ -197,4 +227,7 @@ p.text-dialog {
 	width: 60%;
 	padding: 10px;
 	line-height: 22px;
+}
+#errorLogin {
+	color: red;
 }

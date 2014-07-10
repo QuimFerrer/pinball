@@ -18,7 +18,7 @@ if (isset($_SESSION['autentificat']))
     if ($_SESSION['autentificat'] != "SI")
 	    {
         //si no existeix, envio a la pàgina de autentificació
-        $extra = 'inici.php';
+        $extra = 'index.php';
         header("Location: http://$host$uri/$extra");
     	}
     else
