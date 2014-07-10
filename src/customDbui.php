@@ -1,5 +1,4 @@
 <?php
-
 function customQuerySaveRecord($pid, $id, $record, $kName)
 {
 	switch($pid)

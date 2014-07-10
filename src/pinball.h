@@ -2,12 +2,6 @@
 
 define("LOCAL", true);
 
-function dbExec($query,$tipusResultat=1) {
-    if(LOCAL) $response = dbExecLocal ($query, $tipusResultat);
-    else      $response = dbExecRemote($query, $tipusResultat);
-    return $response;
-    }
-
 function controlErrorQuery($response)
 {
     $estat = $response[0];
@@ -19,6 +13,13 @@ function controlErrorQuery($response)
         if ($_SESSION['endTime'] === "SI")
             $response = array("status" => "error", "message" => "La sessió ha expirat. Torna a fer Login a l'aplicació.");
     return ($response);
+}
+
+function dbExec($query,$tipusResultat=1) {
+    
+    if(LOCAL) $response = dbExecLocal ($query, $tipusResultat);
+    else      $response = dbExecRemote($query, $tipusResultat);
+    return $response;
 }
 
 function dbExecRemote($query,$tipusResultat) {

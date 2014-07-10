@@ -1,6 +1,7 @@
 <?php
 
 include ("../src/pinball.h");
+include ("../src/conex.php");
 include ("../src/seguretat.php"); 
 include ("../src/customDbui.php"); 
 
@@ -33,13 +34,13 @@ isEndSessionInQuery();
 	{
 		case 'get-record' :
 			$qry = customGetQueryForGetRecord($table, $id, $kName);		
-			$result = Sql_Exec($qry);
+			$result = SqlExec($qry);
 			$data 	= mysql_fetch_assoc($result);
 			break;
 
 		case 'get-records' :
 			$qry = customGetQueryForGetRecords($table);
-			$result = Sql_Exec($qry);
+			$result = SqlExec($qry);
 
 			while ($row = mysql_fetch_assoc($result)) {
 				   $row["recid"] = current($row);	
@@ -53,11 +54,11 @@ isEndSessionInQuery();
 		case 'delete' :
 			$data = customGetQueryForDelete($table, $id, $kName);
 			if ($data == "")
-				{
-				$query  = "DELETE FROM $table WHERE $kName=$id";
-	    		$sql  = Sql_Exec($qry);
+			{
+				$qry  = "DELETE FROM $table WHERE $kName=$id";
+	    		$sql  = SqlExec($qry);
 				$data = array( 'cmd' => 'delete', 'success' => (mysql_affected_rows() != 0) );
-				}	
+			}	
 			break;
 
 		case 'save-record' :
@@ -85,7 +86,7 @@ isEndSessionInQuery();
 					$qry  = "INSERT INTO $table (". $sKey . ") VALUES (". $sVal . ")";
 				endif;
 
-				$sql = Sql_Exec($qry);
+				$sql = SqlExec($qry);
 				$data['recid'] = ($id != 0) ? $id : mysql_insert_id();
 				$data['rows']  = mysql_affected_rows();
 			endif;
@@ -93,16 +94,4 @@ isEndSessionInQuery();
 	}
 
 	echo json_encode( $data );
-
-
-	function Sql_Exec($query) {
-		
-		$result = mysql_query($query);
-
-		if (!$result) {
-		    die('Consulta no valida: ' . mysql_error());
-		}
-
-		return $result;
-	}
  ?>
