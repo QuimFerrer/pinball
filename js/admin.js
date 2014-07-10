@@ -50,11 +50,20 @@ w2ui.layout.content('left',
 										{ id: '3590', text: 'Provincia,Població i Màquina',  img: 'icon-page' },
 										{ id: '3600', text: 'Joc',  img: 'icon-page' },
 										{ id: '3610', text: 'Joc, Màq i Població',  img: 'icon-page' },											
-										{ id: '3620', text: 'Joc, Màq, Provincia i Població',  img: 'icon-page' }]},
-								{ id: '3700', text: 'Estadístiques',  img: 'icon-folder',
-								nodes: [{ id: '3710', text: '1',  img: 'icon-page' },
-										{ id: '3720', text: '2',  img: 'icon-page' },									
-										{ id: '3730', text: '3',  img: 'icon-page' }]}]},											
+										{ id: '3620', text: 'Joc, Màq, Provincia i Població',  img: 'icon-page' }] }] },
+						{ id: '3700', text: 'Estadístiques',  img: 'icon-folder',
+						nodes: [{ id: '3701', text: 'Jocs',  img: 'icon-folder',
+								nodes: [{ id: '3711', text: '1',  img: 'icon-page' },
+										{ id: '3712', text: '2',  img: 'icon-page' },
+										{ id: '3713', text: '3',  img: 'icon-page' }]},
+								{ id: '3720', text: 'Màquines',  img: 'icon-folder',
+								nodes: [{ id: '3721', text: '1',  img: 'icon-page' },
+										{ id: '3722', text: '2',  img: 'icon-page' },
+										{ id: '3723', text: '3',  img: 'icon-page' }]},
+								{ id: '3730', text: 'Ubicacions',  img: 'icon-folder',
+								nodes: [{ id: '3731', text: '1',  img: 'icon-page' },
+										{ id: '3732', text: '2',  img: 'icon-page' },
+										{ id: '3733', text: '3',  img: 'icon-page' }]} ]},
 						{ id: '3800', text: 'Ubicacions', img: 'icon-folder',
 						nodes: [{ id: '3830', text: 'Manteniment',  img: 'icon-edit' },
 								{ id: '3840', text: 'Històric',  img: 'icon-page' },							
@@ -252,6 +261,15 @@ var controller = function(e) {
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 
+		case '3711':
+		case '3712':
+		case '3713':
+		case '3721':
+		case '3722':
+		case '3723':
+		case '3731':
+		case '3732':
+		case '3733':
 
 		case '3000':
 		    DataView('../html/perfilAdm.php');		
