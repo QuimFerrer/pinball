@@ -195,11 +195,11 @@ img.perfil {
 }
 #grid,
 #sidebar {
-	height: 500px;
+	height: 510px;
 	float: left;
 }
 #form {
-	height: 500px;
+	height: 495px;
 }
 #toolbar {
 	padding: 4px; 
