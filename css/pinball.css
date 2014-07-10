@@ -26,11 +26,9 @@ header {
 	padding: 3px 0 3px 10px;
 	color: #C7C4E7;
 	background-color: #FFF4F4;
-/*	box-shadow: 6px 3px 5px #D8D7D7;
-*/}
+}
 section {
 	background-color: #fff;
-	border: 1px solid #E9E9E6;
 	padding: 1px;
 	overflow: auto;
 }
@@ -100,7 +98,6 @@ footer {
 /*	box-shadow: 6px 3px 5px #D8D7D7;
 */}
 .menu,
-section,
 header {
 		border-top: 2px solid #E9E9E6;
 }
@@ -185,8 +182,7 @@ header {
 /* perfil.php */
 img.perfil {
 	float: right;
-/*	width: 220px;
-*/	height: 250px;
+	width: 220px;
 	margin: 50px;
 }
 #grid {
