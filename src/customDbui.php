@@ -346,54 +346,54 @@ function customGetQueryForDelete($table, $id, $kName)
 			$query    = sprintf("UPDATE productes SET datModPro   = NOW(),
 										 	          datBaixaPro = NOW()
 						 		WHERE datBaixaPro IS NULL AND id = '%d';",$id);
-			$response = dbExec($query,0);	
+			$response = controlErrorQuery( dbExec($query,0) );
 		case 'ronda':
 			$query = sprintf("UPDATE ronda SET _08_datModRonda   = NOW(),
 									   	       _09_datBaixaRonda = NOW()
 							 WHERE _09_datBaixaRonda IS NULL AND _00_pk_idRonda_auto = '%d';",$id);
-			$response = dbExec($query,0);
+			$response = controlErrorQuery( dbExec($query,0) );
 			break;
 		case 'joc':
 			$query = sprintf("UPDATE torneig SET _08_datModTorn   = NOW(),
 												 _09_datBaixaTorn = NOW()
 							  WHERE _02_pk_idJocTorn = '%d' AND _09_datBaixaTorn IS NULL;",$id);
-			$response = dbExec($query,0);
+			$response = controlErrorQuery( dbExec($query,0) );
 			$query = sprintf("UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
 								  					_08_datBaixaMaqInst = NOW()
 							  WHERE _02_pk_idJocInst = '%d' AND _08_datBaixaMaqInst IS NULL;",$id);
-			$response = dbExec($query,0);
+			$response = controlErrorQuery( dbExec($query,0) );
 			$query = sprintf("UPDATE joc SET _07_datModJoc   = NOW(),
 											 _08_datBaixaJoc = NOW()
 							  WHERE _01_pk_idJoc = '%d' AND _08_datBaixaJoc IS NULL;",$id);
-			$response = dbExec($query,0);	
+			$response = controlErrorQuery( dbExec($query,0) );
 			break;
 		case 'torneig':
 			$query = sprintf("UPDATE torneig SET _08_datModTorn   = NOW(),
 												 _09_datBaixaTorn = NOW()
 							  WHERE _01_pk_idTorn = '%d' AND _09_datBaixaTorn IS NULL;",$id);
-			$response = dbExec($query,0);							
+			$response = controlErrorQuery( dbExec($query,0) );						
 			break;
 		case 'maquina':
 			$query = sprintf("UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
 													_08_datBaixaMaqInst = NOW()
 							  WHERE _01_pk_idMaqInst = '%d' AND _08_datBaixaMaqInst IS NULL;",$id);
-			$response = dbExec($query,0);							
+			$response = controlErrorQuery( dbExec($query,0) );						
 			$query = sprintf("UPDATE maquina SET _07_datModMaq   = NOW(),
 												 _08_datBaixaMaq = NOW()
 					  		  WHERE _01_pk_idMaq = '%d' AND _08_datBaixaMaq IS NULL;",$id);
-			$response = dbExec($query,0);	
+			$response = controlErrorQuery( dbExec($query,0) );
 			break;
 		case 'maqInstall':
 			$query = sprintf("UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
 													_08_datBaixaMaqInst = NOW()				
 							  WHERE _00_pk_idMaqInst_auto = '%d' AND _08_datBaixaMaqInst IS NULL;",$id);
-			$response = dbExec($query,0);				
+			$response = controlErrorQuery( dbExec($query,0) );		
 			break;			
 		case 'ubicacio':
 			$query = sprintf("UPDATE ubicacio SET _15_datModUbic   = NOW(),
 												  _16_datBaixaUbic = NOW()
 							  WHERE _01_pk_idUbic = '%d' AND _16_datBaixaUbic IS NULL;",$id);
-			$response = dbExec($query,0);				
+			$response = controlErrorQuery( dbExec($query,0) );
 			break;			
 		default:
 			$data = "";
