@@ -2303,12 +2303,12 @@ isEndSessionInQuery();
 				break;				
 
 			case INSCRIPCIO_USR_TORNEIG_5063 :
-				// $query = sprintf("SELECT _01_pk_idUsuari INTO @IDJUG 
-				// 		  			FROM usuari 
-				// 		  			WHERE _04_loginUsuari = '%s';",$usrLogin);
-				// $response  = dbExec($query,0);
+				$query = sprintf("SELECT _01_pk_idUsuari INTO @IDJUG 
+						  			FROM usuari 
+						  			WHERE _04_loginUsuari = '%s';",$usrLogin);
+				$response  = dbExec($query,0);
 				$query = sprintf("INSERT INTO inscrit 
-										VALUES (NULL,'%d','%d','%s',NOW(),NULL,NULL);",$idTorn,$idJoc,"joan");
+										VALUES (NULL,'%d','%d',@IDJUG,NOW(),NULL,NULL);",$idTorn,$idJoc);
 				$response  = dbExec($query,0);
 				echo json_encode( $response );		
 				break;				

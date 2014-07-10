@@ -130,9 +130,10 @@ var controller = function(e) {
 	            ],
                 onClick: function(target, data) {
 			        var row = w2ui['grid'].getSelection();
+			        var row = w2ui['grid'].get(row);
 				    if (row.length != 0)
 				    	{
-				    	// console.log(row);
+				    	console.log(row);
 				    	switch(target)
 				    		{
 				    		case 'edit':
