@@ -45,11 +45,7 @@ $(document).ready(function(){
 		$.ajax({
 		    url: "query.php",
 		    data: {pid:'6000', idUserPart:iuserlogin},
-		    success: function(Resultat1){
-		    	console.log(Resultat1);
-		    	crearmenu(Resultat1);
-		    }
-		});
+		    success: function(Resultat1){crearmenu(Resultat1);}});
 	});
      
     function crearmenu(dadesretornades1){ // Els torneigs retornats, i les dades implicades, creen dinàmicament un menu desplegable select.
@@ -60,7 +56,7 @@ $(document).ready(function(){
 	 
 		if (dadesconvert.total>0) {
 		
-			$("#llistat").html('Tria una combinacio: </br> <select id="seleccionador"  name="Combinacio"> </select>'); // label="Combinacio"
+			$("#llistat").html('</br> Tria una combinacio: </br> <select id="seleccionador"  name="Combinacio"> </select>'); // label="Combinacio"
 			
 		  	var contingut = "";
 		
@@ -113,10 +109,11 @@ $(document).ready(function(){
 
 	    aleatoris();    
 	    
-	    $.ajax({ // Precarregar (=SI): els valors seleccionats al PHP (que conectarà amb la DB per fer les modificacions(.
+	   /* $.ajax({ // Precarregar (=SI): els valors seleccionats al PHP (que conectarà amb la DB per fer les modificacions(.
 	      url: "partides.php",
-	      data: {carregar:'SI', MAQ:seraMaquina, JOC:seraJoc, JUG:esJug, FOTO:'NO', TORNID:seraTorneigId, PUNTUA1:sonPunts1, PUNTUA2:sonPunts2, PUNTUA3:sonPunts3}, //date("Y-n-j H:i:s")
-	      success: function(Resultat1){console.log('carregar SI : he carregat els valors que s han d enviar');}});
+	      data: {precarrega:'SI', MAQ:seraMaquina, JOC:seraJoc, JUG:esJug, FOTO:'NO', TORNID:seraTorneigId, PUNTUA1:sonPunts1, PUNTUA2:sonPunts2, PUNTUA3:sonPunts3}, //date("Y-n-j H:i:s")
+	      success: function(Resultat1){console.log('precarrega SI : he carregat els valors que s han d enviar');}});
+	    */
 	    
 	  }); // end jQuery onchange combinacio
     } // end crearmenu
@@ -125,14 +122,15 @@ $(document).ready(function(){
 		e.preventDefault();
 	    $.ajax({ // Precarregar (=NO): els valors precarregats al PHP s'enviaran definitivament a la DB i farà les modificacions. 
 	      url: "partides.php",
-	      data: {carregar:'NO', MAQ:seraMaquina, JOC:seraJoc, JUG:esJug, FOTO:'NO', TORNID:seraTorneigId, PUNTUA1:sonPunts1, PUNTUA2:sonPunts2, PUNTUA3:sonPunts3}, //date("Y-n-j H:i:s")
+	      data: {enviardades:'SI', MAQ:seraMaquina, JOC:seraJoc, JUG:esJug, FOTO:'NO', TORNID:seraTorneigId, PUNTUA1:sonPunts1, PUNTUA2:sonPunts2, PUNTUA3:sonPunts3}, //date("Y-n-j H:i:s")
 	      success: function(Resultat2){processar(Resultat2);}});
 	      
 	        function processar(dadesretornades2){ // Retorn de les notificacions de l'operació de gestió a la DB.
 		//var dadesconvert2= JSON.parse(dadesretornades2); 
 		
 		//var dadesfiltrades = dadesconvert2.records;  
-		document.getElementById('informacions').innerHTML = dadesretornades2;  
+		//document.getElementById('informacions').innerHTML = dadesretornades2;  
+		console.log(dadesretornades2);
 		// return false;
 		}
 	}
@@ -149,10 +147,12 @@ $(document).ready(function(){
 	<section>
 <?php 
       
-	if (isset($_SESSION['emplenat'])) { // Emplenat és la variable que controla si ja hi ha jugadors carregats al menu seleccionable.
+      if (isset($_SESSION['emplenat'])) { // Emplenat és la variable que controla si ja hi ha jugadors disponibles al menu seleccionable.
 
-	if (($_SESSION['emplenat'])=="NO") // Emplenat=NO: Encara no  hi ha jugadors carregats al menu seleccionable i s'han de cridar amb query de la DB.
-	{
+	if ($_SESSION['emplenat']=="NO"){ // (($_SESSION['emplenat']=="NO") && ($_SESSION['opcio'] =="NO") ) Emplenat=NO: Encara no hi ha jugadors precarregats al menu seleccionable i s'han de cridar amb query de la DB.
+		
+		//var_dump($_SESSION['emplenat']);
+		
 		$query   = 'SELECT _04_loginUsuari FROM usuari;';
 		$response = dbExec($query)[1];
 		$_SESSION['resultat']=$response;
@@ -172,12 +172,15 @@ $(document).ready(function(){
 		echo '</form"></br>'; 
 
 		$_SESSION['emplenat']="SI"; // Emplenat ja es pot posar a =SI..
-	}
+		 
+	} // end if emplenat NO
 	
-	elseif ($_SESSION['emplenat'] =="SI") // Emplenat=SI: si hi ha jugadors carregats al menu seleccionable, podem seguir muntant el menu.
+	else {
 	
-		{
-
+	    if (($_SESSION['emplenat'] == "SI") && (isset($_REQUEST['enviardades'])) && ($_REQUEST['enviardades'] == "SI")) { // && (isset($_REQUEST['precarrega']))  Emplenat=SI: si hi ha jugadors precarregats al menu seleccionable, podem seguir muntant el menu.
+	
+	  //  if ($_REQUEST['enviardades'] == "SI") {
+	  
 		// Aquestes variables venen del Ajax per ser precarregats en l'entorn PHP i disponibles per fer les querys necessàries. 
 		$IDMAQ = $_REQUEST['MAQ'];
 		$IDJOC = $_REQUEST['JOC'];
@@ -188,18 +191,7 @@ $(document).ready(function(){
 		$PUNTUA_1 = $_REQUEST['PUNTUA1'];
 		$PUNTUA_2 = $_REQUEST['PUNTUA2'];
 		$PUNTUA_3 = $_REQUEST['PUNTUA3'];
-	  
-		if (($_REQUEST['carregar'])=="SI"){ // No cal fer rès, en realitat el resultat ja es veu en pantalla.
-			echo "<p>carregant dades a les variables</p>"; 
-		}	      
-			
-		  if (($_REQUEST['carregar'])=="NO"){ // Ja no cal pregarregar res, ara toca enviar les dades definitivament a la DB.
-		      
-		      $_SESSION['emplenat']="NO"; // Resetejar per tornar a muntar la pàgina amb els jugadors actuals de la DB.
-		    
-		      
-		      //<p>S'ha fet l'insert!</p><br />
-		  
+	 
 			  $now = date("Y-n-j H:i:s"); // Capturar l'hora actual per totes les querys
 			  
 			  // Actualitzar Partida actual
@@ -278,22 +270,24 @@ $(document).ready(function(){
 			 
 		       
 		      //<b>Warning</b>:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in <b>/opt/lampp/htdocs/Projectes/pinball/src/pinball.h</b> on line <b>74</b><br />
+	   
+	    $_SESSION['emplenat']="NO"; // Emplenat ja es pot posar a = NO
+	    //echo "<p>S'ha fet l'insert !</p>"; 
 	  
-	  echo "<p>S'ha fet l'insert !</p>"; 
-	  
-		// header('location:partides.php');  // Tornar a muntar la pagina ??
-		//
-		
-		}
-	}
     }
-    else 
-    {
-		$_SESSION['emplenat']="NO"; // Emplenat=NO: Aqui és genera per primer cop la variable Session per poder fer les diferents accions.
-		var_dump($_SESSION['emplenat']);
-		echo "<p>no esta emplenat</p>";
-		header('location:partides.php'); // s'ha de tornar a muntar la pàgina amb la variable Session activa i en valor = NO.
-	}
+    
+      else  $_SESSION['emplenat']="NO"; // Emplenat ja es pot posar a = NO
+    
+    }
+    }
+    
+      else {
+	    $_SESSION['emplenat'] = "NO"; // Emplenat=NO: Aqui és genera per primer cop la variable Session per poder fer les diferents accions.
+	    //var_dump($_SESSION['emplenat']);
+	    //echo "<p>no esta emplenat</p>";
+	    header('location:partides.php'); // s'ha de tornar a muntar la pàgina amb la variable Session activa i en valor = NO.
+	    // $_SESSION['opcio'] = "NO";
+      }
 ?>
 	    <div id="desplegable"> </div> </br></br></br> <!--Zona de mostrar desplegable-->
 	    <div id="informacions">  </div> </br></br></br> <!--Zona de mostrar desplegable-->
@@ -306,5 +300,5 @@ $(document).ready(function(){
 </html>
 
 <?php
- 
+if (isset($_POST['entrar'])) controlAcces($_POST["usr"],$_POST["pwd"]);
 ?>
