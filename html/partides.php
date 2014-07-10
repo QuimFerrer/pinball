@@ -109,12 +109,6 @@ $(document).ready(function(){
 
 	    aleatoris();    
 	    
-	   /* $.ajax({ // Precarregar (=SI): els valors seleccionats al PHP (que conectarà amb la DB per fer les modificacions(.
-	      url: "partides.php",
-	      data: {precarrega:'SI', MAQ:seraMaquina, JOC:seraJoc, JUG:esJug, FOTO:'NO', TORNID:seraTorneigId, PUNTUA1:sonPunts1, PUNTUA2:sonPunts2, PUNTUA3:sonPunts3}, //date("Y-n-j H:i:s")
-	      success: function(Resultat1){console.log('precarrega SI : he carregat els valors que s han d enviar');}});
-	    */
-	    
 	  }); // end jQuery onchange combinacio
     } // end crearmenu
 
@@ -126,12 +120,7 @@ $(document).ready(function(){
 	      success: function(Resultat2){processar(Resultat2);}});
 	      
 	        function processar(dadesretornades2){ // Retorn de les notificacions de l'operació de gestió a la DB.
-		//var dadesconvert2= JSON.parse(dadesretornades2); 
-		
-		//var dadesfiltrades = dadesconvert2.records;  
-		//document.getElementById('informacions').innerHTML = dadesretornades2;  
-		console.log(dadesretornades2);
-		// return false;
+	 	console.log(dadesretornades2);
 		}
 	}
 });
@@ -150,9 +139,7 @@ $(document).ready(function(){
       if (isset($_SESSION['emplenat'])) { // Emplenat és la variable que controla si ja hi ha jugadors disponibles al menu seleccionable.
 
 	if ($_SESSION['emplenat']=="NO"){ // (($_SESSION['emplenat']=="NO") && ($_SESSION['opcio'] =="NO") ) Emplenat=NO: Encara no hi ha jugadors precarregats al menu seleccionable i s'han de cridar amb query de la DB.
-		
-		//var_dump($_SESSION['emplenat']);
-		
+				
 		$query   = 'SELECT _04_loginUsuari FROM usuari;';
 		$response = dbExec($query)[1];
 		$_SESSION['resultat']=$response;
@@ -192,84 +179,84 @@ $(document).ready(function(){
 		$PUNTUA_2 = $_REQUEST['PUNTUA2'];
 		$PUNTUA_3 = $_REQUEST['PUNTUA3'];
 	 
-			  $now = date("Y-n-j H:i:s"); // Capturar l'hora actual per totes les querys
-			  
-			  // Actualitzar Partida actual
-			  $query    = sprintf("INSERT INTO partida
-						    VALUES ('%d','%d','%d','%s',NULL,NULL);",$IDMAQ,
-											    $IDJOC,
-											    $IDJUG,
-											    $now);
-			  $response = dbExec($query)[1];
-			  
-			  // Actualitzar Ronda 1
-			  $query    = sprintf("INSERT INTO ronda
-						    VALUES (NULL, '%d','%d','%d','%s','%d','%s','%d', NULL, NULL);"
-									    ,$IDMAQ,
-									    $IDJOC,
-									    $IDJUG,
-									    $now,
-									    1,
-									    "foto.jpg",
-									    $PUNTUA_1);
-			  $response = dbExec($query)[1];
-			  
-			  // Actualitzar Ronda 2
-			  $query    = sprintf("INSERT INTO ronda
-						    VALUES (NULL, '%d','%d','%d','%s','%d','%s','%d', NULL, NULL);"
-									,$IDMAQ,
-									$IDJOC,
-									$IDJUG,
-									$now,
-									2,
-									"foto.jpg",
-									$PUNTUA_2);
-			  $response = dbExec($query)[1];			
-			  
-			  // Actualitzar Ronda 3
-			  $query    = sprintf("INSERT INTO ronda
-						    VALUES (NULL, '%d','%d','%d','%s','%d','%s','%d', NULL, NULL);"
-									,$IDMAQ,
-									$IDJOC,
-									$IDJUG,
-									$now,
-									3,
-									"foto.jpg",
-									$PUNTUA_3);									 											    			  				
-			  $response = dbExec($query)[1];
+		  $now = date("Y-n-j H:i:s"); // Capturar l'hora actual per totes les querys
+		  
+		  // Actualitzar Partida actual
+		  $query    = sprintf("INSERT INTO partida
+					    VALUES ('%d','%d','%d','%s',NULL,NULL);",$IDMAQ,
+										    $IDJOC,
+										    $IDJUG,
+										    $now);
+		  $response = dbExec($query)[1];
+		  
+		  // Actualitzar Ronda 1
+		  $query    = sprintf("INSERT INTO ronda
+					    VALUES (NULL, '%d','%d','%d','%s','%d','%s','%d', NULL, NULL);"
+								    ,$IDMAQ,
+								    $IDJOC,
+								    $IDJUG,
+								    $now,
+								    1,
+								    "foto.jpg",
+								    $PUNTUA_1);
+		  $response = dbExec($query)[1];
+		  
+		  // Actualitzar Ronda 2
+		  $query    = sprintf("INSERT INTO ronda
+					    VALUES (NULL, '%d','%d','%d','%s','%d','%s','%d', NULL, NULL);"
+								,$IDMAQ,
+								$IDJOC,
+								$IDJUG,
+								$now,
+								2,
+								"foto.jpg",
+								$PUNTUA_2);
+		  $response = dbExec($query)[1];			
+		  
+		  // Actualitzar Ronda 3
+		  $query    = sprintf("INSERT INTO ronda
+					    VALUES (NULL, '%d','%d','%d','%s','%d','%s','%d', NULL, NULL);"
+								,$IDMAQ,
+								$IDJOC,
+								$IDJUG,
+								$now,
+								3,
+								"foto.jpg",
+								$PUNTUA_3);									 											    			  				
+		  $response = dbExec($query)[1];
 
-			  // Actualitzar Credits maquina
-			  $query    = sprintf("UPDATE maquina 
-					      set _04_credMaq=(_04_credMaq+1), _05_totCredMaq=_05_totCredMaq+_04_credMaq 
-					      where _01_pk_idMaq = '%d';",$IDMAQ);
-					      
-			  $response = dbExec($query)[1];
-			  
-			  // Actualitzar Partides maqInstall
-			  $query    = sprintf("UPDATE maqInstall
-					      set _03_numPartidesJugadesMaqInst=(_03_numPartidesJugadesMaqInst+1), _04_credJocMaqInst=(_04_credJocMaqInst+1)
-					      where (_01_pk_idMaqInst = '%d') and (_02_pk_idJocInst = '%d');",$IDMAQ,$IDJOC);	 
-					      
-			  $response = dbExec($query)[1];
-			  
-			  // Actualitzar Partides joc
-			  $query    = sprintf("UPDATE joc
-					      set _05_numPartidesJugadesJoc=(_05_numPartidesJugadesJoc+1)
-					      where (_01_pk_idJoc = '%d');",$IDJOC);
-					      
-			  $response = dbExec($query)[1];
-			  
-			  // Insertar Partides torneigTePartida
-			  $query    = sprintf("INSERT INTO torneigTePartida
-						  VALUES (NULL, '%d','%d','%d','%d');",$IDTORN,$IDMAQ,$IDJOC,$IDJUG);
-					      
-			  $response = dbExec($query)[1];
-			   
-			  
-			// Falta posar:   _05_totCredJocMaqInst 
-			 
-		       
-		      //<b>Warning</b>:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in <b>/opt/lampp/htdocs/Projectes/pinball/src/pinball.h</b> on line <b>74</b><br />
+		  // Actualitzar Credits maquina
+		  $query    = sprintf("UPDATE maquina 
+				      set _04_credMaq=(_04_credMaq+1), _05_totCredMaq=_05_totCredMaq+_04_credMaq 
+				      where _01_pk_idMaq = '%d';",$IDMAQ);
+				      
+		  $response = dbExec($query)[1];
+		  
+		  // Actualitzar Partides maqInstall
+		  $query    = sprintf("UPDATE maqInstall
+				      set _03_numPartidesJugadesMaqInst=(_03_numPartidesJugadesMaqInst+1), _04_credJocMaqInst=(_04_credJocMaqInst+1)
+				      where (_01_pk_idMaqInst = '%d') and (_02_pk_idJocInst = '%d');",$IDMAQ,$IDJOC);	 
+				      
+		  $response = dbExec($query)[1];
+		  
+		  // Actualitzar Partides joc
+		  $query    = sprintf("UPDATE joc
+				      set _05_numPartidesJugadesJoc=(_05_numPartidesJugadesJoc+1)
+				      where (_01_pk_idJoc = '%d');",$IDJOC);
+				      
+		  $response = dbExec($query)[1];
+		  
+		  // Insertar Partides torneigTePartida
+		  $query    = sprintf("INSERT INTO torneigTePartida
+					  VALUES (NULL, '%d','%d','%d','%d');",$IDTORN,$IDMAQ,$IDJOC,$IDJUG);
+				      
+		  $response = dbExec($query)[1];
+		    
+		  
+		// Falta posar:   _05_totCredJocMaqInst 
+		  
+		
+	      //<b>Warning</b>:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in <b>/opt/lampp/htdocs/Projectes/pinball/src/pinball.h</b> on line <b>74</b><br />
 	   
 	    $_SESSION['emplenat']="NO"; // Emplenat ja es pot posar a = NO
 	    //echo "<p>S'ha fet l'insert !</p>"; 
@@ -283,10 +270,9 @@ $(document).ready(function(){
     
       else {
 	    $_SESSION['emplenat'] = "NO"; // Emplenat=NO: Aqui és genera per primer cop la variable Session per poder fer les diferents accions.
-	    //var_dump($_SESSION['emplenat']);
-	    //echo "<p>no esta emplenat</p>";
+	     
 	    header('location:partides.php'); // s'ha de tornar a muntar la pàgina amb la variable Session activa i en valor = NO.
-	    // $_SESSION['opcio'] = "NO";
+	     
       }
 ?>
 	    <div id="desplegable"> </div> </br></br></br> <!--Zona de mostrar desplegable-->
