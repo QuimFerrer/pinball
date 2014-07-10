@@ -163,7 +163,7 @@ header {
 }
 
 /* usuaris.php */
-h2.users {
+#users h2 {
 	background-color: #000;
 	color: #FFF;
 	padding: 5px 15px;
