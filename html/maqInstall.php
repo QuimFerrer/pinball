@@ -9,8 +9,6 @@ include ("../src/seguretatLogin.php");
 
 comprovaSessio();
 
-$target = isset($_REQUEST['xx']) ? $_REQUEST['xx']   : '';
-
 if (isset($_REQUEST['cmd']) ) :
 		
 	$data  = array();
@@ -80,38 +78,42 @@ if (isset($_REQUEST['cmd']) ) :
 else: ?>
 <!-- Formulari d'edició -->
 <div class="w2ui-page page-0">
-	<br><br>
 <?php 
-	if ($target != "edit")
-		{
-		echo'<div class="w2ui-label">Escollir la màquina:</div>';
-		echo '<div class="w2ui-field">';
-		$query    = 'SELECT * FROM maquina WHERE _08_datBaixaMaq IS NULL';
-		$response = dbExec($query)[1];
+if (isset($_REQUEST['new']) )
+	{
+	echo'<h3 class="text-dialog">Relació entre màquines i ubicacions</h3>';
+	echo'<p class="text-dialog">Per assignar una joc a una màquina cal donar d\'alta l\'assinació escollint
+						   del desplegable de màquines la maquina i escollint el joc del desplegable de jocs.
+						   En el cas que es vulgui anul.lar l\'assignació perque el joc es canvia
+						   de màquina o perque deixa d\'estar operatiu en aquella màquina, caldrà bolquejar
+						   l\'assignació amb l\'opció corresponent i tornar a crear una assignació nova.</p>';
+	echo'<br><br>';
+	echo'<div class="w2ui-label">Escollir la màquina:</div>';
+	echo '<div class="w2ui-field">';
+	$query    = 'SELECT * FROM maquina WHERE _08_datBaixaMaq IS NULL';
+	$response = dbExec($query)[1];
 
-		echo '<select name="_01_pk_idMaqInst">';
+	echo '<select name="_01_pk_idMaqInst">';
 
-		foreach($response as $maquina)
-			echo '<option value="'. $maquina->_01_pk_idMaq .'">'. $maquina->_02_macMaq .'</option>';
+	foreach($response as $maquina)
+		echo '<option value="'. $maquina->_01_pk_idMaq .'">'. $maquina->_02_macMaq .'</option>';
 
-		echo '</select>';
-		echo '</div>';
-		} 
-	if ($target != "edit")
-		{
-		echo '<div class="w2ui-label">Escollir el joc:</div>';
-		echo '<div class="w2ui-field">';
-		$query    = 'SELECT * FROM joc WHERE _08_datBaixaJoc IS NULL';
-		$response = dbExec($query)[1];
+	echo '</select>';
+	echo '</div>';
 
-		echo '<select name="_02_pk_idJocInst">';
+	echo '<div class="w2ui-label">Escollir el joc:</div>';
+	echo '<div class="w2ui-field">';
+	$query    = 'SELECT * FROM joc WHERE _08_datBaixaJoc IS NULL';
+	$response = dbExec($query)[1];
 
-		foreach($response as $joc)
-			echo '<option value="'. $joc->_01_pk_idJoc .'">'. $joc->_02_nomJoc .'</option>';
-		
-		echo '</select>';
-		echo '</div>';
-		}		
+	echo '<select name="_02_pk_idJocInst">';
+
+	foreach($response as $joc)
+		echo '<option value="'. $joc->_01_pk_idJoc .'">'. $joc->_02_nomJoc .'</option>';
+	
+	echo '</select>';
+	echo '</div>';
+	}		
 ?>
 	<div class="w2ui-label">Partides Maq-Joc</div>
 	<div class="w2ui-field"><input name="_03_numPartidesJugadesMaqInst" maxlength="50" size="30"/></div>

@@ -12,6 +12,7 @@ comprovaSessio();
 <!doctype html>
 <html>
 <head>
+	<meta content="" http-equiv="REFRESH"> </meta>		
 	<meta charset="UTF-8">
 	<title>Pinball. Partides</title>
 	<link rel="stylesheet" href="../css/pinball.css"> 
@@ -28,17 +29,16 @@ comprovaSessio();
 
 	if ($_SESSION['emplenat']=="NO"){ // Emplenat=NO: Encara no hi ha jugadors precarregats al menu seleccionable i s'han de cridar amb query de la DB.
 				
-		$query   = 'SELECT _04_loginUsuari FROM usuari;';
+		$query   = 'SELECT _04_loginUsuari 
+					FROM usuari
+					WHERE _04_loginUsuari <> "admin";';
 		$response = dbExec($query)[1];
 		$_SESSION['resultat']=$response;
 		echo '<form name="formdata" method="POST">';
 		echo 'Tria el jugador: <select align="right" id="I_User" name="User">';
-
-		foreach($response as $jugador) {
-		  if ($jugador->_04_loginUsuari != "admin"){
-		  echo '<option value="'.$jugador->_04_loginUsuari .'">' .$jugador->_04_loginUsuari .'</option>';
-		  }
-		}
+		echo '<option value="0"></option>';
+		foreach($response as $jugador)
+			echo '<option value="'.$jugador->_04_loginUsuari .'">' .$jugador->_04_loginUsuari .'</option>';
 		
 		echo '</select></br>'; 
 		echo '<div id="llistat"></div>';
@@ -68,16 +68,16 @@ comprovaSessio();
 		$PUNTUA_2 = $_REQUEST['PUNTUA2'];
 		$PUNTUA_3 = $_REQUEST['PUNTUA3'];
 	 
-		  $now = date("Y-n-j H:i:s"); // Capturar l'hora actual per totes les querys.
+		  $now = date("Y-n-j H:i:s"); // Capturar l'hora actual per totes les queries.
 		  
 		  // Actualitzar Partida actual.
 		  $query    = sprintf("INSERT INTO partida
 					    VALUES ('%d','%d','%d','%s',NULL,NULL);",$IDMAQ,
-										    $IDJOC,
-										    $IDJUG,
-										    $now);
-		  $response = dbExec($query)[2];
-		  
+															     $IDJOC,
+															     $IDJUG,
+															     $now);
+		  $response = dbExec($query,0)[1];
+
 		  // Actualitzar Ronda 1.
 		  $query    = sprintf("INSERT INTO ronda
 					    VALUES (NULL, '%d','%d','%d','%s','%d','%s','%d', NULL, NULL);"
@@ -88,7 +88,7 @@ comprovaSessio();
 								    1,
 								    "foto.jpg",
 								    $PUNTUA_1);
-		  $response = dbExec($query)[2];
+		  $response = dbExec($query,0)[1];
 		  
 		  // Actualitzar Ronda 2.
 		  $query    = sprintf("INSERT INTO ronda
@@ -100,7 +100,7 @@ comprovaSessio();
 								2,
 								"foto.jpg",
 								$PUNTUA_2);
-		  $response = dbExec($query)[2];			
+		  $response = dbExec($query,0)[1];			
 		  
 		  // Actualitzar Ronda 3.
 		  $query    = sprintf("INSERT INTO ronda
@@ -112,34 +112,38 @@ comprovaSessio();
 								3,
 								"foto.jpg",
 								$PUNTUA_3);									 											    			  				
-		  $response = dbExec($query)[2];
+		  $response = dbExec($query,0)[1];
 
 		  // Actualitzar Credits maquina.
 		  $query    = sprintf("UPDATE maquina 
-				      set _04_credMaq=(_04_credMaq+1), _05_totCredMaq=_05_totCredMaq+_04_credMaq 
+				      set _04_credMaq=(_04_credMaq+1),
+				      	  _05_totCredMaq=_05_totCredMaq+_04_credMaq,
+						  _07_datModMaq = NOW()
 				      where _01_pk_idMaq = '%d';",$IDMAQ);
 				      
-		  $response = dbExec($query)[3];
+		  $response = dbExec($query,0)[1];
 		  
 		  // Actualitzar Partides maqInstall.
 		  $query    = sprintf("UPDATE maqInstall
-				      set _03_numPartidesJugadesMaqInst=(_03_numPartidesJugadesMaqInst+1), _04_credJocMaqInst=(_04_credJocMaqInst+1)
+				      set _03_numPartidesJugadesMaqInst=(_03_numPartidesJugadesMaqInst+1),
+				      	  _07_datModMaqInst = NOW()
 				      where (_01_pk_idMaqInst = '%d') and (_02_pk_idJocInst = '%d');",$IDMAQ,$IDJOC);	 
 				      
-		  $response = dbExec($query)[3];
+		  $response = dbExec($query,0)[1];
 		  
 		  // Actualitzar Partides joc.
 		  $query    = sprintf("UPDATE joc
-				      set _05_numPartidesJugadesJoc=(_05_numPartidesJugadesJoc+1)
+				      set _05_numPartidesJugadesJoc=(_05_numPartidesJugadesJoc+1),
+				      	  _07_datModJoc = NOW()
 				      where (_01_pk_idJoc = '%d');",$IDJOC);
 				      
-		  $response = dbExec($query)[3];
+		  $response = dbExec($query,0)[1];
 		  
 		  // Insertar Partides torneigTePartida.
 		  $query    = sprintf("INSERT INTO torneigTePartida
 					  VALUES (NULL, '%d','%d','%d','%d');",$IDTORN,$IDMAQ,$IDJOC,$IDJUG);
 				      
-		  $response = dbExec($query)[2];
+		  $response = dbExec($query,0)[1];
 		    
 		  
 		// Falta posar:   _05_totCredJocMaqInst 
@@ -165,6 +169,9 @@ comprovaSessio();
 	    <div id="desplegable"> </div> </br></br></br> <!--Zona de mostrar desplegable-->
 	    <div id="informacions">  </div> </br></br></br> <!--Zona de mostrar infos-->
 	 </section>
+	<section id="peu">
+		<div id="msg"></div>
+	</section>
   </div>
 </body>	
 <script src="../js/lib/jquery-1.11.0.min.js"></script> 
@@ -203,7 +210,7 @@ comprovaSessio();
 			$("#llistat").html('</br> Tria una combinacio: </br> <select id="seleccionador"  name="Combinacio"> </select>'); // label="Combinacio"
 			
 		  	var contingut = "";
-		
+			contingut = '<option value="0"></option>';
 			for (var i=0; i<dadesfiltrades.length; i++){
 				//console.log("i: " + i);
 				esIdTorneig = dadesfiltrades[i].idTorn;

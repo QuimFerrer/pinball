@@ -167,3 +167,31 @@
 							FROM torneig AS T
 							WHERE _01_pk_idTorn=1003;                                                            
 2014-07-11 01:26:32 - CONSULTA:                        - SELECT * FROM maqInstall WHERE _00_pk_idMaqInst_auto=8                                                                                                                                                                                                          
+2014-07-11 10:31:24 - CONSULTA:                        - SELECT T.*,
+							DATE_FORMAT(_05_datIniTorn, '%m/%d/%Y') AS datIniTorn,
+							DATE_FORMAT(_06_datFinTorn, '%m/%d/%Y') AS datFinTorn
+							FROM torneig AS T
+							WHERE _01_pk_idTorn=1000;                                                            
+2014-07-11 10:40:22 - CONSULTA:                        - SELECT T.*,
+							DATE_FORMAT(_05_datIniTorn, '%m/%d/%Y') AS datIniTorn,
+							DATE_FORMAT(_06_datFinTorn, '%m/%d/%Y') AS datFinTorn
+							FROM torneig AS T
+							WHERE _01_pk_idTorn=1000;                                                            
+2014-07-11 10:41:39 - CONSULTA:                        - SELECT * FROM maqInstall WHERE _00_pk_idMaqInst_auto=1                                                                                                                                                                                                          
+2014-07-11 10:42:12 - CONSULTA:                        - SELECT * FROM maqInstall WHERE _00_pk_idMaqInst_auto=2                                                                                                                                                                                                          
+2014-07-11 10:47:36 - CONSULTA:                        - SELECT * FROM maqInstall WHERE _00_pk_idMaqInst_auto=1                                                                                                                                                                                                          
+2014-07-11 10:47:44 - CONSULTA:                        - SELECT * FROM maqInstall WHERE _00_pk_idMaqInst_auto=2                                                                                                                                                                                                          
+2014-07-11 11:08:00 - CONSULTA:                        - INSERT INTO ubicaciotemaquina
+									VALUES (NULL,'2','40',NOW(),NULL,NULL);                                                                                                                                                                                 
+2014-07-11 11:09:01 - CONSULTA:                        - SELECT * FROM maqInstall WHERE _00_pk_idMaqInst_auto=1                                                                                                                                                                                                          
+2014-07-11 11:11:03 - CONSULTA:                        - INSERT INTO torneig
+							VALUES (NULL,'102','ddd','33.000000','2014-07-01','2014-07-04',NOW(),NULL,NULL);                                                                                                                                                    
+2014-07-11 11:15:14 - CONSULTA:                        - UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
+													  _08_datBaixaMaqInst = NOW()				
+								  WHERE _00_pk_idMaqInst_auto = '1' AND 
+								        _08_datBaixaMaqInst IS NULL;                                                              
+2014-07-11 12:08:12 - CONSULTA:                        - SELECT * FROM maqInstall WHERE _00_pk_idMaqInst_auto=2                                                                                                                                                                                                          
+2014-07-11 12:42:14 - CONSULTA:                        - UPDATE torneig 
+						SET _08_datModTorn   = NOW(),
+							_09_datBaixaTorn = NOW()
+						WHERE _01_pk_idTorn = '1001' AND _09_datBaixaTorn IS NULL;                                                                                                         
