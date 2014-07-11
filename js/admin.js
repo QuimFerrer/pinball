@@ -539,6 +539,7 @@ var controller = function(e) {
 
 				        case 'edit':
 				        	if (row.length != 0) 
+				        		{
 								fields = [
 									{ name: '_03_nomTorn', type: 'text', required: true },
 									{ name: '_04_premiTorn', type: 'float', required: true },
@@ -547,6 +548,7 @@ var controller = function(e) {
 								];
 				        		DataForm("Modificar torneig", row[0], fields, action, 
 				        				{param:'torneig', keyname:'_01_pk_idTorn'});
+				        		}
 				        	break;
 
 				        case 'del':
