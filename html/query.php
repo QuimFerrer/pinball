@@ -75,7 +75,8 @@ isEndSessionInQuery();
 
 	const ALTA_ASSIGNACIO_JOC_MAQUINA_3460	   = 3460;
 	const BLOQUEIG_ASSIGNACIO_JOC_MAQ_3470     = 3470;
-	const DESBLOQUEIG_ASSIGNACIO_JOC_MAQ_3475  = 3475;	
+	const DESBLOQUEIG_ASSIGNACIO_JOC_MAQ_3475  = 3475;
+	const ACTUALITZA_RACAUDACIO_MAQ_JOC_3476   = 3476;	
 	const MODIF_ASSIGNACIO_JOC_MAQUINA_3480    = 3480;	
 	const LLISTAT_ASSIG_JOC_MAQ_3485		   = 3485;
 
@@ -1016,12 +1017,12 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));				
 				break;
 			case ACTUALITZA_RACAUDACIO_MAQ_3430 :
-				$query    = 'UPDATE maquina SET _04_credMaq     = "$credMaq",
- 										        _05_totCredMaq  = _05_totCredMaq + "$credMaq",
-										        _07_datModMaq   = NOW()
-								WHERE 
-									_01_pk_idMaq    = "' . $idMaq . '" AND
-									_08_datBaixaMaq IS NULL;';
+				$query    = sprintf("UPDATE maquina SET _05_totCredMaq = _05_totCredMaq + _04_credMaq,
+														_04_credMaq    = 0,
+										        		_07_datModMaq  = NOW()
+										WHERE 
+											_01_pk_idMaq    = '%d' AND
+											_08_datBaixaMaq IS NULL;",$idMaq);
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));
 			case LLISTAT_MAQUINES_AMB_JOCS_3440 :
@@ -1146,7 +1147,7 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));			
 				break;
 			case BLOQUEIG_ASSIGNACIO_JOC_MAQ_3470 :
-				$query = sprintf("UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
+				$query = sprintf("UPDATE maqInstall SET _07_datModMaqInst   = NOW(),
 														_08_datBaixaMaqInst = NOW()					
 							  	  WHERE _00_pk_idMaqInst_auto = '%d' AND
 							  	  		_08_datBaixaMaqInst IS NULL;",$idMaqInst);
@@ -1154,13 +1155,22 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));
 				break;
 			case DESBLOQUEIG_ASSIGNACIO_JOC_MAQ_3475 :
-				$query = sprintf("UPDATE maqinstall SET _07_datModMaqInst   = NOW(),
+				$query = sprintf("UPDATE maqInstall SET _07_datModMaqInst   = NOW(),
 														_08_datBaixaMaqInst = NULL
 							  	  WHERE _00_pk_idMaqInst_auto = '%d' AND
 							  	  		_08_datBaixaMaqInst IS NOT NULL;",$idMaqInst);
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));
-				break;				
+				break;
+			case ACTUALITZA_RACAUDACIO_MAQ_JOC_3476 :
+				$query    = sprintf("UPDATE maqInstall SET _05_totCredJocMaqInst = _05_totCredJocMaqInst + _04_credJocMaqInst,
+														_04_credJocMaqInst       = 0,
+										        		_07_datModMaqInst        = NOW()
+										WHERE 
+											_00_pk_idMaqInst_auto = '%d' AND
+											_08_datBaixaMaqInst IS NULL;",$idMaqInst);
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));				
 			case MODIF_ASSIGNACIO_JOC_MAQUINA_3480 :
 				$query    = sprintf("UPDATE maqInstall SET 
 											_03_numPartidesJugadesMaqInst = '%f',
@@ -1203,6 +1213,7 @@ isEndSessionInQuery();
 									_01_pk_idJoc AS idJoc,
 									_02_nomJoc   AS nomJoc,
 									_03_numPartidesJugadesMaqInst AS numPartides,
+									_04_credJocMaqInst AS credits,
 									_05_totCredJocMaqInst AS totalCredits,
 									DATE_FORMAT(_06_datAltaMaqInst, "%d-%m-%Y %H:%i:%s") AS datAltaMaqInst,
 									DATE_FORMAT(_07_datModMaqInst,  "%d-%m-%Y %H:%i:%s") AS datModMaqInst,

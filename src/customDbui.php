@@ -422,18 +422,4 @@ function customGetQueryForGetRecord($table, $id, $kName)
 	return ($query);
 	}							
 
-
-function controlErrorQueryFromDbui($status, $id, $kName)
-{
-	if ($status != "error")
-		{
-		$data[$kName] = $data['recid'] = ($id != 0) ? $id : mysql_insert_id();
-		$data['rows'] = mysql_affected_rows();
-		}
-	else
-		$data['recid'] = $data['rows'] = "999999";
-	
-	return ($data);
-}
-
  ?>

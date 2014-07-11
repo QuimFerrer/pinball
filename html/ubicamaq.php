@@ -55,8 +55,13 @@ else: ?>
 <!-- Formulari d'edició -->
 <div class="w2ui-page page-0">
 	<h3 class="text-dialog">Relació entre màquines i ubicacions</h3>
-	<p class="text-dialog">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt earum eius, dolor voluptates vel architecto assumenda quaerat deserunt, aliquid quos, fugit.</p>
-	<p class="text-dialog">Nesciunt earum eius, dolor voluptates vel architecto assumenda quaerat deserunt, aliquid quos, fugit. Vitae dolore nemo animi quisquam adipisci necessitatibus iure! Numquam!</p>
+	<p class="text-dialog">Per assignar una màquina a una ubicació cal donar d'alta l'assinació escollint
+						   del desplegable d'ubicacions a on anirà la maquina i escollint la màquina del
+						   desplegable de màquines.</p>
+	<p class="text-dialog">En el cas que es vulgui anul.lar l'assignació perque la màquina es canvia
+						   d'ubicació o perque deixa de ser operativa, caldrà bolquejar l'assignació amb
+						   l'opció corresponent i tornar a crear una assignació nova en el cas que la
+						   màquina es canvii d'ubicació.</p>
 	<br><br>
 	<div class="w2ui-label">Escollir l'ubicació:</div>
 	<div class="w2ui-field">

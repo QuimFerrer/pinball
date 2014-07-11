@@ -50,7 +50,7 @@ var dbGrid = function() {
         var row = grid.getSelection();
 
         if (row.length != 0) {
-            w2confirm('Estas segur d\'esborrar?', "Eliminar registre :" + row[0], 
+            w2confirm('Estas segur de bloquejar ?', "Bloquejar registre :" + row[0], 
             function (msg) { 
                 if (msg=='Yes') 
                     grid.request('delete', { 'recid': row[0], 'keyname': pkName }, action, function() {
@@ -75,7 +75,7 @@ var dbGrid = function() {
                 [
                     { type: 'button', id: 'new',  caption: 'Afegir',    img: 'icon-add' },
                     { type: 'button', id: 'edit', caption: 'Modificar', img: 'icon-edit' },
-                    { type: 'button', id: 'del',  caption: 'Eliminar',  img: 'icon-delete' }
+                    { type: 'button', id: 'del',  caption: 'Bloquejar', img: 'icon-delete' }
                     // { type: 'button', id: 'seek', caption: 'Buscar',    img: 'icon-search' }
                 ];
 
