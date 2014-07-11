@@ -87,7 +87,6 @@ if (isset($_REQUEST['new']) )
 						   En el cas que es vulgui anul.lar l\'assignació perque el joc es canvia
 						   de màquina o perque deixa d\'estar operatiu en aquella màquina, caldrà bolquejar
 						   l\'assignació amb l\'opció corresponent i tornar a crear una assignació nova.</p>';
-	echo'<br><br>';
 	echo'<div class="w2ui-label">Escollir la màquina:</div>';
 	echo '<div class="w2ui-field">';
 	$query    = 'SELECT * FROM maquina WHERE _08_datBaixaMaq IS NULL';

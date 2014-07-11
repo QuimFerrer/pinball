@@ -1,7 +1,7 @@
 <?php
 
 // temps màxim de sessió
-define("TIMEOUT",1000000);
+define("TIMEOUT",120);
 
 function comprovaSessio()
 {
