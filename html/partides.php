@@ -43,7 +43,7 @@ comprovaSessio();
 		echo '</select></br>'; 
 		echo '<div id="llistat"></div>';
 		echo '<p>PUNTUACIONS</p>';
-		echo '<div id="puntuacions"> Ronda 1 <input id="punt1" type="number" value="" /></br> Ronda 2 <input id="punt2" type="number" value="" /></br> Ronda 3 <input id="punt3" type="number" value="" /> </div>';
+		echo '<div id="puntuacions"> Ronda 1 <input id="punt1" type="number" value="" readonly /></br> Ronda 2 <input id="punt2" type="number" value="" readonly /></br> Ronda 3 <input id="punt3" type="number" value="" readonly /> </div>';
 		echo '<p><input type="submit" name="submit" value="Generar partida"</p>';
 		echo '</form">'; 
 
