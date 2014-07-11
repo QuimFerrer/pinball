@@ -133,8 +133,7 @@ comprovaSessio();
 
 			for (var i in result)
 				w2ui['dialog'].record[i] = result[i];
-
-			// w2ui['dialog'].refresh();
+			w2ui['dialog'].refresh();
 			if (result['fotoUsr'] != "")
 				{
 				$('#fotoUsr').data('selected', [{ name	: result['fotoUsr']}] );
