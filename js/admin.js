@@ -120,7 +120,7 @@ var controller = function(e) {
 		          html: { caption: 'Nom', attr: 'size="40"', span: 5 }
 		        },
 		        { name: 'descripcio', type: 'textarea', required: false,
-		          html: { caption: 'Descripció', attr: 'size="100"', span: 5 }
+		          html: { caption: 'Descripció', attr: 'size="40"', span: 5 }
 		        },
 		        { name: 'preu', type: 'text', required: false,
 		          html: { caption: 'Preu', attr: 'size="40"', span: 5 }

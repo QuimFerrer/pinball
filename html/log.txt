@@ -195,3 +195,26 @@
 						SET _08_datModTorn   = NOW(),
 							_09_datBaixaTorn = NOW()
 						WHERE _01_pk_idTorn = '1001' AND _09_datBaixaTorn IS NULL;                                                                                                         
+2014-07-11 16:06:02 - CONSULTA:                        - SELECT T.*,
+							DATE_FORMAT(_05_datIniTorn, '%m/%d/%Y') AS datIniTorn,
+							DATE_FORMAT(_06_datFinTorn, '%m/%d/%Y') AS datFinTorn
+							FROM torneig AS T
+							WHERE _01_pk_idTorn=1003;                                                            
+2014-07-11 16:06:06 - CONSULTA:                        - UPDATE torneig 
+							SET _03_nomTorn    = 'castles 2014',
+								_04_premiTorn  = '400',
+								_05_datIniTorn = DATE_FORMAT('2014-05-16','%Y-%m-%d'),
+								_06_datFinTorn = DATE_FORMAT('2014-06-30','%Y-%m-%d'),
+								_08_datModTorn = NOW()
+							WHERE _01_pk_idTorn  = '1003';
+2014-07-11 16:06:24 - CONSULTA:                        - UPDATE torneig 
+						SET _08_datModTorn   = NOW(),
+							_09_datBaixaTorn = NOW()
+						WHERE _01_pk_idTorn = '0' AND _09_datBaixaTorn IS NULL;                                                                                                            
+2014-07-11 16:18:31 - CONSULTA:                        - SELECT T.*,
+							DATE_FORMAT(_05_datIniTorn, '%m/%d/%Y') AS datIniTorn,
+							DATE_FORMAT(_06_datFinTorn, '%m/%d/%Y') AS datFinTorn
+							FROM torneig AS T
+							WHERE _01_pk_idTorn=1003;                                                            
+2014-07-11 16:21:10 - CONSULTA:                        - INSERT INTO ubicaciotemaquina
+									VALUES (NULL,'2','30',NOW(),NULL,NULL);                                                                                                                                                                                 

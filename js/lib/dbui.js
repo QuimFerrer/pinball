@@ -207,7 +207,6 @@ var dbForm = function() {
             msgSaving  : 'Guardant dades',
             fields: this.fields,            
             actions: {
-                // reset: function() { this.clear(); },
                 Guardar: function() { this.save( {'recid': recno, 'pid':self.pid} ); },
                 Sortir:  function() { $().w2popup('close'); }
             },
@@ -274,7 +273,7 @@ var dbForm = function() {
             title   : self.title,
             modal   : true,
             body    : '<div id="popform"></div>',
-            style   : 'padding: 0px',
+            style   : 'padding: 0',
             width   : maxWidth,
             height  : height
         });
