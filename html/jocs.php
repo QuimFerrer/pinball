@@ -29,7 +29,7 @@ comprovaSessio();
 			<h2>Llista de jocs</h2>
 			<?php 
 				$query    = 'SELECT * FROM joc
-								WHERE _08_datBaixaJoc IS NULL;';
+							 WHERE _08_datBaixaJoc IS NULL';
 				$response = dbExec($query)[1];
 
 				echo '<ul class="promo">';

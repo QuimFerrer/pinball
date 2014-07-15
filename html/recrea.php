@@ -28,8 +28,9 @@ comprovaSessio();
 		<section class="staticPage">
 			<h2>Llista de productes</h2>
 			<?php 
-				$query    = 'SELECT * FROM productes
-								WHERE datBaixaPro IS NULL;';
+				$query    = 'SELECT * 
+							FROM productes
+							WHERE datBaixaPro IS NULL;';
 				$response = dbExec($query)[1];
 
 				echo '<ul class="promo">';
