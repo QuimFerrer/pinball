@@ -1,0 +1,33 @@
+
+1. Projecte amb gestió de versions (github)
+	
+	a. Planificació:
+
+		i. Detall de tasques (Joan)
+
+		ii. FrameWork, Infraestructura de serveis, IU (Quim)
+
+		iii. Disseny base de dades (Joan i Victor)
+
+		iv. Queries (Joan)
+
+		v. Generació de partides (Victor)
+
+		vi. Disseny adaptatiu (Jesús)
+
+	b. Estructura:
+
+		i. Projecte amb MVC amb crides fent servir
+
+		ii. PHP Mailer per enviament de mails
+
+		iii. Model ER amb MySQL
+
+		iv. Vistes híbrides PHP-html del framework i custom
+
+
+
+
+
+
+
