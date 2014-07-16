@@ -21,7 +21,7 @@ comprovaSessio();
 <body>
 	<div id="main">
 		<header>
-			<h1>Pagina d'inici BETAaaaaa</h1>
+			<h1>Pagina d'inici BETAaaaaabbbbbbb</h1>
 		</header>
 		<menu>
 			<?php menu(); ?>
