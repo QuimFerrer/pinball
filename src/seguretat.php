@@ -103,17 +103,24 @@ function updateActivacioUsuari($id, $activateKey)
         else
             if ($response['records'][0]->_11_activacioUsuari === $activateKey)
                 {
-                $query  = sprintf("UPDATE usuari
-                                        SET _12_estatUsuari   = '%d'
-                                        WHERE _01_pk_idUsuari = '%d';",0,$id);
-                $response = dbExec($query,3);
-                $response = (object)controlErrorQuery($response);
+                $estat = 0;
+                $response = updateEstatUsuari($id, $estat);
                 if ($response->status != "error")
                     $msg = "El seu compte s'ha activat correctament. Ja pot accedir a la web de Pinball. Gràcies.";
                 else
                     $msg = "Error en l'activació del seu compte. Torni a intentar-ho o faci un nou registre des de la web. Gràcies.";
                 }
     return( $msg );
+    }
+
+function updateEstatUsuari($id, $estat)
+    {
+    $query  = sprintf("UPDATE usuari
+                       SET   _12_estatUsuari = '%d'
+                       WHERE _01_pk_idUsuari = '%d';",$estat,$id);
+    $response = dbExec($query,3);
+    $response = (object)controlErrorQuery($response);
+    return ($response);
     }
 
 ?> 

@@ -24,14 +24,32 @@ function buildEmail($tipusMail, $dades)
     $res = true;
     if (CANAL_ENVIO === "PHPMAILER")
         {
-        if ($tipusMail == "contacte") $resMail = montaMailContacte($dades);
-        if ($tipusMail == "registre") $resMail = montaMailRegistre($dades);        
+        $resMail = "";            
+        switch( $tipusMail )
+            {
+            case "contacte":
+                $resMail = montaMailContacte($dades);
+                break;
+            case "registre":
+            case "resetPassword":
+                $resMail = montaMailRegistre($dades);
+                break;
+            }
         if ($resMail != "") $res = false;
         }
     if (CANAL_ENVIO === "SENDMAIL_PHP")
         {
-        if ($tipusMail == "contacte") $resMail = montaMailContacte_php($dades);
-        if ($tipusMail == "registre") $resMail = montaMailRegistre_php($dades);        
+        $resMail = true;            
+        switch( $tipusMail )
+            {
+            case "contacte":
+                $resMail = montaMailContacte_php($dades);
+                break;
+            case "registre":
+            case "resetPassword":
+                $resMail = montaMailRegistre_php($dades);
+                break;
+            }    
         if (!$resMail) $res = false;
         }
     return($res);
@@ -56,7 +74,7 @@ function montaMailRegistre($dades)
     $altBody = "";
     $to      = $dades['emailUsr'];
     $nomTo   = $dades['nomUsr'] . " " . $dades['cogUsr'];
-    $subject = $dades['loginUsr'] . " Dades de registre al Pinball, guardi aquest email.";
+    $subject = $dades['loginUsr'] . " Dades per accedir al Pinball, guardi aquest email.";
     $body = montaBodyRegistre($dades);
     return( prepMail($isHtml, $subject, $body, $altBody, $to, $nomTo) );
 }
@@ -76,14 +94,14 @@ function montaBodyRegistre($dades)
     // creem el nostre link per enviar per mail la variable $activateLink
     $path = PATH_MAIL_SUSCRIPCION; 
     $activateLink = $path . sprintf("activarRegistre.php?id=%d&activateKey=%s",$dades['idUsr'],
-                                                                                    $dades['activateUsr']);
+                                                                               $dades['activateUsr']);
     $body = '<table width="629" border="0" cellspacing="1" cellpadding="2">
       <tr>
         <td width="623" align="left"></td>
       </tr>
       <tr>
         <td bgcolor="#FF8951"><div style="color:#FFFFFF; font-size:1.8em; font-family: Arial, Helvetica, sans-serif; text-transform: capitalize; font-weight: bold;">
-        <strong>' . $dades['nomUsr'] .' '. $dades['cogUsr'] . ', aquestes son les teves dades de registre: </strong></div>
+        <strong>' . $dades['nomUsr'] .' '. $dades['cogUsr'] . '. aquestes son les teves dades de registre: </strong></div>
         </td>
       </tr>
       <tr>
@@ -92,10 +110,11 @@ function montaBodyRegistre($dades)
               <strong>Clau d\'accés     : </strong>'.$dades["passwordUsr"].'<br><br>
               <strong>Email             : </strong>'.$dades["emailUsr"].'<br><br>
               <strong>Link d\'activació :<br><a href="'.$activateLink.'">'.$activateLink.' </strong></a><br><br>
-              <strong>Per activar el teu compte de Pinball i accedir a la web sense cap restricció,<br>
-                      fes click al link superior o copia\'l a la barra del teu explorador d\'internet.</strong><br><br>
+              <strong>Per activar el teu compte de Pinball i accedir a la web sense cap <br>
+              restricció, fes click al link superior o copia\'l a la barra del teu explorador <br>
+              d\'internet.</strong><br><br>
               <strong>Si el link no funciona a la primera, torna a intentar-ho, el servidor a vegades triga en processar l\'ordre.</strong><br><br>
-              <strong>Gràcies per registrar-te.</strong><br><br>
+              <strong>Gràcies.</strong><br><br>
               <strong>Equip de Pinball.</strong><br><br>              
         </div>
         </td>

@@ -44,8 +44,8 @@ if ((isset($_GET['id'])) and (isset($_GET['activateKey'])))
 
 if ($msg != "")
 	{
-	$extra = '../index.php';
-	$res   = '<meta content="4;URL= ' . $extra . '" http-equiv="REFRESH"> </meta>';		
+	$extra = '../html/index.php';
+	$res   = '<meta content="4;URL= ' . $extra . '" http-equiv="REFRESH"> </meta>';
 	echo $res;
 	}
 

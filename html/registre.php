@@ -78,7 +78,7 @@ $(function () {
 			{ name: 'fotoUsr',     type: 'text',  required: false },
 			{ name: 'facebookUsr', type: 'text',  required: false },
 			{ name: 'twitterUsr',  type: 'text',  required: false }
-		],
+		]
 		actions: {
 			reset: function () {
 				this.clear();
@@ -92,7 +92,8 @@ $(function () {
 						if (data.status != 'error')
 							{
 							w2alert("Registre correcte. Revisa la teva safata d'entrada del teu correu electrònic per activar el teu compte. Gràcies", 'Missatge');
-							document.getElementsByTagName("META")[0].content = "5;URL= ./index.html";
+							document.getElementsByTagName("META")[0].content = "5;URL=../html/index.php";
+							window.location.replace("../html/index.php");
 							}
 						else
 							w2alert(data.message + ". Torna a intentar-ho. Gràcies.", 'Missatge');

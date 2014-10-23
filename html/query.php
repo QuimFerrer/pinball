@@ -11,6 +11,8 @@ isEndSessionInQuery();
 ////////////////////////////////////////////////////////////////////////////////////
 
 	const FORM_CONTACTE_1000 				   = 1000;
+	const FORM_RESET_PASSWORD_1001			   = 1001;
+
 	const FORM_REGISTRE_1010 				   = 1010;
 	const CONSULTA_PRODUCTES_1020  			   = 1020;
 	const CONSULTA_PRODUCTES_HISTORIC_1021 	   = 1021;	
@@ -187,7 +189,59 @@ isEndSessionInQuery();
 		        $response = buildEmail("contacte", $record );			
 				echo json_encode($response);
 				break;
-
+			case FORM_RESET_PASSWORD_1001:
+	            $query = sprintf("SELECT *
+	                             FROM usuari
+	                             WHERE _04_loginUsuari = '%s' AND
+	                             	   _06_emailUsuari = '%s' AND
+	                                   _12_estatUsuari = '%d' AND
+	                                   (_10_datBaixaUsuari IS NULL OR
+	                                    _10_datBaixaUsuari = '');",$record['usuari'],
+	                                                               $record['email'],
+	                                                               0);
+				$response = dbExec($query);
+				$response = (object)controlErrorQuery($response);
+				if ($response->status != "error" and $response->total == 1)
+					{
+					// si el login i email existeixen a la base de dades
+					// obté el id del usuari
+					// bloqueja usuari posant l'estat compte usuari a 1
+	            	// genera nou codi activacio i guarda el nou password
+					$idr = $response->records;
+					$record["idUsr"]       = $idr[0]->_01_pk_idUsuari;
+					$record["nomUsr"]      = $idr[0]->_02_nomUsuari;
+					$record["cogUsr"]      = $idr[0]->_03_cognomUsuari;
+					$record["loginUsr"]    = $idr[0]->_04_loginUsuari;
+					$record["emailUsr"]    = $idr[0]->_06_emailUsuari;
+					$record["activateUsr"] = generaCodiActivacioAleatori(20);
+					$record["estatUsr"]    = 1;
+					$query  = sprintf("UPDATE usuari
+                   					   SET   _05_pwdUsuari       = '%s',
+                   					   		 _09_datModUsuari    = NOW(),
+                   					   		 _11_activacioUsuari = '%s',
+                   					   		 _12_estatUsuari     = '%d'
+                   					   WHERE _01_pk_idUsuari     = '%d';",md5($record["passwordUsr"]),
+                   					   									 $record["activateUsr"],
+                   					   									 $record["estatUsr"],
+                   					   									 $record["idUsr"]);
+					$response = dbExec($query,3);
+					$response = (object)controlErrorQuery($response);
+					if ($response->status != "error")
+						{
+						// envia mail amb enllaç per desbloquejar usuari
+						$response = buildEmail("resetPassword", $record );
+					    if ($response)
+			        		$response = array("error" => "no", "status" => "");
+			        	else
+							$response = array("error" => "si", "status" => "", "message" => "Error en l'enviament del correu de restauració de clau.");
+			        	}
+			    	else
+			    		$response = array("error" => "si", "status" => "", "message" => "Error en l'actualització de dades.");
+			    	}
+			    else
+			    	$response = array("error" => "si", "status" => "", "message" => "Usuari / email incorrectes.");
+				echo json_encode($response);
+				break;
 			case FORM_REGISTRE_1010:
 				$query    = sprintf("SELECT _04_loginUsuari
 									 FROM usuari
@@ -195,7 +249,7 @@ isEndSessionInQuery();
 				$response = dbExec($query);
 				$response = (object)controlErrorQuery($response);
 				if ($response->total > 0)
-					$response = array("status" => "error", "message" => "Ja existeix un usuari amb aquest LOGIN.");
+					$response = array("error" => "si", "status" => "", "message" => "Ja existeix un usuari amb aquest LOGIN.");
 				else
 					{
 					$record["activateUsr"] = generaCodiActivacioAleatori(20);
@@ -228,15 +282,14 @@ isEndSessionInQuery();
 								{
 					        	$response = buildEmail("registre", $record );
 					        	if ($response)
-					        		$response = array("status" => "");
+					        		$response = array("error" => "no", "status" => "");
 					        	else
-									$response = array("status" => "error", "message" => "Error en l'enviament del correu d'activació.");
+									$response = array("error" => "si", "status" => "", "message" => "Error en l'enviament del correu d'activació.");
 					        	}
 						}
 					}
 				echo json_encode($response);
 				break;
-
 			case CONSULTA_PRODUCTES_1020 :
 				$query    = 'SELECT P.*,
 									id AS recid,
@@ -330,39 +383,34 @@ isEndSessionInQuery();
 										_10_datBaixaUsuari IS NULL AND
 										_06_datBaixaAdm   IS NULL AND
 										_04_loginUsuari = '%s';",$usrLogin);
-				$response = dbExec($query,1);
+				$response = dbExec($query);
 				echo json_encode($response);	
 				break;
 			case MODIFICA_PERFIL_ADM_3010 :
 				$nomFile = (isset($record["fotoUsr"][0]['name'])) ? $record["fotoUsr"][0]['name'] : "";
-				$query    = sprintf( 
-							"UPDATE usuari 
-							 SET 
-								_02_nomUsuari    = '%s',
-								_03_cognomUsuari = '%s',
-								_06_emailUsuari  = '%s',				
-								_07_fotoUsuari   = '%s',
-								_09_datModUsuari = NOW() 
-							WHERE
-								_10_datBaixaUsuari IS NULL AND
-								_04_loginUsuari = '%s';",
+				$query    = sprintf("UPDATE usuari 
+							 		SET	_02_nomUsuari    = '%s',
+										_03_cognomUsuari = '%s',
+										_06_emailUsuari  = '%s',				
+										_07_fotoUsuari   = '%s',
+										_09_datModUsuari = NOW() 
+									WHERE _10_datBaixaUsuari IS NULL AND
+										  _04_loginUsuari = '%s';",
 							$record["nomUsr"], $record["cogUsr"],
 							$record["emailUsr"], 
 							$nomFile, 
 							$usrLogin);
 				$response = dbExec($query,0);
-				$query    = sprintf(
-							"UPDATE admin 
-							SET 
-								_02_faceAdm    = '%s',
-		 						_03_twitterAdm = '%s',
-		 						_05_datModAdm  = NOW()
-							WHERE 
-								_06_datBaixaAdm IS NULL AND
-								(_01_pk_idAdm 
-									IN ( SELECT _01_pk_idUsuari AS _01_pk_idAdm FROM usuari
-										WHERE _04_loginUsuari = '%s'));",
-							$record["facebookAdm"], $record["twitterAdm"], $usrLogin);
+				$query    = sprintf("UPDATE admin 
+									SET	_02_faceAdm    = '%s',
+				 						_03_twitterAdm = '%s',
+				 						_05_datModAdm  = NOW()
+									WHERE _06_datBaixaAdm IS NULL AND
+										(_01_pk_idAdm 
+											IN ( SELECT _01_pk_idUsuari AS _01_pk_idAdm FROM usuari
+											WHERE _04_loginUsuari = '%s'));",$record["facebookAdm"],
+																			 $record["twitterAdm"],
+																			 $usrLogin);
 				$response = dbExec($query,0);
 				$response1 = controlErrorQuery($response);
 				if ($response1['status'] != "error")
@@ -618,8 +666,8 @@ isEndSessionInQuery();
 													_08_datBaixaJoc = NOW()
 									 WHERE _01_pk_idJoc = '%d' AND
 										   _08_datBaixaJoc IS NULL;",$idJoc);
-				$response = dbExec($query,0);				
-				echo json_encode(controlErrorQuery($response));			
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));
 				break;				
 			case DESBLOQUEIG_JOC_3222 :
 				$query    = sprintf("UPDATE torneig SET _08_datModTorn    = NOW(),
@@ -1230,9 +1278,9 @@ isEndSessionInQuery();
 				echo json_encode(controlErrorQuery($response));				
 				break;				
 			case RECAUDACIO_X_MAQ_AMB_RANKING_3510 :
-				$query    = 'DROP TABLE CC;';
+				$query     = 'DROP TABLE CC;';
 				$response  = dbExec($query,0);
-				$query    = 'CREATE TABLE CC  ENGINE=MEMORY
+				$query     = 'CREATE TABLE CC  ENGINE=MEMORY
 							SELECT _01_pk_idMaq   AS idMaq,
 								   _02_macMaq     AS macMaq,
 								   _03_propMaq    AS propMaq,
@@ -1261,7 +1309,7 @@ isEndSessionInQuery();
 				break;			
 			case RECAUDACIO_X_JOC_AMB_RANKING_3520 :
 				$query    = 'DROP TABLE CC;';
-				$response  = dbExec($query,0);			
+				$response = dbExec($query,0);			
 				$query    = 'CREATE TABLE CC  ENGINE=MEMORY
 							SELECT _01_pk_idJoc AS idJoc,
 								   _02_nomJoc   AS nomJoc,
@@ -1275,7 +1323,7 @@ isEndSessionInQuery();
 								_08_datBaixaMaq      IS NULL
 							GROUP BY idJoc
 							ORDER BY totalCredits;';
-				$response = dbExec($query,0);
+				$response  = dbExec($query,0);
 				$response1 = controlErrorQuery($response);				
 				if ( !($response[0]->error) )
 					{
@@ -1886,45 +1934,36 @@ isEndSessionInQuery();
 										_10_datBaixaUsuari IS NULL AND
 										_06_datBaixaJug    IS NULL AND
 										_04_loginUsuari = '%s';",$usrLogin);
-				$response = dbExec($query,1);
+				$response = dbExec($query);
 				echo json_encode($response);	
 				break;
 
 			case MODIF_PERFIL_USR_5022 :
 				$nomFile = (isset($record["fotoUsr"][0]['name'])) ? $record["fotoUsr"][0]['name'] : "";			
-				$query    = sprintf( 
-							"UPDATE usuari 
-							 SET 
-								_02_nomUsuari    = '%s',
-								_03_cognomUsuari = '%s',
-								_06_emailUsuari  = '%s',				
-								_07_fotoUsuari   = '%s',
-								_09_datModUsuari = NOW() 
-							WHERE
-								_10_datBaixaUsuari IS NULL AND
-								_04_loginUsuari = '%s';",
-							$record["nomUsr"], $record["cogUsr"],
-							$record["emailUsr"],
-							$nomFile,
-							$usrLogin);
-
+				$query    = sprintf( "UPDATE usuari 
+							 		SET _02_nomUsuari    = '%s',
+										_03_cognomUsuari = '%s',
+										_06_emailUsuari  = '%s',				
+										_07_fotoUsuari   = '%s',
+										_09_datModUsuari = NOW() 
+									WHERE	_10_datBaixaUsuari IS NULL AND
+											_04_loginUsuari = '%s';", $record["nomUsr"],
+																	  $record["cogUsr"],
+																	  $record["emailUsr"],
+																  	  $nomFile,
+																	  $usrLogin);
 				$response = dbExec($query,0);
-
-				$query    = sprintf(
-							"UPDATE jugador 
-							SET 
-								_02_faceJug    = '%s',
-		 						_03_twitterJug = '%s',
-		 						_05_datModJug  = NOW()
-							WHERE 
-								_06_datBaixaJug IS NULL AND
-								(_01_pk_idJug 
-									IN ( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
-										WHERE _04_loginUsuari = '%s'));",
-							$record["facebookUsr"], $record["twitterUsr"], $usrLogin);
-
+				$query    = sprintf("UPDATE jugador 
+									SET _02_faceJug    = '%s',
+				 						_03_twitterJug = '%s',
+				 						_05_datModJug  = NOW()
+									WHERE 	_06_datBaixaJug IS NULL AND
+											(_01_pk_idJug 
+											IN ( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
+												WHERE _04_loginUsuari = '%s'));", $record["facebookUsr"],
+																				  $record["twitterUsr"],
+																				  $usrLogin);
 				$response = dbExec($query,0);
-
 				$response1 = controlErrorQuery($response);
 				if ($response1['status'] != "error")
 					{
@@ -1935,7 +1974,6 @@ isEndSessionInQuery();
 				break;
 
 			case BAIXA_PERFIL_USR_5023 :
-
 				$query    = sprintf("UPDATE usuari SET _09_datModUsuari   = NOW(),
 													   _10_datBaixaUsuari = NOW()
 							 		WHERE _10_datBaixaUsuari IS NULL AND
@@ -1947,11 +1985,9 @@ isEndSessionInQuery();
 						 		WHERE _06_datBaixaJug IS NULL AND
 								 			(_01_pk_idJug IN ( SELECT _01_pk_idUsuari AS _01_pk_idJug FROM usuari
 							       			WHERE _04_loginUsuari = '%s'));",$usrLogin);
-
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));				
 				break;
-
 			case CONSULTA_USR_TORNEIGS_5041 :
 				$query    = sprintf("SELECT _01_pk_idTorn AS recid,
 											_01_pk_idTorn AS idTorn,
@@ -1978,7 +2014,6 @@ isEndSessionInQuery();
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
 				break;	
-
 			case BLOQUEJA_USR_TORN_5043 :
 				$query    = sprintf("UPDATE inscrit SET _05_datModInsc   = NOW(),
 														_06_datBaixaInsc = NOW()
@@ -2078,8 +2113,8 @@ isEndSessionInQuery();
 				break;	
 			case CONSULTA_USR_RANKING_HISTORIC_5051 :
 				$query    = 'DROP TABLE CC;';
-				$response  = dbExec($query,0);
-				$query =	'CREATE TABLE CC  ENGINE=MEMORY
+				$response = dbExec($query,0);
+				$query    =	'CREATE TABLE CC  ENGINE=MEMORY
 						 	SELECT 	_01_pk_idTorn AS idTorn,
 							 		_03_nomTorn AS nomTorn,
 						 			idJoc,
@@ -2111,7 +2146,7 @@ isEndSessionInQuery();
 		
 							GROUP BY idTorn, idJug
 							ORDER BY idTorn, punts DESC;';
-				$response = dbExec($query,0);
+				$response  = dbExec($query,0);
 				$response1 = controlErrorQuery($response);				
 				if ( !($response[0]->error) )
 					{				
@@ -2167,10 +2202,9 @@ isEndSessionInQuery();
 				$response = dbExec($query);
 				echo json_encode(controlErrorQuery($response));				
 				break;				
-
 			case CONSULTA_RANKING_ACTUAL_5070 :
 				$query    = 'DROP TABLE CC;';
-				$response  = dbExec($query,0);
+				$response = dbExec($query,0);
 				$query    = sprintf("CREATE TABLE CC  ENGINE=MEMORY
 							SELECT 	_01_pk_idTorn AS idTorn,
 							 		_03_nomTorn AS nomTorn,
@@ -2205,7 +2239,7 @@ isEndSessionInQuery();
 								_06_datFinTorn   >= CURDATE()
 							GROUP BY idTorn, idJug
 							ORDER BY idTorn, punts DESC;",$usrLogin);
-				$response = dbExec($query,0);
+				$response  = dbExec($query,0);
 				$response1 = controlErrorQuery($response);				
 				if ( !($response[0]->error) )
 					{				
@@ -2242,10 +2276,9 @@ isEndSessionInQuery();
 					}
 				echo json_encode( $response1 );						
 				break;				
-
 			case CONSULTA_RANKING_HISTORIC_5071 :
 				$query    = 'DROP TABLE CC;';
-				$response  = dbExec($query,0);			
+				$response = dbExec($query,0);			
 				$query    = sprintf("CREATE TABLE CC  ENGINE=MEMORY
 							SELECT 	_01_pk_idTorn AS idTorn,
 							 		_03_nomTorn AS nomTorn,
@@ -2278,7 +2311,7 @@ isEndSessionInQuery();
 		
 							GROUP BY idTorn, idJug
 							ORDER BY idTorn, punts DESC;",$usrLogin);
-				$response = dbExec($query,0);
+				$response  = dbExec($query,0);
 				$response1 = controlErrorQuery($response);				
 				if ( !($response[0]->error) )
 					{				
