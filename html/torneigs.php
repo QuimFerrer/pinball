@@ -60,11 +60,6 @@ include ("../src/seguretatLogin.php");
 </html>
 
 <?php
-if (isset($_POST['entrar'])) controlAcces($_POST["usr"],$_POST["pwd"]);
-
-function formatarDataHora($dataHora)
-{
-
-}
-
+if (isset($_POST['entrar']) and !(isset($_POST['resetPassword'])) ) controlAcces($_POST["usr"],$_POST["pwd"]);
+if (isset($_POST['entrar']) and   isset($_POST['resetPassword'])  ) resetPassword($_POST["usr"]);
 ?>

@@ -159,9 +159,13 @@ header {
  	height:30px;
  	font-size: 16px;
 }
-#dialog input[type="checkbox"] {
-margin-left: 37%;
-}
+/*#dialog div input[type="checkbox"] {*/
+
+/*	margin:  0;
+ 	padding: 0;
+*/
+/*margin-left: 37%;*/
+/*}*/
 /* usuaris.php */
 h2#username {
 	background-color: #000;

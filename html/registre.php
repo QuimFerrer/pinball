@@ -92,8 +92,8 @@ $(function () {
 						if (data.status != 'error')
 							{
 							w2alert("Registre correcte. Revisa la teva safata d'entrada del teu correu electrònic per activar el teu compte. Gràcies", 'Missatge');
-							document.getElementsByTagName("META")[0].content = "5;URL=../html/index.php";
-							window.location.replace("../html/index.php");
+							// document.getElementsByTagName("META")[0].content = "5;URL=../html/index.php";
+							setTimeout(function () { location.replace("../html/index.php");}, 7000);
 							}
 						else
 							w2alert(data.message + ". Torna a intentar-ho. Gràcies.", 'Missatge');
@@ -107,5 +107,6 @@ $(function () {
 </html>
 
 <?php
-if (isset($_POST['entrar'])) controlAcces($_POST["usr"],$_POST["pwd"]);
+if (isset($_POST['entrar']) and !(isset($_POST['resetPassword'])) ) controlAcces($_POST["usr"],$_POST["pwd"]);
+if (isset($_POST['entrar']) and   isset($_POST['resetPassword'])  ) resetPassword($_POST["usr"]);
 ?>

@@ -171,7 +171,9 @@ function dbExecRemote($query,$tipusResultat) {
                     <input type="text"     name="usr" placeholder="Nom d'usuari" required autofocus/>
                     <input type="password" name="pwd" placeholder="Clau d'accés"/>
                     <input type="submit"   name="entrar" value="Entrar"/>
-                    <input type="checkbox" name="resetPassword"/><span>Reset clau</span>
+                <div>
+                    <input type="checkbox" name="resetPassword"/><span>Reset clau accés</span>
+                </div>
                 </form>
             </div>
         </div>
