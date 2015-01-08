@@ -1,6 +1,9 @@
 <?php 
 
 define("LOCAL", true);
+define("SERVER_MYSQL"   , 'localhost');
+define("USER_MYSQL"     , 'root');
+define("PASSWORD_MYSQL" , '');
 
 //controla la resposta de la query per si hi ha un error
 function controlErrorQuery($response)
@@ -69,7 +72,7 @@ function dbExecLocal($query,$tipusResultat)
 
     if (!isset($query) ) die('<h1>No es una consulta correcte !</h1>');
 
-    $link = mysql_connect("localhost", "root", "");
+    $link = mysql_connect(SERVER_MYSQL, USER_MYSQL, PASSWORD_MYSQL);
     if (!$link) die('Not connected : ' . mysql_error());
 
     $db_selected = mysql_select_db('u555588791_pinba', $link);

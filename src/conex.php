@@ -1,7 +1,7 @@
 <?php 
 function UseConex() {
 
-	$pConnect = mysql_pconnect('localhost', 'root', '');
+	$pConnect = mysql_pconnect(SERVER_MYSQL, USER_MYSQL, PASSWORD_MYSQL);
 			
 	if ($pConnect) mysql_select_db('u555588791_pinba', $pConnect );		
 	return $pConnect;

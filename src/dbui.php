@@ -10,7 +10,7 @@ isEndSessionInQuery();
 
 	if (!isset($_REQUEST['cmd']) ) die('<h1>No es una consulta correcte !</h1>');
 
-	$link = mysql_connect('localhost', 'root', '');
+	$link = mysql_connect(SERVER_MYSQL, USER_MYSQL, PASSWORD_MYSQL);
 
 	if (!$link)	die('Not connected : ' . mysql_error());
 

@@ -15,7 +15,7 @@ define("NOM_FROM_CONTACTE","Contacte Pinball");
 define("DESTINACION_UPLOADS", "./uploads/");
 define("CANAL_ENVIO","PHPMAILER");
 // define("CANAL_ENVIO","SENDMAIL_PHP");
-define("PATH_MAIL_SUSCRIPCION","http://localhost/pinball/registre/");
+define("PATH_MAIL_SUSCRIPCION","http://" . SERVER_MYSQL . "/pinball/registre/");
 define("SIZE_UPLOAD",2000000);
 
 
