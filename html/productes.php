@@ -3,7 +3,7 @@
 <head>
     <meta content="" http-equiv="REFRESH"> </meta>      
     <meta charset="UTF-8">
-    <title>Gestio de productes</title>
+    <title>Gestió de productes</title>
     <link rel="stylesheet" href="../css/lib/w2ui-1.3.2.css" />
     <link rel="stylesheet" href="../css/lib/dbui.css" />
 </head>

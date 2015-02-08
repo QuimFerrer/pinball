@@ -6,12 +6,13 @@ include ("../src/seguretat.php");
 include ("../src/seguretatLogin.php");
 
 comprovaSessio();
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta content="" http-equiv="REFRESH"> </meta>			
-	<meta charset="UTF-8">
+	<meta content="" http-equiv="REFRESH"></meta>
+	<meta charset="UTF-8"></meta>
 	<title>Perfil Administrador</title>
 	<link rel="stylesheet" href="../css/lib/w2ui-1.3.2.css" />
 	<link rel="stylesheet" href="../css/pinball.css">
@@ -122,7 +123,6 @@ comprovaSessio();
 						{
 						$("#form").hide();
 						w2alert("Les dades s'han guardat correctament", "Perfil Administrador");
-						document.getElementsByTagName("META")[0].content = "3;URL= ./usuaris.php";
 						}
 				});
 			}

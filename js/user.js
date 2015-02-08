@@ -5,7 +5,7 @@ w2ui.layout.content('left',
 		nodes: [ 
 			{ id: '5000', text: 'Opcions', expanded: true, group: true,
 			  nodes: [ 
-					{ id: '5020', text: 'Perfil', img: 'icon-page'},
+					{ id: '5020', text: 'Perfil', img: 'w2ui-icon-pencil'},
 					{ id: '5040', text: 'Els Meus Torneigs', img: 'icon-folder',
 						nodes: [
 							{ id: '5041', text: 'Consulta', img: 'icon-page' },
@@ -49,8 +49,8 @@ var controller = function(e) {
 		case '5041':
             toolbar = { 
                 items: [
-	                { type: 'button', id: 'lock',    caption: 'desactivar',  img: 'icon-delete' },
-	                { type: 'button', id: 'unlock',  caption: 'activar',     img: 'icon-edit' }	                
+	                { type: 'button', id: 'lock',    caption: 'desactivar',  img: 'w2ui-icon-cross' },
+	                { type: 'button', id: 'unlock',  caption: 'activar',     img: 'w2ui-icon-pencil' }	                
 	            ],
                 onClick: function(target, data) {
 			        var row = w2ui['grid'].getSelection();
@@ -126,7 +126,7 @@ var controller = function(e) {
 
             toolbar = { 
 	            items: [
-	                { type: 'button', id: 'edit',    caption: 'Inscripció',    	 img: 'icon-add' },
+	                { type: 'button', id: 'edit',    caption: 'Inscripció',    	 img: 'w2ui-icon-plus' },
 	            ],
                 onClick: function(target, data) {
 			        var row = w2ui['grid'].getSelection();

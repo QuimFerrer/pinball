@@ -26,7 +26,7 @@ function controlLogin1($user, $pswd)
         $_SESSION["autentificat"]   = "SI";
         $_SESSION["login"]          = $user;
         $_SESSION["nomUsr"]         = $response['records'][0]->_02_nomUsuari;
-        $_SESSION["cognomUsr"]      = $response['records'][0]->_03_cognomUsuari;        
+        $_SESSION["cognomUsr"]      = $response['records'][0]->_03_cognomUsuari;
         //defineixo la data i hora d'inici de sessió en format aaaa-mm-dd hh:mm:ss 
         $_SESSION['lastAccessTime'] = date("Y-n-j H:i:s");
         $res = "SI";

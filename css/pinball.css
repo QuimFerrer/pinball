@@ -128,10 +128,12 @@ header {
 	padding:2px;
 	display: inline-block;
 }
-#dialog span:first-child,
+
+/*#dialog span:first-child,
 	    span:last-child {
 	color: #FAE5E5;
 }
+*/
 /* Caixa de login */
 #dialog {
 	width: 30%;

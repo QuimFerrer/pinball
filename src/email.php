@@ -4,25 +4,65 @@
 //Utilitzacio d'una clase de la llibreria.
 include('../src/PHPMailer/class.phpmailer.php');
 
-define("DEBUG",0);
-define("HOST","smtp.gmail.com");
-define("PORT_HOST",587);
-define("USER","activar.cuenta.usuario@gmail.com");
-define("PASS","sudoku06");
-define("FROM","activar.cuenta.usuario@gmail.com");
-define("NOM_FROM","Pinball");
-define("NOM_FROM_CONTACTE","Contacte Pinball");
-define("DESTINACION_UPLOADS", "./uploads/");
-define("CANAL_ENVIO","PHPMAILER");
-// define("CANAL_ENVIO","SENDMAIL_PHP");
-define("PATH_MAIL_SUSCRIPCION","http://" . SERVER_MYSQL . "/pinball/registre/");
-define("SIZE_UPLOAD",2000000);
+// define("DEBUG",0);
+// define("HOST","smtp.gmail.com");
+// define("PORT_HOST",587);
+// define("USER","activar.cuenta.usuario@gmail.com");
+// define("PASS","sudoku06");
+// define("FROM","activar.cuenta.usuario@gmail.com");
+// define("NOM_FROM","Pinball");
+// define("NOM_TO_CONTACTE","Contacte Pinball");
+// define("CANAL_ENVIO","PHPMAILER");
+// // define("CANAL_ENVIO","SENDMAIL_PHP");
+// define("PATH_MAIL_SUSCRIPCIO","http://" . SERVER_MYSQL . "/pinball/registre/");
+// define("DESTINACIO_UPLOADS", "./uploads/");
+// define("SIZE_UPLOAD",2000000);
 
+function getConfiguracioMail()
+{
+$query = sprintf("SELECT _02_nomServerMYSQL     AS nomServerMYSQL,
+                         _03_usrMYSQL           AS usrMYSQL,
+                         _04_passwordUsrMYSQL   AS passwordUsrMYSQL,
+                         _05_dbLocalOrRemot     AS dbLocalOrRemot,
+                         _06_emailDebug         AS emailDebug,
+                         _07_emailSMTPHost      AS emailSMTPHost,
+                         _08_emailSMTPHostPort  AS emailSMTPHostPort,
+                         _09_emailUser          AS emailUser,
+                         _10_emailPassword      AS emailPassword,
+                         _11_emailFrom          AS emailFrom,
+                         _12_emailNomFrom       AS emailNomFrom,
+                         _13_emailNomToContacte AS emailNomToContacte,
+                         _14_emailCanal         AS emailCanal,
+                         _15_emailPathRegistre  AS emailPathRegistre,
+                         _16_pathUploads        AS pathUploads,
+                         _17_sizeUploads        AS sizeUploads
+                    FROM configuracio
+                    WHERE
+                        _01_pk_idConfig = '%d';", 1 );
+$response = dbExec($query);
+$response = controlErrorQuery($response);
+
+define("DEBUG",           $response['records'][0]->emailDebug);
+define("HOST",            $response['records'][0]->emailSMTPHost);
+define("PORT_HOST",       $response['records'][0]->emailSMTPHostPort);
+define("USER",            $response['records'][0]->emailUser);
+define("PASS",            $response['records'][0]->emailPassword);
+define("FROM",            $response['records'][0]->emailFrom);
+define("NOM_FROM",        $response['records'][0]->emailNomFrom);
+define("NOM_TO_CONTACTE", $response['records'][0]->emailNomToContacte);
+define("CANAL_ENVIO",     $response['records'][0]->emailCanal);
+define("PATH_MAIL_SUSCRIPCIO","http://" . SERVER_MYSQL . "/pinball/" . $response['records'][0]->emailPathRegistre);
+
+define("DESTINACIO_UPLOADS", "./" + $response['records'][0]->pathUploads);
+define("SIZE_UPLOAD",     $response['records'][0]->sizeUploads);
+}
 
 function buildEmail($tipusMail, $dades)
 {
+    getConfiguracioMail();
     $res = true;
-    if (CANAL_ENVIO === "PHPMAILER")
+    // PHPMAILER
+    if (CANAL_ENVIO == 0)
         {
         $resMail = "";            
         switch( $tipusMail )
@@ -37,7 +77,8 @@ function buildEmail($tipusMail, $dades)
             }
         if ($resMail != "") $res = false;
         }
-    if (CANAL_ENVIO === "SENDMAIL_PHP")
+    // SENDMAIL_PHP
+    if (CANAL_ENVIO == 1)
         {
         $resMail = true;            
         switch( $tipusMail )
@@ -62,7 +103,7 @@ function montaMailContacte($dades)
     $isHtml  = true;
     $altBody = "";
     $to      = FROM;
-    $nomTo   = NOM_FROM_CONTACTE;
+    $nomTo   = NOM_TO_CONTACTE;
     $subject = "Contacte des de Pinball";
     $body = montaBodyContacte($dades);
     return( prepMail($isHtml, $subject, $body, $altBody, $to, $nomTo) );
@@ -92,7 +133,7 @@ function montaBodyContacte($dades)
 function montaBodyRegistre($dades)
 {
     // creem el nostre link per enviar per mail la variable $activateLink
-    $path = PATH_MAIL_SUSCRIPCION; 
+    $path = PATH_MAIL_SUSCRIPCIO; 
     $activateLink = $path . sprintf("activarRegistre.php?id=%d&activateKey=%s",$dades['idUsr'],
                                                                                $dades['activateUsr']);
     $body = '<table width="629" border="0" cellspacing="1" cellpadding="2">
@@ -194,7 +235,7 @@ function montaMailContacte_php($dades)
 {
     $isHtml  = true;
     $to      = FROM;
-    // $nomTo   = NOM_FROM_CONTACTE;
+    // $nomTo   = NOM_TO_CONTACTE;
     $body    = montaBodyContacte($dades);
     $subject = "Contacte des de Pinball";
 

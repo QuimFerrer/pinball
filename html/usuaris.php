@@ -7,7 +7,7 @@ include ("../src/seguretat.php");
 include ("../src/seguretatLogin.php");
 
 comprovaSessio();
-	
+
 function mostraUsuariLogat()
 {
 	if (isset($_SESSION["login"]))
@@ -27,7 +27,9 @@ function mostraUsuariLogat()
 	<meta content="" http-equiv="REFRESH"> </meta>
 	<meta charset="UTF-8">
 	<title>Pinball. Usuaris</title>
-	<link rel="stylesheet" href="../css/lib/w2ui-1.3.2.css" />
+	<!-- <link rel="stylesheet" href="../css/lib/w2ui-1.3.2.css" /> -->
+	<link rel="stylesheet" href="../w2ui/dist/w2ui-1.5.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../w2ui/libs/font-awesome/font-awesome.css"/>
 	<link rel="stylesheet" href="../css/pinball.css">
 </head>
 <body>
@@ -56,8 +58,14 @@ function mostraUsuariLogat()
 		</footer>
 	</div>
 </body>
-	<script type="text/javascript" src="../js/lib/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript" src="../js/lib/w2ui-1.3.2.min.js"></script>
+	
+<!-- <script type="text/javascript" src="../js/lib/jquery-1.11.0.min.js"></script> -->
+<!-- <script type="text/javascript" src="../js/lib/w2ui-1.3.2.min.js"></script> -->
+
+<script type="text/javascript" src="../w2ui/libs/jquery/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="../w2ui/dist/w2ui-1.5.min.js"></script>
+
+
 	<script type="text/javascript" src="../js/pinball.js"></script>
 	<script type="text/javascript" src="../js/lib/dbui.js"></script>
 

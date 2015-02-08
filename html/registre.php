@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 ob_start();
 
 include ("../src/pinball.h");
@@ -78,7 +79,7 @@ $(function () {
 			{ name: 'fotoUsr',     type: 'text',  required: false },
 			{ name: 'facebookUsr', type: 'text',  required: false },
 			{ name: 'twitterUsr',  type: 'text',  required: false }
-		]
+		],
 		actions: {
 			reset: function () {
 				this.clear();

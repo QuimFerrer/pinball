@@ -34,7 +34,7 @@ $url = 'http://'.$host.$uri.'/'.$extra;
 			if ($sessioAutenticada == "SI")
 	        	echo "</br><h2>T'esperem molt aviat !!!!</h2></br>";
 			?>
-			<img src="../resources/img/logout/pinballTronic.jpg" width="35%" alt="Màquina Pinball" />
+			<img src="../resources/img/logout/PINBALL_TRONIC.jpg" width="35%" alt="Màquina Pinball" />
 		</section>
 		<footer>
 			<?php footer(); ?>

@@ -1,26 +1,27 @@
 // Sidebar per l'administrador
 // Exemple per incorporar un fitxer extern
-//{ id: '0000', text: 'Test', img: 'icon-edit' },
+//{ id: '0000', text: 'Test', img: 'w2ui-icon-pencil' },
 w2ui.layout.content('left',
 	$('#sidebar').w2sidebar({
 		name: 'sidebar',
 		nodes: [ 
 			{ id: '2000', text: 'Opcions', expanded: true, group: true,
-			  nodes: [  { id: '3000', text: 'Perfil', img: 'icon-edit' },
+			  nodes: [  { id: '3000', text: 'Perfil', img: 'w2ui-icon-pencil' },
+			  			{ id: '3030', text: 'Configuració', img: 'w2ui-icon-pencil' },
 						{ id: '3100', text: 'Partides', img: 'icon-folder',
-						nodes: [{ id: '3180', text: 'Generador partides', img:'icon-add'},
+						nodes: [{ id: '3180', text: 'Generador partides', img:'w2ui-icon-plus'},
 								{ id: '3110', text: 'per màquina',  img: 'icon-page' },
 								{ id: '3120', text: 'per jugador',  img: 'icon-page' },
-								{ id: '3160', text: 'Manteniment Rondes',  img: 'icon-edit' },
+								{ id: '3160', text: 'Manteniment Rondes',  img: 'w2ui-icon-pencil' },
 								{ id: '3170', text: 'Històric de Rondes',  img: 'icon-page' }]},
 						{ id: '3200', text: 'Jocs', img: 'icon-folder',
-						nodes: [{ id: '3230', text: 'Manteniment',  img: 'icon-edit' },
+						nodes: [{ id: '3230', text: 'Manteniment',  img: 'w2ui-icon-pencil' },
 								{ id: '3240', text: 'Històric', img: 'icon-page' },
 								{ id: '3245', text: 'Màquines', img: 'icon-folder',									
 								nodes: [{ id: '3250', text: 'Actual',  img: 'icon-page' },
 										{ id: '3260', text: 'Històric',  img: 'icon-page' }]}]},
 						{ id: '3300', text: 'Torneigs', img: 'icon-folder',
-						nodes: [{ id: '3340', text: 'Manteniment',  img: 'icon-edit' },
+						nodes: [{ id: '3340', text: 'Manteniment',  img: 'w2ui-icon-pencil' },
 								{ id: '3342', text: 'Històric',  img: 'icon-page' },
 								{ id: '3345', text: 'Llistats',  img: 'icon-folder',
 								nodes: [{ id: '3348', text: 'Jugadors',  img: 'icon-folder',
@@ -31,13 +32,13 @@ w2ui.layout.content('left',
 												{ id: '3380', text: 'Amb partides. Actual',  img: 'icon-page' },
 												{ id: '3390', text: 'Amb partides. Històric',  img: 'icon-page' } ]}]}]},
 						{ id: '3400', text: 'Màquines', img: 'icon-folder',
-						nodes: [{ id: '3420', text: 'Manteniment',  img: 'icon-edit' },
+						nodes: [{ id: '3420', text: 'Manteniment',  img: 'w2ui-icon-pencil' },
 								{ id: '3425', text: 'Històric',  img: 'icon-page' },
 								{ id: '3440', text: 'Jocs',  img: 'icon-page' },
 								{ id: '3450', text: 'Històric de jocs',  img: 'icon-page' },
 								{ id: '3456', text: 'Disponibles',  img: 'icon-page' },							
 								{ id: '3459', text: 'Assignar Jocs',  img: 'icon-folder',
-								nodes: [{ id: '3485', text: 'Manteniment',  img: 'icon-edit' },									
+								nodes: [{ id: '3485', text: 'Manteniment',  img: 'w2ui-icon-pencil' },									
 										{ id: '3490', text: 'Històric',  img: 'icon-page' }]},
 								{ id: '3500', text: 'Recaudacions',  img: 'icon-folder',
 								nodes: [{ id: '3510', text: 'Maquina i Ranking',  img: 'icon-page' },
@@ -66,14 +67,14 @@ w2ui.layout.content('left',
 										{ id: '3732', text: '2',  img: 'icon-page' },
 										{ id: '3733', text: '3',  img: 'icon-page' }]} ]},
 						{ id: '3800', text: 'Ubicacions', img: 'icon-folder',
-						nodes: [{ id: '3830', text: 'Manteniment',  img: 'icon-edit' },
+						nodes: [{ id: '3830', text: 'Manteniment',  img: 'w2ui-icon-pencil' },
 								{ id: '3840', text: 'Històric',  img: 'icon-page' },							
 								{ id: '3845', text: 'Llistats',  img: 'icon-folder',
 								nodes: [{ id: '3850', text: 'Provincia, Població i CP',  img: 'icon-page' },
 										{ id: '3860', text: 'Coordenades',  img: 'icon-page' },
 										{ id: '3870', text: 'Empresa, Provincia i Població',  img: 'icon-page' }]},
 								{ id: '3875', text: 'Assignar màquines',  img: 'icon-folder',
-								nodes: [{ id: '3890', text: 'Manteniment',  img: 'icon-edit' },
+								nodes: [{ id: '3890', text: 'Manteniment',  img: 'w2ui-icon-pencil' },
 										{ id: '3920', text: 'Llistats',  img: 'icon-folder',
 										nodes: [{ id: '3930', text: 'Provincia i Població',  img: 'icon-page' },
 												{ id: '3940', text: 'Coordenades',  img: 'icon-page' },
@@ -82,8 +83,37 @@ w2ui.layout.content('left',
 						nodes: [{ id: '4010', text: 'Perfils',  img: 'icon-page' },
 								{ id: '4040', text: 'Torneigs registrats', img: 'icon-page' }]},
 						{ id: '1015', text: 'Productes', img: 'icon-folder',
-						nodes: [{ id: '1020', text: 'Manteniment',  img: 'icon-edit' },
+						nodes: [{ id: '1020', text: 'Manteniment',  img: 'w2ui-icon-pencil' },
 								{ id: '1021', text: 'Històric',     img: 'icon-page' }]},
+
+			  			{ id: '9000', text: 'Tests', img: 'icon-folder',
+			  			nodes: [{ id: '9001', text: 'Test Formulari',    img: 'w2ui-icon-pencil'},
+			  					{ id: '9002', text: 'w2ui-icon-check',   img: 'w2ui-icon-check'},
+								{ id: '9003', text: 'w2ui-icon-columns', img: 'w2ui-icon-columns'},
+								{ id: '9004', text: 'w2ui-icon-cross',   img: 'w2ui-icon-cross'},
+								{ id: '9005', text: 'w2ui-icon-pencil',  img: 'w2ui-icon-pencil'},
+								{ id: '9006', text: 'w2ui-icon-plus',    img: 'w2ui-icon-plus'},
+								{ id: '9007', text: 'w2ui-icon-reload',  img: 'w2ui-icon-reload'},
+								{ id: '9008', text: 'w2ui-icon-search',  img: 'w2ui-icon-search'},								
+								{ id: '9009', text: 'icon-page',         img: 'icon-page'},
+								{ id: '9010', text: 'icon-folder',       img: 'icon-folder'},
+								{ id: '9020', text: 'fa-glass',          img: 'fa-glass'},
+								{ id: '9021', text: 'fa-music',          img: 'fa-music'},
+								{ id: '9022', text: 'fa-search',         img: 'fa-search'},
+								{ id: '9023', text: 'fa-envelope',       img: 'fa-envelope'},
+								{ id: '9024', text: 'fa-heart',          img: 'fa-heart'},
+								{ id: '9025', text: 'fa-star',           img: 'fa-star'},
+								{ id: '9026', text: 'fa-star-empty',     img: 'fa-star-empty'},
+								{ id: '9027', text: 'fa-user',           img: 'fa-user'},
+								{ id: '9028', text: 'fa-film',           img: 'fa-film'},
+								{ id: '9029', text: 'fa-th-large',       img: 'fa-th-large'},
+								{ id: '9030', text: 'fa-th',             img: 'fa-th'},
+								{ id: '9031', text: 'fa-th-list',        img: 'fa-th-list'},
+								{ id: '9032', text: 'fa-ok',             img: 'fa-ok'},
+								{ id: '9033', text: 'fa-remove',         img: 'fa-remove'},
+								{ id: '9034', text: 'fa-zoom-in',        img: 'fa-zoom-in'}
+								]
+						},
 						]
 					}
 				],
@@ -103,6 +133,10 @@ var controller = function(e) {
 			// DataView('../html/test.php');
 			DataView('../html/external.php');
 			break;
+// tests
+		case '9001':
+		    DataView('../w2ui/testform.php');
+		    break;
 
 // Productes
 		case '1020':
@@ -134,8 +168,8 @@ var controller = function(e) {
 		case '1021':
             toolbar = { 
                 items: [
-	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
-	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' }	                
+	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'w2ui-icon-cross' },
+	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'w2ui-icon-pencil' }	                
 	            ],
                 onClick: function(target, data) {
 			        var row = w2ui['grid'].getSelection();
@@ -172,80 +206,80 @@ var controller = function(e) {
 			DataGrid("Històric de Productes recreatius", false, toolbar, columns, e.target);				
 			break;
 // Torneigs
-		case '1060':
-            toolbar = { 
-                items: [
-	                { type: 'button', id: 'opcio_1',  caption: 'un',    img: 'icon-add' },
-	                { type: 'button', id: 'opcio_2',  caption: 'dos', img: 'icon-edit' },
-	                { type: 'button', id: 'opcio_3',  caption: 'tres',  img: 'icon-delete' }
-	            ],
-                onClick: function(target, data) {
-                    switch(target) {
-                        case 'opcio_1' : console.log(grid.getSelection()[0]); break;
-                        case 'opcio_2' : grid.reload(); break;
-                        case 'opcio_3' : console.log(target,data); break;
-                    } 
-                }
-            };
-			columns = [				
-				{ field: "_01_pk_idTorn", caption: 'ID Torneig', size: '10%' },
-				{ field: "_02_pk_idJocTorn", caption: 'ID Joc', size: '10%' },
-				{ field: "_03_nomTorn", caption: 'Nom del torneig', size: '50%', editable: { type: 'text' } },
-				{ field: "_04_premiTorn", caption: 'Premi', size: '10%' },
-				{ field: "_05_datIniTorn", caption: 'Inici', size: '10%' },
-				{ field: "_06_datFinTorn", caption: 'Final', size: '10%' }
-			];
-			fields = [
-		        { name: "_03_nomTorn", type: 'text', required: true,
-		          html: { caption: 'Nom', attr: 'size="40"', span: 5 }
-		        },
-		        { name: "_02_pk_idJocTorn", type: 'list', 
-		          html: { caption: 'Joc', attr: 'readonly', span: 5 },
-				  options: {
-				  	url: '../src/dbui.php?cmd=ld&param=joc',   
-				  	showNone: false     // shows first element - none - with empty value
-				  }
-		        },
-		        { name: "_04_premiTorn", type: 'float', required: false,
-		          html: { caption: 'Premi', attr: 'size="40"', span: 5 }
-		        },
-		        { name: "_05_datIniTorn", type: 'date', required: false,
-		          html: { caption: 'Data inici', attr: 'size="40"', span: 5 }
-		        },
-		        { name: "_06_datFinTorn", type: 'date', required: false,
-		          html: { caption: 'Data final', attr: 'size="40"', span: 5 }
-		        }
-		    ];
-		    DataGrid("Llistat de torneigs", "torneig", false, columns, fields, "_01_pk_idTorn");
-		    break;
+		// case '1060':
+  //           toolbar = { 
+  //               items: [
+	 //                { type: 'button', id: 'opcio_1',  caption: 'un',    img: 'w2ui-icon-plus' },
+	 //                { type: 'button', id: 'opcio_2',  caption: 'dos', img: 'w2ui-icon-pencil' },
+	 //                { type: 'button', id: 'opcio_3',  caption: 'tres',  img: 'w2ui-icon-cross' }
+	 //            ],
+  //               onClick: function(target, data) {
+  //                   switch(target) {
+  //                       case 'opcio_1' : console.log(grid.getSelection()[0]); break;
+  //                       case 'opcio_2' : grid.reload(); break;
+  //                       case 'opcio_3' : console.log(target,data); break;
+  //                   } 
+  //               }
+  //           };
+		// 	columns = [				
+		// 		{ field: "_01_pk_idTorn", caption: 'ID Torneig', size: '10%' },
+		// 		{ field: "_02_pk_idJocTorn", caption: 'ID Joc', size: '10%' },
+		// 		{ field: "_03_nomTorn", caption: 'Nom del torneig', size: '50%', editable: { type: 'text' } },
+		// 		{ field: "_04_premiTorn", caption: 'Premi', size: '10%' },
+		// 		{ field: "_05_datIniTorn", caption: 'Inici', size: '10%' },
+		// 		{ field: "_06_datFinTorn", caption: 'Final', size: '10%' }
+		// 	];
+		// 	fields = [
+		//         { name: "_03_nomTorn", type: 'text', required: true,
+		//           html: { caption: 'Nom', attr: 'size="40"', span: 5 }
+		//         },
+		//         { name: "_02_pk_idJocTorn", type: 'list', 
+		//           html: { caption: 'Joc', attr: 'readonly', span: 5 },
+		// 		  options: {
+		// 		  	url: '../src/dbui.php?cmd=ld&param=joc',   
+		// 		  	showNone: false     // shows first element - none - with empty value
+		// 		  }
+		//         },
+		//         { name: "_04_premiTorn", type: 'float', required: false,
+		//           html: { caption: 'Premi', attr: 'size="40"', span: 5 }
+		//         },
+		//         { name: "_05_datIniTorn", type: 'date', required: false,
+		//           html: { caption: 'Data inici', attr: 'size="40"', span: 5 }
+		//         },
+		//         { name: "_06_datFinTorn", type: 'date', required: false,
+		//           html: { caption: 'Data final', attr: 'size="40"', span: 5 }
+		//         }
+		//     ];
+		//     DataGrid("Llistat de torneigs", "torneig", false, columns, fields, "_01_pk_idTorn");
+		//     break;
 // Usuaris
-		case '1080':
-			columns = [				
-				{ field: '_01_pk_idUsuari', caption: 'ID Usuari', size: '10%' },
-				{ field: '_02_nomUsuari', caption: 'Nom', size: '30%' },
-				{ field: '_03_cognomUsuari', caption: 'Cognom', size: '30%' },
-				{ field: '_04_loginUsuari', caption: 'Login', size: '15%' },
-				{ field: '_05_pwdUsuari', caption: 'Password', size: '15%' }
-			];
-			fields = [
-		        { name: '_02_nomUsuari', type: 'text', required: true,
-		          html: { caption: 'Nom', attr: 'size="40"', span: 5 }
-		        },
-		        { name: '_03_cognomUsuari', type: 'text', required: false,
-		          html: { caption: 'Cognoms', attr: 'size="40"', span: 5 }
-		        },
-		        { name: '_04_loginUsuari', type: 'text', required: false,
-		          html: { caption: 'Login', attr: 'size="40"', span: 5 }
-		        },
-		        { name: '_05_pwdUsuari', type: 'text', required: false,
-		          html: { caption: 'Password', attr: 'size="40"', span: 5 }
-		        }
-		    ];
-		    DataGrid("Manteniment d'usuaris", "usuari", false, columns, fields, '_01_pk_idUsuari');
-		    break;
+		// case '1080':
+		// 	columns = [				
+		// 		{ field: '_01_pk_idUsuari', caption: 'ID Usuari', size: '10%' },
+		// 		{ field: '_02_nomUsuari', caption: 'Nom', size: '30%' },
+		// 		{ field: '_03_cognomUsuari', caption: 'Cognom', size: '30%' },
+		// 		{ field: '_04_loginUsuari', caption: 'Login', size: '15%' },
+		// 		{ field: '_05_pwdUsuari', caption: 'Password', size: '15%' }
+		// 	];
+		// 	fields = [
+		//         { name: '_02_nomUsuari', type: 'text', required: true,
+		//           html: { caption: 'Nom', attr: 'size="40"', span: 5 }
+		//         },
+		//         { name: '_03_cognomUsuari', type: 'text', required: false,
+		//           html: { caption: 'Cognoms', attr: 'size="40"', span: 5 }
+		//         },
+		//         { name: '_04_loginUsuari', type: 'text', required: false,
+		//           html: { caption: 'Login', attr: 'size="40"', span: 5 }
+		//         },
+		//         { name: '_05_pwdUsuari', type: 'text', required: false,
+		//           html: { caption: 'Password', attr: 'size="40"', span: 5 }
+		//         }
+		//     ];
+		//     DataGrid("Manteniment d'usuaris", "usuari", false, columns, fields, '_01_pk_idUsuari');
+		//     break;
 
 //Generar partides
-		case '1120':
+/*		case '1120':
 			columns = [				
 				{ field: '_02_nomUsuari', caption: 'Usuari', size: '10%' },
 				{ field: '_02_macMaq', caption: 'MAC Maquina', size: '30%' },
@@ -258,12 +292,16 @@ var controller = function(e) {
 			];
 		    DataGrid("Manteniment de partides", "partides", false, false, columns, e.target);
 		    break;
-
+*/
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 
 		case '3000':
 		    DataView('../html/perfilAdm.php');		
+		    break;
+
+		case '3030':
+		    DataView('../html/configuracio.php');
 		    break;
 
 		case '3110':
@@ -284,8 +322,8 @@ var controller = function(e) {
 		case '3120':
             toolbar = { 
                 items: [
-	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
-	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' }	                
+	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'w2ui-icon-cross' },
+	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'w2ui-icon-pencil' }	                
 	            ],
                 onClick: function(target, data) {
 			        var row = w2ui['grid'].getSelection();
@@ -361,8 +399,8 @@ var controller = function(e) {
 		case '3170':
             toolbar = { 
                 items: [
-	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
-	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' }	                
+	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'w2ui-icon-cross' },
+	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'w2ui-icon-pencil' }	                
 	            ],
                 onClick: function(target, data) {
 			        var row = w2ui['grid'].getSelection();
@@ -438,8 +476,8 @@ var controller = function(e) {
 		case '3240':
             toolbar = { 
                 items: [
-	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
-	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' }	                
+	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'w2ui-icon-cross' },
+	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'w2ui-icon-pencil' }	                
 	            ],
                 onClick: function(target, data) {
 			        var row = w2ui['grid'].getSelection();
@@ -516,9 +554,9 @@ var controller = function(e) {
 
             toolbar = { 
 	            items: [
-	                { type: 'button', id: 'new',  caption: 'Afegir',    img: 'icon-add' },
-	                { type: 'button', id: 'edit', caption: 'Modificar', img: 'icon-edit' },
-	                { type: 'button', id: 'del',  caption: 'Bloquejar', img: 'icon-delete' }
+	                { type: 'button', id: 'new',  caption: 'Afegir',    img: 'w2ui-icon-plus' },
+	                { type: 'button', id: 'edit', caption: 'Modificar', img: 'w2ui-icon-pencil' },
+	                { type: 'button', id: 'del',  caption: 'Bloquejar', img: 'w2ui-icon-cross' }
 	            ],
 	            onClick: function(target, data) {
 			        var action = "../html/torneig.php";
@@ -573,8 +611,8 @@ var controller = function(e) {
 		case '3342':
             toolbar = { 
                 items: [
-	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
-	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' }	                
+	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'w2ui-icon-cross' },
+	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'w2ui-icon-pencil' }	                
 	            ],
                 onClick: function(target, data) {
 			        var row = w2ui['grid'].getSelection();
@@ -721,9 +759,9 @@ var controller = function(e) {
 		case '3425':
             toolbar = { 
                 items: [
-	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
-	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' },
-	                { type: 'button', id: 'recauda', caption: 'Act. Recaudació', img: 'icon-add' }
+	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'w2ui-icon-cross' },
+	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'w2ui-icon-pencil' },
+	                { type: 'button', id: 'recauda', caption: 'Act. Recaudació', img: 'w2ui-icon-plus' }
 	            ],
                 onClick: function(target, data) {
 			        var row = w2ui['grid'].getSelection();
@@ -828,9 +866,9 @@ var controller = function(e) {
 			];
             toolbar = { 
 	            items: [
-	                { type: 'button', id: 'new',  caption: 'Afegir',    img: 'icon-add' },
-	                { type: 'button', id: 'edit', caption: 'Modificar', img: 'icon-edit' },
-	                { type: 'button', id: 'del',  caption: 'Bloquejar',  img: 'icon-delete' }
+	                { type: 'button', id: 'new',  caption: 'Afegir',    img: 'w2ui-icon-plus' },
+	                { type: 'button', id: 'edit', caption: 'Modificar', img: 'w2ui-icon-pencil' },
+	                { type: 'button', id: 'del',  caption: 'Bloquejar',  img: 'w2ui-icon-cross' }
 	            ],
 	            onClick: function(target, data) {
 			        var action = "../html/maqInstall.php";
@@ -883,9 +921,9 @@ var controller = function(e) {
 		case '3490':
             toolbar = { 
                 items: [
-	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
-	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' },
-	                { type: 'button', id: 'recauda', caption: 'Act. Recaudació', img: 'icon-add' }	                
+	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'w2ui-icon-cross' },
+	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'w2ui-icon-pencil' },
+	                { type: 'button', id: 'recauda', caption: 'Act. Recaudació', img: 'w2ui-icon-plus' }	                
 	            ],
                 onClick: function(target, data) {
 			        var row = w2ui['grid'].getSelection();
@@ -1122,8 +1160,8 @@ var controller = function(e) {
 		case '3840':
             toolbar = { 
                 items: [
-	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
-	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' }	                
+	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'w2ui-icon-cross' },
+	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'w2ui-icon-pencil' }	                
 	            ],
                 onClick: function(target, data) {
 			        var row = w2ui['grid'].getSelection();
@@ -1249,9 +1287,9 @@ var controller = function(e) {
 
             toolbar = { 
 	            items: [
-	                { type: 'button', id: 'new',    caption: 'Afegir',    	 img: 'icon-add' },
-	                { type: 'button', id: 'lock',   caption: 'bloquejar',    img: 'icon-delete' },
-	                { type: 'button', id: 'unlock', caption: 'desbloquejar', img: 'icon-edit' }
+	                { type: 'button', id: 'new',    caption: 'Afegir',    	 img: 'w2ui-icon-plus' },
+	                { type: 'button', id: 'lock',   caption: 'bloquejar',    img: 'w2ui-icon-cross' },
+	                { type: 'button', id: 'unlock', caption: 'desbloquejar', img: 'w2ui-icon-pencil' }
 	            ],
 	            onClick: function(target, data) {
 			        var action = "../html/ubicamaq.php";
@@ -1328,8 +1366,8 @@ var controller = function(e) {
 		case '4010':
             toolbar = { 
                 items: [
-	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'icon-delete' },
-	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'icon-edit' }	                
+	                { type: 'button', id: 'lock',    caption: 'bloquejar',    img: 'w2ui-icon-cross' },
+	                { type: 'button', id: 'unlock',  caption: 'desbloquejar', img: 'w2ui-icon-pencil' }	                
 	            ],
                 onClick: function(target, data) {
 			        var row = w2ui['grid'].getSelection();

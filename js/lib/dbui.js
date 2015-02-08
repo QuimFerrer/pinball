@@ -73,10 +73,10 @@ var dbGrid = function() {
             if (!this.toolbar) {
                 var buttons = 
                 [
-                    { type: 'button', id: 'new',  caption: 'Afegir',    img: 'icon-add' },
-                    { type: 'button', id: 'edit', caption: 'Modificar', img: 'icon-edit' },
-                    { type: 'button', id: 'del',  caption: 'Bloquejar', img: 'icon-delete' }
-                    // { type: 'button', id: 'seek', caption: 'Buscar',    img: 'icon-search' }
+                    { type: 'button', id: 'new',  caption: 'Afegir',    img: 'w2ui-icon-plus' },
+                    { type: 'button', id: 'edit', caption: 'Modificar', img: 'w2ui-icon-pencil' },
+                    { type: 'button', id: 'del',  caption: 'Bloquejar', img: 'w2ui-icon-cross' }
+                    // { type: 'button', id: 'seek', caption: 'Buscar',    img: 'w2ui-icon-search' }
                 ];
 
                 this.toolbar = { 

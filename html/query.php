@@ -26,7 +26,10 @@ isEndSessionInQuery();
 
 	const GET_DADES_PERFIL_ADM_3000            = 3000;
 	const MODIFICA_PERFIL_ADM_3010             = 3010;
-	const BAIXA_PERFIL_ADM_3020  	           = 3020;	
+	const BAIXA_PERFIL_ADM_3020  	           = 3020;
+
+	const GET_DADES_CONFIGURACIO_3030          = 3030;
+	const MODIFICA_DADES_CONFIGURACIO_3040     = 3040;	
 
 	const PARTIDES_X_MAQUINA_3110              = 3110; //
 	const PARTIDES_X_JUGADOR_3120              = 3120; //
@@ -437,6 +440,71 @@ isEndSessionInQuery();
 				$response = dbExec($query,0);
 				echo json_encode(controlErrorQuery($response));				
 				break;
+
+			case GET_DADES_CONFIGURACIO_3030 :
+				$query    = sprintf("SELECT _02_nomServerMYSQL     AS nomServerMYSQL,
+											_03_usrMYSQL           AS usrMYSQL,
+											_04_passwordUsrMYSQL   AS passwordUsrMYSQL,
+											_05_dbLocalOrRemot     AS dbLocalOrRemot,
+											_06_emailDebug         AS emailDebug,
+											_07_emailSMTPHost      AS emailSMTPHost,
+											_08_emailSMTPHostPort  AS emailSMTPHostPort,
+											_09_emailUser          AS emailUser,
+											_10_emailPassword      AS emailPassword,
+											_11_emailFrom          AS emailFrom,
+											_12_emailNomFrom       AS emailNomFrom,
+											_13_emailNomToContacte AS emailNomToContacte,
+											_14_emailCanal         AS emailCanal,
+											_15_emailPathRegistre  AS emailPathRegistre,
+											_16_pathUploads        AS pathUploads,
+											_17_sizeUploads        AS sizeUploads
+									FROM configuracio
+									WHERE
+										_01_pk_idConfig = '%d';", 1 );
+				$response = dbExec($query);
+				echo json_encode(controlErrorQuery($response));
+				break;
+
+			case MODIFICA_DADES_CONFIGURACIO_3040 :
+				$query    = sprintf("UPDATE configuracio
+							 		SET	_02_nomServerMYSQL     = '%s',
+										_03_usrMYSQL           = '%s',
+										_04_passwordUsrMYSQL   = '%s',
+										_05_dbLocalOrRemot     = '%s',
+										_06_emailDebug         = '%d',
+										_07_emailSMTPHost      = '%s',
+										_08_emailSMTPHostPort  = '%d',
+										_09_emailUser          = '%s',
+										_10_emailPassword      = '%s',
+										_11_emailFrom          = '%s',
+										_12_emailNomFrom       = '%s',
+										_13_emailNomToContacte = '%s',
+										_14_emailCanal         = '%d',
+										_15_emailPathRegistre  = '%s',
+										_16_pathUploads        = '%s',
+										_17_sizeUploads        = '%f',
+										_18_datModConfig       = NOW()
+									WHERE _01_pk_idConfig = '%d';",$record["nomServerMYSQL"]
+																  ,$record["usrMYSQL"]
+																  ,$record["passwordUsrMYSQL"]
+																  ,$record["dbLocalOrRemot"]
+														   		  ,$record["emailDebug"]
+															  	  ,$record["emailSMTPHost"]
+																  ,$record["emailSMTPHostPort"]
+																  ,$record["emailUser"]
+																  ,$record["emailPassword"]
+																  ,$record["emailFrom"]
+																  ,$record["emailNomFrom"]
+																  ,$record["emailNomToContacte"]
+																  ,$record["emailCanal"]
+																  ,$record["emailPathRegistre"]
+																  ,$record["pathUploads"]
+																  ,$record["sizeUploads"]
+															      , 1 );
+				$response = dbExec($query,0);
+				echo json_encode(controlErrorQuery($response));
+				break;
+
 			case PARTIDES_X_MAQUINA_3110 :
 				$query    = 'SELECT  @NL:=@NL+1 		AS recid,
 									 _01_pk_idMaqPart   AS idMaq,
